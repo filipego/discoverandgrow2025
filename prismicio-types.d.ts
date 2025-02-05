@@ -4,7 +4,7 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type HomepageDocumentDataSlicesSlice = HeroSlice;
+type HomepageDocumentDataSlicesSlice = TextAndImageSlice | HeroSlice;
 
 /**
  * Content for Homepage documents
@@ -69,23 +69,12 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
-type PageDocumentDataSlicesSlice = never;
+type PageDocumentDataSlicesSlice = TextAndImageSlice;
 
 /**
  * Content for Page documents
  */
 interface PageDocumentData {
-  /**
-   * Title field in *Page*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: page.title
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
   /**
    * Slice Zone field in *Page*
    *
@@ -141,23 +130,12 @@ interface PageDocumentData {
 export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
-type ProgramsDocumentDataSlicesSlice = never;
+type ProgramsDocumentDataSlicesSlice = TextAndImageSlice;
 
 /**
  * Content for Programs documents
  */
 interface ProgramsDocumentData {
-  /**
-   * title field in *Programs*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: programs.title
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
   /**
    * Slice Zone field in *Programs*
    *
@@ -330,6 +308,98 @@ type HeroSliceVariation = HeroSliceDefault;
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
+/**
+ * Item in *TextAndImage → Default → Primary → Buttons*
+ */
+export interface TextAndImageSliceDefaultPrimaryButtonsItem {
+  /**
+   * Link field in *TextAndImage → Default → Primary → Buttons*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_and_image.default.primary.buttons[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Primary content in *TextAndImage → Default → Primary*
+ */
+export interface TextAndImageSliceDefaultPrimary {
+  /**
+   * Heading field in *TextAndImage → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_and_image.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *TextAndImage → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_and_image.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Buttons field in *TextAndImage → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_and_image.default.primary.buttons[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  buttons: prismic.GroupField<
+    Simplify<TextAndImageSliceDefaultPrimaryButtonsItem>
+  >;
+
+  /**
+   * Image field in *TextAndImage → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_and_image.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for TextAndImage Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TextAndImageSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TextAndImageSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TextAndImage*
+ */
+type TextAndImageSliceVariation = TextAndImageSliceDefault;
+
+/**
+ * TextAndImage Shared Slice
+ *
+ * - **API ID**: `text_and_image`
+ * - **Description**: TextAndImage
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TextAndImageSlice = prismic.SharedSlice<
+  "text_and_image",
+  TextAndImageSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -367,6 +437,11 @@ declare module "@prismicio/client" {
       HeroSlice,
       HeroSliceVariation,
       HeroSliceDefault,
+      TextAndImageSlice,
+      TextAndImageSliceDefaultPrimaryButtonsItem,
+      TextAndImageSliceDefaultPrimary,
+      TextAndImageSliceVariation,
+      TextAndImageSliceDefault,
     };
   }
 }

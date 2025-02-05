@@ -22,7 +22,7 @@ export function Heading({
             className={clsx(
                 "font-sans",
                 size === "xl" && "~text-4xl/8xl",
-                size === "lg" && "~text-3xl/7xl",
+                size === "lg" && "text-4xl",
                 size === "md" && "~text-3xl/5xl",
                 size === "sm" && "~text-xl/4xl",
                 size === "xs" && "~text-lg/xl",

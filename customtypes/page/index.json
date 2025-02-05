@@ -12,18 +12,15 @@
           "label": "UID"
         }
       },
-      "title": {
-        "type": "Text",
-        "config": {
-          "label": "Title",
-          "placeholder": ""
-        }
-      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "choices": {}
+          "choices": {
+            "text_and_image": {
+              "type": "SharedSlice"
+            }
+          }
         }
       }
     },
