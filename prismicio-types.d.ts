@@ -324,6 +324,21 @@ export interface TextAndImageSliceDefaultPrimaryButtonsItem {
 }
 
 /**
+ * Item in *TextAndImage → Image on Left → Primary → Buttons*
+ */
+export interface TextAndImageSliceImageOnLeftPrimaryButtonsItem {
+  /**
+   * Link field in *TextAndImage → Image on Left → Primary → Buttons*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_and_image.imageOnLeft.primary.buttons[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
  * Primary content in *TextAndImage → Default → Primary*
  */
 export interface TextAndImageSliceDefaultPrimary {
@@ -384,9 +399,71 @@ export type TextAndImageSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *TextAndImage → Image on Left → Primary*
+ */
+export interface TextAndImageSliceImageOnLeftPrimary {
+  /**
+   * Image field in *TextAndImage → Image on Left → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_and_image.imageOnLeft.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Heading field in *TextAndImage → Image on Left → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_and_image.imageOnLeft.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *TextAndImage → Image on Left → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_and_image.imageOnLeft.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Buttons field in *TextAndImage → Image on Left → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_and_image.imageOnLeft.primary.buttons[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  buttons: prismic.GroupField<
+    Simplify<TextAndImageSliceImageOnLeftPrimaryButtonsItem>
+  >;
+}
+
+/**
+ * Image on Left variation for TextAndImage Slice
+ *
+ * - **API ID**: `imageOnLeft`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TextAndImageSliceImageOnLeft = prismic.SharedSliceVariation<
+  "imageOnLeft",
+  Simplify<TextAndImageSliceImageOnLeftPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *TextAndImage*
  */
-type TextAndImageSliceVariation = TextAndImageSliceDefault;
+type TextAndImageSliceVariation =
+  | TextAndImageSliceDefault
+  | TextAndImageSliceImageOnLeft;
 
 /**
  * TextAndImage Shared Slice
@@ -440,8 +517,11 @@ declare module "@prismicio/client" {
       TextAndImageSlice,
       TextAndImageSliceDefaultPrimaryButtonsItem,
       TextAndImageSliceDefaultPrimary,
+      TextAndImageSliceImageOnLeftPrimaryButtonsItem,
+      TextAndImageSliceImageOnLeftPrimary,
       TextAndImageSliceVariation,
       TextAndImageSliceDefault,
+      TextAndImageSliceImageOnLeft,
     };
   }
 }

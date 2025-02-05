@@ -4,6 +4,7 @@ import { ButtonLink } from './ButtonLink'
 import { Bounded } from './Bounded'
 import { createClient } from "@/prismicio";
 import { PrismicNextLink } from "@prismicio/next";
+import { LongLogo } from "./LongLogo";
 
 type Props = {}
 
@@ -11,15 +12,13 @@ export async function Header({ }: Props) {
 
     const client = createClient();
     const settings = await client.getSingle("settings");
-    
-    console.log('Navigation items:', settings.data.navigation);
-    
+
     return (
         <Bounded as="header">
             <div className="flex w-full items-center justify-between gap-6">
                 <div className="">
                     <Link href="/">
-                        Logo
+                        <LongLogo treeColor="#5A3E36" className='text-[#29285D] h-[70]' />
                     </Link>
                 </div>
                 <nav aria-label="Main"
@@ -28,16 +27,16 @@ export async function Header({ }: Props) {
                         {settings.data.navigation.map((item, index) => (
                             <li key={index}>
                                 {item.link.link_type === "Document" ? (
-                                    <Link 
+                                    <Link
                                         href={`/${item.link.uid}`}
-                                        className="~text-lg/xl"
+                                        className=""
                                     >
                                         {item.link.text}
                                     </Link>
                                 ) : (
                                     <PrismicNextLink
                                         field={item.link}
-                                        className="~text-lg/xl"
+                                        className=""
                                     />
                                 )}
                             </li>

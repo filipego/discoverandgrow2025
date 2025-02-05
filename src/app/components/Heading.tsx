@@ -21,8 +21,8 @@ export function Heading({
         <Comp
             className={clsx(
                 "font-sans",
-                size === "xl" && "~text-4xl/8xl",
-                size === "lg" && "text-4xl",
+                size === "xl" && "text-4xl lg:text-8xl",
+                size === "lg" && "text-2xl lg:text-4xl",
                 size === "md" && "~text-3xl/5xl",
                 size === "sm" && "~text-xl/4xl",
                 size === "xs" && "~text-lg/xl",

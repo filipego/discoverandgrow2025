@@ -3,7 +3,10 @@ import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { Heading } from "@/app/components/Heading";
 import { Bounded } from "@/app/components/Bounded";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicNextImage } from "@prismicio/next";
+import clsx from "clsx";
+import { isFilled } from "@prismicio/client";
+import { ButtonLink } from "@/app/components/ButtonLink";
 
 /**
  * Props for `TextAndImage`.
@@ -19,14 +22,17 @@ const TextAndImage: FC<TextAndImageProps> = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
-        <div>
-          <Heading size="lg" className="mb-16">{slice.primary.heading}</Heading>
+      <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-24">
+        <div className={clsx(
+          "flex flex-col items-center gap-8 text-center lg:items-start lg:text-left",
+          slice.variation === "imageOnLeft" && "lg:order-2"
+        )}>
+          <Heading size="lg" className="mb-8">{slice.primary.heading}</Heading>
           <PrismicRichText field={slice.primary.body} />
-          {slice.primary.buttons && (
+          {isFilled.group(slice.primary.buttons) && (
             <ul>
               {slice.primary.buttons.map((item) => (
-                <li><PrismicNextLink field={item.link} /></li>
+                <li><ButtonLink field={item.link}>{item.link.text}</ButtonLink></li>
               ))}
             </ul>
           )}
