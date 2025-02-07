@@ -28,32 +28,49 @@
             "multi": "paragraph,preformatted,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
           }
         },
-        "buttons": {
-          "type": "Group",
-          "config": {
-            "label": "Buttons",
-            "repeat": true,
-            "fields": {
-              "link": {
-                "type": "Link",
-                "config": {
-                  "label": "Link",
-                  "placeholder": "",
-                  "select": null,
-                  "allowTargetBlank": true,
-                  "allowText": true,
-                  "repeat": false
-                }
-              }
-            }
-          }
-        },
         "image": {
           "type": "Image",
           "config": {
             "label": "Image",
             "constraint": {},
             "thumbnails": []
+          }
+        },
+        "link": {
+          "type": "Link",
+          "config": {
+            "label": "Link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary"
+            ]
+          }
+        },
+        "bg_color": {
+          "type": "Select",
+          "config": {
+            "label": "Bg Color",
+            "placeholder": "(Optional)",
+            "options": [
+              "Dark Blue",
+              "Yellow"
+            ]
+          }
+        },
+        "bg_color_full_width": {
+          "type": "Select",
+          "config": {
+            "label": "Bg Color Full Width",
+            "placeholder": "(Optional)",
+            "options": [
+              "Blue",
+              "Yellow"
+            ]
           }
         }
       },
@@ -91,24 +108,41 @@
             "multi": "paragraph,preformatted,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
           }
         },
-        "buttons": {
-          "type": "Group",
+        "link": {
+          "type": "Link",
           "config": {
-            "label": "Buttons",
+            "label": "Link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
             "repeat": true,
-            "fields": {
-              "link": {
-                "type": "Link",
-                "config": {
-                  "label": "Link",
-                  "placeholder": "",
-                  "select": null,
-                  "allowTargetBlank": true,
-                  "allowText": true,
-                  "repeat": false
-                }
-              }
-            }
+            "variants": [
+              "Primary",
+              "Secondary"
+            ]
+          }
+        },
+        "bg_color": {
+          "type": "Select",
+          "config": {
+            "label": "Bg Color",
+            "placeholder": "(Optional)",
+            "options": [
+              "Dark Blue",
+              "Yellow"
+            ]
+          }
+        },
+        "bg_color_full_width": {
+          "type": "Select",
+          "config": {
+            "label": "Bg Color Full Width",
+            "placeholder": "(Optional)",
+            "options": [
+              "Dark Blue",
+              "Yellow"
+            ]
           }
         }
       },

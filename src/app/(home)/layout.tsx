@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "../globals.css";
 
-import { createClient } from "@/prismicio";
+import { createClient, repositoryName } from "@/prismicio";
+import { PrismicPreview } from "@prismicio/next";
 import { Header } from "../components/Header";
 
 
@@ -32,6 +33,7 @@ export default function RootLayout({
           <Header />
           {children}
         </main>
+        <PrismicPreview repositoryName={repositoryName} />
       </body>
     </html>
   );

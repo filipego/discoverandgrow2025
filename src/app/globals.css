@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
+@font-face {
+  font-family: 'More Sugar';
+  src: url('/fonts/MoreSugarRegular.woff2') format('woff2'),
+      url('/fonts/MoreSugarRegular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @import 'tailwindcss';
 
 
@@ -8,6 +17,7 @@
   --color-foreground: var(--foreground);
   --font-secondary: "Raleway", serif;
   --font-primary: "Open Sans", serif;
+  --font--logo :'More Sugar';
 }
 
 /*

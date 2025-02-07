@@ -19,28 +19,6 @@
 					}
 				]
 			},
-			"buttons": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"link",
-								{
-									"key": "a5f3c02c-1b45-4aa4-91ed-0ce66ed5dd03",
-									"__TYPE__": "LinkContent",
-									"value": {
-										"__TYPE__": "ExternalLink",
-										"url": "https://slicemachine.dev",
-										"text": "require"
-									}
-								}
-							]
-						]
-					}
-				]
-			},
 			"image": {
 				"origin": {
 					"id": "main",
@@ -63,6 +41,32 @@
 				"alt": null,
 				"__TYPE__": "ImageContent",
 				"thumbnails": {}
+			},
+			"bg_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Dark Blue",
+				"type": "Select"
+			},
+			"bg_color_full_width": {
+				"__TYPE__": "FieldContent",
+				"value": "Blue",
+				"type": "Select"
+			},
+			"link": {
+				"__TYPE__": "RepeatableContent",
+				"type": "Link",
+				"value": [
+					{
+						"key": "4ded47db-790d-43a6-8a85-cd64cd08b094",
+						"__TYPE__": "LinkContent",
+						"value": {
+							"__TYPE__": "ExternalLink",
+							"url": "http://twitter.com",
+							"text": "shown",
+							"variant": "Primary"
+						}
+					}
+				]
 			}
 		},
 		"items": []
@@ -84,28 +88,6 @@
 						"content": {
 							"text": "Magna exercitation ullamco culpa ullamco labore tempor enim id anim."
 						}
-					}
-				]
-			},
-			"buttons": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"link",
-								{
-									"key": "f15eda36-625e-4eca-a435-179d311b7414",
-									"__TYPE__": "LinkContent",
-									"value": {
-										"__TYPE__": "ExternalLink",
-										"url": "http://google.com",
-										"text": "rush"
-									}
-								}
-							]
-						]
 					}
 				]
 			},
@@ -131,6 +113,32 @@
 				"alt": null,
 				"__TYPE__": "ImageContent",
 				"thumbnails": {}
+			},
+			"bg_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Dark Blue",
+				"type": "Select"
+			},
+			"bg_color_full_width": {
+				"__TYPE__": "FieldContent",
+				"value": "Yellow",
+				"type": "Select"
+			},
+			"link": {
+				"__TYPE__": "RepeatableContent",
+				"type": "Link",
+				"value": [
+					{
+						"key": "3597638b-3185-477f-94a4-b1a79c24d7c8",
+						"__TYPE__": "LinkContent",
+						"value": {
+							"__TYPE__": "ExternalLink",
+							"url": "http://twitter.com",
+							"text": "differ",
+							"variant": "Primary"
+						}
+					}
+				]
 			}
 		},
 		"items": [

@@ -18,7 +18,7 @@ export async function Header({ }: Props) {
             <div className="flex w-full items-center justify-between gap-6">
                 <div className="">
                     <Link href="/">
-                        <LongLogo treeColor="#5A3E36" className='text-[#29285D] h-[70]' />
+                        <LongLogo treeColor="#29285D" className='text-[#29285D] h-[70]' />
                     </Link>
                 </div>
                 <nav aria-label="Main"
