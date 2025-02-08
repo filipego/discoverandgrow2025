@@ -31,7 +31,7 @@ const ColorSection = ({
   children
 }: ColorSectionProps) => {
   return (
-    <div 
+    <div
       className={clsx(
         className,
         bgColor === "Dark Blue" && "bg-[#29285D] text-white rounded-xl p-[50px_40px]",
@@ -70,19 +70,16 @@ const TextAndImage: FC<TextAndImageProps> = ({ slice }) => {
           <PrismicRichText field={slice.primary.body} />
           {isFilled.repeatable(slice.primary.link) && (
             <ul className="flex gap-4">
-              {slice.primary.link.map((link) => {
-                console.log('Link data:', link);
-                return (
-                  <li key={link.key}>
-                    <ButtonLink
-                      color={link.variant}
-                      field={link}
-                    >
-                      {link.text}
-                    </ButtonLink>
-                  </li>
-                );
-              })}
+              {slice.primary.link.map((link) => (
+                <li key={link.key}>
+                  <ButtonLink
+                    field={link}
+                  >
+                    {link.text}
+
+                  </ButtonLink>
+                </li>
+              ))}
             </ul>
           )}
         </div>

@@ -6,6 +6,7 @@ import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { Heading } from "@/app/components/Heading";
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 import clsx from "clsx";
+import { SmartPrismicLink } from "@/app/components/SmartPrismicLink";
 
 
 /**
@@ -62,16 +63,16 @@ const CardsandImages: FC<CardsandImagesProps> = ({ slice }) => {
               <div className="mt-auto pt-4 flex justify-between items-center group">
                 {item.link && (
                   <>
-                    <PrismicNextLink
-                      field={item.link}
+                    <SmartPrismicLink
+                      link={item.link}
                       className={clsx(
                         item.bg_color === "Dark Blue" && "text-[#F1E1A7]"
                       )}
                     >
                       {item.link.text}
-                    </PrismicNextLink>
+                    </SmartPrismicLink>
 
-                    <PrismicNextLink field={item.link}>
+                    <SmartPrismicLink link={item.link}>
                       <IoArrowForwardCircleOutline
                         className={clsx(
                           "mt-2 -rotate-45 transition-transform duration-300 group-hover:rotate-0",
@@ -79,7 +80,7 @@ const CardsandImages: FC<CardsandImagesProps> = ({ slice }) => {
                         )}
                         size={30}
                       />
-                    </PrismicNextLink>
+                    </SmartPrismicLink>
                   </>
                 )}
               </div>
