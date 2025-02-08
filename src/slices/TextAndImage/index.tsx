@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { Heading } from "@/app/components/Heading";
@@ -37,7 +38,7 @@ const ColorSection = ({
   return <div className={className} style={styles}>{children}</div>;
 };
 
-const TextAndImage = ({ slice }: TextAndImageProps) => {
+const TextAndImage: FC<TextAndImageProps> = ({ slice }) => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}
@@ -64,16 +65,19 @@ const TextAndImage = ({ slice }: TextAndImageProps) => {
           <PrismicRichText field={slice.primary.body} />
           {isFilled.repeatable(slice.primary.link) && (
             <ul className="flex gap-4">
-              {slice.primary.link.map((link) => (
-                <li key={link.key}>
-                  <ButtonLink
-                    color={link.variant}
-                    field={link}
-                  >
-                    {link.text}
-                  </ButtonLink>
-                </li>
-              ))}
+              {slice.primary.link.map((link) => {
+                console.log('Link data:', link);
+                return (
+                  <li key={link.key}>
+                    <ButtonLink
+                      color={link.variant}
+                      field={link}
+                    >
+                      {link.text}
+                    </ButtonLink>
+                  </li>
+                );
+              })}
             </ul>
           )}
         </div>

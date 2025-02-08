@@ -23,9 +23,9 @@ export function Heading({
                 "font-sans",
                 size === "xl" && "text-4xl lg:text-8xl",
                 size === "lg" && "text-2xl lg:text-4xl",
-                size === "md" && "~text-3xl/5xl",
-                size === "sm" && "~text-xl/4xl",
-                size === "xs" && "~text-lg/xl",
+                size === "md" && "text-xl lg:text-3xl",
+                size === "sm" && "text-lg lg:text-2xl",
+                size === "xs" && "~text-md/lg:text-xl",
 
                 color === "brand-dark-gray" && "text-brand-dark-gray",
                 color === "brand-light-gray" && "text-brand-light-gray",
