@@ -51,7 +51,7 @@ const TextAndImage: FC<TextAndImageProps> = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className={clsx(
-        isFilled.select(slice.primary.bg_color_full_width) && "p-[50px_40px]",
+        isFilled.select(slice.primary.bg_color_full_width) && "p-[50px_40px] my-10",
         slice.primary.bg_color_full_width === "Dark Blue" && "bg-[#29285D] text-white",
         slice.primary.bg_color_full_width === "Yellow" && "bg-[#F1E1A7]",
         slice.primary.bg_color_full_width === "Green" && "bg-[#43C467]",
