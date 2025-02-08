@@ -3,8 +3,8 @@ import React from 'react'
 import { ButtonLink } from './ButtonLink'
 import { Bounded } from './Bounded'
 import { createClient } from "@/prismicio";
-import { PrismicNextLink } from "@prismicio/next";
 import { LongLogo } from "./LongLogo";
+import { SmartPrismicLink } from "./SmartPrismicLink";
 
 type Props = {}
 
@@ -26,25 +26,18 @@ export async function Header({ }: Props) {
                     <ul className="flex flex-wrap items-center justify-center gap-8">
                         {settings.data.navigation.map((item, index) => (
                             <li key={index}>
-                                {item.link.link_type === "Document" ? (
-                                    <Link
-                                        href={`/${item.link.uid}`}
-                                        className=""
-                                    >
-                                        {item.link.text}
-                                    </Link>
-                                ) : (
-                                    <PrismicNextLink
-                                        field={item.link}
-                                        className=""
-                                    />
-                                )}
+                                <SmartPrismicLink link={item.link}>
+                                    {item.link.text}
+                                </SmartPrismicLink>
                             </li>
                         ))}
                     </ul>
                 </nav>
-                <ButtonLink href="/">
-                    Donate
+                <ButtonLink
+                    field={settings.data.button}
+                >
+                    {settings.data.button.text}
+
                 </ButtonLink>
             </div>
         </Bounded>
