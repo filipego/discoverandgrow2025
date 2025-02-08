@@ -1,10 +1,12 @@
 import { PrismicNextLinkProps } from "@prismicio/next";
 import { SmartPrismicLink } from "@/app/components/SmartPrismicLink";
 import clsx from "clsx";
+import { LinkField } from "@prismicio/client";  // Add this import
 
-export type ButtonProps = PrismicNextLinkProps & {
+export type ButtonProps = Omit<PrismicNextLinkProps, 'href'> & {
     color?: "Primary" | "Secondary";
     size?: "sm" | "md" | "lg";
+    field: LinkField;  // Add proper type for field
 };
 
 export function ButtonLink({
