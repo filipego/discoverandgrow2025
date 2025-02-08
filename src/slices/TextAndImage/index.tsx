@@ -17,6 +17,8 @@ const bgColorMap = {
   "Orange": { bg: "#F57F15", text: "inherit" }
 };
 
+// Remove bgColorMap object
+
 type ColorSectionProps = {
   bgColor?: string;
   className?: string;
@@ -28,14 +30,19 @@ const ColorSection = ({
   className,
   children
 }: ColorSectionProps) => {
-  const styles = bgColor ? {
-    backgroundColor: bgColorMap[bgColor as keyof typeof bgColorMap]?.bg,
-    color: bgColorMap[bgColor as keyof typeof bgColorMap]?.text,
-    padding: "50px 40px",
-    borderRadius: "15px"
-  } : {};
-
-  return <div className={className} style={styles}>{children}</div>;
+  return (
+    <div 
+      className={clsx(
+        className,
+        bgColor === "Dark Blue" && "bg-[#29285D] text-white rounded-xl p-[50px_40px]",
+        bgColor === "Yellow" && "bg-[#F1E1A7] rounded-xl p-[50px_40px]",
+        bgColor === "Green" && "bg-[#43C467] rounded-xl p-[50px_40px]",
+        bgColor === "Orange" && "bg-[#F57F15] rounded-xl p-[50px_40px]"
+      )}
+    >
+      {children}
+    </div>
+  );
 };
 
 const TextAndImage: FC<TextAndImageProps> = ({ slice }) => {
@@ -43,15 +50,13 @@ const TextAndImage: FC<TextAndImageProps> = ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      style={{
-        backgroundColor: isFilled.select(slice.primary.bg_color_full_width)
-          ? bgColorMap[slice.primary.bg_color_full_width as keyof typeof bgColorMap]?.bg
-          : undefined,
-        color: isFilled.select(slice.primary.bg_color_full_width)
-          ? bgColorMap[slice.primary.bg_color_full_width as keyof typeof bgColorMap]?.text
-          : undefined,
-        padding: isFilled.select(slice.primary.bg_color_full_width) ? "50px 40px" : undefined,
-      }}
+      className={clsx(
+        isFilled.select(slice.primary.bg_color_full_width) && "p-[50px_40px]",
+        slice.primary.bg_color_full_width === "Dark Blue" && "bg-[#29285D] text-white",
+        slice.primary.bg_color_full_width === "Yellow" && "bg-[#F1E1A7]",
+        slice.primary.bg_color_full_width === "Green" && "bg-[#43C467]",
+        slice.primary.bg_color_full_width === "Orange" && "bg-[#F57F15]"
+      )}
     >
       <ColorSection
         bgColor={isFilled.select(slice.primary.bg_color) ? slice.primary.bg_color : undefined}

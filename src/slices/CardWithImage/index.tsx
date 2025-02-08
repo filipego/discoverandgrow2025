@@ -17,14 +17,7 @@ export type CardsandImagesProps =
 /**
  * Component for "CardsandImages" Slices.
  */
-const bgColorMap = {
-  "Dark Blue": { bg: "#29285D", text: "#FFFFFF" },
-  "Yellow": { bg: "#F1E1A7", text: "inherit" },
-};
-
 const CardsandImages: FC<CardsandImagesProps> = ({ slice }) => {
-  console.log('Entire slice:', slice);
-  console.log('Card data:', slice.primary.card);
   return (
     <Bounded
       data-slice-type={slice.slice_type}
@@ -36,18 +29,16 @@ const CardsandImages: FC<CardsandImagesProps> = ({ slice }) => {
             key={i}
             className={clsx(
               "rounded-xl overflow-hidden w-full",
-              slice.variation === "imageLeft" ? "flex flex-row h-full md:h-[400px]" : "flex flex-col"
+              slice.variation === "imageLeft" ? "flex flex-row h-full md:h-[400px]" : "flex flex-col",
+              item.bg_color === "Dark Blue" && "bg-[#29285D] text-white",
+              item.bg_color === "Yellow" && "bg-[#F1E1A7]"
             )}
-            style={{
-              backgroundColor: item.bg_color ? bgColorMap[item.bg_color]?.bg : undefined,
-              color: item.bg_color ? bgColorMap[item.bg_color]?.text : undefined,
-            }}
           >
             <div className={clsx(
               slice.variation === "imageLeft" && "w-1/2"
             )}>
-              <PrismicNextImage 
-                field={item.image} 
+              <PrismicNextImage
+                field={item.image}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -63,20 +54,31 @@ const CardsandImages: FC<CardsandImagesProps> = ({ slice }) => {
                   field={item.body}
                   components={{
                     paragraph: ({ children }) => (
-                      <p className="text-sm mb-5 max-w-[90%]">{children}</p>
+                      <p className="text-sm mb-5 lg:max-w-[90%]">{children}</p>
                     ),
                   }}
                 />
               </div>
-              <div className="mt-auto pt-4 flex justify-between items-center">
+              <div className="mt-auto pt-4 flex justify-between items-center group">
                 {item.link && (
                   <>
-                    <PrismicNextLink field={item.link}>
+                    <PrismicNextLink
+                      field={item.link}
+                      className={clsx(
+                        item.bg_color === "Dark Blue" && "text-[#F1E1A7]"
+                      )}
+                    >
                       {item.link.text}
                     </PrismicNextLink>
 
                     <PrismicNextLink field={item.link}>
-                      <IoArrowForwardCircleOutline className="mt-2 -rotate-45" size={26} />
+                      <IoArrowForwardCircleOutline
+                        className={clsx(
+                          "mt-2 -rotate-45 transition-transform duration-300 group-hover:rotate-0",
+                          item.bg_color === "Dark Blue" && "text-[#F1E1A7]"
+                        )}
+                        size={30}
+                      />
                     </PrismicNextLink>
                   </>
                 )}
