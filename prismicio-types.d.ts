@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type HomepageDocumentDataSlicesSlice =
+  | VideoBlockSlice
   | ImageSlice
   | CardsandImagesSlice
   | TextAndImageSlice
@@ -74,6 +75,7 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | VideoBlockSlice
   | ImageSlice
   | HeroSlice
   | CardsandImagesSlice
@@ -139,6 +141,7 @@ export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
 type ProgramsDocumentDataSlicesSlice =
+  | VideoBlockSlice
   | ImageSlice
   | HeroSlice
   | CardsandImagesSlice
@@ -697,11 +700,11 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
- * Item in *Image → Multiple images → Primary → Images*
+ * Item in *ImageBlock → Multiple images → Primary → Images*
  */
 export interface ImageSliceMultipleImagesPrimaryImagesItem {
   /**
-   * Image field in *Image → Multiple images → Primary → Images*
+   * Image field in *ImageBlock → Multiple images → Primary → Images*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -712,11 +715,11 @@ export interface ImageSliceMultipleImagesPrimaryImagesItem {
 }
 
 /**
- * Primary content in *Image → Default → Primary*
+ * Primary content in *ImageBlock → Default → Primary*
  */
 export interface ImageSliceDefaultPrimary {
   /**
-   * Image field in *Image → Default → Primary*
+   * Image field in *ImageBlock → Default → Primary*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -726,7 +729,7 @@ export interface ImageSliceDefaultPrimary {
   image: prismic.ImageField<never>;
 
   /**
-   * Smaller field in *Image → Default → Primary*
+   * Smaller field in *ImageBlock → Default → Primary*
    *
    * - **Field Type**: Boolean
    * - **Placeholder**: *None*
@@ -737,7 +740,7 @@ export interface ImageSliceDefaultPrimary {
   smaller: prismic.BooleanField;
 
   /**
-   * No padding field in *Image → Default → Primary*
+   * No padding field in *ImageBlock → Default → Primary*
    *
    * - **Field Type**: Boolean
    * - **Placeholder**: *None*
@@ -749,7 +752,7 @@ export interface ImageSliceDefaultPrimary {
 }
 
 /**
- * Default variation for Image Slice
+ * Default variation for ImageBlock Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -762,11 +765,11 @@ export type ImageSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
- * Primary content in *Image → Multiple images → Primary*
+ * Primary content in *ImageBlock → Multiple images → Primary*
  */
 export interface ImageSliceMultipleImagesPrimary {
   /**
-   * Images field in *Image → Multiple images → Primary*
+   * Images field in *ImageBlock → Multiple images → Primary*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
@@ -778,7 +781,7 @@ export interface ImageSliceMultipleImagesPrimary {
   >;
 
   /**
-   * No padding field in *Image → Multiple images → Primary*
+   * No padding field in *ImageBlock → Multiple images → Primary*
    *
    * - **Field Type**: Boolean
    * - **Placeholder**: *None*
@@ -789,7 +792,7 @@ export interface ImageSliceMultipleImagesPrimary {
   no_padding: prismic.BooleanField;
 
   /**
-   * No gap field in *Image → Multiple images → Primary*
+   * No gap field in *ImageBlock → Multiple images → Primary*
    *
    * - **Field Type**: Boolean
    * - **Placeholder**: *None*
@@ -801,7 +804,7 @@ export interface ImageSliceMultipleImagesPrimary {
 }
 
 /**
- * Multiple images variation for Image Slice
+ * Multiple images variation for ImageBlock Slice
  *
  * - **API ID**: `multipleImages`
  * - **Description**: Default
@@ -814,12 +817,12 @@ export type ImageSliceMultipleImages = prismic.SharedSliceVariation<
 >;
 
 /**
- * Slice variation for *Image*
+ * Slice variation for *ImageBlock*
  */
 type ImageSliceVariation = ImageSliceDefault | ImageSliceMultipleImages;
 
 /**
- * Image Shared Slice
+ * ImageBlock Shared Slice
  *
  * - **API ID**: `image`
  * - **Description**: Image
@@ -1018,6 +1021,73 @@ export type TextAndImageSlice = prismic.SharedSlice<
   TextAndImageSliceVariation
 >;
 
+/**
+ * Primary content in *VideoBlock → Default → Primary*
+ */
+export interface VideoBlockSliceDefaultPrimary {
+  /**
+   * Youtube Video ID field in *VideoBlock → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: video_block.default.primary.youtube_video_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  youtube_video_id: prismic.KeyTextField;
+
+  /**
+   * smaller field in *VideoBlock → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: video_block.default.primary.smaller
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  smaller: prismic.BooleanField;
+
+  /**
+   * No padding field in *VideoBlock → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: video_block.default.primary.no_padding
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  no_padding: prismic.BooleanField;
+}
+
+/**
+ * Default variation for VideoBlock Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type VideoBlockSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<VideoBlockSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *VideoBlock*
+ */
+type VideoBlockSliceVariation = VideoBlockSliceDefault;
+
+/**
+ * VideoBlock Shared Slice
+ *
+ * - **API ID**: `video_block`
+ * - **Description**: VideoBlock
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type VideoBlockSlice = prismic.SharedSlice<
+  "video_block",
+  VideoBlockSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -1082,6 +1152,10 @@ declare module "@prismicio/client" {
       TextAndImageSliceVariation,
       TextAndImageSliceDefault,
       TextAndImageSliceImageOnLeft,
+      VideoBlockSlice,
+      VideoBlockSliceDefaultPrimary,
+      VideoBlockSliceVariation,
+      VideoBlockSliceDefault,
     };
   }
 }
