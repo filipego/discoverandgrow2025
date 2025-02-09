@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type HomepageDocumentDataSlicesSlice =
+  | ImageSlice
   | CardsandImagesSlice
   | TextAndImageSlice
   | HeroSlice;
@@ -73,6 +74,7 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | ImageSlice
   | HeroSlice
   | CardsandImagesSlice
   | TextAndImageSlice;
@@ -137,6 +139,7 @@ export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
 type ProgramsDocumentDataSlicesSlice =
+  | ImageSlice
   | HeroSlice
   | CardsandImagesSlice
   | TextAndImageSlice;
@@ -694,6 +697,137 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
+ * Item in *Image → Multiple images → Primary → Images*
+ */
+export interface ImageSliceMultipleImagesPrimaryImagesItem {
+  /**
+   * Image field in *Image → Multiple images → Primary → Images*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image.multipleImages.primary.images[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *Image → Default → Primary*
+ */
+export interface ImageSliceDefaultPrimary {
+  /**
+   * Image field in *Image → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Smaller field in *Image → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image.default.primary.smaller
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  smaller: prismic.BooleanField;
+
+  /**
+   * No padding field in *Image → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image.default.primary.no_padding
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  no_padding: prismic.BooleanField;
+}
+
+/**
+ * Default variation for Image Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ImageSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ImageSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *Image → Multiple images → Primary*
+ */
+export interface ImageSliceMultipleImagesPrimary {
+  /**
+   * Images field in *Image → Multiple images → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image.multipleImages.primary.images[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  images: prismic.GroupField<
+    Simplify<ImageSliceMultipleImagesPrimaryImagesItem>
+  >;
+
+  /**
+   * No padding field in *Image → Multiple images → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image.multipleImages.primary.no_padding
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  no_padding: prismic.BooleanField;
+
+  /**
+   * No gap field in *Image → Multiple images → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image.multipleImages.primary.no_gap
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  no_gap: prismic.BooleanField;
+}
+
+/**
+ * Multiple images variation for Image Slice
+ *
+ * - **API ID**: `multipleImages`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ImageSliceMultipleImages = prismic.SharedSliceVariation<
+  "multipleImages",
+  Simplify<ImageSliceMultipleImagesPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Image*
+ */
+type ImageSliceVariation = ImageSliceDefault | ImageSliceMultipleImages;
+
+/**
+ * Image Shared Slice
+ *
+ * - **API ID**: `image`
+ * - **Description**: Image
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ImageSlice = prismic.SharedSlice<"image", ImageSliceVariation>;
+
+/**
  * Primary content in *TextAndImage → Default → Primary*
  */
 export interface TextAndImageSliceDefaultPrimary {
@@ -935,6 +1069,13 @@ declare module "@prismicio/client" {
       HeroSlice,
       HeroSliceVariation,
       HeroSliceDefault,
+      ImageSlice,
+      ImageSliceDefaultPrimary,
+      ImageSliceMultipleImagesPrimaryImagesItem,
+      ImageSliceMultipleImagesPrimary,
+      ImageSliceVariation,
+      ImageSliceDefault,
+      ImageSliceMultipleImages,
       TextAndImageSlice,
       TextAndImageSliceDefaultPrimary,
       TextAndImageSliceImageOnLeftPrimary,
