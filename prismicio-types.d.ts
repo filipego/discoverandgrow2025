@@ -72,7 +72,10 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
-type PageDocumentDataSlicesSlice = CardsandImagesSlice | TextAndImageSlice;
+type PageDocumentDataSlicesSlice =
+  | HeroSlice
+  | CardsandImagesSlice
+  | TextAndImageSlice;
 
 /**
  * Content for Page documents
@@ -299,11 +302,11 @@ export type AllDocumentTypes =
   | SettingsDocument;
 
 /**
- * Item in *CardWithImage → Default → Primary → Card*
+ * Item in *Card → Default → Primary → Card*
  */
 export interface CardsandImagesSliceDefaultPrimaryCardItem {
   /**
-   * Image field in *CardWithImage → Default → Primary → Card*
+   * Image field in *Card → Default → Primary → Card*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -313,7 +316,7 @@ export interface CardsandImagesSliceDefaultPrimaryCardItem {
   image: prismic.ImageField<never>;
 
   /**
-   * Heading field in *CardWithImage → Default → Primary → Card*
+   * Heading field in *Card → Default → Primary → Card*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -323,7 +326,7 @@ export interface CardsandImagesSliceDefaultPrimaryCardItem {
   heading: prismic.KeyTextField;
 
   /**
-   * Body field in *CardWithImage → Default → Primary → Card*
+   * Body field in *Card → Default → Primary → Card*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -333,7 +336,7 @@ export interface CardsandImagesSliceDefaultPrimaryCardItem {
   body: prismic.RichTextField;
 
   /**
-   * Link field in *CardWithImage → Default → Primary → Card*
+   * Link field in *Card → Default → Primary → Card*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
@@ -343,7 +346,7 @@ export interface CardsandImagesSliceDefaultPrimaryCardItem {
   link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 
   /**
-   * Bg Color field in *CardWithImage → Default → Primary → Card*
+   * Bg Color field in *Card → Default → Primary → Card*
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
@@ -355,11 +358,11 @@ export interface CardsandImagesSliceDefaultPrimaryCardItem {
 }
 
 /**
- * Item in *CardWithImage → imageLeft → Primary → Card*
+ * Item in *Card → Image left → Primary → Card*
  */
 export interface CardsandImagesSliceImageLeftPrimaryCardItem {
   /**
-   * Image field in *CardWithImage → imageLeft → Primary → Card*
+   * Image field in *Card → Image left → Primary → Card*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -369,7 +372,7 @@ export interface CardsandImagesSliceImageLeftPrimaryCardItem {
   image: prismic.ImageField<never>;
 
   /**
-   * Heading field in *CardWithImage → imageLeft → Primary → Card*
+   * Heading field in *Card → Image left → Primary → Card*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -379,7 +382,7 @@ export interface CardsandImagesSliceImageLeftPrimaryCardItem {
   heading: prismic.KeyTextField;
 
   /**
-   * Body field in *CardWithImage → imageLeft → Primary → Card*
+   * Body field in *Card → Image left → Primary → Card*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -389,7 +392,7 @@ export interface CardsandImagesSliceImageLeftPrimaryCardItem {
   body: prismic.RichTextField;
 
   /**
-   * Link field in *CardWithImage → imageLeft → Primary → Card*
+   * Link field in *Card → Image left → Primary → Card*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
@@ -399,7 +402,7 @@ export interface CardsandImagesSliceImageLeftPrimaryCardItem {
   link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 
   /**
-   * Bg Color field in *CardWithImage → imageLeft → Primary → Card*
+   * Bg Color field in *Card → Image left → Primary → Card*
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
@@ -411,11 +414,123 @@ export interface CardsandImagesSliceImageLeftPrimaryCardItem {
 }
 
 /**
- * Primary content in *CardWithImage → Default → Primary*
+ * Item in *Card → Card with icon inside → Primary → Card*
+ */
+export interface CardsandImagesSliceCardWithIconInsidePrimaryCardItem {
+  /**
+   * Image field in *Card → Card with icon inside → Primary → Card*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cardsand_images.cardWithIconInside.primary.card[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Heading field in *Card → Card with icon inside → Primary → Card*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cardsand_images.cardWithIconInside.primary.card[].heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *Card → Card with icon inside → Primary → Card*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cardsand_images.cardWithIconInside.primary.card[].body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Link field in *Card → Card with icon inside → Primary → Card*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cardsand_images.cardWithIconInside.primary.card[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Bg Color field in *Card → Card with icon inside → Primary → Card*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Dark Blue
+   * - **API ID Path**: cardsand_images.cardWithIconInside.primary.card[].bg_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  bg_color: prismic.SelectField<"Dark Blue" | "Yellow", "filled">;
+}
+
+/**
+ * Item in *Card → Card with icon outside → Primary → Card*
+ */
+export interface CardsandImagesSliceCardWithIconOutsidePrimaryCardItem {
+  /**
+   * Image field in *Card → Card with icon outside → Primary → Card*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cardsand_images.cardWithIconOutside.primary.card[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Heading field in *Card → Card with icon outside → Primary → Card*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cardsand_images.cardWithIconOutside.primary.card[].heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *Card → Card with icon outside → Primary → Card*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cardsand_images.cardWithIconOutside.primary.card[].body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Link field in *Card → Card with icon outside → Primary → Card*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cardsand_images.cardWithIconOutside.primary.card[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Bg Color field in *Card → Card with icon outside → Primary → Card*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Dark Blue
+   * - **API ID Path**: cardsand_images.cardWithIconOutside.primary.card[].bg_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  bg_color: prismic.SelectField<"Dark Blue" | "Yellow", "filled">;
+}
+
+/**
+ * Primary content in *Card → Default → Primary*
  */
 export interface CardsandImagesSliceDefaultPrimary {
   /**
-   * Card field in *CardWithImage → Default → Primary*
+   * Card field in *Card → Default → Primary*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
@@ -426,7 +541,7 @@ export interface CardsandImagesSliceDefaultPrimary {
 }
 
 /**
- * Default variation for CardWithImage Slice
+ * Default variation for Card Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -439,11 +554,11 @@ export type CardsandImagesSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
- * Primary content in *CardWithImage → imageLeft → Primary*
+ * Primary content in *Card → Image left → Primary*
  */
 export interface CardsandImagesSliceImageLeftPrimary {
   /**
-   * Card field in *CardWithImage → imageLeft → Primary*
+   * Card field in *Card → Image left → Primary*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
@@ -456,7 +571,7 @@ export interface CardsandImagesSliceImageLeftPrimary {
 }
 
 /**
- * imageLeft variation for CardWithImage Slice
+ * Image left variation for Card Slice
  *
  * - **API ID**: `imageLeft`
  * - **Description**: Default
@@ -469,14 +584,78 @@ export type CardsandImagesSliceImageLeft = prismic.SharedSliceVariation<
 >;
 
 /**
- * Slice variation for *CardWithImage*
+ * Primary content in *Card → Card with icon inside → Primary*
+ */
+export interface CardsandImagesSliceCardWithIconInsidePrimary {
+  /**
+   * Card field in *Card → Card with icon inside → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cardsand_images.cardWithIconInside.primary.card[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  card: prismic.GroupField<
+    Simplify<CardsandImagesSliceCardWithIconInsidePrimaryCardItem>
+  >;
+}
+
+/**
+ * Card with icon inside variation for Card Slice
+ *
+ * - **API ID**: `cardWithIconInside`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CardsandImagesSliceCardWithIconInside =
+  prismic.SharedSliceVariation<
+    "cardWithIconInside",
+    Simplify<CardsandImagesSliceCardWithIconInsidePrimary>,
+    never
+  >;
+
+/**
+ * Primary content in *Card → Card with icon outside → Primary*
+ */
+export interface CardsandImagesSliceCardWithIconOutsidePrimary {
+  /**
+   * Card field in *Card → Card with icon outside → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cardsand_images.cardWithIconOutside.primary.card[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  card: prismic.GroupField<
+    Simplify<CardsandImagesSliceCardWithIconOutsidePrimaryCardItem>
+  >;
+}
+
+/**
+ * Card with icon outside variation for Card Slice
+ *
+ * - **API ID**: `cardWithIconOutside`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CardsandImagesSliceCardWithIconOutside =
+  prismic.SharedSliceVariation<
+    "cardWithIconOutside",
+    Simplify<CardsandImagesSliceCardWithIconOutsidePrimary>,
+    never
+  >;
+
+/**
+ * Slice variation for *Card*
  */
 type CardsandImagesSliceVariation =
   | CardsandImagesSliceDefault
-  | CardsandImagesSliceImageLeft;
+  | CardsandImagesSliceImageLeft
+  | CardsandImagesSliceCardWithIconInside
+  | CardsandImagesSliceCardWithIconOutside;
 
 /**
- * CardWithImage Shared Slice
+ * Card Shared Slice
  *
  * - **API ID**: `cardsand_images`
  * - **Description**: CardsandImages
@@ -744,9 +923,15 @@ declare module "@prismicio/client" {
       CardsandImagesSliceDefaultPrimary,
       CardsandImagesSliceImageLeftPrimaryCardItem,
       CardsandImagesSliceImageLeftPrimary,
+      CardsandImagesSliceCardWithIconInsidePrimaryCardItem,
+      CardsandImagesSliceCardWithIconInsidePrimary,
+      CardsandImagesSliceCardWithIconOutsidePrimaryCardItem,
+      CardsandImagesSliceCardWithIconOutsidePrimary,
       CardsandImagesSliceVariation,
       CardsandImagesSliceDefault,
       CardsandImagesSliceImageLeft,
+      CardsandImagesSliceCardWithIconInside,
+      CardsandImagesSliceCardWithIconOutside,
       HeroSlice,
       HeroSliceVariation,
       HeroSliceDefault,
