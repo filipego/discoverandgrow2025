@@ -15,15 +15,14 @@ export async function Header({ }: Props) {
 
     return (
         <Bounded as="header">
-            <div className="flex w-full items-center justify-between gap-6">
-                <div className="">
+            <div className="grid grid-cols-[230px_1fr_230px] w-full items-center">
+                <div className="flex-shrink-0">
                     <Link href="/">
-                        <LongLogo treeColor="#29285D" className='text-[#29285D] h-[70]' />
+                        <LongLogo treeColor="#29285D" className='text-[#29285D] h-[60]' />
                     </Link>
                 </div>
-                <nav aria-label="Main"
-                    className="col-span-full row-start-2 md:col-span-1 md:col-start-2 md:row-start-1">
-                    <ul className="flex flex-wrap items-center justify-center gap-8">
+                <nav aria-label="Main" className="grid place-items-center w-full">
+                    <ul className="flex items-center gap-8">
                         {settings.data.navigation.map((item, index) => (
                             <li key={index}>
                                 <SmartPrismicLink link={item.link}>
@@ -33,13 +32,15 @@ export async function Header({ }: Props) {
                         ))}
                     </ul>
                 </nav>
-                <ButtonLink
-                    field={settings.data.button}
-                >
-                    {settings.data.button.text}
-
-                </ButtonLink>
+                <div className="flex justify-end">
+                    <ButtonLink
+                        field={settings.data.button}
+                        color="Secondary"
+                    >
+                        {settings.data.button.text}
+                    </ButtonLink>
+                </div>
             </div>
         </Bounded>
-    )
+    );
 }
