@@ -1,0 +1,40 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "method",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Ex do nostrud ad ex qui elit aliquip enim officia aliquip incididunt voluptate. Duis in id ullamco deserunt esse fugiat sint. Pariatur enim exercitation do dolor velit amet ipsum est id minim aliqua voluptate commodo qui reprehenderit."
+						}
+					}
+				]
+			},
+			"bg_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Dark Blue",
+				"type": "Select"
+			},
+			"bg_color_full_width": {
+				"__TYPE__": "FieldContent",
+				"value": "Dark Blue",
+				"type": "Select"
+			},
+			"form": {
+				"__TYPE__": "FieldContent",
+				"value": "Contact Form",
+				"type": "Select"
+			}
+		},
+		"items": []
+	}
+]

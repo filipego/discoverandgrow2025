@@ -1,0 +1,68 @@
+{
+  "id": "text_and_form",
+  "type": "SharedSlice",
+  "name": "TextAndForm",
+  "description": "TextAndForm",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "form": {
+          "type": "Select",
+          "config": {
+            "label": "Form",
+            "placeholder": "",
+            "options": [
+              "Contact Form",
+              "Newsletter Form"
+            ]
+          }
+        },
+        "bg_color": {
+          "type": "Select",
+          "config": {
+            "label": "Bg Color",
+            "placeholder": "",
+            "options": [
+              "Dark Blue",
+              "Yellow"
+            ]
+          }
+        },
+        "bg_color_full_width": {
+          "type": "Select",
+          "config": {
+            "label": "Bg Color Full Width",
+            "placeholder": "",
+            "options": [
+              "Dark Blue",
+              "Yellow"
+            ]
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -6,6 +6,7 @@ export const components = {
   cardsand_images: dynamic(() => import("./Card")),
   hero: dynamic(() => import("./Hero")),
   image: dynamic(() => import("./ImageBlock")),
+  text_and_form: dynamic(() => import("./TextAndForm")),
   text_and_image: dynamic(() => import("./TextAndImage")),
   video_block: dynamic(() => import("./VideoBlock")),
 };

@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type HomepageDocumentDataSlicesSlice =
+  | TextAndFormSlice
   | VideoBlockSlice
   | ImageSlice
   | CardsandImagesSlice
@@ -75,6 +76,7 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | TextAndFormSlice
   | VideoBlockSlice
   | ImageSlice
   | HeroSlice
@@ -141,6 +143,7 @@ export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
 type ProgramsDocumentDataSlicesSlice =
+  | TextAndFormSlice
   | VideoBlockSlice
   | ImageSlice
   | HeroSlice
@@ -874,6 +877,91 @@ type ImageSliceVariation = ImageSliceDefault | ImageSliceMultipleImages;
 export type ImageSlice = prismic.SharedSlice<"image", ImageSliceVariation>;
 
 /**
+ * Primary content in *TextAndForm → Default → Primary*
+ */
+export interface TextAndFormSliceDefaultPrimary {
+  /**
+   * Heading field in *TextAndForm → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_and_form.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *TextAndForm → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_and_form.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Form field in *TextAndForm → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_and_form.default.primary.form
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  form: prismic.SelectField<"Contact Form" | "Newsletter Form">;
+
+  /**
+   * Bg Color field in *TextAndForm → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_and_form.default.primary.bg_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  bg_color: prismic.SelectField<"Dark Blue" | "Yellow">;
+
+  /**
+   * Bg Color Full Width field in *TextAndForm → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_and_form.default.primary.bg_color_full_width
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  bg_color_full_width: prismic.SelectField<"Dark Blue" | "Yellow">;
+}
+
+/**
+ * Default variation for TextAndForm Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TextAndFormSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TextAndFormSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TextAndForm*
+ */
+type TextAndFormSliceVariation = TextAndFormSliceDefault;
+
+/**
+ * TextAndForm Shared Slice
+ *
+ * - **API ID**: `text_and_form`
+ * - **Description**: TextAndForm
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TextAndFormSlice = prismic.SharedSlice<
+  "text_and_form",
+  TextAndFormSliceVariation
+>;
+
+/**
  * Primary content in *TextAndImage → Default → Primary*
  */
 export interface TextAndImageSliceDefaultPrimary {
@@ -1190,6 +1278,10 @@ declare module "@prismicio/client" {
       ImageSliceVariation,
       ImageSliceDefault,
       ImageSliceMultipleImages,
+      TextAndFormSlice,
+      TextAndFormSliceDefaultPrimary,
+      TextAndFormSliceVariation,
+      TextAndFormSliceDefault,
       TextAndImageSlice,
       TextAndImageSliceDefaultPrimary,
       TextAndImageSliceImageOnLeftPrimary,
