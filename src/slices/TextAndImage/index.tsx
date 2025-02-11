@@ -74,6 +74,7 @@ const TextAndImage: FC<TextAndImageProps> = ({ slice }) => {
                 <li key={link.key}>
                   <ButtonLink
                     field={link}
+                    color={link.variant}
                   >
                     {link.text}
 

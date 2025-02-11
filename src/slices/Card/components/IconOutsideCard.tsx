@@ -16,8 +16,8 @@ export const IconOutsideCard: FC<CardProps> = ({ item }) => {
   );
 
   return (
-    <DefaultCard 
-      item={item} 
+    <DefaultCard
+      item={item}
       className="pt-16 relative mt-16"
       imageContainer={imageContainer}
     />

@@ -10,14 +10,18 @@ import clsx from "clsx";
 
 interface ExtendedCardProps extends CardProps {
   className?: string;
+  contentClassName?: string;
   imageContainer?: ReactNode;
+  imageLeft?: boolean;
 }
 
-export const DefaultCard: FC<ExtendedCardProps> = ({ 
-  item, 
+export const DefaultCard: FC<ExtendedCardProps> = ({
+  item,
   className,
+  contentClassName,
+  imageLeft,
   imageContainer = (
-    <div className="w-full h-[200px]">
+    <div className="w-full h-[200px] overflow-hidden rounded-t-xl">
       <PrismicNextImage
         field={item.image}
         className="w-full h-full object-cover"
@@ -27,7 +31,8 @@ export const DefaultCard: FC<ExtendedCardProps> = ({
 }) => {
   return (
     <li className={clsx(
-      "rounded-xl w-full flex flex-col md:min-h-[400px]", // Added md: prefix
+      "rounded-xl w-full flex flex-col md:min-h-[400px]",
+      imageLeft && "md:flex-row",
       item.bg_color === "Dark Blue" && "bg-[#29285D] text-white",
       item.bg_color === "Yellow" && "bg-[#F1E1A7]",
       className
@@ -35,7 +40,8 @@ export const DefaultCard: FC<ExtendedCardProps> = ({
       {imageContainer}
       <div className={clsx(
         "px-10 py-10 flex-1 flex flex-col",
-        !className?.includes("flex-row") && "overflow-hidden"
+        !className?.includes("flex-row") && "overflow-hidden",
+        contentClassName
       )}>
         <div className="flex-1"> {/* Added flex-1 to push content up */}
           <Heading as="h3" size="sm" className="mb-5">

@@ -16,7 +16,7 @@ export const IconInsideCard: FC<CardProps> = ({ item }) => {
   );
 
   return (
-    <DefaultCard 
+    <DefaultCard
       item={item}
       imageContainer={imageContainer}
     />

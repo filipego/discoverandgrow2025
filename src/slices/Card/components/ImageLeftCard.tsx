@@ -5,7 +5,7 @@ import { DefaultCard } from "./DefaultCard";
 
 export const ImageLeftCard: FC<CardProps> = ({ item }) => {
   const imageContainer = (
-    <div className="w-1/2 h-full">
+    <div className="w-full h-[200px] overflow-hidden rounded-t-xl md:w-1/2 md:h-full md:rounded-none md:rounded-l-xl">
       <PrismicNextImage
         field={item.image}
         className="w-full h-full object-cover"
@@ -14,9 +14,10 @@ export const ImageLeftCard: FC<CardProps> = ({ item }) => {
   );
 
   return (
-    <DefaultCard 
+    <DefaultCard
       item={item}
-      className="flex flex-row h-full md:h-[400px]"
+      imageLeft
+      className="flex-col md:flex-row h-full md:h-[400px]"
       imageContainer={imageContainer}
     />
   );
