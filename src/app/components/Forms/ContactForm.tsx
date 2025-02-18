@@ -6,6 +6,7 @@ import * as z from "zod";
 import { Input } from "@/app/components/Forms/ui/Input";
 import { Label } from "@/app/components/Forms/ui/Label";
 import { Button } from "@/app/components/Forms/ui/Button";
+import { useState } from 'react';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -17,13 +18,37 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export default function ContactForm() {
-  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<FormData>({
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+  
+  const { register, handleSubmit, formState: { errors, isValid, touchedFields }, reset } = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    mode: "onChange"
+    mode: "onTouched"  // Changed from "onChange" to "onTouched"
   });
+
+  // ... then in the message field JSX:
+  <div>
+    <Label htmlFor="message">Message</Label>
+    <Input
+      {...register("message")}
+      multiline
+      rows={4}
+      placeholder="Your message"
+    />
+    {touchedFields.message && errors.message && (
+      <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
+    )}
+  </div>
+
+  // Add at the top after imports
+  const FORM_MESSAGES = {
+    SUCCESS: 'Thank you for your message. We will get back to you soon!'
+  } as const;
 
   const onSubmit = async (data: FormData) => {
     try {
+      setIsLoading(true);
+      setMessage(null);
       const response = await fetch('/api/emails', {
         method: 'POST',
         headers: {
@@ -36,11 +61,16 @@ export default function ContactForm() {
       });
       
       if (response.ok) {
-        console.log('Form submitted successfully');
+        setMessage({ type: 'success', text: FORM_MESSAGES.SUCCESS });
         reset();
+        setTimeout(() => {
+          setMessage(null);
+        }, 5000);
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -87,12 +117,21 @@ export default function ContactForm() {
         {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
       </div>
 
+      {message && (
+        <div className="my-4">
+          <p className={`text-sm font-medium ${message.type === 'success' ? 'text-green-600' : 'text-red-500'}`}>
+            {message.text}
+          </p>
+        </div>
+      )}
+
       <div className="flex justify-start">
         <Button
           type="submit"
           isValid={isValid}
+          disabled={isLoading}
         >
-          Send
+          {isLoading ? 'Sending...' : 'Send'}
         </Button>
       </div>
     </form>

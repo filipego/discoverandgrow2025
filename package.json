@@ -17,6 +17,7 @@
     "@prismicio/next": "^2.0.0",
     "@prismicio/react": "^3.0.0",
     "@react-email/components": "0.0.33",
+    "@supabase/supabase-js": "^2.48.1",
     "clsx": "^2.1.1",
     "next": "15.1.6",
     "react": "19.0.0",
