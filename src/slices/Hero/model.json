@@ -12,6 +12,74 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "kicker": {
+          "type": "Text",
+          "config": {
+            "label": "Kicker",
+            "placeholder": ""
+          }
+        },
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "link": {
+          "type": "Link",
+          "config": {
+            "label": "Link",
+            "placeholder": "(Optional)",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary"
+            ]
+          }
+        },
+        "video_platform": {
+          "type": "Select",
+          "config": {
+            "label": "Video Platform",
+            "placeholder": "",
+            "options": [
+              "TikTok",
+              "YouTube"
+            ],
+            "default_value": "TikTok"
+          }
+        },
+        "video_id": {
+          "type": "Text",
+          "config": {
+            "label": "Video ID",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "centeredHero",
+      "name": "Centered Hero",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
         "heading": {
           "type": "Text",
           "config": {

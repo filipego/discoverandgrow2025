@@ -680,6 +680,16 @@ export type CardsandImagesSlice = prismic.SharedSlice<
  */
 export interface HeroSliceDefaultPrimary {
   /**
+   * Kicker field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.kicker
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  kicker: prismic.KeyTextField;
+
+  /**
    * Heading field in *Hero → Default → Primary*
    *
    * - **Field Type**: Text
@@ -716,6 +726,27 @@ export interface HeroSliceDefaultPrimary {
       "Primary" | "Secondary"
     >
   >;
+
+  /**
+   * Video Platform field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: TikTok
+   * - **API ID Path**: hero.default.primary.video_platform
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  video_platform: prismic.SelectField<"TikTok" | "YouTube", "filled">;
+
+  /**
+   * Video ID field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.video_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  video_id: prismic.KeyTextField;
 }
 
 /**
@@ -732,9 +763,65 @@ export type HeroSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *Hero → Centered Hero → Primary*
+ */
+export interface HeroSliceCenteredHeroPrimary {
+  /**
+   * Heading field in *Hero → Centered Hero → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.centeredHero.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *Hero → Centered Hero → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.centeredHero.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Link field in *Hero → Centered Hero → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: (Optional)
+   * - **API ID Path**: hero.centeredHero.primary.link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary"
+    >
+  >;
+}
+
+/**
+ * Centered Hero variation for Hero Slice
+ *
+ * - **API ID**: `centeredHero`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HeroSliceCenteredHero = prismic.SharedSliceVariation<
+  "centeredHero",
+  Simplify<HeroSliceCenteredHeroPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *Hero*
  */
-type HeroSliceVariation = HeroSliceDefault;
+type HeroSliceVariation = HeroSliceDefault | HeroSliceCenteredHero;
 
 /**
  * Hero Shared Slice
@@ -1269,8 +1356,10 @@ declare module "@prismicio/client" {
       CardsandImagesSliceCardWithIconOutside,
       HeroSlice,
       HeroSliceDefaultPrimary,
+      HeroSliceCenteredHeroPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      HeroSliceCenteredHero,
       ImageSlice,
       ImageSliceDefaultPrimary,
       ImageSliceMultipleImagesPrimaryImagesItem,

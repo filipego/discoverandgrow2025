@@ -38,6 +38,7 @@
   }
 }
 
+/* TikTok Embed Customization */
 :root {
   --background: #FAF9F6;
   --foreground: #171717;
@@ -49,6 +50,23 @@
     --foreground: #ededed;
   }
 } */
+
+/* Add this before the body selector */
+.tiktok-embed {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.tiktok-embed iframe {
+  background: transparent !important;
+  border: none !important;
+}
+
+.tiktok-embed::before,
+.tiktok-embed::after,
+.tiktok-embed-background {
+  display: none !important;
+}
 
 body {
   color: var(--foreground);
