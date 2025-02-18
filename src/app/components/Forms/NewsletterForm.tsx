@@ -13,6 +13,13 @@ const formSchema = z.object({
   email: z.string().email('Invalid email address'),
 });
 
+const FORM_MESSAGES = {
+  SUCCESS: 'Thank you for subscribing to our newsletter!',
+  DUPLICATE: 'This email is already subscribed to our newsletter.',
+  DATABASE_ERROR: 'Unable to add your email to our newsletter. Please try again later.',
+  EMAIL_ERROR: 'Unable to send confirmation email. Please try again later.'
+} as const;
+
 type FormData = z.infer<typeof formSchema>;
 
 export default function NewsletterForm() {
@@ -35,13 +42,6 @@ export default function NewsletterForm() {
         .insert([{ email: data.email }]);
 
       // If we get a unique constraint error, it means email already exists
-      const FORM_MESSAGES = {
-        SUCCESS: 'Thank you for subscribing to our newsletter!',
-        DUPLICATE: 'This email is already subscribed to our newsletter.',
-        DATABASE_ERROR: 'Unable to add your email to our newsletter. Please try again later.',
-        EMAIL_ERROR: 'Unable to send confirmation email. Please try again later.'
-      } as const;
-
       if (insertError?.code === '23505') {
         setMessage({ type: 'error', text: FORM_MESSAGES.DUPLICATE });
         setTimeout(() => {
@@ -73,19 +73,17 @@ export default function NewsletterForm() {
       });
       
       if (response.ok) {
-        setMessage({ type: 'success', text: 'Thank you for subscribing to our newsletter!' });
+        setMessage({ type: 'success', text: FORM_MESSAGES.SUCCESS });
         reset();
-        // Auto-hide message after 5 seconds
         setTimeout(() => {
           setMessage(null);
         }, 5000);
       }
     } catch (error) {
-      setMessage({ type: 'error', text: 'An error occurred. Please try again.' });
+      setMessage({ type: 'error', text: FORM_MESSAGES.DATABASE_ERROR });
       setTimeout(() => {
         setMessage(null);
       }, 5000);
-      console.error(error);
     } finally {
       setIsLoading(false);
     }
