@@ -2,8 +2,8 @@ import { FC } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { Bounded } from "@/app/components/Bounded";
-import { DefaultCard } from "./components/DefaultCard";
-import { ImageSideCard } from "./components/ImageSideCard";
+import { BasicCard } from "./components/BasicCard";
+import { SideImageCard } from "./components/SideImageCard";
 import { IconInsideCard } from "./components/IconInsideCard";
 import { IconOutsideCard } from "./components/IconOutsideCard";
 
@@ -17,8 +17,8 @@ export type CardsandImagesProps = SliceComponentProps<Content.CardsandImagesSlic
 
 const CardsandImages: FC<CardsandImagesProps> = ({ slice }) => {
   const components = {
-    default: DefaultCard,
-    imageSide: ImageSideCard,
+    default: BasicCard,
+    imageSide: SideImageCard,
     cardWithIconInside: IconInsideCard,
     cardWithIconOutside: IconOutsideCard
   };
