@@ -1,0 +1,25 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "was",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Velit mollit ea nostrud id eiusmod cupidatat est consequat aliqua. Cupidatat do occaecat officia aute sint duis dolor occaecat. Est eiusmod nulla eiusmod nulla occaecat voluptate."
+						}
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

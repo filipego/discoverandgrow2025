@@ -24,13 +24,13 @@
 				"type": "Link",
 				"value": [
 					{
-						"key": "3e8d5868-bd12-417c-b101-c502684dd9d6",
+						"key": "a8be4a2e-f2a1-43e7-89fe-e8538be2a852",
 						"__TYPE__": "LinkContent",
 						"value": {
 							"__TYPE__": "ExternalLink",
-							"url": "http://google.com",
-							"text": "particularly",
-							"variant": "Primary"
+							"url": "http://twitter.com",
+							"text": "shot",
+							"variant": "Secondary"
 						}
 					}
 				]
@@ -78,13 +78,13 @@
 				"type": "Link",
 				"value": [
 					{
-						"key": "169bf991-fe27-44e8-845f-ae59cdee9a2d",
 						"__TYPE__": "LinkContent",
+						"key": "985c92ab-f4f5-44da-b9ac-e49d8af2a58d",
 						"value": {
 							"__TYPE__": "ExternalLink",
-							"url": "http://twitter.com",
-							"text": "out",
-							"variant": "Primary"
+							"url": "http://google.com",
+							"text": "porch",
+							"variant": "Secondary"
 						}
 					}
 				]

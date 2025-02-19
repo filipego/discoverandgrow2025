@@ -57,13 +57,13 @@
 				"type": "Link",
 				"value": [
 					{
-						"key": "4ded47db-790d-43a6-8a85-cd64cd08b094",
+						"key": "e3137ac9-37e3-4b1a-8008-aaa399d3babe",
 						"__TYPE__": "LinkContent",
 						"value": {
 							"__TYPE__": "ExternalLink",
 							"url": "http://twitter.com",
-							"text": "shown",
-							"variant": "Primary"
+							"text": "glad",
+							"variant": "Secondary"
 						}
 					}
 				]
@@ -129,12 +129,12 @@
 				"type": "Link",
 				"value": [
 					{
-						"key": "3597638b-3185-477f-94a4-b1a79c24d7c8",
 						"__TYPE__": "LinkContent",
+						"key": "21ada3eb-a88a-4f25-8df5-2f51a465dfbe",
 						"value": {
 							"__TYPE__": "ExternalLink",
-							"url": "http://twitter.com",
-							"text": "differ",
+							"url": "http://google.com",
+							"text": "game",
 							"variant": "Primary"
 						}
 					}

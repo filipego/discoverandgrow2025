@@ -73,7 +73,7 @@
 								"bg_color",
 								{
 									"__TYPE__": "FieldContent",
-									"value": "Yellow",
+									"value": "Dark Blue",
 									"type": "Select"
 								}
 							]
@@ -83,96 +83,6 @@
 			}
 		},
 		"items": []
-	},
-	{
-		"__TYPE__": "SharedSliceContent",
-		"variation": "imageLeft",
-		"primary": {
-			"card": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"image",
-								{
-									"origin": {
-										"id": "main",
-										"url": "https://images.unsplash.com/photo-1600804931749-2da4ce26c869",
-										"width": 3199,
-										"height": 3199
-									},
-									"url": "https://images.unsplash.com/photo-1600804931749-2da4ce26c869",
-									"width": 3199,
-									"height": 3199,
-									"edit": {
-										"zoom": 1,
-										"crop": {
-											"x": 0,
-											"y": 0
-										},
-										"background": "transparent"
-									},
-									"credits": null,
-									"alt": null,
-									"__TYPE__": "ImageContent",
-									"thumbnails": {}
-								}
-							],
-							[
-								"heading",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "dark",
-									"type": "Text"
-								}
-							],
-							[
-								"body",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "paragraph",
-											"content": {
-												"text": "Nisi nisi occaecat aliqua proident ex do nulla deserunt fugiat in eu. Tempor voluptate incididunt voluptate dolore cillum incididunt ex ipsum deserunt velit sint voluptate."
-											}
-										}
-									]
-								}
-							],
-							[
-								"link",
-								{
-									"key": "98ecc6e6-0348-4d73-a80f-c209d151a8e5",
-									"__TYPE__": "LinkContent",
-									"value": {
-										"__TYPE__": "ExternalLink",
-										"url": "http://twitter.com",
-										"text": "wrote"
-									}
-								}
-							],
-							[
-								"bg_color",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "Yellow",
-									"type": "Select"
-								}
-							]
-						]
-					}
-				]
-			}
-		},
-		"items": [
-			{
-				"__TYPE__": "GroupItemContent",
-				"value": []
-			}
-		]
 	},
 	{
 		"__TYPE__": "SharedSliceContent",
@@ -339,6 +249,104 @@
 								{
 									"__TYPE__": "FieldContent",
 									"value": "Dark Blue",
+									"type": "Select"
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "imageSide",
+		"primary": {
+			"card": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1541807084-5c52b6b3adef",
+										"width": 4000,
+										"height": 6000
+									},
+									"url": "https://images.unsplash.com/photo-1541807084-5c52b6b3adef",
+									"width": 4000,
+									"height": 6000,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"credits": null,
+									"alt": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"heading",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "driver",
+									"type": "Text"
+								}
+							],
+							[
+								"body",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Irure amet aliqua fugiat mollit laborum ad velit irure duis. Consequat laboris id Lorem veniam minim eiusmod nostrud aliqua dolore nisi."
+											}
+										}
+									]
+								}
+							],
+							[
+								"link",
+								{
+									"key": "9468f83e-5bb7-4c97-bcb9-5b90e0ba37ad",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "https://prismic.io",
+										"text": "bigger"
+									}
+								}
+							],
+							[
+								"bg_color",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "Dark Blue",
+									"type": "Select"
+								}
+							],
+							[
+								"direction",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "right",
 									"type": "Select"
 								}
 							]

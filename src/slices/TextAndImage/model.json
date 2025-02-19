@@ -47,7 +47,8 @@
             "repeat": true,
             "variants": [
               "Primary",
-              "Secondary"
+              "Secondary",
+              "Link"
             ]
           }
         },
@@ -119,7 +120,8 @@
             "repeat": true,
             "variants": [
               "Primary",
-              "Secondary"
+              "Secondary",
+              "Link"
             ]
           }
         },

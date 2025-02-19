@@ -12,58 +12,70 @@ interface ExtendedCardProps extends CardProps {
   className?: string;
   contentClassName?: string;
   imageContainer?: ReactNode;
-  imageLeft?: boolean;
 }
 
 export const DefaultCard: FC<ExtendedCardProps> = ({
   item,
   className,
   contentClassName,
-  imageLeft,
   imageContainer = (
-    <div className="w-full h-[200px] overflow-hidden rounded-t-xl">
+    <div className={clsx(
+      "w-full overflow-hidden",
+      // Only apply height and rounded top to default cards
+      !className && "h-[400px] rounded-t-xl"
+    )}>
       <PrismicNextImage
         field={item.image}
         className="w-full h-full object-cover"
+        alt=""
       />
     </div>
   )
 }) => {
   return (
     <li className={clsx(
-      "rounded-xl w-full flex flex-col md:min-h-[400px]",
-      imageLeft && "md:flex-row",
+      "rounded-xl w-full flex flex-col relative",
+      className === "imageSide" && "md:flex-row md:min-h-[400px]",
+      className === "imageSideReverse" && "md:flex-row-reverse md:min-h-[400px]",
       item.bg_color === "Dark Blue" && "bg-[#29285D] text-white",
-      item.bg_color === "Yellow" && "bg-[#F1E1A7]",
-      className
+      item.bg_color === "White" && "bg-white"
     )}>
       {imageContainer}
       <div className={clsx(
-        "px-10 py-10 flex-1 flex flex-col",
-        !className?.includes("flex-row") && "overflow-hidden",
+        "flex flex-col h-full justify-between p-8 md:p-12",
+        (className === "imageSide" || className === "imageSideReverse") && "md:w-1/2",
         contentClassName
       )}>
-        <div className="flex-1"> {/* Added flex-1 to push content up */}
-          <Heading as="h3" size="sm" className="mb-5">
+        <div>
+          <Heading as="h3" size="sm" className="mb-4">
             {item.heading}
           </Heading>
           <PrismicRichText
             field={item.body}
             components={{
-              paragraph: ({ children }) => (
-                <p className="text-sm mb-5 lg:max-w-[90%]">{children}</p>
+              heading3: ({ children }) => (
+                <h3 className="text-xl font-bold mb-4">{children}</h3>
               ),
+              paragraph: ({ children }) => (
+                <p className="mb-6">{children}</p>
+              ),
+              list: ({ children }) => (
+                <ul className={clsx(
+                  "list-disc pl-10 space-y-2",
+                  (className === "imageSide" || className === "imageSideReverse") && "mb-10"
+                )}>{children}</ul>
+              ),
+              listItem: ({ children }) => (
+                <li>{children}</li>
+              )
             }}
           />
         </div>
         {isFilled.link(item.link) && (
-          <div className="mt-auto pt-4 flex justify-between items-center group">
-            {/* Link content remains the same */}
+          <div className="flex justify-between items-center group">
             <SmartPrismicLink
               link={item.link}
-              className={clsx(
-                item.bg_color === "Dark Blue" && "text-[#F1E1A7]"
-              )}
+              className="font-bold text-[#D93CA6]"
             >
               {item.link.text}
             </SmartPrismicLink>
@@ -72,7 +84,7 @@ export const DefaultCard: FC<ExtendedCardProps> = ({
               <IoArrowForwardCircleOutline
                 className={clsx(
                   "mt-2 -rotate-45 transition-transform duration-300 group-hover:rotate-0",
-                  item.bg_color === "Dark Blue" && "text-[#F1E1A7]"
+                  "text-[#D93CA6]"
                 )}
                 size={30}
               />

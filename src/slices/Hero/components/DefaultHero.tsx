@@ -1,4 +1,4 @@
-import { Content, isFilled } from "@prismicio/client";
+import { Content, isFilled, KeyTextField } from "@prismicio/client";
 import { PrismicRichText } from "@prismicio/react";
 import { Heading } from "@/app/components/Heading";
 import { ButtonLink } from "@/app/components/ButtonLink";
@@ -12,14 +12,14 @@ type DefaultHeroProps = {
   link: Content.HeroSlice["primary"]["link"];
   video_platform: "TikTok" | "YouTube" | null;
   video_id: string | null;
-  kicker: Content.HeroSlice["primary"]["kicker"];
+  kicker: KeyTextField;
 };
 
 export function DefaultHero({ heading, body, link, video_platform, video_id, kicker }: DefaultHeroProps) {
   return (
-    <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-24 pt-8 lg:pt-20">
+    <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-24 py-8 lg:py-20">
       <div>
-        {kicker && (
+        {isFilled.keyText(kicker) && (
           <span className="mb-4 text-xs uppercase tracking-widest block">
             {kicker}
           </span>
@@ -31,7 +31,7 @@ export function DefaultHero({ heading, body, link, video_platform, video_id, kic
           <PrismicRichText field={body} />
         </div>
         {isFilled.repeatable(link) && (
-          <ul className="flex gap-4 mt-8">
+          <ul className="flex gap-2 mt-14">
             {link.map((link) => (
               <li key={link.key}>
                 <ButtonLink field={link} color={link.variant}>

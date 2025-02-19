@@ -19,7 +19,7 @@ export function CenteredHero({ heading, body, link }: CenteredHeroProps) {
         <PrismicRichText field={body} />
       </div>
       {isFilled.repeatable(link) && (
-        <ul className="flex gap-4 mt-8">
+        <ul className="flex gap-2 mt-8">
           {link.map((link) => (
             <li key={link.key}>
               <ButtonLink field={link} color={link.variant}>
