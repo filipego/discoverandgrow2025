@@ -1,10 +1,9 @@
-import { PrismicNextLinkProps } from "@prismicio/next";
-import { SmartPrismicLink } from "@/app/components/SmartPrismicLink";
+import { PrismicNextLink, PrismicNextLinkProps } from "@prismicio/next";
 import clsx from "clsx";
-import { LinkField } from "@prismicio/client";  // Add this import
+import { LinkField } from "@prismicio/client";
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
-export type ButtonProps = Omit<PrismicNextLinkProps, 'href'> & {
+export type ButtonProps = PrismicNextLinkProps & {
     color?: "Primary" | "Secondary" | "Link";
     size?: "sm" | "md" | "lg";
     field: LinkField;
@@ -26,8 +25,9 @@ export function ButtonLink({
     };
 
     return (
-        <SmartPrismicLink
-            link={field}
+        <PrismicNextLink
+            field={field}
+            {...props}
         >
             <span
                 className={clsx(
@@ -48,6 +48,6 @@ export function ButtonLink({
                     />
                 )}
             </span>
-        </SmartPrismicLink>
+        </PrismicNextLink>
     );
 }

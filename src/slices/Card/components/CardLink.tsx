@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { SmartPrismicLink } from "@/app/components/SmartPrismicLink";
+import { PrismicNextLink } from "@prismicio/next";
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 import { LinkField } from "@prismicio/client";
 import clsx from "clsx";
@@ -11,14 +11,14 @@ interface CardLinkProps {
 export const CardLink: FC<CardLinkProps> = ({ link }) => {
     return (
         <div className="flex justify-between items-center group mt-auto pt-16">
-            <SmartPrismicLink
-                link={link}
+            <PrismicNextLink
+                field={link}
                 className="font-bold text-[#D93CA6]"
             >
                 {link.text}
-            </SmartPrismicLink>
+            </PrismicNextLink>
 
-            <SmartPrismicLink link={link}>
+            <PrismicNextLink field={link}>
                 <IoArrowForwardCircleOutline
                     className={clsx(
                         "mt-2 -rotate-45 transition-transform duration-300 group-hover:rotate-0",
@@ -26,7 +26,7 @@ export const CardLink: FC<CardLinkProps> = ({ link }) => {
                     )}
                     size={30}
                 />
-            </SmartPrismicLink>
+            </PrismicNextLink>
         </div>
     );
 };

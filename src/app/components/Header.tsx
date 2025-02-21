@@ -4,12 +4,11 @@ import { ButtonLink } from './ButtonLink'
 import { Bounded } from './Bounded'
 import { createClient } from "@/prismicio";
 import { LongLogo } from "./LongLogo";
-import { SmartPrismicLink } from "./SmartPrismicLink";
+import { PrismicNextLink } from "@prismicio/next";
 
 type Props = {}
 
 export async function Header({ }: Props) {
-
     const client = createClient();
     const settings = await client.getSingle("settings");
 
@@ -25,9 +24,9 @@ export async function Header({ }: Props) {
                     <ul className="flex items-center gap-8">
                         {settings.data.navigation.map((item, index) => (
                             <li key={index}>
-                                <SmartPrismicLink link={item.link}>
+                                <PrismicNextLink field={item.link}>
                                     {item.link.text}
-                                </SmartPrismicLink>
+                                </PrismicNextLink>
                             </li>
                         ))}
                     </ul>
