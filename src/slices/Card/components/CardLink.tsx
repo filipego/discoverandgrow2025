@@ -10,21 +10,18 @@ interface CardLinkProps {
 
 export const CardLink: FC<CardLinkProps> = ({ link }) => {
     return (
-        <div className="flex justify-between items-center group mt-auto pt-16">
+        <div className="flex items-center mt-auto pt-16">
             <PrismicNextLink
                 field={link}
-                className="font-bold text-[#D93CA6]"
+                className="font-bold text-[#D93CA6] flex items-center group"
             >
-                {link.text}
-            </PrismicNextLink>
-
-            <PrismicNextLink field={link}>
+                <span>{link.text}</span>
                 <IoArrowForwardCircleOutline
                     className={clsx(
-                        "mt-2 -rotate-45 transition-transform duration-300 group-hover:rotate-0",
+                        "ml-2 -rotate-45 transition-transform duration-300 group-hover:rotate-0",
                         "text-[#D93CA6]"
                     )}
-                    size={30}
+                    size={24}
                 />
             </PrismicNextLink>
         </div>

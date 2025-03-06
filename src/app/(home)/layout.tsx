@@ -4,6 +4,7 @@ import "../globals.css";
 import { createClient, repositoryName } from "@/prismicio";
 import { PrismicPreview } from "@prismicio/next";
 import { Header } from "../components/Header";
+import Footer from "../components/Footer";
 
 
 
@@ -32,6 +33,7 @@ export default function RootLayout({
         <main>
           <Header />
           {children}
+          <Footer />
         </main>
         <PrismicPreview repositoryName={repositoryName} />
       </body>

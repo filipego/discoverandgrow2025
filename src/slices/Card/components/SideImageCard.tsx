@@ -8,11 +8,13 @@ import clsx from "clsx";
 import { CardLink } from "./CardLink";
 
 export const SideImageCard: FC<CardProps> = ({ item }) => {
+    const isDarkBlue = item.bg_color === "Dark Blue";
+    
     return (
         <li className={clsx(
             "rounded-xl w-full flex flex-col md:flex-row md:min-h-[400px] relative",
             item.direction === "right" && "md:flex-row-reverse",
-            item.bg_color === "Dark Blue" && "bg-[#29285D] text-white",
+            isDarkBlue && "bg-[#29285D] text-white",
             item.bg_color === "White" && "bg-white"
         )}>
             <div className={clsx(
@@ -37,13 +39,13 @@ export const SideImageCard: FC<CardProps> = ({ item }) => {
                                 <h3 className="text-xl font-bold mb-4">{children}</h3>
                             ),
                             paragraph: ({ children }) => (
-                                <p className="mb-6">{children}</p>
+                                <p className={clsx("mb-6", isDarkBlue && "text-gray-200")}>{children}</p>
                             ),
                             list: ({ children }) => (
                                 <ul className="list-disc pl-10 space-y-2">{children}</ul>
                             ),
                             listItem: ({ children }) => (
-                                <li>{children}</li>
+                                <li className={clsx(isDarkBlue && "text-gray-200")}>{children}</li>
                             )
                         }}
                     />

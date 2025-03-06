@@ -36,6 +36,9 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+  p,li{
+    @apply text-sm leading-5
+  }
 }
 
 /* TikTok Embed Customization */
