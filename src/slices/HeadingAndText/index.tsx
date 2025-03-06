@@ -18,6 +18,7 @@ const HeadingAndText: FC<HeadingAndTextProps> = ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="py-16 lg:py-24"
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
         <div>
