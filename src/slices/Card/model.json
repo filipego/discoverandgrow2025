@@ -12,6 +12,21 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "padding": {
+          "type": "Select",
+          "config": {
+            "label": "padding",
+            "placeholder": "",
+            "options": [
+              "normal padding ",
+              "smaller padding",
+              "no padding ",
+              "no top padding",
+              "no bottom padding"
+            ],
+            "default_value": "normal padding "
+          }
+        },
         "card": {
           "type": "Group",
           "config": {
@@ -79,6 +94,21 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "padding": {
+          "type": "Select",
+          "config": {
+            "label": "padding",
+            "placeholder": "",
+            "options": [
+              "normal padding ",
+              "smaller padding",
+              "no padding ",
+              "no top padding",
+              "no bottom padding"
+            ],
+            "default_value": "normal padding "
+          }
+        },
         "card": {
           "type": "Group",
           "config": {
@@ -149,6 +179,21 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "padding": {
+          "type": "Select",
+          "config": {
+            "label": "padding",
+            "placeholder": "",
+            "options": [
+              "normal padding ",
+              "smaller padding",
+              "no padding ",
+              "no top padding",
+              "no bottom padding"
+            ],
+            "default_value": "normal padding "
+          }
+        },
         "card": {
           "type": "Group",
           "config": {
@@ -219,6 +264,21 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "padding": {
+          "type": "Select",
+          "config": {
+            "label": "padding",
+            "placeholder": "",
+            "options": [
+              "normal padding ",
+              "smaller padding",
+              "no padding ",
+              "no top padding",
+              "no bottom padding"
+            ],
+            "default_value": "normal padding "
+          }
+        },
         "card": {
           "type": "Group",
           "config": {

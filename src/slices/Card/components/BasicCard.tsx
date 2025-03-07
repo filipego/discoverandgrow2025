@@ -16,7 +16,7 @@ export const BasicCard: FC<CardProps> = ({ item }) => {
             isDarkBlue && "bg-[#29285D] text-white",
             item.bg_color === "White" && "bg-white"
         )}>
-            <div className="w-full h-[450px] overflow-hidden rounded-t-xl">
+            <div className="w-full overflow-hidden rounded-t-xl">
                 <PrismicNextImage
                     field={item.image}
                     className="w-full h-full object-cover"

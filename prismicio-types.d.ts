@@ -553,6 +553,24 @@ export interface CardsandImagesSliceImageSidePrimaryCardItem {
  */
 export interface CardsandImagesSliceDefaultPrimary {
   /**
+   * padding field in *Card → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: normal padding
+   * - **API ID Path**: cardsand_images.default.primary.padding
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  padding: prismic.SelectField<
+    | "normal padding "
+    | "smaller padding"
+    | "no padding "
+    | "no top padding"
+    | "no bottom padding",
+    "filled"
+  >;
+
+  /**
    * Card field in *Card → Default → Primary*
    *
    * - **Field Type**: Group
@@ -580,6 +598,24 @@ export type CardsandImagesSliceDefault = prismic.SharedSliceVariation<
  * Primary content in *Card → Card with icon inside → Primary*
  */
 export interface CardsandImagesSliceCardWithIconInsidePrimary {
+  /**
+   * padding field in *Card → Card with icon inside → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: normal padding
+   * - **API ID Path**: cardsand_images.cardWithIconInside.primary.padding
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  padding: prismic.SelectField<
+    | "normal padding "
+    | "smaller padding"
+    | "no padding "
+    | "no top padding"
+    | "no bottom padding",
+    "filled"
+  >;
+
   /**
    * Card field in *Card → Card with icon inside → Primary*
    *
@@ -612,6 +648,24 @@ export type CardsandImagesSliceCardWithIconInside =
  */
 export interface CardsandImagesSliceCardWithIconOutsidePrimary {
   /**
+   * padding field in *Card → Card with icon outside → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: normal padding
+   * - **API ID Path**: cardsand_images.cardWithIconOutside.primary.padding
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  padding: prismic.SelectField<
+    | "normal padding "
+    | "smaller padding"
+    | "no padding "
+    | "no top padding"
+    | "no bottom padding",
+    "filled"
+  >;
+
+  /**
    * Card field in *Card → Card with icon outside → Primary*
    *
    * - **Field Type**: Group
@@ -642,6 +696,24 @@ export type CardsandImagesSliceCardWithIconOutside =
  * Primary content in *Card → Image Side → Primary*
  */
 export interface CardsandImagesSliceImageSidePrimary {
+  /**
+   * padding field in *Card → Image Side → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: normal padding
+   * - **API ID Path**: cardsand_images.imageSide.primary.padding
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  padding: prismic.SelectField<
+    | "normal padding "
+    | "smaller padding"
+    | "no padding "
+    | "no top padding"
+    | "no bottom padding",
+    "filled"
+  >;
+
   /**
    * Card field in *Card → Image Side → Primary*
    *

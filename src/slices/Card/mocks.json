@@ -80,6 +80,11 @@
 						]
 					}
 				]
+			},
+			"padding": {
+				"__TYPE__": "FieldContent",
+				"value": "no top padding",
+				"type": "Select"
 			}
 		},
 		"items": []
@@ -165,6 +170,11 @@
 						]
 					}
 				]
+			},
+			"padding": {
+				"__TYPE__": "FieldContent",
+				"value": "no top padding",
+				"type": "Select"
 			}
 		},
 		"items": [
@@ -255,6 +265,11 @@
 						]
 					}
 				]
+			},
+			"padding": {
+				"__TYPE__": "FieldContent",
+				"value": "normal padding",
+				"type": "Select"
 			}
 		},
 		"items": [
@@ -353,6 +368,11 @@
 						]
 					}
 				]
+			},
+			"padding": {
+				"__TYPE__": "FieldContent",
+				"value": "normal padding",
+				"type": "Select"
 			}
 		},
 		"items": [
