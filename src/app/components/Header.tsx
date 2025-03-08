@@ -23,7 +23,7 @@ export async function Header({ }: Props) {
                 <nav aria-label="Main" className="grid place-items-center w-full">
                     <ul className="flex items-center gap-8">
                         {settings.data.navigation.map((item, index) => (
-                            <li key={index}>
+                            <li key={index} className='text-base'>
                                 <PrismicNextLink field={item.link}>
                                     {item.link.text}
                                 </PrismicNextLink>
@@ -35,6 +35,7 @@ export async function Header({ }: Props) {
                     <ButtonLink
                         field={settings.data.button}
                         color="Secondary"
+                        size='md'
                     >
                         {settings.data.button.text}
                     </ButtonLink>

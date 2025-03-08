@@ -24,7 +24,7 @@ export function DefaultHero({ heading, body, link, video_platform, video_id, kic
             {kicker}
           </span>
         )}
-        <Heading as="h1" size="lg" className="mb-10 max-w-[600]">
+        <Heading as="h1" size="lg" className="mb-10 max-w-[600] font-bold leading-12">
           {heading}
         </Heading>
         <div className="max-w-[480] mb-5">

@@ -1,14 +1,22 @@
 import { FC } from "react";
 import { Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import { Heading } from "@/app/components/Heading";
+import { SliceComponentProps } from "@prismicio/react";
 import { Bounded } from "@/app/components/Bounded";
+import { DefaultHeadingAndText } from "./components/DefaultHeadingAndText";
+import { WithLinksHeadingAndText } from "./components/WithLinksHeadingAndText";
+import clsx from "clsx";
 
 /**
  * Props for `HeadingAndText`.
  */
 export type HeadingAndTextProps =
   SliceComponentProps<Content.HeadingAndTextSlice>;
+
+export interface HeadingAndTextComponentProps {
+  heading: Content.HeadingAndTextSlice["primary"]["heading"];
+  body: Content.HeadingAndTextSlice["primary"]["body"];
+  className?: string;
+}
 
 /**
  * Component for "HeadingAndText" Slices.
@@ -18,20 +26,22 @@ const HeadingAndText: FC<HeadingAndTextProps> = ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="py-16 lg:py-24"
+      className={clsx(
+        "py-10 lg:pt-16 lg:pb-30",
+      )}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
-        <div>
-          <Heading as="h2" size="md" className="max-w-[600]">
-            {slice.primary.heading}
-          </Heading>
-        </div>
-        <div>
-          <div className="max-w-[480] mb-5">
-            <PrismicRichText field={slice.primary.body} />
-          </div>
-        </div>
-      </div>
+      {slice.variation === 'withLinks' ? (
+        <WithLinksHeadingAndText
+          heading={slice.primary.heading}
+          body={slice.primary.body}
+          link={slice.primary.link}
+        />
+      ) : (
+        <DefaultHeadingAndText
+          heading={slice.primary.heading}
+          body={slice.primary.body}
+        />
+      )}
     </Bounded>
   );
 };

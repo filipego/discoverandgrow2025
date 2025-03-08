@@ -873,9 +873,61 @@ export type HeadingAndTextSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *HeadingAndText → With Links → Primary*
+ */
+export interface HeadingAndTextSliceWithLinksPrimary {
+  /**
+   * Heading field in *HeadingAndText → With Links → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: heading_and_text.withLinks.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *HeadingAndText → With Links → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: heading_and_text.withLinks.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Link field in *HeadingAndText → With Links → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: heading_and_text.withLinks.primary.link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+}
+
+/**
+ * With Links variation for HeadingAndText Slice
+ *
+ * - **API ID**: `withLinks`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HeadingAndTextSliceWithLinks = prismic.SharedSliceVariation<
+  "withLinks",
+  Simplify<HeadingAndTextSliceWithLinksPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *HeadingAndText*
  */
-type HeadingAndTextSliceVariation = HeadingAndTextSliceDefault;
+type HeadingAndTextSliceVariation =
+  | HeadingAndTextSliceDefault
+  | HeadingAndTextSliceWithLinks;
 
 /**
  * HeadingAndText Shared Slice
@@ -1573,8 +1625,10 @@ declare module "@prismicio/client" {
       CardsandImagesSliceImageSide,
       HeadingAndTextSlice,
       HeadingAndTextSliceDefaultPrimary,
+      HeadingAndTextSliceWithLinksPrimary,
       HeadingAndTextSliceVariation,
       HeadingAndTextSliceDefault,
+      HeadingAndTextSliceWithLinks,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceCenteredHeroPrimary,

@@ -3,7 +3,7 @@ import clsx from "clsx";
 type HeadingProps = {
     as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
     size?: "xl" | "lg" | "md" | "sm" | "xs";
-    color?: "brand-dark-gray" | "brand-light-gray" | "brand-gold" | "brand-off-white";
+    color?: "brand-black" | "brand-light-gray" | "brand-off-white";
     ff?: "primary" | "primary-light" | "primary-medium" | "secondary";
     children: React.ReactNode;
     className?: string;
@@ -14,7 +14,7 @@ export function Heading({
     className,
     children,
     size = "lg",
-    color = "brand-dark-gray",
+    color = "brand-black",
     ff,
 }: HeadingProps) {
     return (
@@ -25,11 +25,10 @@ export function Heading({
                 size === "lg" && "text-2xl lg:text-5xl",
                 size === "md" && "text-xl lg:text-3xl",
                 size === "sm" && "text-lg lg:text-2xl",
-                size === "xs" && "~text-md/lg:text-xl",
+                size === "xs" && "text-md lg:text-xl",
 
-                color === "brand-dark-gray" && "text-brand-dark-gray",
+                color === "brand-black" && "text-black",
                 color === "brand-light-gray" && "text-brand-light-gray",
-                color === "brand-gold" && "text-brand-gold",
                 color === "brand-off-white" && "text-brand-off-white",
 
                 ff === "primary" && "font-primary",

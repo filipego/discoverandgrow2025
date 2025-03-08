@@ -4,7 +4,6 @@ import { SliceComponentProps } from "@prismicio/react";
 import { Bounded } from "@/app/components/Bounded";
 import { CenteredHero } from "./components/CenteredHero";
 import { DefaultHero } from "./components/DefaultHero";
-import clsx from "clsx";
 
 export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 
@@ -18,7 +17,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
           link={slice.primary.link}
         />
       ) : (
-        <DefaultHero 
+        <DefaultHero
           heading={slice.primary.heading}
           body={slice.primary.body}
           link={slice.primary.link}
