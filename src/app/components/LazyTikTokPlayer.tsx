@@ -35,12 +35,12 @@ export function LazyTikTokPlayer({ tikTokID }: VideoProps) {
     });
 
     return (
-        <div className="relative w-full h-full overflow-hidden" ref={containerRef}>
+        <div className="relative w-full h-full overflow-hidden rounded-xl" ref={containerRef}>
             {isInView && (
                 <iframe
                     src={`https://www.tiktok.com/player/v1/${tikTokID}?controls=1&play_button=1&volume_control=1&progress_bar=1&autoplay=1&rel=0&description=0&music_info=0`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    className="absolute top-0 left-0 w-full h-full"
+                    className="absolute top-0 left-0 w-full h-full rounded-xl"
                 />
             )}
         </div>
