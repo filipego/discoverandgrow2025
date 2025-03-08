@@ -307,11 +307,84 @@ export type SettingsDocument<Lang extends string = string> =
     Lang
   >;
 
+type WhatWeDoDocumentDataSlicesSlice =
+  | VideoBlockSlice
+  | TextAndImageSlice
+  | TextAndFormSlice
+  | ImageSlice
+  | HeroSlice
+  | HeadingAndTextSlice
+  | CardsandImagesSlice;
+
+/**
+ * Content for What we do documents
+ */
+interface WhatWeDoDocumentData {
+  /**
+   * Slice Zone field in *What we do*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: what_we_do.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<WhatWeDoDocumentDataSlicesSlice> /**
+   * Meta Title field in *What we do*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: what_we_do.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *What we do*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: what_we_do.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *What we do*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: what_we_do.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * What we do document from Prismic
+ *
+ * - **API ID**: `what_we_do`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type WhatWeDoDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<WhatWeDoDocumentData>,
+    "what_we_do",
+    Lang
+  >;
+
 export type AllDocumentTypes =
   | HomepageDocument
   | PageDocument
   | ProgramsDocument
-  | SettingsDocument;
+  | SettingsDocument
+  | WhatWeDoDocument;
 
 /**
  * Item in *Card → Default → Primary → Card*
@@ -1480,6 +1553,9 @@ declare module "@prismicio/client" {
       SettingsDocument,
       SettingsDocumentData,
       SettingsDocumentDataNavigationItem,
+      WhatWeDoDocument,
+      WhatWeDoDocumentData,
+      WhatWeDoDocumentDataSlicesSlice,
       AllDocumentTypes,
       CardsandImagesSlice,
       CardsandImagesSliceDefaultPrimaryCardItem,
