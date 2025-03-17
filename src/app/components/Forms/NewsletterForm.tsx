@@ -22,7 +22,11 @@ const FORM_MESSAGES = {
 
 type FormData = z.infer<typeof formSchema>;
 
-export default function NewsletterForm() {
+type NewsletterFormProps = {
+  hideLabel?: boolean;
+};
+
+export default function NewsletterForm({ hideLabel = false }: NewsletterFormProps) {
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   
@@ -92,7 +96,7 @@ export default function NewsletterForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full max-w-md mx-auto relative">
       <div>
-        <Label htmlFor="email">Email</Label>
+        {!hideLabel && <Label htmlFor="email">Email</Label>}
         <Input
           {...register("email")}
           type="email"

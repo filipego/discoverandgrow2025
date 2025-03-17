@@ -58,6 +58,68 @@
           "allowText": true,
           "repeat": false
         }
+      },
+      "newsletter_title": {
+        "type": "Text",
+        "config": {
+          "label": "Newsletter Title",
+          "placeholder": ""
+        }
+      },
+      "donate_title": {
+        "type": "Text",
+        "config": {
+          "label": "Donate Title",
+          "placeholder": ""
+        }
+      },
+      "donate_body": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Donate Body",
+          "placeholder": "",
+          "allowTargetBlank": false,
+          "multi": "paragraph,strong,em"
+        }
+      },
+      "badge": {
+        "type": "Image",
+        "config": {
+          "label": "Badge",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "footer_bio": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Footer Bio",
+          "placeholder": "",
+          "allowTargetBlank": false,
+          "multi": "paragraph,strong,em"
+        }
+      },
+      "social_links": {
+        "type": "Link",
+        "config": {
+          "label": "Social Links",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": true
+        }
+      },
+      "documents_link": {
+        "type": "Link",
+        "config": {
+          "label": "Documents Link",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": true
+        }
       }
     }
   }
