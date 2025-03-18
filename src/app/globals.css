@@ -11,25 +11,17 @@
 
 @import 'tailwindcss';
 
-
 @theme {
-  --font-secondary: "Raleway", serif;
+  --font-secondary: "Raleway", serif; 
   --font-primary: "Open Sans", serif;
-  --font--logo :'More Sugar';
+  --font-logo: "More Sugar"; 
 
   --color-brand-blue: #34328F;
-  --color-brand-light-gray: #E8E8E8
-  
+  --color-brand-light-gray: #E8E8E8;
+  --color-brand-off-white: #F6F6F6;
+  --color-brand-black: #0A0A0A;
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
@@ -38,26 +30,14 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
-  p,li{
-    @apply text-base leading-6
+  
+  p, li {
+    @apply text-sm leading-[22px] lg:text-base lg:leading-6;
   }
-}
 
-
-.tiktok-embed {
-  background-color: transparent !important;
-  border: none !important;
-}
-
-.tiktok-embed iframe {
-  background: transparent !important;
-  border: none !important;
-}
-
-.tiktok-embed::before,
-.tiktok-embed::after,
-.tiktok-embed-background {
-  display: none !important;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-secondary); 
+  }
 }
 
 body {
@@ -66,28 +46,3 @@ body {
   font-family: var(--font-primary);
 }
 
-svg {
-  overflow: hidden;
-}
-
-/* Add this to the end of your globals.css file */
-.link-border-animation {
-  position: relative;
-}
-
-.link-border-animation::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: #34328F;
-  transform-origin: 0 0;
-  transform: scaleX(0);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.link-border-animation:hover::before {
-  transform: scaleX(1);
-}

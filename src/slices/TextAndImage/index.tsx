@@ -17,33 +17,47 @@ const TextAndImage: FC<TextAndImageProps> = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className={clsx(
-        isFilled.select(slice.primary.bg_color_full_width) && "p-[50px_40px] my-10",
-        slice.primary.bg_color_full_width === "Dark Blue" && "bg-[#29285D] text-white",
-        slice.primary.bg_color_full_width === "Yellow" && "bg-[#F1E1A7]",
-        slice.primary.bg_color_full_width === "Green" && "bg-[#43C467]",
-        slice.primary.bg_color_full_width === "Orange" && "bg-[#F57F15]"
+        isFilled.select(slice.primary.bg_color_full_width) &&
+          "p-[50px_40px] my-10",
+        slice.primary.bg_color_full_width === "Dark Blue" &&
+          "bg-[#29285D] text-white",
+        slice.primary.bg_color_full_width === "Yellow" && "bg-[#F1E1A7]"
       )}
     >
       <ColorSection
-        bgColor={isFilled.select(slice.primary.bg_color) ? slice.primary.bg_color : undefined}
+        bgColor={
+          isFilled.select(slice.primary.bg_color)
+            ? slice.primary.bg_color
+            : undefined
+        }
         className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-24"
       >
-        <div className={clsx(
-          "flex flex-col items-center gap-8 text-center lg:items-start lg:text-left",
-          slice.variation === "imageOnLeft" && "lg:order-2"
-        )}>
-          <Heading size="lg" className="mb-8">{slice.primary.heading}</Heading>
+        <div
+          className={clsx(
+            "flex flex-col items-center gap-8 text-center lg:items-start lg:text-left",
+            slice.variation === "imageOnLeft" && "lg:order-2"
+          )}
+        >
+          <Heading
+            as="h2"
+            size="lg"
+            color={
+              slice.primary.bg_color === "Dark Blue" ||
+              slice.primary.bg_color_full_width === "Dark Blue"
+                ? "brand-off-white"
+                : undefined
+            }
+            className="mb-8"
+          >
+            {slice.primary.heading}
+          </Heading>
           <PrismicRichText field={slice.primary.body} />
           {isFilled.repeatable(slice.primary.link) && (
             <ul className="flex gap-4">
               {slice.primary.link.map((link) => (
                 <li key={link.key}>
-                  <ButtonLink
-                    field={link}
-                    color={link.variant}
-                  >
+                  <ButtonLink field={link} color={link.variant}>
                     {link.text}
-
                   </ButtonLink>
                 </li>
               ))}
@@ -51,7 +65,11 @@ const TextAndImage: FC<TextAndImageProps> = ({ slice }) => {
           )}
         </div>
         <div>
-          <PrismicNextImage field={slice.primary.image} className="rounded-xl" alt="" />
+          <PrismicNextImage
+            field={slice.primary.image}
+            className="rounded-xl"
+            alt=""
+          />
         </div>
       </ColorSection>
     </Bounded>
