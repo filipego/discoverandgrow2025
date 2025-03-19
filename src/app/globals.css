@@ -53,3 +53,29 @@ body {
   font-family: var(--font-primary);
 }
 
+svg {
+  overflow: hidden;
+}
+
+
+.link-border-animation {
+  position: relative;
+}
+
+.link-border-animation::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-brand-green);
+  transform-origin: 0 0;
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-border-animation:hover::before {
+  transform: scaleX(1);
+}
+

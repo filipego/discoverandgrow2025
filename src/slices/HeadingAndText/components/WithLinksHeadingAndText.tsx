@@ -7,42 +7,45 @@ import { HiArrowRight } from "react-icons/hi2";
 import { LinkField } from "@prismicio/client";
 
 interface WithLinksHeadingAndTextProps extends HeadingAndTextComponentProps {
-    link: LinkField[];
+  link: LinkField[];
 }
 
 export const WithLinksHeadingAndText: FC<WithLinksHeadingAndTextProps> = ({
-    heading,
-    body,
-    className,
-    link
+  heading,
+  body,
+  className,
+  link,
 }) => {
-    return (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 border-t border-brand-light-gray pt-12">
-            <div>
-                <Heading as="h2" size="md" className="max-w-[600] mb-5">
-                    {heading}
-                </Heading>
-                <div className="max-w-[480] mb-5">
-                    <PrismicRichText field={body} />
-                </div>
-            </div>
-            <div>
-                {link && (
-                    <ul className="flex flex-col">
-                        {link.map((linkItem, index) => (
-                            <li key={index} className="text-base relative group">
-                                <PrismicNextLink
-                                    field={linkItem}
-                                    className="text-brand-blue font-medium flex items-center justify-between w-full py-6 border-t border-brand-light-gray link-border-animation"
-                                >
-                                    <span>{linkItem.text}</span>
-                                    <HiArrowRight className="transition-all duration-300 transform -rotate-45 group-hover:rotate-0 group-hover:translate-x-1" size={20} />
-                                </PrismicNextLink>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-            </div>
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 border-t border-brand-light-gray pt-12">
+      <div>
+        <Heading as="h2" size="md" className="max-w-[600] mb-5">
+          {heading}
+        </Heading>
+        <div className="max-w-[480] mb-5">
+          <PrismicRichText field={body} />
         </div>
-    );
+      </div>
+      <div>
+        {link && (
+          <ul className="flex flex-col">
+            {link.map((linkItem, index) => (
+              <li key={index} className="text-base relative group">
+                <PrismicNextLink
+                  field={linkItem}
+                  className="text-brand-green font-medium flex items-center justify-between w-full py-6 border-t border-brand-light-gray link-border-animation"
+                >
+                  <span>{linkItem.text}</span>
+                  <HiArrowRight
+                    className="transition-all duration-300 transform -rotate-45 group-hover:rotate-0 group-hover:translate-x-1"
+                    size={20}
+                  />
+                </PrismicNextLink>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
 };
