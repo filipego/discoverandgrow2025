@@ -31,7 +31,7 @@ export function Heading({
         size === "xs" && "text-md lg:text-lg font-bold",
 
         color === "brand-black" && "text-brand-black",
-        color === "brand-light-gray" && "text-brand-light-gray",
+        color === "brand-light-gray" && "text-brand-gray",
         color === "brand-off-white" && "text-brand-off-white",
 
         ff === "primary" && "font-primary",

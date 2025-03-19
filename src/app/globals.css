@@ -16,10 +16,17 @@
   --font-primary: "Open Sans", serif;
   --font-logo: "More Sugar"; 
 
-  --color-brand-blue: #34328F;
-  --color-brand-light-gray: #E8E8E8;
-  --color-brand-off-white: #F6F6F6;
-  --color-brand-black: #0A0A0A;
+  --color-brand-blue: #29285D;
+  --color-brand-blue-light: #51507A;
+  --color-brand-blue-lighter: #787898;
+  --color-brand-bg: #F0F0F0;
+  --color-brand-off-white: #FAF9F6;
+  --color-brand-black: black;
+  --color-brand-gray: #0A0A0A;
+  --color-brand-gray-light: #4E4E4E;
+  --color-brand-gray-lighter: #949494;
+  --color-brand-green: #01BFA7;
+  --color-brand-orange: #F15B3B;
 }
 
 @layer base {
@@ -41,8 +48,8 @@
 }
 
 body {
-  color: black;
-  background: #FAF9F6;
+  color: var(--color-brand-gray-light);
+  background: var(--color-brand-bg);
   font-family: var(--font-primary);
 }
 

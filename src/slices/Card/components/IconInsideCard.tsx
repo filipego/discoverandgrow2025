@@ -5,7 +5,7 @@ import { Heading } from "@/app/components/Heading";
 import { isFilled } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import clsx from "clsx";
-import { CardLink } from "./CardLink";
+import { ButtonLink } from "@/app/components/ButtonLink";
 
 export const IconInsideCard: FC<CardProps> = ({ item }) => {
   const isDarkBlue = item.bg_color === "Dark Blue";
@@ -64,7 +64,13 @@ export const IconInsideCard: FC<CardProps> = ({ item }) => {
             }}
           />
         </div>
-        {isFilled.link(item.link) && <CardLink link={item.link} />}
+        {isFilled.link(item.link) && (
+          <div className="flex items-center mt-auto pt-16">
+            <ButtonLink field={item.link} color="Link">
+              {item.link.text}
+            </ButtonLink>
+          </div>
+        )}
       </div>
     </li>
   );
