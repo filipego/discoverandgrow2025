@@ -1,0 +1,72 @@
+{
+  "id": "programs_card",
+  "type": "SharedSlice",
+  "name": "ProgramsCard",
+  "description": "ProgramsCard",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "padding": {
+          "type": "Select",
+          "config": {
+            "label": "padding",
+            "placeholder": "",
+            "options": [
+              "normal padding ",
+              "smaller padding",
+              "no padding",
+              "no top padding",
+              "no bottom padding"
+            ],
+            "default_value": "normal padding "
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "imageSide",
+      "name": "imageSide",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "padding": {
+          "type": "Select",
+          "config": {
+            "label": "padding",
+            "placeholder": "",
+            "options": [
+              "normal padding ",
+              "smaller padding",
+              "no padding",
+              "no top padding",
+              "no bottom padding"
+            ],
+            "default_value": "normal padding "
+          }
+        },
+        "image_direction": {
+          "type": "Select",
+          "config": {
+            "label": "Image Direction",
+            "placeholder": "",
+            "options": [
+              "right",
+              "left"
+            ],
+            "default_value": "right"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

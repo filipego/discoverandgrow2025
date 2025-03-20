@@ -1,0 +1,36 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"padding": {
+				"__TYPE__": "FieldContent",
+				"value": "normal padding",
+				"type": "Select"
+			}
+		},
+		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "imageSide",
+		"primary": {
+			"padding": {
+				"__TYPE__": "FieldContent",
+				"value": "smaller padding",
+				"type": "Select"
+			},
+			"image_direction": {
+				"__TYPE__": "FieldContent",
+				"value": "right",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]

@@ -14,34 +14,38 @@ export interface CardProps {
   };
 }
 
-export type CardsandImagesProps = SliceComponentProps<Content.CardsandImagesSlice>;
+export type CardsandImagesProps =
+  SliceComponentProps<Content.CardsandImagesSlice>;
 
 const CardsandImages: FC<CardsandImagesProps> = ({ slice }) => {
   const components = {
     default: BasicCard,
     imageSide: SideImageCard,
     cardWithIconInside: IconInsideCard,
-    cardWithIconOutside: IconOutsideCard
+    cardWithIconOutside: IconOutsideCard,
   };
 
   const CardComponent = components[slice.variation] || components.default;
-  
+
   // Safely access the padding property with optional chaining
   const padding = slice.primary?.padding as string | undefined;
 
   return (
     <Bounded
-      data-slice-type={slice.slice_type} data-slice-variation={slice.variation}
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
       className={clsx(
         padding === "smaller padding" && "py-5",
-        padding === "no padding" && "py-0"
+        padding === "no padding" && "py-0",
+        padding === "no top padding" && "!pt-0",
+        padding === "no bottom padding" && "!pb-0"
       )}
     >
       <ul className="flex flex-col md:flex-row gap-5 md:items-stretch">
         {slice.primary.card?.map((cardItem, i) => {
           const item = {
             ...cardItem,
-            bg_color: cardItem.bg_color as "Dark Blue" | "White"
+            bg_color: cardItem.bg_color as "Dark Blue" | "White",
           };
           return <CardComponent key={i} item={item} />;
         })}

@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type HomepageDocumentDataSlicesSlice =
+  | ProgramsCardSlice
   | HeadingAndTextSlice
   | TextAndFormSlice
   | VideoBlockSlice
@@ -388,51 +389,6 @@ export type SettingsDocument<Lang extends string = string> =
     Lang
   >;
 
-/**
- * Item in *What we do → Card*
- */
-export interface WhatWeDoDocumentDataCardItem {
-  /**
-   * Image field in *What we do → Card*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: what_we_do.card[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Heading field in *What we do → Card*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: what_we_do.card[].heading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  heading: prismic.KeyTextField;
-
-  /**
-   * Body field in *What we do → Card*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: what_we_do.card[].body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * Link field in *What we do → Card*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: what_we_do.card[].link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-}
-
 type WhatWeDoDocumentDataSlicesSlice =
   | VideoBlockSlice
   | TextAndImageSlice
@@ -447,15 +403,75 @@ type WhatWeDoDocumentDataSlicesSlice =
  */
 interface WhatWeDoDocumentData {
   /**
-   * Card field in *What we do*
+   * Category field in *What we do*
    *
-   * - **Field Type**: Group
+   * - **Field Type**: Select
    * - **Placeholder**: *None*
-   * - **API ID Path**: what_we_do.card[]
+   * - **API ID Path**: what_we_do.category
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#group
+   * - **Documentation**: https://prismic.io/docs/field#select
    */
-  card: prismic.GroupField<Simplify<WhatWeDoDocumentDataCardItem>>;
+  category: prismic.SelectField<
+    | "Programs for Caregivers"
+    | "Programs for Children and Youth"
+    | "Programs for Schools"
+  >;
+
+  /**
+   * Featured field in *What we do*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: what_we_do.featured
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  featured: prismic.BooleanField;
+
+  /**
+   * Thumbnail field in *What we do*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: what_we_do.thumbnail
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  thumbnail: prismic.ImageField<never>;
+
+  /**
+   * Title field in *What we do*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: what_we_do.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *What we do*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: what_we_do.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Link field in *What we do*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: what_we_do.link
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 
   /**
    * Slice Zone field in *What we do*
@@ -1367,6 +1383,108 @@ type ImageSliceVariation = ImageSliceDefault | ImageSliceMultipleImages;
 export type ImageSlice = prismic.SharedSlice<"image", ImageSliceVariation>;
 
 /**
+ * Primary content in *ProgramsCard → Default → Primary*
+ */
+export interface ProgramsCardSliceDefaultPrimary {
+  /**
+   * padding field in *ProgramsCard → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: normal padding
+   * - **API ID Path**: programs_card.default.primary.padding
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  padding: prismic.SelectField<
+    | "normal padding "
+    | "smaller padding"
+    | "no padding"
+    | "no top padding"
+    | "no bottom padding",
+    "filled"
+  >;
+}
+
+/**
+ * Default variation for ProgramsCard Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProgramsCardSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ProgramsCardSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *ProgramsCard → imageSide → Primary*
+ */
+export interface ProgramsCardSliceImageSidePrimary {
+  /**
+   * padding field in *ProgramsCard → imageSide → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: normal padding
+   * - **API ID Path**: programs_card.imageSide.primary.padding
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  padding: prismic.SelectField<
+    | "normal padding "
+    | "smaller padding"
+    | "no padding"
+    | "no top padding"
+    | "no bottom padding",
+    "filled"
+  >;
+
+  /**
+   * Image Direction field in *ProgramsCard → imageSide → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: right
+   * - **API ID Path**: programs_card.imageSide.primary.image_direction
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  image_direction: prismic.SelectField<"right" | "left", "filled">;
+}
+
+/**
+ * imageSide variation for ProgramsCard Slice
+ *
+ * - **API ID**: `imageSide`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProgramsCardSliceImageSide = prismic.SharedSliceVariation<
+  "imageSide",
+  Simplify<ProgramsCardSliceImageSidePrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ProgramsCard*
+ */
+type ProgramsCardSliceVariation =
+  | ProgramsCardSliceDefault
+  | ProgramsCardSliceImageSide;
+
+/**
+ * ProgramsCard Shared Slice
+ *
+ * - **API ID**: `programs_card`
+ * - **Description**: ProgramsCard
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProgramsCardSlice = prismic.SharedSlice<
+  "programs_card",
+  ProgramsCardSliceVariation
+>;
+
+/**
  * Primary content in *TextAndForm → Default → Primary*
  */
 export interface TextAndFormSliceDefaultPrimary {
@@ -1744,7 +1862,6 @@ declare module "@prismicio/client" {
       SettingsDocumentDataNavigationItem,
       WhatWeDoDocument,
       WhatWeDoDocumentData,
-      WhatWeDoDocumentDataCardItem,
       WhatWeDoDocumentDataSlicesSlice,
       AllDocumentTypes,
       CardsandImagesSlice,
@@ -1780,6 +1897,12 @@ declare module "@prismicio/client" {
       ImageSliceVariation,
       ImageSliceDefault,
       ImageSliceMultipleImages,
+      ProgramsCardSlice,
+      ProgramsCardSliceDefaultPrimary,
+      ProgramsCardSliceImageSidePrimary,
+      ProgramsCardSliceVariation,
+      ProgramsCardSliceDefault,
+      ProgramsCardSliceImageSide,
       TextAndFormSlice,
       TextAndFormSliceDefaultPrimary,
       TextAndFormSliceVariation,

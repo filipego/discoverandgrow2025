@@ -7,6 +7,7 @@ export const components = {
   heading_and_text: dynamic(() => import("./HeadingAndText")),
   hero: dynamic(() => import("./Hero")),
   image: dynamic(() => import("./ImageBlock")),
+  programs_card: dynamic(() => import("./ProgramsCard")),
   text_and_form: dynamic(() => import("./TextAndForm")),
   text_and_image: dynamic(() => import("./TextAndImage")),
   video_block: dynamic(() => import("./VideoBlock")),

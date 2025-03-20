@@ -11,6 +11,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "programs_card": {
+              "type": "SharedSlice"
+            },
             "heading_and_text": {
               "type": "SharedSlice"
             },
