@@ -13,6 +13,7 @@ import {
   FaXTwitter,
   FaLinkedinIn,
 } from "react-icons/fa6";
+import { ButtonLink } from "./ButtonLink";
 
 type Props = {};
 
@@ -53,7 +54,13 @@ export async function Footer({}: Props) {
                 }}
               />
 
-              <PrismicNextLink field={settings.data.button} />
+              <ButtonLink
+                field={settings.data.button}
+                color="Secondary"
+                size="md"
+              >
+                {settings.data.button.text}
+              </ButtonLink>
             </div>
             <div className="w-1/6 flex items-center justify-end">
               <PrismicNextImage
