@@ -13,24 +13,12 @@ import SideImageCard from "@/app/components/Cards/SideimageCard";
  */
 export type ProgramsCardProps = SliceComponentProps<Content.ProgramsCardSlice>;
 
-export interface CardProps {
-  item: {
-    heading: string;
-    body: any;
-    image: any;
-    link: any;
-    bg_color: "Dark Blue" | "White";
-    direction?: "left" | "right";
-  };
-}
-
 /**
  * Component for "ProgramsCard" Slices.
  */
 const ProgramsCard: FC<ProgramsCardProps> = async ({ slice }) => {
   const client = createClient();
   const programs = await client.getAllByType("what_we_do");
-  const padding = slice.primary?.padding as string | undefined;
 
   // Filter featured program for imageSide variant
   const featuredProgram = programs.find(
@@ -51,45 +39,35 @@ const ProgramsCard: FC<ProgramsCardProps> = async ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={clsx(
-        padding === "smaller padding" && "!py-5",
-        padding === "no padding" && "!pt-0 !pb-0",
-        padding === "no top padding" && "!pt-0",
-        padding === "no bottom padding" && "!pb-0"
-      )}
+      padding={(slice.primary?.padding as any) || "normal padding"}
     >
-      {slice.variation === "default" && (
-        <ul className="flex flex-col md:flex-row gap-5 md:items-stretch">
-          {nonFeaturedPrograms.map((program, i) => (
-            <BasicCard
-              key={i}
-              item={{
-                heading: program.data.title || "",
-                body: program.data.description,
-                image: program.data.thumbnail,
-                link: program.data.link,
-                bg_color: "White",
-              }}
-            />
-          ))}
-        </ul>
-      )}
+      <ul className="flex flex-col md:flex-row gap-5 md:items-stretch">
+        {slice.variation === "default" &&
+          nonFeaturedPrograms.map((program, i) => {
+            const baseProps = {
+              heading: program.data.title || "",
+              body: program.data.body,
+              image: program.data.image,
+              link: program.data.link,
+              bg_color: "White" as "Dark Blue" | "White",
+            };
 
-      {slice.variation === "imageSide" && featuredProgram && (
-        <ul className="flex flex-col md:flex-row gap-5 md:items-stretch">
-          {/* In the SideImageCard usage: */}
+            return <BasicCard key={i} item={baseProps} />;
+          })}
+
+        {slice.variation === "imageSide" && featuredProgram && (
           <SideImageCard
             item={{
               heading: featuredProgram.data.title || "",
-              body: featuredProgram.data.description,
-              image: featuredProgram.data.thumbnail,
+              body: featuredProgram.data.body,
+              image: featuredProgram.data.image,
               link: featuredProgram.data.link,
-              bg_color: "White",
-              direction: slice.primary?.image_direction,
+              bg_color: "White" as "Dark Blue" | "White",
+              direction: slice.primary?.image_direction as "left" | "right",
             }}
           />
-        </ul>
-      )}
+        )}
+      </ul>
     </Bounded>
   );
 };

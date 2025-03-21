@@ -12,19 +12,11 @@ export type CardsandImagesProps =
   SliceComponentProps<Content.CardsandImagesSlice>;
 
 const CardsandImages: FC<CardsandImagesProps> = ({ slice }) => {
-  // Safely access the padding property with optional chaining
-  const padding = slice.primary?.padding as string | undefined;
-
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={clsx(
-        padding === "smaller padding" && "py-5",
-        padding === "no padding" && "py-0",
-        padding === "no top padding" && "!pt-0",
-        padding === "no bottom padding" && "!pb-0"
-      )}
+      padding={(slice.primary?.padding as any) || "normal padding"}
     >
       <ul className="flex flex-col md:flex-row gap-5 md:items-stretch">
         {slice.primary.card?.map((cardItem, i) => {

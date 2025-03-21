@@ -33,10 +33,10 @@
           "default_value": false
         }
       },
-      "thumbnail": {
+      "image": {
         "type": "Image",
         "config": {
-          "label": "Thumbnail",
+          "label": "Image",
           "constraint": {},
           "thumbnails": []
         }
@@ -48,10 +48,10 @@
           "placeholder": ""
         }
       },
-      "description": {
+      "body": {
         "type": "StructuredText",
         "config": {
-          "label": "Description",
+          "label": "Body",
           "placeholder": "",
           "allowTargetBlank": true,
           "multi": "paragraph,heading3,heading4,strong,em,list-item,o-list-item"

@@ -430,15 +430,15 @@ interface WhatWeDoDocumentData {
   featured: prismic.BooleanField;
 
   /**
-   * Thumbnail field in *What we do*
+   * Image field in *What we do*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: what_we_do.thumbnail
+   * - **API ID Path**: what_we_do.image
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#image
    */
-  thumbnail: prismic.ImageField<never>;
+  image: prismic.ImageField<never>;
 
   /**
    * Title field in *What we do*
@@ -452,15 +452,15 @@ interface WhatWeDoDocumentData {
   title: prismic.KeyTextField;
 
   /**
-   * Description field in *What we do*
+   * Body field in *What we do*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: what_we_do.description
+   * - **API ID Path**: what_we_do.body
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  description: prismic.RichTextField;
+  body: prismic.RichTextField;
 
   /**
    * Link field in *What we do*
