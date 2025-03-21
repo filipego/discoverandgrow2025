@@ -4,8 +4,9 @@ import { SliceComponentProps } from "@prismicio/react";
 import { Bounded } from "@/app/components/Bounded";
 import { createClient } from "@/prismicio";
 import clsx from "clsx";
-import { BasicCard } from "./components/BasicCard";
-import { SideImageCard } from "./components/SideImageCard";
+
+import BasicCard from "@/app/components/Cards/BasicCard";
+import SideImageCard from "@/app/components/Cards/SideimageCard";
 
 /**
  * Props for `ProgramsCard`.
@@ -63,7 +64,7 @@ const ProgramsCard: FC<ProgramsCardProps> = async ({ slice }) => {
             <BasicCard
               key={i}
               item={{
-                heading: program.data.title || "", // Add fallback empty string
+                heading: program.data.title || "",
                 body: program.data.description,
                 image: program.data.thumbnail,
                 link: program.data.link,

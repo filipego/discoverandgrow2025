@@ -1,11 +1,21 @@
 import { FC } from "react";
-import { CardProps } from "../index";
+import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText } from "@prismicio/react";
 import { Heading } from "@/app/components/Heading";
-import { isFilled } from "@prismicio/client";
-import { PrismicNextImage } from "@prismicio/next";
-import clsx from "clsx";
 import { ButtonLink } from "@/app/components/ButtonLink";
+import { isFilled } from "@prismicio/client";
+import clsx from "clsx";
+
+export interface CardProps {
+  item: {
+    heading: string;
+    body: any;
+    image: any;
+    link: any;
+    bg_color: "Dark Blue" | "White";
+    direction?: "left" | "right";
+  };
+}
 
 export const SideImageCard: FC<CardProps> = ({ item }) => {
   const isDarkBlue = item.bg_color === "Dark Blue";
@@ -13,7 +23,7 @@ export const SideImageCard: FC<CardProps> = ({ item }) => {
   return (
     <li
       className={clsx(
-        "rounded-xl w-full flex flex-col md:flex-row md:min-h-[400px] relative",
+        "shadow-xl rounded-xl w-full flex flex-col md:flex-row md:min-h-[400px] relative",
         item.direction === "right" && "md:flex-row-reverse",
         isDarkBlue && "bg-[#29285D] text-white",
         item.bg_color === "White" && "bg-white"
@@ -52,8 +62,22 @@ export const SideImageCard: FC<CardProps> = ({ item }) => {
                   {children}
                 </Heading>
               ),
+              heading4: ({ children }) => (
+                <Heading
+                  as="h4"
+                  size="sm"
+                  className={clsx("mb-4", isDarkBlue && "text-white")}
+                >
+                  {children}
+                </Heading>
+              ),
               paragraph: ({ children }) => (
-                <p className={clsx("mb-6", isDarkBlue && "text-gray-200")}>
+                <p
+                  className={clsx(
+                    "text-sm mb-6 last:mb-0",
+                    isDarkBlue && "text-gray-200"
+                  )}
+                >
                   {children}
                 </p>
               ),
@@ -61,7 +85,7 @@ export const SideImageCard: FC<CardProps> = ({ item }) => {
                 <ul className="list-disc pl-10 space-y-2">{children}</ul>
               ),
               listItem: ({ children }) => (
-                <li className={clsx(isDarkBlue && "text-gray-200")}>
+                <li className={clsx("text-sm", isDarkBlue && "text-gray-200")}>
                   {children}
                 </li>
               ),
@@ -69,9 +93,14 @@ export const SideImageCard: FC<CardProps> = ({ item }) => {
           />
         </div>
         {isFilled.link(item.link) && (
-          <div className="flex items-center mt-auto pt-16">
-            <ButtonLink field={item.link} color="Link">
-              {item.link.text}
+          <div className="w-full flex pt-10">
+            <ButtonLink
+              field={item.link}
+              size="sm"
+              color="Link"
+              className="!pl-0"
+            >
+              Learn more
             </ButtonLink>
           </div>
         )}
@@ -79,3 +108,5 @@ export const SideImageCard: FC<CardProps> = ({ item }) => {
     </li>
   );
 };
+
+export default SideImageCard;

@@ -28,7 +28,7 @@ export function ButtonLink({
             "bg-brand-green text-white rounded-full text-sm",
           color === "Secondary" &&
             "bg-brand-orange text-white rounded-full text-sm",
-          size === "sm" && "gap-2.5 py-2 text-xs px-3",
+          size === "sm" && "gap-2.5 py-2 text-sm px-3",
           size === "md" && "gap-3 py-3 px-6",
           size === "lg" && "gap-3 py-4 px-6",
           className

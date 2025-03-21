@@ -2,31 +2,16 @@ import { FC } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { Bounded } from "@/app/components/Bounded";
-import { BasicCard } from "./components/BasicCard";
-import { SideImageCard } from "./components/SideImageCard";
-import { IconInsideCard } from "./components/IconInsideCard";
-import { IconOutsideCard } from "./components/IconOutsideCard";
+import BasicCard from "@/app/components/Cards/BasicCard";
+import SideImageCard from "@/app/components/Cards/SideimageCard";
+import IconInsideCard from "@/app/components/Cards/IconInsideCard";
+import IconOutsideCard from "@/app/components/Cards/IconOutsideCard";
 import clsx from "clsx";
-
-export interface CardProps {
-  item: Content.CardsandImagesSlice["primary"]["card"][number] & {
-    direction?: "left" | "right";
-  };
-}
 
 export type CardsandImagesProps =
   SliceComponentProps<Content.CardsandImagesSlice>;
 
 const CardsandImages: FC<CardsandImagesProps> = ({ slice }) => {
-  const components = {
-    default: BasicCard,
-    imageSide: SideImageCard,
-    cardWithIconInside: IconInsideCard,
-    cardWithIconOutside: IconOutsideCard,
-  };
-
-  const CardComponent = components[slice.variation] || components.default;
-
   // Safely access the padding property with optional chaining
   const padding = slice.primary?.padding as string | undefined;
 
@@ -43,11 +28,36 @@ const CardsandImages: FC<CardsandImagesProps> = ({ slice }) => {
     >
       <ul className="flex flex-col md:flex-row gap-5 md:items-stretch">
         {slice.primary.card?.map((cardItem, i) => {
-          const item = {
-            ...cardItem,
+          // Common props for all card types
+          const baseProps = {
+            heading: cardItem.heading || "",
+            body: cardItem.body,
+            image: cardItem.image,
+            link: cardItem.link,
             bg_color: cardItem.bg_color as "Dark Blue" | "White",
           };
-          return <CardComponent key={i} item={item} />;
+
+          // Render different card components based on variation
+          if (slice.variation === "default") {
+            return <BasicCard key={i} item={baseProps} />;
+          } else if (slice.variation === "imageSide") {
+            return (
+              <SideImageCard
+                key={i}
+                item={{
+                  ...baseProps,
+                  direction: slice.primary?.image_direction as "left" | "right",
+                }}
+              />
+            );
+          } else if (slice.variation === "cardWithIconInside") {
+            return <IconInsideCard key={i} item={baseProps} />;
+          } else if (slice.variation === "cardWithIconOutside") {
+            return <IconOutsideCard key={i} item={baseProps} />;
+          }
+
+          // Fallback to BasicCard if variation is not recognized
+          return <BasicCard key={i} item={baseProps} />;
         })}
       </ul>
     </Bounded>
