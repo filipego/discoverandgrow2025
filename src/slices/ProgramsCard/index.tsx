@@ -3,7 +3,6 @@ import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { Bounded } from "@/app/components/Bounded";
 import { createClient } from "@/prismicio";
-import clsx from "clsx";
 
 import BasicCard from "@/app/components/Cards/BasicCard";
 import SideImageCard from "@/app/components/Cards/SideimageCard";

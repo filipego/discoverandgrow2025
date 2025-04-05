@@ -18,34 +18,32 @@ const Image: FC<ImageProps> = ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={clsx(
-        slice.primary.no_padding && "!py-0"
-      )}
+      className={clsx(slice.primary.no_padding && "!py-0")}
     >
-      {slice.variation === 'multipleImages' ? (
-        <ul className={clsx(
-          "flex flex-col md:flex-row justify-center",
-          !slice.primary.no_gap && "gap-5"
-        )}>
+      {slice.variation === "multipleImages" ? (
+        <ul
+          className={clsx(
+            "flex flex-col md:flex-row justify-center",
+            !slice.primary.no_gap && "gap-5"
+          )}
+        >
           {slice.primary.images.map((item, i) => (
             <li key={i} className="w-full">
-              <PrismicNextImage
-                field={item.image}
-                className="w-full"
-                alt=""
-              />
+              <PrismicNextImage field={item.image} className="w-full" alt="" />
             </li>
           ))}
         </ul>
       ) : (
         <div className="flex justify-center">
-          <div className={clsx(
-            "w-full",
-            slice.primary.smaller ? "lg:w-[70%]" : "w-full"
-          )}>
+          <div
+            className={clsx(
+              "w-full",
+              slice.primary.smaller ? "lg:w-[70%]" : "w-full"
+            )}
+          >
             <PrismicNextImage
               field={slice.primary.image}
-              className="w-full"
+              className="w-full rounded-xl shadow-2xl"
               alt=""
             />
           </div>

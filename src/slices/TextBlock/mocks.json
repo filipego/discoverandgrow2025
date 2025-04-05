@@ -1,0 +1,20 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Pariatur culpa in nulla consequat id. Laborum ut commodo irure eiusmod consectetur incididunt tempor fugiat commodo enim velit magna anim."
+						}
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

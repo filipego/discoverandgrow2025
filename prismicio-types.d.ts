@@ -5,6 +5,8 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type HomepageDocumentDataSlicesSlice =
+  | TextBlockSlice
+  | StoreSlice
   | ProgramsCardSlice
   | HeadingAndTextSlice
   | TextAndFormSlice
@@ -78,6 +80,7 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | TextBlockSlice
   | HeadingAndTextSlice
   | TextAndFormSlice
   | VideoBlockSlice
@@ -146,6 +149,7 @@ export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
 type ProgramsDocumentDataSlicesSlice =
+  | TextBlockSlice
   | HeadingAndTextSlice
   | TextAndFormSlice
   | VideoBlockSlice
@@ -390,6 +394,7 @@ export type SettingsDocument<Lang extends string = string> =
   >;
 
 type WhatWeDoDocumentDataSlicesSlice =
+  | TextBlockSlice
   | VideoBlockSlice
   | TextAndImageSlice
   | TextAndFormSlice
@@ -1485,6 +1490,93 @@ export type ProgramsCardSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *Store → Default → Primary → Items*
+ */
+export interface StoreSliceDefaultPrimaryItemsItem {
+  /**
+   * Image field in *Store → Default → Primary → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: store.default.primary.items[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Heading field in *Store → Default → Primary → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: store.default.primary.items[].heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *Store → Default → Primary → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: store.default.primary.items[].body
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  body: prismic.KeyTextField;
+
+  /**
+   * Price field in *Store → Default → Primary → Items*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: store.default.primary.items[].price
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  price: prismic.NumberField;
+}
+
+/**
+ * Primary content in *Store → Default → Primary*
+ */
+export interface StoreSliceDefaultPrimary {
+  /**
+   * Items field in *Store → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: store.default.primary.items[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  items: prismic.GroupField<Simplify<StoreSliceDefaultPrimaryItemsItem>>;
+}
+
+/**
+ * Default variation for Store Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type StoreSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<StoreSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Store*
+ */
+type StoreSliceVariation = StoreSliceDefault;
+
+/**
+ * Store Shared Slice
+ *
+ * - **API ID**: `store`
+ * - **Description**: Store
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type StoreSlice = prismic.SharedSlice<"store", StoreSliceVariation>;
+
+/**
  * Primary content in *TextAndForm → Default → Primary*
  */
 export interface TextAndFormSliceDefaultPrimary {
@@ -1761,6 +1853,51 @@ export type TextAndImageSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *TextBlock → Default → Primary*
+ */
+export interface TextBlockSliceDefaultPrimary {
+  /**
+   * Body field in *TextBlock → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_block.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+}
+
+/**
+ * Default variation for TextBlock Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TextBlockSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TextBlockSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TextBlock*
+ */
+type TextBlockSliceVariation = TextBlockSliceDefault;
+
+/**
+ * TextBlock Shared Slice
+ *
+ * - **API ID**: `text_block`
+ * - **Description**: TextBlock
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TextBlockSlice = prismic.SharedSlice<
+  "text_block",
+  TextBlockSliceVariation
+>;
+
+/**
  * Primary content in *VideoBlock → Default → Primary*
  */
 export interface VideoBlockSliceDefaultPrimary {
@@ -1903,6 +2040,11 @@ declare module "@prismicio/client" {
       ProgramsCardSliceVariation,
       ProgramsCardSliceDefault,
       ProgramsCardSliceImageSide,
+      StoreSlice,
+      StoreSliceDefaultPrimaryItemsItem,
+      StoreSliceDefaultPrimary,
+      StoreSliceVariation,
+      StoreSliceDefault,
       TextAndFormSlice,
       TextAndFormSliceDefaultPrimary,
       TextAndFormSliceVariation,
@@ -1913,6 +2055,10 @@ declare module "@prismicio/client" {
       TextAndImageSliceVariation,
       TextAndImageSliceDefault,
       TextAndImageSliceImageOnLeft,
+      TextBlockSlice,
+      TextBlockSliceDefaultPrimary,
+      TextBlockSliceVariation,
+      TextBlockSliceDefault,
       VideoBlockSlice,
       VideoBlockSliceDefaultPrimary,
       VideoBlockSliceVariation,

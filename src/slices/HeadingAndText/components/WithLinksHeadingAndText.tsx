@@ -23,7 +23,16 @@ export const WithLinksHeadingAndText: FC<WithLinksHeadingAndTextProps> = ({
           {heading}
         </Heading>
         <div className="max-w-[480] mb-5">
-          <PrismicRichText field={body} />
+          <PrismicRichText
+            field={body}
+            components={{
+              heading3: ({ children }) => (
+                <Heading as="h3" size="sm" className="font-semibold mb-3 mt-10">
+                  {children}
+                </Heading>
+              ),
+            }}
+          />
         </div>
       </div>
       <div>

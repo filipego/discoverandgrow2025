@@ -8,7 +8,9 @@ export const components = {
   hero: dynamic(() => import("./Hero")),
   image: dynamic(() => import("./ImageBlock")),
   programs_card: dynamic(() => import("./ProgramsCard")),
+  store: dynamic(() => import("./Store")),
   text_and_form: dynamic(() => import("./TextAndForm")),
   text_and_image: dynamic(() => import("./TextAndImage")),
+  text_block: dynamic(() => import("./TextBlock")),
   video_block: dynamic(() => import("./VideoBlock")),
 };

@@ -11,6 +11,12 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "text_block": {
+              "type": "SharedSlice"
+            },
+            "store": {
+              "type": "SharedSlice"
+            },
             "programs_card": {
               "type": "SharedSlice"
             },
