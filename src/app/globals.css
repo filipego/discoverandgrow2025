@@ -19,7 +19,7 @@
   --color-brand-blue: #29285D;
   --color-brand-blue-light: #51507A;
   --color-brand-blue-lighter: #787898;
-  --color-brand-bg: #F0F0F0;
+  --color-brand-bg: #ffffff;
   --color-brand-off-white: #FAF9F6;
   --color-brand-black: black;
   --color-brand-gray: #0A0A0A;
@@ -79,3 +79,6 @@ svg {
   transform: scaleX(1);
 }
 
+/* .box-shadow {
+  box-shadow: 0 197px 79px rgba(0, 0, 0, .01), 0 111px 67px rgba(0, 0, 0, .03), 0 49px 49px rgba(0, 0, 0, .05), 0 12px 27px rgba(0, 0, 0, .05);
+} */

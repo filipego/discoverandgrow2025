@@ -18,6 +18,8 @@ export function ButtonLink({
   field,
   ...props
 }: ButtonProps) {
+  const isPrimaryOrSecondary = color === "Primary" || color === "Secondary";
+
   return (
     <PrismicNextLink field={field} {...props}>
       <span
@@ -28,26 +30,43 @@ export function ButtonLink({
             "bg-brand-green text-white rounded-full text-sm",
           color === "Secondary" &&
             "bg-brand-orange text-white rounded-full text-sm",
-          size === "sm" && "gap-2.5 py-2 text-sm px-3",
-          size === "md" && "gap-3 py-3 px-6",
-          size === "lg" && "gap-3 py-4 px-6",
+          size === "sm" && "gap-2.5 py-1.5 text-sm px-2",
+          size === "md" && "gap-3 py-[9px] px-5",
+          size === "lg" && "gap-3 py-3 px-5",
           className
         )}
       >
         {children}
-        {(color === "Link" || color === "Primary" || color === "Secondary") && (
-          <HiArrowRight
-            className={clsx(
-              "transition-all duration-300 transform",
-              color === "Link" &&
-                "ml-[-4px] -rotate-45 group-hover:rotate-0 group-hover:translate-x-1",
-              color === "Primary" &&
-                "ml-0.5 -rotate-45 group-hover:rotate-0 group-hover:translate-x-1",
-              color === "Secondary" &&
-                "ml-0.5 -rotate-45 group-hover:rotate-0 group-hover:translate-x-1"
+        {(color === "Link" || isPrimaryOrSecondary) && (
+          <>
+            {isPrimaryOrSecondary ? (
+              <span
+                className={clsx(
+                  "flex items-center justify-center rounded-full w-7 h-7",
+                  color === "Primary" && "bg-[#25DBC4]",
+                  color === "Secondary" && "bg-[#FF7456]"
+                )}
+              >
+                <HiArrowRight
+                  className={clsx(
+                    "transition-all duration-300 transform",
+                    "-rotate-45 group-hover:rotate-0",
+                    "relative left-[0.5px] group-hover:left-[1px]" // Adjust position before and after hover
+                  )}
+                  size={16}
+                />
+              </span>
+            ) : (
+              <HiArrowRight
+                className={clsx(
+                  "transition-all duration-300 transform",
+                  "-rotate-45 group-hover:rotate-0",
+                  "relative left-[0.5px] group-hover:left-[1px]"
+                )}
+                size={16}
+              />
             )}
-            size={16}
-          />
+          </>
         )}
       </span>
     </PrismicNextLink>
