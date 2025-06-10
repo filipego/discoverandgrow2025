@@ -1,0 +1,78 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"content": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"heading",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "upward",
+									"type": "Text"
+								}
+							],
+							[
+								"body",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Sunt quis id mollit incididunt nostrud nostrud nulla ad occaecat quis non consequat dolore. Dolore tempor velit elit mollit minim dolore qui cupidatat id culpa. Labore nisi velit adipisicing sit eu ullamco eu sunt amet nisi."
+											}
+										}
+									]
+								}
+							],
+							[
+								"link",
+								{
+									"key": "201dac40-f907-43b4-8ab7-9ba8a4027480",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "https://slicemachine.dev",
+										"text": "opposite"
+									}
+								}
+							],
+							[
+								"image",
+								{
+									"__TYPE__": "ImageContent",
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1589321599763-d66926c29613",
+										"width": 3168,
+										"height": 4752
+									},
+									"url": "https://images.unsplash.com/photo-1589321599763-d66926c29613",
+									"width": 3168,
+									"height": 4752,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"alt": "brass",
+									"thumbnails": {}
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

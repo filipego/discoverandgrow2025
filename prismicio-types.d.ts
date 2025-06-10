@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type HomepageDocumentDataSlicesSlice =
+  | TabPanelSlice
   | TextBlockSlice
   | StoreSlice
   | ProgramsCardSlice
@@ -1577,6 +1578,96 @@ type StoreSliceVariation = StoreSliceDefault;
 export type StoreSlice = prismic.SharedSlice<"store", StoreSliceVariation>;
 
 /**
+ * Item in *Tab Panel → Default → Primary → Content*
+ */
+export interface TabPanelSliceDefaultPrimaryContentItem {
+  /**
+   * Heading field in *Tab Panel → Default → Primary → Content*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tab_panel.default.primary.content[].heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *Tab Panel → Default → Primary → Content*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tab_panel.default.primary.content[].body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Link field in *Tab Panel → Default → Primary → Content*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tab_panel.default.primary.content[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Image field in *Tab Panel → Default → Primary → Content*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tab_panel.default.primary.content[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *Tab Panel → Default → Primary*
+ */
+export interface TabPanelSliceDefaultPrimary {
+  /**
+   * Content field in *Tab Panel → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tab_panel.default.primary.content[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  content: prismic.GroupField<Simplify<TabPanelSliceDefaultPrimaryContentItem>>;
+}
+
+/**
+ * Default variation for Tab Panel Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TabPanelSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TabPanelSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Tab Panel*
+ */
+type TabPanelSliceVariation = TabPanelSliceDefault;
+
+/**
+ * Tab Panel Shared Slice
+ *
+ * - **API ID**: `tab_panel`
+ * - **Description**: Tab Panel
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TabPanelSlice = prismic.SharedSlice<
+  "tab_panel",
+  TabPanelSliceVariation
+>;
+
+/**
  * Primary content in *TextAndForm → Default → Primary*
  */
 export interface TextAndFormSliceDefaultPrimary {
@@ -2045,6 +2136,11 @@ declare module "@prismicio/client" {
       StoreSliceDefaultPrimary,
       StoreSliceVariation,
       StoreSliceDefault,
+      TabPanelSlice,
+      TabPanelSliceDefaultPrimaryContentItem,
+      TabPanelSliceDefaultPrimary,
+      TabPanelSliceVariation,
+      TabPanelSliceDefault,
       TextAndFormSlice,
       TextAndFormSliceDefaultPrimary,
       TextAndFormSliceVariation,

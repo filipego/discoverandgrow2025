@@ -7,6 +7,7 @@ export type ButtonProps = PrismicNextLinkProps & {
   color?: "Primary" | "Secondary" | "Link";
   size?: "sm" | "md" | "lg";
   blink?: boolean;
+  noPadding?: boolean;
   field: LinkField;
 };
 
@@ -16,6 +17,7 @@ export function ButtonLink({
   children,
   className,
   field,
+  noPadding = false,
   ...props
 }: ButtonProps) {
   const isPrimaryOrSecondary = color === "Primary" || color === "Secondary";
@@ -30,9 +32,12 @@ export function ButtonLink({
             "bg-brand-green text-white rounded-full text-sm",
           color === "Secondary" &&
             "bg-brand-orange text-white rounded-full text-sm",
-          size === "sm" && "gap-2.5 py-1.5 text-sm px-2",
-          size === "md" && "gap-3 py-[9px] px-5",
-          size === "lg" && "gap-3 py-3 px-5",
+          noPadding && size === "sm" && "gap-2.5 text-sm",
+          noPadding && size === "md" && "gap-3 text-base", 
+          noPadding && size === "lg" && "gap-3 text-lg",
+          !noPadding && size === "sm" && "gap-2.5 py-1.5 text-sm px-2",
+          !noPadding && size === "md" && "gap-3 py-[9px] px-5",
+          !noPadding && size === "lg" && "gap-3 py-3 px-5",
           className
         )}
       >

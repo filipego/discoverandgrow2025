@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 
 export const components = {
+  tab_panel: dynamic(() => import("./TabPanel")),
   cardsand_images: dynamic(() => import("./Card")),
   heading_and_text: dynamic(() => import("./HeadingAndText")),
   hero: dynamic(() => import("./Hero")),
