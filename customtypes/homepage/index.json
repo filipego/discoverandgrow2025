@@ -11,6 +11,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "animated_cards": {
+              "type": "SharedSlice"
+            },
             "tab_panel": {
               "type": "SharedSlice"
             },

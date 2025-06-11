@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type HomepageDocumentDataSlicesSlice =
+  | AnimatedCardsSlice
   | TabPanelSlice
   | TextBlockSlice
   | StoreSlice
@@ -544,6 +545,98 @@ export type AllDocumentTypes =
   | ProgramsDocument
   | SettingsDocument
   | WhatWeDoDocument;
+
+/**
+ * Item in *AnimatedCards → Default → Primary → Cards*
+ */
+export interface AnimatedCardsSliceDefaultPrimaryCardsItem {
+  /**
+   * Heading field in *AnimatedCards → Default → Primary → Cards*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: animated_cards.default.primary.cards[].heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *AnimatedCards → Default → Primary → Cards*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: animated_cards.default.primary.cards[].body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Link field in *AnimatedCards → Default → Primary → Cards*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: animated_cards.default.primary.cards[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Image field in *AnimatedCards → Default → Primary → Cards*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: animated_cards.default.primary.cards[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *AnimatedCards → Default → Primary*
+ */
+export interface AnimatedCardsSliceDefaultPrimary {
+  /**
+   * Cards field in *AnimatedCards → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: animated_cards.default.primary.cards[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  cards: prismic.GroupField<
+    Simplify<AnimatedCardsSliceDefaultPrimaryCardsItem>
+  >;
+}
+
+/**
+ * Default variation for AnimatedCards Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AnimatedCardsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<AnimatedCardsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *AnimatedCards*
+ */
+type AnimatedCardsSliceVariation = AnimatedCardsSliceDefault;
+
+/**
+ * AnimatedCards Shared Slice
+ *
+ * - **API ID**: `animated_cards`
+ * - **Description**: AnimatedCards
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AnimatedCardsSlice = prismic.SharedSlice<
+  "animated_cards",
+  AnimatedCardsSliceVariation
+>;
 
 /**
  * Item in *Card → Default → Primary → Card*
@@ -2092,6 +2185,11 @@ declare module "@prismicio/client" {
       WhatWeDoDocumentData,
       WhatWeDoDocumentDataSlicesSlice,
       AllDocumentTypes,
+      AnimatedCardsSlice,
+      AnimatedCardsSliceDefaultPrimaryCardsItem,
+      AnimatedCardsSliceDefaultPrimary,
+      AnimatedCardsSliceVariation,
+      AnimatedCardsSliceDefault,
       CardsandImagesSlice,
       CardsandImagesSliceDefaultPrimaryCardItem,
       CardsandImagesSliceDefaultPrimary,

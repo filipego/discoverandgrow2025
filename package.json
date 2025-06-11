@@ -12,6 +12,7 @@
     "email": "email dev --dir src/emails --port 3001"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^4.0.0",
     "@prismicio/client": "^7.16.0",
     "@prismicio/next": "^2.0.0",
@@ -19,6 +20,7 @@
     "@react-email/components": "0.0.33",
     "@supabase/supabase-js": "^2.48.1",
     "clsx": "^2.1.1",
+    "gsap": "^3.13.0",
     "next": "15.1.6",
     "react": "19.0.0",
     "react-dom": "19.0.0",

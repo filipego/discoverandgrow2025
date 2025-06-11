@@ -3,13 +3,14 @@
 import dynamic from "next/dynamic";
 
 export const components = {
-  tab_panel: dynamic(() => import("./TabPanel")),
+  animated_cards: dynamic(() => import("./AnimatedCards")),
   cardsand_images: dynamic(() => import("./Card")),
   heading_and_text: dynamic(() => import("./HeadingAndText")),
   hero: dynamic(() => import("./Hero")),
   image: dynamic(() => import("./ImageBlock")),
   programs_card: dynamic(() => import("./ProgramsCard")),
   store: dynamic(() => import("./Store")),
+  tab_panel: dynamic(() => import("./TabPanel")),
   text_and_form: dynamic(() => import("./TextAndForm")),
   text_and_image: dynamic(() => import("./TextAndImage")),
   text_block: dynamic(() => import("./TextBlock")),
