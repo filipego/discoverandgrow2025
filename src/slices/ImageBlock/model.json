@@ -37,6 +37,15 @@
             "placeholder_true": "true",
             "default_value": false
           }
+        },
+        "remove_shadow": {
+          "type": "Boolean",
+          "config": {
+            "label": "Remove Shadow",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
         }
       },
       "items": {}
@@ -79,6 +88,15 @@
           "type": "Boolean",
           "config": {
             "label": "No gap",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        },
+        "remove_shadow": {
+          "type": "Boolean",
+          "config": {
+            "label": "Remove Shadow",
             "placeholder_false": "false",
             "placeholder_true": "true",
             "default_value": false

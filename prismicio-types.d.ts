@@ -1400,6 +1400,17 @@ export interface ImageSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   no_padding: prismic.BooleanField;
+
+  /**
+   * Remove Shadow field in *ImageBlock → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image.default.primary.remove_shadow
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  remove_shadow: prismic.BooleanField;
 }
 
 /**
@@ -1452,6 +1463,17 @@ export interface ImageSliceMultipleImagesPrimary {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   no_gap: prismic.BooleanField;
+
+  /**
+   * Remove Shadow field in *ImageBlock → Multiple images → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image.multipleImages.primary.remove_shadow
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  remove_shadow: prismic.BooleanField;
 }
 
 /**

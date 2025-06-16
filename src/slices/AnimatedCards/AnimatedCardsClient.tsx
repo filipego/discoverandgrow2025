@@ -155,7 +155,7 @@ export const AnimatedCardsClient = ({ slice }: AnimatedCardsClientProps) => {
               zIndex: index + 1,
             }}
           >
-            <div className="bg-white rounded-2xl border border-gray-200 min-h-[400px] flex flex-col lg:flex-row overflow-hidden">
+            <div className="bg-[#F5F6FF] rounded-2xl min-h-[400px] flex flex-col lg:flex-row overflow-hidden">
               {/* Text Content */}
               <div className="lg:w-1/2 p-12 space-y-6 flex flex-col justify-center">
                 {isFilled.keyText(card.heading) && (

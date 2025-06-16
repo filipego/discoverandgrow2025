@@ -14,6 +14,9 @@ export type ImageProps = SliceComponentProps<Content.ImageSlice>;
  * Component for "Image" Slices.
  */
 const Image: FC<ImageProps> = ({ slice }) => {
+  // Debug the value
+  console.log('Remove shadow value:', slice.primary.remove_shadow);
+  
   return (
     <Bounded
       data-slice-type={slice.slice_type}
@@ -29,7 +32,14 @@ const Image: FC<ImageProps> = ({ slice }) => {
         >
           {slice.primary.images.map((item, i) => (
             <li key={i} className="w-full">
-              <PrismicNextImage field={item.image} className="w-full" alt="" />
+              <PrismicNextImage 
+                field={item.image} 
+                className={clsx(
+                  "w-full",
+                  slice.primary.remove_shadow === false && "shadow-2xl"
+                )} 
+                alt="" 
+              />
             </li>
           ))}
         </ul>
@@ -43,7 +53,10 @@ const Image: FC<ImageProps> = ({ slice }) => {
           >
             <PrismicNextImage
               field={slice.primary.image}
-              className="w-full rounded-xl shadow-2xl"
+              className={clsx(
+                "w-full rounded-xl",
+                slice.primary.remove_shadow === false && "shadow-2xl"
+              )}
               alt=""
             />
           </div>
