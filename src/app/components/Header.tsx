@@ -9,6 +9,7 @@ import { LongLogo } from "./LongLogo";
 import { Navigation } from "./Navigation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import clsx from "clsx";
 
 // Removed headerStyles - now using Tailwind with clsx
 
@@ -26,6 +27,7 @@ function HeaderContent() {
   const [settings, setSettings] = useState<any>(null);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   // Fetch settings data
   useEffect(() => {
@@ -73,6 +75,12 @@ function HeaderContent() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const shouldBeScrolled = currentScrollY > 100;
+      
+      // Update scrolled state
+      if (shouldBeScrolled !== isScrolled) {
+        setIsScrolled(shouldBeScrolled);
+      }
       
       // Determine if we should show or hide the header
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
@@ -105,7 +113,7 @@ function HeaderContent() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY, isVisible]);
+  }, [lastScrollY, isVisible, isScrolled]);
 
   // Handle nav item hover animations (now just a placeholder)
   const handleNavItemHover = (e: React.MouseEvent<HTMLLIElement>, isEnter: boolean) => {
@@ -116,8 +124,14 @@ function HeaderContent() {
 
   return (
     <div ref={headerRef} className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      <Bounded as="header" padding="smaller padding" className="scrolled-header-container">
-        <div className="grid grid-cols-[230px_1fr_230px] w-full items-center">
+      <Bounded as="header" padding="smaller padding">
+        <div className={clsx(
+          "grid grid-cols-[230px_1fr_230px] w-full items-center transition-all duration-300",
+          {
+            // Glass effect and rounded corners when scrolled
+            "backdrop-blur-md bg-white/70 rounded-[50px] mt-2.5 border border-white/90 shadow-[0_4px_15px_rgba(0,0,0,0.05)] max-w-6xl mx-auto py-4 px-6": isScrolled,
+          }
+        )}>
           <div className="flex-shrink-0">
             <Link href="/">
               <LongLogo treeColor="#29285D" className="text-[#29285D] h-[55]" />

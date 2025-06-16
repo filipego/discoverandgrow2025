@@ -32,7 +32,9 @@ export default function RootLayout({
       >
         <main>
           <Header />
-          {children}
+          <div className="pt-24">
+            {children}
+          </div>
           {/* <Footer /> */}
         </main>
         <PrismicPreview repositoryName={repositoryName} />
