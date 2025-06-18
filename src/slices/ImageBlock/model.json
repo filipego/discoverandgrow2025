@@ -20,19 +20,25 @@
             "thumbnails": []
           }
         },
+        "padding": {
+          "type": "Select",
+          "config": {
+            "label": "Padding",
+            "placeholder": "",
+            "options": [
+              "normal padding",
+              "smaller padding",
+              "no padding",
+              "no top padding",
+              "no bottom padding"
+            ],
+            "default_value": "normal padding"
+          }
+        },
         "smaller": {
           "type": "Boolean",
           "config": {
             "label": "Smaller",
-            "placeholder_false": "false",
-            "placeholder_true": "true",
-            "default_value": false
-          }
-        },
-        "no_padding": {
-          "type": "Boolean",
-          "config": {
-            "label": "No padding",
             "placeholder_false": "false",
             "placeholder_true": "true",
             "default_value": false

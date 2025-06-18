@@ -47,13 +47,57 @@
 				"type": "Link",
 				"value": [
 					{
-						"__TYPE__": "LinkContent",
 						"key": "d67c0879-4a69-4a43-a1b4-a7018489888b",
+						"__TYPE__": "LinkContent",
 						"value": {
 							"__TYPE__": "ExternalLink",
 							"url": "http://google.com",
 							"text": "property"
 						}
+					}
+				]
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "multipleHeaderAndText",
+		"primary": {
+			"item": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"heading",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "citizen",
+									"type": "Text"
+								}
+							],
+							[
+								"body",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Sint dolore et et veniam labore consectetur tempor sit dolor veniam. Enim laborum esse consequat nisi minim aute."
+											}
+										}
+									]
+								}
+							]
+						]
 					}
 				]
 			}

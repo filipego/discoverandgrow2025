@@ -17,28 +17,51 @@ const TextBlock: FC<TextBlockProps> = ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="!py-0"
+      padding="no padding"
     >
-      <div className="max-w-[700px] mb-5">
+      <div className="max-w-[850px] mb-5 lg:mb-10">
         <PrismicRichText
           field={slice.primary.body}
           components={{
+            heading2: ({ children }) => (
+              <Heading
+                as="h2"
+                size="xl"
+                className="font-semibold mb-5 lg:mb-10"
+              >
+                {children}
+              </Heading>
+            ),
+            heading3: ({ children }) => (
+              <Heading
+                as="h3"
+                size="xl"
+                className="font-semibold mb-10 lg:mb-20"
+              >
+                {children}
+              </Heading>
+            ),
             heading4: ({ children }) => (
               <Heading
                 as="h4"
-                size="lg"
-                className="font-semibold mb-10 text-brand-gray/80"
+                size="xl"
+                className="font-semibold mb-10 lg:mb-20"
               >
                 {children}
               </Heading>
             ),
             list: ({ children }) => (
-              <ul className="list-disc pl-14 mb-6 space-y-2 text-brand-gray">
+              <ul className="max-w-prose list-disc pl-14 mb-6 space-y-2 text-brand-gray">
                 {children}
               </ul>
             ),
             listItem: ({ children }) => (
               <li className="leading-relaxed">{children}</li>
+            ),
+            paragraph: ({ children }) => (
+              <p className="max-w-prose mb-6 text-brand-gray leading-relaxed">
+                {children}
+              </p>
             ),
           }}
         />

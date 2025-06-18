@@ -4,6 +4,7 @@ import { SliceComponentProps } from "@prismicio/react";
 import { Bounded } from "@/app/components/Bounded";
 import { DefaultHeadingAndText } from "./components/DefaultHeadingAndText";
 import { WithLinksHeadingAndText } from "./components/WithLinksHeadingAndText";
+import { MultipleHeadingAndText } from "./components/MultipleHeadingAndText";
 import clsx from "clsx";
 
 /**
@@ -13,8 +14,8 @@ export type HeadingAndTextProps =
   SliceComponentProps<Content.HeadingAndTextSlice>;
 
 export interface HeadingAndTextComponentProps {
-  heading: Content.HeadingAndTextSlice["primary"]["heading"];
-  body: Content.HeadingAndTextSlice["primary"]["body"];
+  heading: Content.HeadingAndTextSliceDefaultPrimary["heading"];
+  body: Content.HeadingAndTextSliceDefaultPrimary["body"];
   className?: string;
 }
 
@@ -22,6 +23,35 @@ export interface HeadingAndTextComponentProps {
  * Component for "HeadingAndText" Slices.
  */
 const HeadingAndText: FC<HeadingAndTextProps> = ({ slice }) => {
+  const renderContent = () => {
+    switch (slice.variation) {
+      case 'withLinks':
+        return (
+          <WithLinksHeadingAndText
+            // @ts-ignore - Prismic types are correctly discriminated at runtime
+            heading={slice.primary.heading}
+            body={slice.primary.body}
+            link={slice.primary.link}
+          />
+        );
+      case 'multipleHeaderAndText':
+        return (
+          <MultipleHeadingAndText
+            // @ts-ignore - Prismic types are correctly discriminated at runtime
+            items={slice.primary.item}
+          />
+        );
+      default:
+        return (
+          <DefaultHeadingAndText
+            // @ts-ignore - Prismic types are correctly discriminated at runtime
+            heading={slice.primary.heading}
+            body={slice.primary.body}
+          />
+        );
+    }
+  };
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}
@@ -30,18 +60,7 @@ const HeadingAndText: FC<HeadingAndTextProps> = ({ slice }) => {
         "py-10 lg:pt-16 lg:pb-30",
       )}
     >
-      {slice.variation === 'withLinks' ? (
-        <WithLinksHeadingAndText
-          heading={slice.primary.heading}
-          body={slice.primary.body}
-          link={slice.primary.link}
-        />
-      ) : (
-        <DefaultHeadingAndText
-          heading={slice.primary.heading}
-          body={slice.primary.body}
-        />
-      )}
+      {renderContent()}
     </Bounded>
   );
 };

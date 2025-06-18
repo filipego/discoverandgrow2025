@@ -34,11 +34,18 @@ const ProgramsCard: FC<ProgramsCardProps> = async ({ slice }) => {
     )
     .slice(0, 2);
 
+  const getPadding = () => {
+    if ('padding' in slice.primary && slice.primary.padding) {
+      return slice.primary.padding as "normal padding" | "smaller padding" | "no padding" | "no top padding" | "no bottom padding";
+    }
+    return "normal padding" as const;
+  };
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      padding={(slice.primary?.padding as any) || "normal padding"}
+      padding={getPadding()}
     >
       <ul className="flex flex-col md:flex-row gap-5 md:items-stretch">
         {slice.variation === "default" &&

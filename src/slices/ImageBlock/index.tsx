@@ -17,11 +17,18 @@ const Image: FC<ImageProps> = ({ slice }) => {
   // Debug the value
   console.log('Remove shadow value:', slice.primary.remove_shadow);
   
+  const getPadding = () => {
+    if (slice.variation === "default") {
+      return (slice.primary as Content.ImageSliceDefaultPrimary).padding || "normal padding";
+    }
+    return "normal padding";
+  };
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={clsx(slice.primary.no_padding && "!py-0")}
+      padding={getPadding()}
     >
       {slice.variation === "multipleImages" ? (
         <ul

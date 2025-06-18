@@ -82,6 +82,7 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | OurTeamSlice
   | TextBlockSlice
   | HeadingAndTextSlice
   | TextAndFormSlice
@@ -1087,6 +1088,31 @@ export type CardsandImagesSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *HeadingAndText → MultipleHeaderAndText → Primary → Item*
+ */
+export interface HeadingAndTextSliceMultipleHeaderAndTextPrimaryItemItem {
+  /**
+   * Heading field in *HeadingAndText → MultipleHeaderAndText → Primary → Item*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: heading_and_text.multipleHeaderAndText.primary.item[].heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *HeadingAndText → MultipleHeaderAndText → Primary → Item*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: heading_and_text.multipleHeaderAndText.primary.item[].body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+}
+
+/**
  * Primary content in *HeadingAndText → Default → Primary*
  */
 export interface HeadingAndTextSliceDefaultPrimary {
@@ -1175,11 +1201,43 @@ export type HeadingAndTextSliceWithLinks = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *HeadingAndText → MultipleHeaderAndText → Primary*
+ */
+export interface HeadingAndTextSliceMultipleHeaderAndTextPrimary {
+  /**
+   * Item field in *HeadingAndText → MultipleHeaderAndText → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: heading_and_text.multipleHeaderAndText.primary.item[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  item: prismic.GroupField<
+    Simplify<HeadingAndTextSliceMultipleHeaderAndTextPrimaryItemItem>
+  >;
+}
+
+/**
+ * MultipleHeaderAndText variation for HeadingAndText Slice
+ *
+ * - **API ID**: `multipleHeaderAndText`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HeadingAndTextSliceMultipleHeaderAndText =
+  prismic.SharedSliceVariation<
+    "multipleHeaderAndText",
+    Simplify<HeadingAndTextSliceMultipleHeaderAndTextPrimary>,
+    never
+  >;
+
+/**
  * Slice variation for *HeadingAndText*
  */
 type HeadingAndTextSliceVariation =
   | HeadingAndTextSliceDefault
-  | HeadingAndTextSliceWithLinks;
+  | HeadingAndTextSliceWithLinks
+  | HeadingAndTextSliceMultipleHeaderAndText;
 
 /**
  * HeadingAndText Shared Slice
@@ -1380,6 +1438,24 @@ export interface ImageSliceDefaultPrimary {
   image: prismic.ImageField<never>;
 
   /**
+   * Padding field in *ImageBlock → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: normal padding
+   * - **API ID Path**: image.default.primary.padding
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  padding: prismic.SelectField<
+    | "normal padding"
+    | "smaller padding"
+    | "no padding"
+    | "no top padding"
+    | "no bottom padding",
+    "filled"
+  >;
+
+  /**
    * Smaller field in *ImageBlock → Default → Primary*
    *
    * - **Field Type**: Boolean
@@ -1389,17 +1465,6 @@ export interface ImageSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   smaller: prismic.BooleanField;
-
-  /**
-   * No padding field in *ImageBlock → Default → Primary*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: image.default.primary.no_padding
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  no_padding: prismic.BooleanField;
 
   /**
    * Remove Shadow field in *ImageBlock → Default → Primary*
@@ -1502,6 +1567,191 @@ type ImageSliceVariation = ImageSliceDefault | ImageSliceMultipleImages;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type ImageSlice = prismic.SharedSlice<"image", ImageSliceVariation>;
+
+/**
+ * Item in *OurTeam → Default → Primary → Person*
+ */
+export interface OurTeamSliceDefaultPrimaryPersonItem {
+  /**
+   * Image field in *OurTeam → Default → Primary → Person*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: our_team.default.primary.person[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Name field in *OurTeam → Default → Primary → Person*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: our_team.default.primary.person[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Title field in *OurTeam → Default → Primary → Person*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: our_team.default.primary.person[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * LinkedIn field in *OurTeam → Default → Primary → Person*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: our_team.default.primary.person[].linkedin
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  linkedin: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Body field in *OurTeam → Default → Primary → Person*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: our_team.default.primary.person[].body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+}
+
+/**
+ * Item in *OurTeam → OurBoard → Primary → Person*
+ */
+export interface OurTeamSliceOurBoardPrimaryPersonItem {
+  /**
+   * Image field in *OurTeam → OurBoard → Primary → Person*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: our_team.ourBoard.primary.person[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Name field in *OurTeam → OurBoard → Primary → Person*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: our_team.ourBoard.primary.person[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Title field in *OurTeam → OurBoard → Primary → Person*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: our_team.ourBoard.primary.person[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * LinkedIn field in *OurTeam → OurBoard → Primary → Person*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: our_team.ourBoard.primary.person[].linkedin
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  linkedin: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+}
+
+/**
+ * Primary content in *OurTeam → Default → Primary*
+ */
+export interface OurTeamSliceDefaultPrimary {
+  /**
+   * Person field in *OurTeam → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: our_team.default.primary.person[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  person: prismic.GroupField<Simplify<OurTeamSliceDefaultPrimaryPersonItem>>;
+}
+
+/**
+ * Default variation for OurTeam Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type OurTeamSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<OurTeamSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *OurTeam → OurBoard → Primary*
+ */
+export interface OurTeamSliceOurBoardPrimary {
+  /**
+   * Person field in *OurTeam → OurBoard → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: our_team.ourBoard.primary.person[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  person: prismic.GroupField<Simplify<OurTeamSliceOurBoardPrimaryPersonItem>>;
+}
+
+/**
+ * OurBoard variation for OurTeam Slice
+ *
+ * - **API ID**: `ourBoard`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type OurTeamSliceOurBoard = prismic.SharedSliceVariation<
+  "ourBoard",
+  Simplify<OurTeamSliceOurBoardPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *OurTeam*
+ */
+type OurTeamSliceVariation = OurTeamSliceDefault | OurTeamSliceOurBoard;
+
+/**
+ * OurTeam Shared Slice
+ *
+ * - **API ID**: `our_team`
+ * - **Description**: OurTeam
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type OurTeamSlice = prismic.SharedSlice<
+  "our_team",
+  OurTeamSliceVariation
+>;
 
 /**
  * Primary content in *ProgramsCard → Default → Primary*
@@ -2071,6 +2321,17 @@ export interface TextBlockSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   body: prismic.RichTextField;
+
+  /**
+   * More bottom padding field in *TextBlock → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: text_block.default.primary.more_bottom_padding
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  more_bottom_padding: prismic.BooleanField;
 }
 
 /**
@@ -2229,9 +2490,12 @@ declare module "@prismicio/client" {
       HeadingAndTextSlice,
       HeadingAndTextSliceDefaultPrimary,
       HeadingAndTextSliceWithLinksPrimary,
+      HeadingAndTextSliceMultipleHeaderAndTextPrimaryItemItem,
+      HeadingAndTextSliceMultipleHeaderAndTextPrimary,
       HeadingAndTextSliceVariation,
       HeadingAndTextSliceDefault,
       HeadingAndTextSliceWithLinks,
+      HeadingAndTextSliceMultipleHeaderAndText,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceCenteredHeroPrimary,
@@ -2245,6 +2509,14 @@ declare module "@prismicio/client" {
       ImageSliceVariation,
       ImageSliceDefault,
       ImageSliceMultipleImages,
+      OurTeamSlice,
+      OurTeamSliceDefaultPrimaryPersonItem,
+      OurTeamSliceDefaultPrimary,
+      OurTeamSliceOurBoardPrimaryPersonItem,
+      OurTeamSliceOurBoardPrimary,
+      OurTeamSliceVariation,
+      OurTeamSliceDefault,
+      OurTeamSliceOurBoard,
       ProgramsCardSlice,
       ProgramsCardSliceDefaultPrimary,
       ProgramsCardSliceImageSidePrimary,

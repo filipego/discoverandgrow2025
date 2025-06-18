@@ -12,11 +12,19 @@ export type CardsandImagesProps =
   SliceComponentProps<Content.CardsandImagesSlice>;
 
 const CardsandImages: FC<CardsandImagesProps> = ({ slice }) => {
+  const getPadding = () => {
+    // Check if padding field exists for this variation and use proper type assertion
+    if ('padding' in slice.primary && slice.primary.padding) {
+      return slice.primary.padding as "normal padding" | "smaller padding" | "no padding" | "no top padding" | "no bottom padding";
+    }
+    return "normal padding" as const;
+  };
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      padding={(slice.primary?.padding as any) || "normal padding"}
+      padding={getPadding()}
     >
       <ul className="flex flex-col md:flex-row gap-5 md:items-stretch">
         {slice.primary.card?.map((cardItem, i) => {
@@ -38,7 +46,7 @@ const CardsandImages: FC<CardsandImagesProps> = ({ slice }) => {
                 key={i}
                 item={{
                   ...baseProps,
-                  direction: slice.primary?.image_direction as "left" | "right",
+                  direction: ('direction' in cardItem ? cardItem.direction : "right") as "left" | "right",
                 }}
               />
             );
