@@ -155,17 +155,17 @@ export const AnimatedCardsClient = ({ slice }: AnimatedCardsClientProps) => {
               zIndex: index + 1,
             }}
           >
-            <div className="bg-[#F5F6FF] rounded-2xl min-h-[400px] flex flex-col lg:flex-row overflow-hidden">
+            <div className="bg-[#2A285D] rounded-2xl min-h-[400px] flex flex-col lg:flex-row overflow-hidden">
               {/* Text Content */}
               <div className="lg:w-1/2 p-12 space-y-6 flex flex-col justify-center">
                 {isFilled.keyText(card.heading) && (
-                  <Heading as="h3" size="sm" color="brand-black" ff="secondary">
+                  <Heading as="h3" size="sm" color="brand-off-white" ff="secondary">
                     {card.heading}
                   </Heading>
                 )}
                 
                 {isFilled.richText(card.body) && (
-                  <div className="text-brand-gray">
+                  <div className="text-brand-off-white">
                     <PrismicRichText 
                       field={card.body}
                       components={{
@@ -182,12 +182,12 @@ export const AnimatedCardsClient = ({ slice }: AnimatedCardsClientProps) => {
                           <ol className="text-sm space-y-2 list-decimal list-inside mb-4 last:mb-0 mt-4 ml-4">{children}</ol>
                         ),
                         heading4: ({ children }) => (
-                          <Heading as="h4" size="xs" color="brand-black" ff="secondary" className="mb-3 mt-6 first:mt-0">
+                          <Heading as="h4" size="xs" color="brand-off-white" ff="secondary" className="mb-3 mt-6 first:mt-0">
                             {children}
                           </Heading>
                         ),
                         strong: ({ children }) => (
-                          <strong className="font-semibold text-brand-black">{children}</strong>
+                          <strong className="font-semibold text-brand-off-white">{children}</strong>
                         ),
                         em: ({ children }) => (
                           <em className="italic">{children}</em>

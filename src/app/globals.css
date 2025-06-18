@@ -1,32 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
 @font-face {
-  font-family: 'More Sugar';
-  src: url('/fonts/MoreSugarRegular.woff2') format('woff2'),
-      url('/fonts/MoreSugarRegular.woff') format('woff');
+  font-family: "More Sugar";
+  src:
+    url("/fonts/MoreSugarRegular.woff2") format("woff2"),
+    url("/fonts/MoreSugarRegular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
-  --font-secondary: "Raleway", serif; 
+  --font-secondary: "Raleway", serif;
   --font-primary: "Open Sans", serif;
-  --font-logo: "More Sugar"; 
+  --font-logo: "More Sugar";
 
-  --color-brand-blue: #29285D;
-  --color-brand-blue-light: #51507A;
+  --color-brand-blue: #29285d;
+  --color-brand-blue-light: #51507a;
   --color-brand-blue-lighter: #787898;
   --color-brand-bg: #ffffff;
-  --color-brand-off-white: #FAF9F6;
+  --color-brand-off-white: #faf9f6;
   --color-brand-black: black;
-  --color-brand-gray: #0A0A0A;
-  --color-brand-gray-light: #4E4E4E;
+  --color-brand-gray: #0a0a0a;
+  --color-brand-gray-light: #4e4e4e;
   --color-brand-gray-lighter: #949494;
-  --color-brand-green: #01BFA7;
-  --color-brand-orange: #F15B3B;
+  --color-brand-green: #2ca382;
+  --color-brand-orange: #f15b3b;
 }
 
 @layer base {
@@ -37,13 +38,19 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
-  
-  p, li {
+
+  p,
+  li {
     @apply text-sm leading-[22px] lg:text-base lg:leading-6;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-secondary); 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-secondary);
   }
 }
 
@@ -56,7 +63,6 @@ body {
 svg {
   overflow: hidden;
 }
-
 
 .link-border-animation {
   position: relative;

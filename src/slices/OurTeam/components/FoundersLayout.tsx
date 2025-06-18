@@ -15,7 +15,7 @@ export const FoundersLayout: FC<FoundersLayoutProps> = ({ people }) => {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 lg:items-center">
       {people.map((person, index) => (
         <div key={index} className={clsx(
-          "space-y-4",
+          "space-y-5",
           index > 0 && "pt-8 lg:pt-0"
         )}>
           {/* Image */}
@@ -45,7 +45,7 @@ export const FoundersLayout: FC<FoundersLayoutProps> = ({ people }) => {
                 >
                   {person.name}
                 </Heading>
-                <p className="text-sm text-brand-gray/70 font-medium">
+                <p className="text-sm text-brand-gray/70 font-medium mb-3">
                   {person.title}
                 </p>
               </div>

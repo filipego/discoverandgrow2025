@@ -14,7 +14,7 @@ export const BoardLayout: FC<BoardLayoutProps> = ({ people }) => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
       {people.map((person, index) => (
         <div key={index} className={clsx(
-          "space-y-3",
+          "space-y-4",
           index > 0 && "pt-8 md:pt-0"
         )}>
           {/* Image */}

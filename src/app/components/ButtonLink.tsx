@@ -48,7 +48,7 @@ export function ButtonLink({
               <span
                 className={clsx(
                   "flex items-center justify-center rounded-full w-7 h-7",
-                  color === "Primary" && "bg-[#25DBC4]",
+                  color === "Primary" && "bg-[#54AC8B]",
                   color === "Secondary" && "bg-[#FF7456]"
                 )}
               >
