@@ -1,0 +1,196 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "Get in Touch",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Ready to start your journey with us? We'd love to hear from you and discuss how we can help you achieve your goals."
+						}
+					},
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Fill out the form and we'll get back to you within 24 hours."
+						}
+					}
+				]
+			},
+			"form_title": {
+				"__TYPE__": "FieldContent",
+				"value": "Contact Form",
+				"type": "Text"
+			},
+			"submit_button_text": {
+				"__TYPE__": "FieldContent",
+				"value": "Send Message",
+				"type": "Text"
+			},
+			"success_message": {
+				"__TYPE__": "FieldContent",
+				"value": "Thank you! We'll be in touch soon.",
+				"type": "Text"
+			},
+			"thank_you_email_content": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Thank you for reaching out to us! We've received your message and will get back to you within 24 hours."
+						}
+					}
+				]
+			},
+			"notification_email": {
+				"__TYPE__": "FieldContent",
+				"value": "hello@discoverandgrow.ca",
+				"type": "Text"
+			},
+			"enable_captcha": {
+				"__TYPE__": "FieldContent",
+				"value": true,
+				"type": "Boolean"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					{
+						"field_type": {
+							"__TYPE__": "FieldContent",
+							"value": "text",
+							"type": "Select"
+						},
+						"field_label": {
+							"__TYPE__": "FieldContent",
+							"value": "First Name",
+							"type": "Text"
+						},
+						"field_placeholder": {
+							"__TYPE__": "FieldContent",
+							"value": "Enter your first name",
+							"type": "Text"
+						},
+						"field_width": {
+							"__TYPE__": "FieldContent",
+							"value": "half",
+							"type": "Select"
+						},
+						"is_required": {
+							"__TYPE__": "FieldContent",
+							"value": true,
+							"type": "Boolean"
+						}
+					}
+				]
+			},
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					{
+						"field_type": {
+							"__TYPE__": "FieldContent",
+							"value": "text",
+							"type": "Select"
+						},
+						"field_label": {
+							"__TYPE__": "FieldContent",
+							"value": "Last Name",
+							"type": "Text"
+						},
+						"field_placeholder": {
+							"__TYPE__": "FieldContent",
+							"value": "Enter your last name",
+							"type": "Text"
+						},
+						"field_width": {
+							"__TYPE__": "FieldContent",
+							"value": "half",
+							"type": "Select"
+						},
+						"is_required": {
+							"__TYPE__": "FieldContent",
+							"value": true,
+							"type": "Boolean"
+						}
+					}
+				]
+			},
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					{
+						"field_type": {
+							"__TYPE__": "FieldContent",
+							"value": "email",
+							"type": "Select"
+						},
+						"field_label": {
+							"__TYPE__": "FieldContent",
+							"value": "Email Address",
+							"type": "Text"
+						},
+						"field_placeholder": {
+							"__TYPE__": "FieldContent",
+							"value": "your@email.com",
+							"type": "Text"
+						},
+						"field_width": {
+							"__TYPE__": "FieldContent",
+							"value": "full",
+							"type": "Select"
+						},
+						"is_required": {
+							"__TYPE__": "FieldContent",
+							"value": true,
+							"type": "Boolean"
+						}
+					}
+				]
+			},
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					{
+						"field_type": {
+							"__TYPE__": "FieldContent",
+							"value": "textarea",
+							"type": "Select"
+						},
+						"field_label": {
+							"__TYPE__": "FieldContent",
+							"value": "Message",
+							"type": "Text"
+						},
+						"field_placeholder": {
+							"__TYPE__": "FieldContent",
+							"value": "Tell us about your project...",
+							"type": "Text"
+						},
+						"field_width": {
+							"__TYPE__": "FieldContent",
+							"value": "full",
+							"type": "Select"
+						},
+						"is_required": {
+							"__TYPE__": "FieldContent",
+							"value": true,
+							"type": "Boolean"
+						}
+					}
+				]
+			}
+		]
+	}
+]

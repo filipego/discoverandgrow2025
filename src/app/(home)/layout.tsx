@@ -27,9 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-
-      >
+      <body suppressHydrationWarning={true}>
         <main>
           <Header />
           <div className="pt-24">

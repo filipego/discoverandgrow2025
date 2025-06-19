@@ -1,0 +1,138 @@
+{
+  "id": "form",
+  "type": "SharedSlice",
+  "name": "Form",
+  "description": "Form",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Heading and text on left, form on right",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": "Contact Us"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "Form description...",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "form_title": {
+          "type": "Text",
+          "config": {
+            "label": "Form Title",
+            "placeholder": "Get in Touch"
+          }
+        },
+        "submit_button_text": {
+          "type": "Text",
+          "config": {
+            "label": "Submit Button Text",
+            "placeholder": "Send Message"
+          }
+        },
+        "success_message": {
+          "type": "Text",
+          "config": {
+            "label": "Success Message",
+            "placeholder": "Thank you for your message!"
+          }
+        },
+        "thank_you_email_content": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Thank You Email Content",
+            "placeholder": "Custom thank you message for email...",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink"
+          }
+        },
+        "notification_email": {
+          "type": "Text",
+          "config": {
+            "label": "Notification Email",
+            "placeholder": "admin@example.com"
+          }
+        },
+        "enable_captcha": {
+          "type": "Boolean",
+          "config": {
+            "label": "Enable Captcha",
+            "default_value": true
+          }
+        },
+        "form_fields": {
+          "type": "Group",
+          "config": {
+            "label": "Form Fields",
+            "fields": {
+              "field_type": {
+                "type": "Select",
+                "config": {
+                  "label": "Field Type",
+                  "options": ["text", "email", "phone", "textarea", "select", "radio", "checkbox", "number", "url"]
+                }
+              },
+              "field_label": {
+                "type": "Text",
+                "config": {
+                  "label": "Field Label",
+                  "placeholder": "Full Name"
+                }
+              },
+              "field_placeholder": {
+                "type": "Text",
+                "config": {
+                  "label": "Field Placeholder",
+                  "placeholder": "Enter your full name"
+                }
+              },
+              "field_width": {
+                "type": "Select",
+                "config": {
+                  "label": "Field Width",
+                  "options": ["full", "half"],
+                  "default_value": "full"
+                }
+              },
+              "is_required": {
+                "type": "Boolean",
+                "config": {
+                  "label": "Required Field",
+                  "default_value": false
+                }
+              },
+              "options": {
+                "type": "Group",
+                "config": {
+                  "label": "Options (for Select/Radio/Checkbox)",
+                  "fields": {
+                    "option_label": {
+                      "type": "Text",
+                      "config": {
+                        "label": "Option Label",
+                        "placeholder": "Small"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

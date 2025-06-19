@@ -82,6 +82,7 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | FormSlice
   | PartnersSlice
   | OurTeamSlice
   | TextBlockSlice
@@ -158,6 +159,50 @@ type PartnerPostDocumentDataSlicesSlice = never;
  * Content for Partner Post documents
  */
 interface PartnerPostDocumentData {
+  /**
+   * Body field in *Partner Post*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partner_post.body
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Name field in *Partner Post*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partner_post.name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Job Title field in *Partner Post*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partner_post.job_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  job_title: prismic.KeyTextField;
+
+  /**
+   * Company Name field in *Partner Post*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partner_post.company_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  company_name: prismic.KeyTextField;
+
   /**
    * Slice Zone field in *Partner Post*
    *
@@ -1153,6 +1198,196 @@ export type CardsandImagesSlice = prismic.SharedSlice<
   "cardsand_images",
   CardsandImagesSliceVariation
 >;
+
+/**
+ * Primary content in *Form → Default → Primary*
+ */
+export interface FormSliceDefaultPrimary {
+  /**
+   * Heading field in *Form → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Contact Us
+   * - **API ID Path**: form.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *Form → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Form description...
+   * - **API ID Path**: form.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Form Title field in *Form → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Get in Touch
+   * - **API ID Path**: form.default.primary.form_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  form_title: prismic.KeyTextField;
+
+  /**
+   * Submit Button Text field in *Form → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Send Message
+   * - **API ID Path**: form.default.primary.submit_button_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  submit_button_text: prismic.KeyTextField;
+
+  /**
+   * Success Message field in *Form → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Thank you for your message!
+   * - **API ID Path**: form.default.primary.success_message
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  success_message: prismic.KeyTextField;
+
+  /**
+   * Thank You Email Content field in *Form → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Custom thank you message for email...
+   * - **API ID Path**: form.default.primary.thank_you_email_content
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  thank_you_email_content: prismic.RichTextField;
+
+  /**
+   * Notification Email field in *Form → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: admin@example.com
+   * - **API ID Path**: form.default.primary.notification_email
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  notification_email: prismic.KeyTextField;
+
+  /**
+   * Enable Captcha field in *Form → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: form.default.primary.enable_captcha
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  enable_captcha: prismic.BooleanField;
+}
+
+/**
+ * Primary content in *Form → Items*
+ */
+export interface FormSliceDefaultItem {
+  /**
+   * Field Type field in *Form → Items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: form.items[].field_type
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  field_type: prismic.SelectField<
+    | "text"
+    | "email"
+    | "phone"
+    | "textarea"
+    | "select"
+    | "radio"
+    | "checkbox"
+    | "number"
+    | "url"
+  >;
+
+  /**
+   * Field Label field in *Form → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Full Name
+   * - **API ID Path**: form.items[].field_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  field_label: prismic.KeyTextField;
+
+  /**
+   * Field Placeholder field in *Form → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Enter your full name
+   * - **API ID Path**: form.items[].field_placeholder
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  field_placeholder: prismic.KeyTextField;
+
+  /**
+   * Field Width field in *Form → Items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: full
+   * - **API ID Path**: form.items[].field_width
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  field_width: prismic.SelectField<"full" | "half", "filled">;
+
+  /**
+   * Required Field field in *Form → Items*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: form.items[].is_required
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  is_required: prismic.BooleanField;
+
+  /**
+   * Options (for Select/Radio/Checkbox) field in *Form → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Option 1|option1, Option 2|option2, Option 3|option3
+   * - **API ID Path**: form.items[].options
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  options: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Form Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Heading and text on left, form on right
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FormSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<FormSliceDefaultPrimary>,
+  Simplify<FormSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *Form*
+ */
+type FormSliceVariation = FormSliceDefault;
+
+/**
+ * Form Shared Slice
+ *
+ * - **API ID**: `form`
+ * - **Description**: Form
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FormSlice = prismic.SharedSlice<"form", FormSliceVariation>;
 
 /**
  * Item in *HeadingAndText → MultipleHeaderAndText → Primary → Item*
@@ -2587,6 +2822,11 @@ declare module "@prismicio/client" {
       CardsandImagesSliceCardWithIconInside,
       CardsandImagesSliceCardWithIconOutside,
       CardsandImagesSliceImageSide,
+      FormSlice,
+      FormSliceDefaultPrimary,
+      FormSliceDefaultItem,
+      FormSliceVariation,
+      FormSliceDefault,
       HeadingAndTextSlice,
       HeadingAndTextSliceDefaultPrimary,
       HeadingAndTextSliceWithLinksPrimary,
