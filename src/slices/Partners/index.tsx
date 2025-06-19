@@ -9,7 +9,7 @@ import PartnerSliderComponent from "./PartnerSliderComponent";
 /**
  * Props for `Partners`.
  */
-export type PartnersProps = SliceComponentProps<any>;
+export type PartnersProps = SliceComponentProps<Content.PartnersSlice>;
 
 /**
  * Component for "Partners" Slices.
