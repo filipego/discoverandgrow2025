@@ -9,6 +9,7 @@ export const components = {
   hero: dynamic(() => import("./Hero")),
   image: dynamic(() => import("./ImageBlock")),
   our_team: dynamic(() => import("./OurTeam")),
+  partners: dynamic(() => import("./Partners")),
   programs_card: dynamic(() => import("./ProgramsCard")),
   store: dynamic(() => import("./Store")),
   tab_panel: dynamic(() => import("./TabPanel")),

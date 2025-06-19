@@ -82,6 +82,7 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | PartnersSlice
   | OurTeamSlice
   | TextBlockSlice
   | HeadingAndTextSlice
@@ -150,6 +151,71 @@ interface PageDocumentData {
  */
 export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
+
+type PartnerPostDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Partner Post documents
+ */
+interface PartnerPostDocumentData {
+  /**
+   * Slice Zone field in *Partner Post*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partner_post.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<PartnerPostDocumentDataSlicesSlice> /**
+   * Meta Title field in *Partner Post*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: partner_post.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Partner Post*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: partner_post.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Partner Post*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partner_post.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Partner Post document from Prismic
+ *
+ * - **API ID**: `partner_post`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PartnerPostDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<PartnerPostDocumentData>,
+    "partner_post",
+    Lang
+  >;
 
 type ProgramsDocumentDataSlicesSlice =
   | TextBlockSlice
@@ -543,6 +609,7 @@ export type WhatWeDoDocument<Lang extends string = string> =
 export type AllDocumentTypes =
   | HomepageDocument
   | PageDocument
+  | PartnerPostDocument
   | ProgramsDocument
   | SettingsDocument
   | WhatWeDoDocument;
@@ -1754,6 +1821,36 @@ export type OurTeamSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Default variation for Partners Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type PartnersSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *Partners*
+ */
+type PartnersSliceVariation = PartnersSliceDefault;
+
+/**
+ * Partners Shared Slice
+ *
+ * - **API ID**: `partners`
+ * - **Description**: Partners
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type PartnersSlice = prismic.SharedSlice<
+  "partners",
+  PartnersSliceVariation
+>;
+
+/**
  * Primary content in *ProgramsCard → Default → Primary*
  */
 export interface ProgramsCardSliceDefaultPrimary {
@@ -2458,6 +2555,9 @@ declare module "@prismicio/client" {
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
+      PartnerPostDocument,
+      PartnerPostDocumentData,
+      PartnerPostDocumentDataSlicesSlice,
       ProgramsDocument,
       ProgramsDocumentData,
       ProgramsDocumentDataSlicesSlice,
@@ -2517,6 +2617,9 @@ declare module "@prismicio/client" {
       OurTeamSliceVariation,
       OurTeamSliceDefault,
       OurTeamSliceOurBoard,
+      PartnersSlice,
+      PartnersSliceVariation,
+      PartnersSliceDefault,
       ProgramsCardSlice,
       ProgramsCardSliceDefaultPrimary,
       ProgramsCardSliceImageSidePrimary,

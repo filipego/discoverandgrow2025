@@ -1,9 +1,6 @@
 {
   "format": "page",
-  "id": "page",
-  "label": "Page",
-  "repeatable": true,
-  "status": true,
+  "id": "partner_post",
   "json": {
     "Main": {
       "uid": {
@@ -12,42 +9,41 @@
           "label": "UID"
         }
       },
+      "body": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Body",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "name": {
+        "type": "Text",
+        "config": {
+          "label": "Name",
+          "placeholder": ""
+        }
+      },
+      "job_title": {
+        "type": "Text",
+        "config": {
+          "label": "Job Title",
+          "placeholder": ""
+        }
+      },
+      "company_name": {
+        "type": "Text",
+        "config": {
+          "label": "Company Name",
+          "placeholder": ""
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "choices": {
-            "partners": {
-              "type": "SharedSlice"
-            },
-            "our_team": {
-              "type": "SharedSlice"
-            },
-            "text_block": {
-              "type": "SharedSlice"
-            },
-            "heading_and_text": {
-              "type": "SharedSlice"
-            },
-            "text_and_form": {
-              "type": "SharedSlice"
-            },
-            "video_block": {
-              "type": "SharedSlice"
-            },
-            "image": {
-              "type": "SharedSlice"
-            },
-            "hero": {
-              "type": "SharedSlice"
-            },
-            "cardsand_images": {
-              "type": "SharedSlice"
-            },
-            "text_and_image": {
-              "type": "SharedSlice"
-            }
-          }
+          "choices": {}
         }
       }
     },
@@ -78,5 +74,8 @@
         "type": "Image"
       }
     }
-  }
+  },
+  "label": "Partner Post",
+  "repeatable": true,
+  "status": true
 }
