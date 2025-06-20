@@ -26,6 +26,7 @@ const CardsandImages: FC<CardsandImagesProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       padding={getPadding()}
     >
+      
       <ul className="flex flex-col md:flex-row gap-5 md:items-stretch">
         {slice.primary.card?.map((cardItem, i) => {
           // Common props for all card types
