@@ -38,7 +38,19 @@ export const createDynamicSchema = (formFields: FormField[]) => {
         break;
       
       case 'url':
-        fieldSchema = z.string().url('Please enter a valid URL');
+        if (field.is_required) {
+          fieldSchema = z.string().min(1, 'URL is required').url('Please enter a valid URL');
+        } else {
+          fieldSchema = z.string().optional().refine((val) => {
+            if (!val || val.trim() === '') return true; // Allow empty
+            try {
+              new URL(val);
+              return true;
+            } catch {
+              return false;
+            }
+          }, { message: 'Please enter a valid URL' });
+        }
         break;
       
       case 'text':
@@ -48,13 +60,25 @@ export const createDynamicSchema = (formFields: FormField[]) => {
       
       case 'select':
       case 'radio':
-        fieldSchema = z.string().min(1, 'Please select an option');
+        if (field.is_required) {
+          fieldSchema = z.string().min(1, 'Please select an option');
+        } else {
+          fieldSchema = z.string();
+        }
         break;
       
       case 'checkbox':
         fieldSchema = z.boolean().refine(val => val === true, {
           message: `You must agree to ${field.field_label}`
         });
+        break;
+      
+      case 'checkbox_group':
+        if (field.is_required) {
+          fieldSchema = z.array(z.string()).min(1, 'Please select at least one option');
+        } else {
+          fieldSchema = z.array(z.string()).optional();
+        }
         break;
       
       default:

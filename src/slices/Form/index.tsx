@@ -104,6 +104,8 @@ const Form: FC<FormProps> = ({ slice }) => {
             thankYouContent={thankYouContentHTML}
             notificationEmail={slice.primary.notification_email || 'hello@discoverandgrow.ca'}
             enableCaptcha={slice.primary.enable_captcha ?? true}
+            // @ts-ignore - show_captcha field exists in Prismic but types not yet regenerated
+            showCaptcha={slice.primary.show_captcha ?? true}
           />
         </div>
       </div>

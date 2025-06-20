@@ -2,44 +2,52 @@
 
 import { forwardRef, useState } from "react";
 
-interface RadioOption {
+interface CheckboxOption {
   label: string;
   value: string;
   disabled?: boolean;
 }
 
-interface CustomRadioProps {
+interface CustomCheckboxGroupProps {
   label: string;
+  options: CheckboxOption[];
   required?: boolean;
   error?: string;
-  options: RadioOption[];
-  value?: string;
-  onChange?: (value: string) => void;
-  name?: string;
+  value?: string[];
+  onChange?: (value: string[]) => void;
   disabled?: boolean;
 }
 
-export const CustomRadio = forwardRef<HTMLInputElement, CustomRadioProps>(
-  ({ label, required, error, options, value, onChange, name, disabled, ...props }, ref) => {
-    const [selectedValue, setSelectedValue] = useState(value || "");
-
-    const handleChange = (optionValue: string) => {
-      if (disabled) return;
-      setSelectedValue(optionValue);
-      onChange?.(optionValue);
+export const CustomCheckboxGroup = forwardRef<HTMLDivElement, CustomCheckboxGroupProps>(
+  ({ label, options, required, error, value = [], onChange, disabled, ...props }, ref) => {
+    
+    const handleCheckboxChange = (optionValue: string, checked: boolean) => {
+      if (!onChange || disabled) return;
+      
+      let newValue: string[];
+      if (checked) {
+        // Add the value if checked
+        newValue = [...value, optionValue];
+      } else {
+        // Remove the value if unchecked
+        newValue = value.filter(v => v !== optionValue);
+      }
+      
+      onChange(newValue);
     };
 
     const handleKeyDown = (e: React.KeyboardEvent, optionValue: string, optionDisabled?: boolean) => {
-      if (e.key === " " || e.key === "Enter") {
+      if (e.key === " ") {
         e.preventDefault();
         if (!disabled && !optionDisabled) {
-          handleChange(optionValue);
+          const isCurrentlyChecked = value.includes(optionValue);
+          handleCheckboxChange(optionValue, !isCurrentlyChecked);
         }
       }
     };
 
     return (
-      <div className="space-y-3">
+      <div ref={ref} className="space-y-3">
         <div className="block text-sm font-medium text-gray-700">
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
@@ -47,7 +55,7 @@ export const CustomRadio = forwardRef<HTMLInputElement, CustomRadioProps>(
         
         <div className="space-y-3">
           {options.map((option, index) => {
-            const isSelected = selectedValue === option.value;
+            const isChecked = value.includes(option.value);
             const isDisabled = disabled || option.disabled;
             
             return (
@@ -58,23 +66,20 @@ export const CustomRadio = forwardRef<HTMLInputElement, CustomRadioProps>(
                 }`}
               >
                 <div className="relative flex items-center">
-                  {/* Hidden native radio for form submission */}
+                  {/* Hidden native checkbox for form submission */}
                   <input
-                    ref={index === 0 ? ref : undefined}
-                    type="radio"
-                    name={name}
+                    type="checkbox"
                     value={option.value}
-                    checked={isSelected}
-                    onChange={() => handleChange(option.value)}
+                    checked={isChecked}
+                    onChange={(e) => handleCheckboxChange(option.value, e.target.checked)}
                     disabled={isDisabled}
                     className="sr-only"
-                    {...props}
                   />
                   
-                  {/* Custom radio button */}
+                  {/* Custom checkbox */}
                   <div
-                    className={`w-5 h-5 rounded-full border-2 transition-all duration-200 flex items-center justify-center ${
-                      isSelected
+                    className={`w-5 h-5 rounded border-2 transition-all duration-200 flex items-center justify-center ${
+                      isChecked
                         ? 'bg-black border-black'
                         : error
                         ? 'border-red-300 group-hover:border-red-400'
@@ -84,16 +89,24 @@ export const CustomRadio = forwardRef<HTMLInputElement, CustomRadioProps>(
                     }`}
                     tabIndex={isDisabled ? -1 : 0}
                     onKeyDown={(e) => handleKeyDown(e, option.value, option.disabled)}
-                    role="radio"
-                    aria-checked={isSelected}
+                    role="checkbox"
+                    aria-checked={isChecked}
                     aria-disabled={isDisabled}
                   >
-                    {/* Radio dot */}
-                    <div
-                      className={`w-2 h-2 rounded-full bg-white transition-all duration-200 ${
-                        isSelected ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                    {/* Checkmark */}
+                    <svg
+                      className={`w-3 h-3 text-white transition-all duration-200 ${
+                        isChecked ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                       }`}
-                    />
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
                   </div>
                 </div>
                 
@@ -122,4 +135,4 @@ export const CustomRadio = forwardRef<HTMLInputElement, CustomRadioProps>(
   }
 );
 
-CustomRadio.displayName = 'CustomRadio'; 
+CustomCheckboxGroup.displayName = 'CustomCheckboxGroup'; 

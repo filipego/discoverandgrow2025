@@ -72,6 +72,13 @@
             "default_value": true
           }
         },
+        "show_captcha": {
+          "type": "Boolean",
+          "config": {
+            "label": "Show Captcha Widget",
+            "default_value": true
+          }
+        },
         "form_fields": {
           "type": "Group",
           "config": {
@@ -81,7 +88,7 @@
                 "type": "Select",
                 "config": {
                   "label": "Field Type",
-                  "options": ["text", "email", "phone", "textarea", "select", "radio", "checkbox", "number", "url"]
+                  "options": ["text", "email", "phone", "textarea", "select", "radio", "checkbox", "checkbox_group", "number", "url"]
                 }
               },
               "field_label": {

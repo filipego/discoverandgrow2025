@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useState, useMemo } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { createDynamicSchema, sanitizeFieldKey, FormField } from "@/lib/dynamicValidation";
@@ -14,6 +14,7 @@ import { CustomInput } from "./CustomInput";
 import { CustomSelect } from "./CustomSelect";
 import { CustomRadio } from "./CustomRadio";
 import { CustomCheckbox } from "./CustomCheckbox";
+import { CustomCheckboxGroup } from "./CustomCheckboxGroup";
 import { CustomTextarea } from "./CustomTextarea";
 
 interface DynamicFormProps {
@@ -24,6 +25,7 @@ interface DynamicFormProps {
   thankYouContent: string;
   notificationEmail: string;
   enableCaptcha: boolean;
+  showCaptcha?: boolean;
   onSuccess?: () => void;
 }
 
@@ -35,6 +37,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
   thankYouContent,
   notificationEmail,
   enableCaptcha,
+  showCaptcha = true,
   onSuccess
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,10 +54,12 @@ const DynamicForm: FC<DynamicFormProps> = ({
     handleSubmit, 
     formState: { errors },
     reset,
-    watch
+    watch,
+    control,
+    trigger
   } = useForm({
     resolver: zodResolver(schema),
-    mode: 'onChange' // Enable real-time validation
+    mode: 'onSubmit' // Only validate when form is submitted
   });
 
   // Watch all form values
@@ -71,8 +76,10 @@ const DynamicForm: FC<DynamicFormProps> = ({
       // Check if field has a value and no errors
       if (field.field_type === 'checkbox') {
         return value === true;
+      } else if (field.field_type === 'checkbox_group') {
+        return Array.isArray(value) && value.length > 0;
       } else {
-        return value && value.toString().trim() !== '' && !errors[fieldKey];
+        return value && value.toString().trim() !== '';
       }
     });
   }, [watchedValues, formFields, errors]);
@@ -162,7 +169,23 @@ const DynamicForm: FC<DynamicFormProps> = ({
         })) || [];
         return (
           <div key={index} className={isHalfWidth ? 'col-span-1' : 'col-span-full'}>
-            <CustomSelect {...commonProps} options={selectOptions} />
+            <Controller
+              name={fieldKey}
+              control={control}
+              defaultValue=""
+              render={({ field: controllerField }) => (
+                <CustomSelect 
+                  label={field.field_label}
+                  placeholder={field.field_placeholder}
+                  required={field.is_required}
+                  error={error}
+                  options={selectOptions}
+                  value={controllerField.value}
+                  onChange={controllerField.onChange}
+                  name={controllerField.name}
+                />
+              )}
+            />
           </div>
         );
 
@@ -173,21 +196,87 @@ const DynamicForm: FC<DynamicFormProps> = ({
         })) || [];
         return (
           <div key={index} className={isHalfWidth ? 'col-span-1' : 'col-span-full'}>
-            <CustomRadio {...commonProps} options={radioOptions} />
+            <Controller
+              name={fieldKey}
+              control={control}
+              defaultValue=""
+              render={({ field: controllerField }) => (
+                <CustomRadio 
+                  label={field.field_label}
+                  required={field.is_required}
+                  error={error}
+                  options={radioOptions}
+                  value={controllerField.value}
+                  onChange={controllerField.onChange}
+                  name={controllerField.name}
+                />
+              )}
+            />
           </div>
         );
 
       case 'checkbox':
         return (
           <div key={index} className={isHalfWidth ? 'col-span-1' : 'col-span-full'}>
-            <CustomCheckbox {...commonProps} />
+            <Controller
+              name={fieldKey}
+              control={control}
+              defaultValue={false}
+              render={({ field: controllerField }) => (
+                <CustomCheckbox 
+                  label={field.field_label}
+                  required={field.is_required}
+                  error={error}
+                  checked={controllerField.value}
+                  onChange={controllerField.onChange}
+                  name={controllerField.name}
+                />
+              )}
+            />
+          </div>
+        );
+
+      case 'checkbox_group':
+        const checkboxOptions = field.options?.map(opt => ({
+          label: opt.option_label,
+          value: generateValue(opt.option_label)
+        })) || [];
+        return (
+          <div key={index} className={isHalfWidth ? 'col-span-1' : 'col-span-full'}>
+            <Controller
+              name={fieldKey}
+              control={control}
+              defaultValue={[]}
+              render={({ field: controllerField }) => (
+                <CustomCheckboxGroup 
+                  label={field.field_label}
+                  options={checkboxOptions}
+                  required={field.is_required}
+                  error={error}
+                  value={controllerField.value || []}
+                  onChange={controllerField.onChange}
+                />
+              )}
+            />
           </div>
         );
 
       default:
+        // For email fields, add onBlur validation
+        const emailProps = field.field_type === 'email' ? {
+          ...commonProps,
+          onBlur: (e: React.FocusEvent<HTMLInputElement>) => {
+            commonProps.onBlur?.(e);
+            // Trigger validation for email field on blur
+            if (e.target.value.trim() !== '') {
+              trigger(fieldKey);
+            }
+          }
+        } : commonProps;
+
         return (
           <div key={index} className={isHalfWidth ? 'col-span-1' : 'col-span-full'}>
-            <CustomInput {...commonProps} type={field.field_type} />
+            <CustomInput {...emailProps} type={field.field_type} />
           </div>
         );
     }
@@ -231,7 +320,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
 
       {/* Captcha */}
       {enableCaptcha && (
-        <div className="flex justify-center">
+        <div className={showCaptcha ? "flex justify-center" : "hidden"}>
           <Turnstile
             siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
             onSuccess={setTurnstileToken}
