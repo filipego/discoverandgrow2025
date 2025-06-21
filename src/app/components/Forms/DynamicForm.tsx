@@ -339,7 +339,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
       <button
         type="submit"
         disabled={isSubmitting || (enableCaptcha && !turnstileToken) || !areRequiredFieldsValid}
-        className="w-full bg-black text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all duration-200"
+        className="w-full bg-brand-green text-white py-3 px-6 rounded-lg font-medium hover:bg-brand-green/80 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all duration-200 uppercase"
       >
         {isSubmitting ? 'Submitting...' : submitButtonText}
       </button>
