@@ -1,6 +1,9 @@
 {
   "format": "page",
   "id": "partner_post",
+  "label": "Partner Post",
+  "repeatable": true,
+  "status": true,
   "json": {
     "Main": {
       "uid": {
@@ -9,13 +12,12 @@
           "label": "UID"
         }
       },
-      "body": {
-        "type": "StructuredText",
+      "image": {
+        "type": "Image",
         "config": {
-          "label": "Body",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "multi": "paragraph,preformatted,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          "label": "Image",
+          "constraint": {},
+          "thumbnails": []
         }
       },
       "name": {
@@ -37,6 +39,15 @@
         "config": {
           "label": "Company Name",
           "placeholder": ""
+        }
+      },
+      "body": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Body",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
         }
       },
       "slices": {
@@ -74,8 +85,5 @@
         "type": "Image"
       }
     }
-  },
-  "label": "Partner Post",
-  "repeatable": true,
-  "status": true
+  }
 }

@@ -160,15 +160,15 @@ type PartnerPostDocumentDataSlicesSlice = never;
  */
 interface PartnerPostDocumentData {
   /**
-   * Body field in *Partner Post*
+   * Image field in *Partner Post*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: partner_post.body
+   * - **API ID Path**: partner_post.image
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   * - **Documentation**: https://prismic.io/docs/field#image
    */
-  body: prismic.RichTextField;
+  image: prismic.ImageField<never>;
 
   /**
    * Name field in *Partner Post*
@@ -202,6 +202,17 @@ interface PartnerPostDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   company_name: prismic.KeyTextField;
+
+  /**
+   * Body field in *Partner Post*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: partner_post.body
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
 
   /**
    * Slice Zone field in *Partner Post*
@@ -1200,6 +1211,101 @@ export type CardsandImagesSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *Form → Default → Primary → Form Fields → Options (for Select/Radio/Checkbox)*
+ */
+export interface FormSliceDefaultPrimaryFormFieldsOptionsItem {
+  /**
+   * Option Label field in *Form → Default → Primary → Form Fields → Options (for Select/Radio/Checkbox)*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Small
+   * - **API ID Path**: form.default.primary.form_fields[].options[].option_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  option_label: prismic.KeyTextField;
+}
+
+/**
+ * Item in *Form → Default → Primary → Form Fields*
+ */
+export interface FormSliceDefaultPrimaryFormFieldsItem {
+  /**
+   * Field Type field in *Form → Default → Primary → Form Fields*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: form.default.primary.form_fields[].field_type
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  field_type: prismic.SelectField<
+    | "text"
+    | "email"
+    | "phone"
+    | "textarea"
+    | "select"
+    | "radio"
+    | "checkbox"
+    | "checkbox_group"
+    | "number"
+    | "url"
+  >;
+
+  /**
+   * Field Label field in *Form → Default → Primary → Form Fields*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Full Name
+   * - **API ID Path**: form.default.primary.form_fields[].field_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  field_label: prismic.KeyTextField;
+
+  /**
+   * Field Placeholder field in *Form → Default → Primary → Form Fields*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Enter your full name
+   * - **API ID Path**: form.default.primary.form_fields[].field_placeholder
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  field_placeholder: prismic.KeyTextField;
+
+  /**
+   * Field Width field in *Form → Default → Primary → Form Fields*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: full
+   * - **API ID Path**: form.default.primary.form_fields[].field_width
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  field_width: prismic.SelectField<"full" | "half", "filled">;
+
+  /**
+   * Required Field field in *Form → Default → Primary → Form Fields*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: form.default.primary.form_fields[].is_required
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  is_required: prismic.BooleanField;
+
+  /**
+   * Options (for Select/Radio/Checkbox) field in *Form → Default → Primary → Form Fields*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: form.default.primary.form_fields[].options[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  options: prismic.NestedGroupField<
+    Simplify<FormSliceDefaultPrimaryFormFieldsOptionsItem>
+  >;
+}
+
+/**
  * Primary content in *Form → Default → Primary*
  */
 export interface FormSliceDefaultPrimary {
@@ -1283,83 +1389,29 @@ export interface FormSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   enable_captcha: prismic.BooleanField;
-}
-
-/**
- * Primary content in *Form → Items*
- */
-export interface FormSliceDefaultItem {
-  /**
-   * Field Type field in *Form → Items*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **API ID Path**: form.items[].field_type
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  field_type: prismic.SelectField<
-    | "text"
-    | "email"
-    | "phone"
-    | "textarea"
-    | "select"
-    | "radio"
-    | "checkbox"
-    | "number"
-    | "url"
-  >;
 
   /**
-   * Field Label field in *Form → Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Full Name
-   * - **API ID Path**: form.items[].field_label
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  field_label: prismic.KeyTextField;
-
-  /**
-   * Field Placeholder field in *Form → Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Enter your full name
-   * - **API ID Path**: form.items[].field_placeholder
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  field_placeholder: prismic.KeyTextField;
-
-  /**
-   * Field Width field in *Form → Items*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: full
-   * - **API ID Path**: form.items[].field_width
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  field_width: prismic.SelectField<"full" | "half", "filled">;
-
-  /**
-   * Required Field field in *Form → Items*
+   * Show Captcha Widget field in *Form → Default → Primary*
    *
    * - **Field Type**: Boolean
    * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: form.items[].is_required
+   * - **Default Value**: true
+   * - **API ID Path**: form.default.primary.show_captcha
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
-  is_required: prismic.BooleanField;
+  show_captcha: prismic.BooleanField;
 
   /**
-   * Options (for Select/Radio/Checkbox) field in *Form → Items*
+   * Form Fields field in *Form → Default → Primary*
    *
-   * - **Field Type**: Text
-   * - **Placeholder**: Option 1|option1, Option 2|option2, Option 3|option3
-   * - **API ID Path**: form.items[].options
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: form.default.primary.form_fields[]
+   * - **Documentation**: https://prismic.io/docs/field#group
    */
-  options: prismic.KeyTextField;
+  form_fields: prismic.GroupField<
+    Simplify<FormSliceDefaultPrimaryFormFieldsItem>
+  >;
 }
 
 /**
@@ -1372,7 +1424,7 @@ export interface FormSliceDefaultItem {
 export type FormSliceDefault = prismic.SharedSliceVariation<
   "default",
   Simplify<FormSliceDefaultPrimary>,
-  Simplify<FormSliceDefaultItem>
+  never
 >;
 
 /**
@@ -2823,8 +2875,9 @@ declare module "@prismicio/client" {
       CardsandImagesSliceCardWithIconOutside,
       CardsandImagesSliceImageSide,
       FormSlice,
+      FormSliceDefaultPrimaryFormFieldsOptionsItem,
+      FormSliceDefaultPrimaryFormFieldsItem,
       FormSliceDefaultPrimary,
-      FormSliceDefaultItem,
       FormSliceVariation,
       FormSliceDefault,
       HeadingAndTextSlice,
