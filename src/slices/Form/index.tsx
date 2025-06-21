@@ -90,7 +90,8 @@ const Form: FC<FormProps> = ({ slice }) => {
 
         {/* Right side - Form */}
         <div className="bg-gray-50 p-8 rounded-2xl">
-          {slice.primary.form_title && (
+          {/* @ts-ignore - hide_form_title field exists in Prismic but types not yet regenerated */}
+          {slice.primary.form_title && !slice.primary.hide_form_title && (
             <Heading as="h3" size="md" className="text-black mb-6">
               {slice.primary.form_title}
             </Heading>

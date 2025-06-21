@@ -46,7 +46,7 @@ export const BoardLayout: FC<BoardLayoutProps> = ({ people }) => {
                 </Heading>
               </div>
               {person.linkedin && (
-                <PrismicNextLink field={person.linkedin} className="text-brand-gray hover:text-brand-blue transition-colors ml-2">
+                <PrismicNextLink field={person.linkedin} className="text-brand-green hover:text-brand-green/80 transition-colors ml-2">
                   <FaLinkedinIn className="w-4 h-4" />
                 </PrismicNextLink>
               )}

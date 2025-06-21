@@ -50,7 +50,7 @@ export const FoundersLayout: FC<FoundersLayoutProps> = ({ people }) => {
                 </p>
               </div>
               {person.linkedin && (
-                <PrismicNextLink field={person.linkedin} className="text-brand-gray hover:text-brand-blue transition-colors ml-2 self-start">
+                <PrismicNextLink field={person.linkedin} className="text-brand-green hover:text-brand-green/80 transition-colors ml-2 self-start">
                   <FaLinkedinIn className="w-5 h-5" />
                 </PrismicNextLink>
               )}

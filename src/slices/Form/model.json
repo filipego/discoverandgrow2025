@@ -79,6 +79,13 @@
             "default_value": true
           }
         },
+        "hide_form_title": {
+          "type": "Boolean",
+          "config": {
+            "label": "Hide Form Title",
+            "default_value": false
+          }
+        },
         "form_fields": {
           "type": "Group",
           "config": {
