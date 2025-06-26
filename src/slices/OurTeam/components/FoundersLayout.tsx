@@ -21,7 +21,7 @@ export const FoundersLayout: FC<FoundersLayoutProps> = ({ people }) => {
           {/* Image */}
           <div className={clsx(
             "w-full rounded-xl overflow-hidden",
-            index === 0 ? "max-w-lg" : "max-w-md ml-auto"
+            index === 0 ? "max-w-md mx-auto" : "max-w-md ml-auto"
           )}>
             <PrismicNextImage
               field={person.image}
