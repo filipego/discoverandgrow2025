@@ -1,0 +1,53 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "class",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Magna reprehenderit et incididunt do fugiat sint."
+						}
+					}
+				]
+			},
+			"donate_form_image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1587653915936-5623ea0b949a",
+					"width": 4000,
+					"height": 4000
+				},
+				"url": "https://images.unsplash.com/photo-1587653915936-5623ea0b949a?rect=0%2C916%2C4000%2C2168&w=465&h=252",
+				"width": 465,
+				"height": 252,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 916
+					},
+					"background": "transparent"
+				},
+				"alt": "show",
+				"credits": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
+			},
+			"donate_form_heading": {
+				"__TYPE__": "FieldContent",
+				"value": "took",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]

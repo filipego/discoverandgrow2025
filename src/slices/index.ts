@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 export const components = {
   animated_cards: dynamic(() => import("./AnimatedCards")),
   cardsand_images: dynamic(() => import("./Card")),
+  donation_form: dynamic(() => import("./DonationForm")),
   form: dynamic(() => import("./Form")),
   heading_and_text: dynamic(() => import("./HeadingAndText")),
   hero: dynamic(() => import("./Hero")),

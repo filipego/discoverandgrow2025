@@ -1,0 +1,53 @@
+{
+  "id": "donation_form",
+  "type": "SharedSlice",
+  "name": "DonationForm",
+  "description": "DonationForm",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "donate_form_image": {
+          "type": "Image",
+          "config": {
+            "label": "Donate Form Image",
+            "constraint": {
+              "width": 465,
+              "height": 252
+            },
+            "thumbnails": []
+          }
+        },
+        "donate_form_heading": {
+          "type": "Text",
+          "config": {
+            "label": "Donate Form Heading",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

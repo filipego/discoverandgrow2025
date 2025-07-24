@@ -17,6 +17,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "donation_form": {
+              "type": "SharedSlice"
+            },
             "form": {
               "type": "SharedSlice"
             },
