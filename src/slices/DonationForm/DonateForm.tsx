@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { ImageField, KeyTextField } from '@prismicio/client';
@@ -57,6 +57,8 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [showCardElement, setShowCardElement] = useState(false);
+  const [minContentHeight, setMinContentHeight] = useState<number>(0);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const [success, setSuccess] = useState<boolean>(false);
   const [donorInfo, setDonorInfo] = useState<DonorInfo>({
@@ -67,6 +69,16 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
     company: '',
     isAnonymous: false
   });
+
+  // Measure content heights and set minimum height to prevent layout shifts
+  useEffect(() => {
+    if (contentRef.current) {
+      const currentHeight = contentRef.current.scrollHeight;
+      if (currentHeight > minContentHeight) {
+        setMinContentHeight(currentHeight);
+      }
+    }
+  }, [currentStep, showCardElement, success, minContentHeight]);
 
   // Clear errors when entering payment step and delay CardElement rendering
   useEffect(() => {
@@ -259,41 +271,37 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
     setIsProcessing(false);
   };
 
-  if (success) {
-    return (
-      <div className="bg-white rounded-2xl p-8 shadow-lg max-w-md mx-auto">
-        <div className="text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank you!</h3>
-          <p className="text-gray-600 mb-6">Your donation has been processed successfully.</p>
-          <button
-            onClick={() => {
-              setSuccess(false);
-              setCurrentStep('amount');
-              setSelectedAmount(50);
-              setCustomAmount('');
-              setCoverFees(true);
-              setDonorInfo({
-                firstName: '',
-                lastName: '',
-                email: '',
-                phone: '',
-                company: '',
-                isAnonymous: false
-              });
-            }}
-            className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors"
-          >
-            Make Another Donation
-          </button>
-        </div>
+  const renderSuccessStep = () => (
+    <div className="text-center">
+      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        </svg>
       </div>
-    );
-  }
+      <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank you!</h3>
+      <p className="text-gray-600 mb-6">Your donation has been processed successfully.</p>
+      <button
+        onClick={() => {
+          setSuccess(false);
+          setCurrentStep('amount');
+          setSelectedAmount(50);
+          setCustomAmount('');
+          setCoverFees(true);
+          setDonorInfo({
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            company: '',
+            isAnonymous: false
+          });
+        }}
+        className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors"
+      >
+        Make Another Donation
+      </button>
+    </div>
+  );
 
   const renderStepIndicator = () => (
     <div className="mb-6">
@@ -626,47 +634,57 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
           )}
 
           {/* Step Content */}
-          <div className="mb-6">
-            {currentStep === 'amount' && renderAmountStep()}
-            {currentStep === 'donor-info' && renderDonorInfoStep()}
-            {currentStep === 'payment' && renderPaymentStep()}
+          <div 
+            ref={contentRef}
+            className="mb-6"
+            style={{ minHeight: minContentHeight > 0 ? `${minContentHeight}px` : 'auto' }}
+          >
+            {success ? renderSuccessStep() : (
+              <>
+                {currentStep === 'amount' && renderAmountStep()}
+                {currentStep === 'donor-info' && renderDonorInfoStep()}
+                {currentStep === 'payment' && renderPaymentStep()}
+              </>
+            )}
           </div>
 
           {/* Navigation Buttons */}
-          <div className="flex justify-between space-x-4">
-            <button
-              type="button"
-              onClick={handlePrevStep}
-              disabled={currentStep === 'amount'}
-              className={`flex items-center px-4 py-2 rounded-lg font-medium transition-colors cursor-pointer ${
-                currentStep === 'amount'
-                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 hover:cursor-pointer'
-              }`}
-            >
-              <ChevronLeft className="w-4 h-4 mr-1" />
-              Back
-            </button>
-            
-            {currentStep === 'payment' ? (
-              <button
-                type="submit"
-                disabled={isProcessing || !stripe || (!selectedAmount && !customAmount) || !showCardElement}
-                className="flex-1 bg-black text-white py-4 rounded-lg font-semibold hover:bg-gray-800 hover:cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-              >
-                {isProcessing ? 'Processing...' : !showCardElement ? 'Loading...' : `Donate $${getFinalAmount().toFixed(2)}`}
-              </button>
-            ) : (
+          {!success && (
+            <div className="flex justify-between space-x-4">
               <button
                 type="button"
-                onClick={handleNextStep}
-                className="flex items-center px-6 py-2 bg-black text-white rounded-lg font-medium hover:bg-gray-800 hover:cursor-pointer transition-colors"
+                onClick={handlePrevStep}
+                disabled={currentStep === 'amount'}
+                className={`flex items-center px-4 py-2 rounded-lg font-medium transition-colors cursor-pointer ${
+                  currentStep === 'amount'
+                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300 hover:cursor-pointer'
+                }`}
               >
-                Continue
-                <ChevronRight className="w-4 h-4 ml-1" />
+                <ChevronLeft className="w-4 h-4 mr-1" />
+                Back
               </button>
-            )}
-          </div>
+              
+              {currentStep === 'payment' ? (
+                <button
+                  type="submit"
+                  disabled={isProcessing || !stripe || (!selectedAmount && !customAmount) || !showCardElement}
+                  className="flex-1 bg-black text-white py-4 rounded-lg font-semibold hover:bg-gray-800 hover:cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                >
+                  {isProcessing ? 'Processing...' : !showCardElement ? 'Loading...' : `Donate $${getFinalAmount().toFixed(2)}`}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleNextStep}
+                  className="flex items-center px-6 py-2 bg-black text-white rounded-lg font-medium hover:bg-gray-800 hover:cursor-pointer transition-colors"
+                >
+                  Continue
+                  <ChevronRight className="w-4 h-4 ml-1" />
+                </button>
+              )}
+            </div>
+          )}
         </form>
       </div>
     </div>
