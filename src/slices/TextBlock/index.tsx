@@ -19,7 +19,7 @@ const TextBlock: FC<TextBlockProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       padding="no padding"
     >
-      <div className="max-w-[860px] mb-5 lg:mb-10">
+      <div className="max-w-[970px] mb-5 lg:mb-10 px-[50px]">
         <PrismicRichText
           field={slice.primary.body}
           components={{
