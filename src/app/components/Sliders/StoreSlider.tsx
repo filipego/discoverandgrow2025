@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react";
 import { PrismicRichText } from "@prismicio/react";
 import { PrismicNextImage } from "@prismicio/next";
-import { ImageField, RichTextField } from "@prismicio/client";
+import { ImageField, RichTextField, LinkField } from "@prismicio/client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow } from "swiper/modules";
 // Fix the import path for Heading
 import { Heading } from "@/app/components/Heading";
+import { ButtonLink } from "@/app/components/ButtonLink";
 
 // Import Swiper styles
 import "swiper/css";
@@ -19,6 +20,7 @@ type StoreSliderProps = {
     heading: string;
     body: RichTextField;
     price?: number;
+    link?: LinkField;
     // Remove id from expected properties
   }[];
 };
@@ -100,11 +102,11 @@ export default function StoreSlider({ items }: StoreSliderProps) {
             ))}
           </Swiper>
 
-          <div className="text-center mt-10">
-            <Heading as="h3" className="mb-6">
+          <div className="text-center mt-10 min-h-[240px]">
+            <Heading as="h3" size="md" className="mb-6 max-w-[560px] mx-auto min-h-[72px]">
               {items[activeIndex]?.heading}
             </Heading>
-            <div className="max-w-md mx-auto mt-3 h-[120px] overflow-y-auto">
+            {/* <div className="max-w-md mx-auto mt-3 h-[120px] overflow-y-auto">
               {items[activeIndex]?.body &&
               Array.isArray(items[activeIndex]?.body) ? (
                 <PrismicRichText
@@ -119,6 +121,17 @@ export default function StoreSlider({ items }: StoreSliderProps) {
                     ? items[activeIndex].body
                     : "No description available"}
                 </p>
+              )}
+            </div> */}
+            <div className="mt-0 flex justify-center min-h-[44px]">
+              {items[activeIndex]?.link && (
+                <ButtonLink
+                  field={items[activeIndex].link}
+                  color="Secondary"
+                  size="md"
+                >
+                  {items[activeIndex].link.text || "Buy Now"}
+                </ButtonLink>
               )}
             </div>
           </div>

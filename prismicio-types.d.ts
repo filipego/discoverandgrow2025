@@ -2434,6 +2434,16 @@ export interface StoreSliceDefaultPrimaryItemsItem {
    * - **Documentation**: https://prismic.io/docs/fields/number
    */
   price: prismic.NumberField;
+
+  /**
+   * Link field in *Store → Default → Primary → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: store.default.primary.items[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 }
 
 /**

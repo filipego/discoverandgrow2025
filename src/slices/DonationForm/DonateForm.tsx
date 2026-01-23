@@ -611,7 +611,7 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
         <div className="w-full">
           <PrismicNextImage
             field={image}
-            className="w-full h-56 object-cover"
+            className="w-full h-[260px] object-cover"
           />
         </div>
       )}

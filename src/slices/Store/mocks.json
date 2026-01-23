@@ -58,6 +58,17 @@
 									"value": "66",
 									"type": "Number"
 								}
+							],
+							[
+								"link",
+								{
+									"__TYPE__": "LinkContent",
+									"key": "4f221952-e044-4d00-a893-c02385dbc2f5",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://twitter.com"
+									}
+								}
 							]
 						]
 					}
