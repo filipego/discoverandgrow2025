@@ -48,9 +48,9 @@ const ThankYouPage: React.FC = () => {
             What happens next?
           </h3>
           <div className="space-y-3 text-gray-600">
-            <p>• You'll receive an email confirmation with your donation receipt</p>
+            <p>• You&apos;ll receive an email confirmation with your donation receipt</p>
             <p>• Your donation will be processed within 1-2 business days</p>
-            <p>• If you signed up for monthly donations, you'll be charged on the same date each month</p>
+            <p>• If you signed up for monthly donations, you&apos;ll be charged on the same date each month</p>
             <p>• You can manage your recurring donations anytime through your Stripe customer portal</p>
           </div>
         </div>
