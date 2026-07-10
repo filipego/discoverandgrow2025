@@ -39,6 +39,7 @@ Read `context/deployment-readiness-report.md` before deployment work.
 - Use `Heading` from `src/app/components/Heading.tsx` for headings in new or modified UI.
 - Use brand tokens from `src/app/globals.css` where they exist. If hardcoded colors are touched, prefer replacing them with existing brand utilities or document why a new token/pattern is needed.
 - Preserve user-visible copy unless the task explicitly changes it.
+- When using the Stripe MCP or changing Stripe integration behavior, use the global `stripe-best-practices` skill first.
 - Treat `src/lib/supabase.ts` and the newsletter Supabase insert as a legacy integration, not the project’s main backend. Do not expand Supabase usage without an explicit task.
 - Update `context/ui-registry.md` when reusable UI components or established component patterns change.
 - Update `context/ui-tokens.md` and `context/ui-rules.md` whenever `src/app/globals.css` tokens or shared interaction patterns change.

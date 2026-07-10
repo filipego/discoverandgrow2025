@@ -4,25 +4,34 @@ import { SliceComponentProps } from "@prismicio/react";
 import { Bounded } from "@/app/components/Bounded";
 import { CenteredHero } from "./components/CenteredHero";
 import { DefaultHero } from "./components/DefaultHero";
+import { VideoHero } from "./components/VideoHero";
 
 export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 
 const Hero: FC<HeroProps> = ({ slice }) => {
   return (
     <Bounded className="pt-4 lg:pt-6">
-      {slice.variation === 'centeredHero' ? (
+      {slice.variation === "centeredHero" ? (
         <CenteredHero
           heading={slice.primary.heading}
           body={slice.primary.body}
           link={slice.primary.link}
+        />
+      ) : slice.variation === "heroWithVideo" ? (
+        <VideoHero
+          heading={slice.primary.heading}
+          body={slice.primary.body}
+          link={slice.primary.link}
+          video_platform={slice.primary.video_platform}
+          video_id={slice.primary.video_id}
+          kicker={slice.primary.kicker}
         />
       ) : (
         <DefaultHero
           heading={slice.primary.heading}
           body={slice.primary.body}
           link={slice.primary.link}
-          video_platform={slice.primary.video_platform}
-          video_id={slice.primary.video_id}
+          image={slice.primary.image}
           kicker={slice.primary.kicker}
         />
       )}

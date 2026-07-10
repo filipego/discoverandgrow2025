@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "stripe_sandbox": {
+      "type": "http",
+      "url": "https://mcp.stripe.com",
+      "headers": {
+        "Authorization": "Bearer rk_test_REPLACE_WITH_DISCOVER_AND_GROW_RESTRICTED_KEY"
+      }
+    },
+    "stripe_live": {
+      "type": "http",
+      "url": "https://mcp.stripe.com",
+      "headers": {
+        "Authorization": "Bearer rk_live_REPLACE_WITH_DISCOVER_AND_GROW_RESTRICTED_KEY"
+      }
+    }
+  }
+}

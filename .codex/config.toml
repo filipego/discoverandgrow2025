@@ -1,0 +1,20 @@
+# Project-local MCP servers for Discover and Grow.
+# No secrets belong in this file.
+#
+# Set these environment variables locally before starting Codex:
+#   STRIPE_MCP_SANDBOX_KEY=rk_test_...
+#   STRIPE_MCP_LIVE_KEY=rk_live_...
+#
+# Use Stripe restricted keys, not the app's unrestricted STRIPE_SECRET_KEY.
+
+[mcp_servers.stripe_sandbox]
+url = "https://mcp.stripe.com"
+bearer_token_env_var = "STRIPE_MCP_SANDBOX_KEY"
+default_tools_approval_mode = "prompt"
+tool_timeout_sec = 60
+
+[mcp_servers.stripe_live]
+url = "https://mcp.stripe.com"
+bearer_token_env_var = "STRIPE_MCP_LIVE_KEY"
+default_tools_approval_mode = "prompt"
+tool_timeout_sec = 60

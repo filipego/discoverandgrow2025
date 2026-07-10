@@ -87,6 +87,7 @@ Current route resolvers:
 ## Stripe
 
 - Installed versions: `stripe` `^18.3.0`, `@stripe/react-stripe-js` `^3.8.0`, `@stripe/stripe-js` `^7.6.1`.
+- Use the global `stripe-best-practices` skill before using Stripe MCP, changing Stripe API behavior, or reviewing Stripe payment, subscription, invoice, webhook, or key-handling code.
 - Donation UI lives in the `DonationForm` slice and `DonateForm`.
 - Server routes live in `src/app/api`.
 - Use `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` on the client and `STRIPE_SECRET_KEY` on the server.

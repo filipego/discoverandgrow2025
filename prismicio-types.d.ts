@@ -1810,25 +1810,14 @@ export interface HeroSliceDefaultPrimary {
   >;
 
   /**
-   * Video Platform field in *Hero → Default → Primary*
+   * Image field in *Hero → Default → Primary*
    *
-   * - **Field Type**: Select
+   * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **Default Value**: TikTok
-   * - **API ID Path**: hero.default.primary.video_platform
-   * - **Documentation**: https://prismic.io/docs/fields/select
+   * - **API ID Path**: hero.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
    */
-  video_platform: prismic.SelectField<"TikTok" | "YouTube", "filled">;
-
-  /**
-   * Video ID field in *Hero → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.default.primary.video_id
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  video_id: prismic.KeyTextField;
+  image: prismic.ImageField<never>;
 }
 
 /**
@@ -1901,9 +1890,99 @@ export type HeroSliceCenteredHero = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *Hero → Hero with Video → Primary*
+ */
+export interface HeroSliceHeroWithVideoPrimary {
+  /**
+   * Kicker field in *Hero → Hero with Video → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.heroWithVideo.primary.kicker
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  kicker: prismic.KeyTextField;
+
+  /**
+   * Heading field in *Hero → Hero with Video → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.heroWithVideo.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *Hero → Hero with Video → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.heroWithVideo.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Link field in *Hero → Hero with Video → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: (Optional)
+   * - **API ID Path**: hero.heroWithVideo.primary.link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      "Primary" | "Secondary" | "Link"
+    >
+  >;
+
+  /**
+   * Video Platform field in *Hero → Hero with Video → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: TikTok
+   * - **API ID Path**: hero.heroWithVideo.primary.video_platform
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  video_platform: prismic.SelectField<"TikTok" | "YouTube", "filled">;
+
+  /**
+   * Video ID field in *Hero → Hero with Video → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.heroWithVideo.primary.video_id
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  video_id: prismic.KeyTextField;
+}
+
+/**
+ * Hero with Video variation for Hero Slice
+ *
+ * - **API ID**: `heroWithVideo`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSliceHeroWithVideo = prismic.SharedSliceVariation<
+  "heroWithVideo",
+  Simplify<HeroSliceHeroWithVideoPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *Hero*
  */
-type HeroSliceVariation = HeroSliceDefault | HeroSliceCenteredHero;
+type HeroSliceVariation =
+  | HeroSliceDefault
+  | HeroSliceCenteredHero
+  | HeroSliceHeroWithVideo;
 
 /**
  * Hero Shared Slice
@@ -3058,9 +3137,11 @@ declare module "@prismicio/client" {
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceCenteredHeroPrimary,
+      HeroSliceHeroWithVideoPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
       HeroSliceCenteredHero,
+      HeroSliceHeroWithVideo,
       ImageSlice,
       ImageSliceDefaultPrimary,
       ImageSliceMultipleImagesPrimaryImagesItem,

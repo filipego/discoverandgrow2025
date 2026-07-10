@@ -8,7 +8,7 @@ Update this file after every meaningful application implementation change. Docum
 
 **Phase:** Dependency compatibility and deployment readiness
 
-**Last completed:** Next.js and `eslint-config-next` were updated from `15.1.6` to the patched Next 15 backport `15.5.20`; `/thank-you` was moved into the `(home)` route group so it has a root layout and production build passes.
+**Last completed:** The Hero slice's `default` variation now renders a Prismic image; the existing TikTok/YouTube hero was retained as a separate `Hero with Video` variation.
 
 **Next:** Address existing lint debt and remaining non-Next npm audit findings when deployment hardening continues.
 
@@ -63,7 +63,7 @@ Update this file after every meaningful application implementation change. Docum
 - Confirm newsletter persistence direction: keep Supabase, migrate, or remove storage.
 - Review Stripe webhook handling and API versions.
 - Review mobile header/navigation behavior.
-- Regenerate Prismic types after any future Slice Machine model changes.
+- Publish the local Hero slice model update in Prismic and add the supplied home-hero image to the homepage's default Hero variation.
 
 ---
 

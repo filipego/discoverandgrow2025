@@ -40,15 +40,27 @@
 				"value": "twelve",
 				"type": "Text"
 			},
-			"video_id": {
-				"__TYPE__": "FieldContent",
-				"value": "cup",
-				"type": "Text"
-			},
-			"video_platform": {
-				"__TYPE__": "FieldContent",
-				"value": "TikTok",
-				"type": "Select"
+			"image": {
+				"__TYPE__": "ImageContent",
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1587613865763-4b8b0d19e8ab",
+					"width": 12288,
+					"height": 16384
+				},
+				"url": "https://images.unsplash.com/photo-1587613865763-4b8b0d19e8ab",
+				"width": 12288,
+				"height": 16384,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"alt": "round",
+				"thumbnails": {}
 			}
 		},
 		"items": []
@@ -78,8 +90,8 @@
 				"type": "Link",
 				"value": [
 					{
-						"__TYPE__": "LinkContent",
 						"key": "985c92ab-f4f5-44da-b9ac-e49d8af2a58d",
+						"__TYPE__": "LinkContent",
 						"value": {
 							"__TYPE__": "ExternalLink",
 							"url": "http://google.com",
@@ -88,6 +100,65 @@
 						}
 					}
 				]
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "heroWithVideo",
+		"primary": {
+			"kicker": {
+				"__TYPE__": "FieldContent",
+				"value": "treated",
+				"type": "Text"
+			},
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "near",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Officia quis sunt occaecat enim aute amet."
+						}
+					}
+				]
+			},
+			"link": {
+				"__TYPE__": "RepeatableContent",
+				"type": "Link",
+				"value": [
+					{
+						"key": "b2069609-73ec-4773-abcb-7446f6553549",
+						"__TYPE__": "LinkContent",
+						"value": {
+							"__TYPE__": "ExternalLink",
+							"url": "https://slicemachine.dev",
+							"text": "whenever",
+							"variant": "Link"
+						}
+					}
+				]
+			},
+			"video_platform": {
+				"__TYPE__": "FieldContent",
+				"value": "YouTube",
+				"type": "Select"
+			},
+			"video_id": {
+				"__TYPE__": "FieldContent",
+				"value": "fewer",
+				"type": "Text"
 			}
 		},
 		"items": [
