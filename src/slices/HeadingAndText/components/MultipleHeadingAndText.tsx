@@ -29,7 +29,7 @@ export const MultipleHeadingAndText: FC<MultipleHeadingAndTextProps> = ({
                   </Heading>
                 ),
                 paragraph: ({ children }) => (
-                  <p className="text-brand-gray leading-relaxed">
+                  <p className="mb-3 text-brand-gray leading-relaxed last:mb-0">
                     {children}
                   </p>
                 ),
@@ -40,4 +40,4 @@ export const MultipleHeadingAndText: FC<MultipleHeadingAndTextProps> = ({
       ))}
     </div>
   );
-}; 
+};

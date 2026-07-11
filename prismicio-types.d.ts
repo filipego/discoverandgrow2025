@@ -1451,6 +1451,35 @@ export interface FormSliceDefaultPrimaryFormFieldsItem {
  */
 export interface FormSliceDefaultPrimary {
   /**
+   * Padding field in *Form → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: normal padding
+   * - **API ID Path**: form.default.primary.padding
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  padding: prismic.SelectField<
+    | "normal padding"
+    | "smaller padding"
+    | "no padding"
+    | "no top padding"
+    | "no bottom padding",
+    "filled"
+  >;
+
+  /**
+   * Center content field in *Form → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: form.default.primary.center_content
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  center_content: prismic.BooleanField;
+
+  /**
    * Heading field in *Form → Default → Primary*
    *
    * - **Field Type**: Text

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Open_Sans, Raleway } from "next/font/google";
 import "../globals.css";
 
 import { createClient, repositoryName } from "@/prismicio";
@@ -6,6 +7,17 @@ import { PrismicPreview } from "@prismicio/next";
 import { Header } from "../components/Header";
 import Footer from "../components/Footer";
 
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  variable: "--font-open-sans",
+  display: "swap",
+});
+
+const raleway = Raleway({
+  subsets: ["latin"],
+  variable: "--font-raleway",
+  display: "swap",
+});
 
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -27,7 +39,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true}>
+      <body
+        suppressHydrationWarning={true}
+        className={`${openSans.variable} ${raleway.variable}`}
+      >
         <main>
           <Header />
           <div className="pt-24">

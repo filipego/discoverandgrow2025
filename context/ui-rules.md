@@ -41,6 +41,7 @@ route page
 - Public paths should remain aligned with `src/prismicio.ts` route resolvers.
 - Route groups are organizational only; do not rely on them for public URL semantics.
 - Ensure long text, headings, buttons, and forms fit on mobile.
+- For a desktop two-column Form slice, use `items-stretch` on the grid and `flex flex-col lg:justify-center` on the complete left column. This centers the entire heading-and-rich-text group against the adjacent form; never center only one child.
 
 ---
 
@@ -50,7 +51,24 @@ route page
 - Body text inherits Open Sans via `body`.
 - Heading elements inherit Raleway globally.
 - Use the `Heading` size props instead of inventing one-off heading scales.
-- Rich text from Prismic should use `PrismicRichText` with local component overrides when a slice needs specific typography.
+- Rich text from Prismic must use `PrismicRichText` with an explicit `components` map whenever a slice needs visual styling. Do not rely on a generic `prose` wrapper for headings, paragraphs, lists, or hyperlinks that need project-specific styles.
+- In that map, render headings with `Heading`, paragraphs with the slice's intended margin/text/leading utilities, lists and list items explicitly, and hyperlinks with `PrismicNextLink`. Apply the link color in the `hyperlink` renderer; links have no underline unless a design explicitly requests one.
+- Keep rich-text spacing intentional and slice-specific. The Contact Form and HeadingAndText slices use `mb-3` paragraphs so body copy stays compact and readable.
+
+```tsx
+<PrismicRichText
+  field={slice.primary.body}
+  components={{
+    heading3: ({ children }) => <Heading as="h3" size="md">{children}</Heading>,
+    paragraph: ({ children }) => <p className="mb-3 text-brand-gray leading-relaxed">{children}</p>,
+    hyperlink: ({ node, children }) => (
+      <PrismicNextLink field={node.data} className="font-semibold text-brand-green">
+        {children}
+      </PrismicNextLink>
+    ),
+  }}
+/>
+```
 
 ---
 

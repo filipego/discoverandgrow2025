@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps, PrismicRichText } from "@prismicio/react";
 import { asHTML } from "@prismicio/client";
+import { PrismicNextLink } from "@prismicio/next";
 import { Bounded } from "@/app/components/Bounded";
 import { Heading } from "@/app/components/Heading";
 import DynamicForm from "@/app/components/Forms/DynamicForm";
@@ -41,16 +42,23 @@ const Form: FC<FormProps> = ({ slice }) => {
   const thankYouContentHTML = slice.primary.thank_you_email_content 
     ? asHTML(slice.primary.thank_you_email_content)
     : 'Thank you for contacting us. We will get back to you soon.';
+  
+    const getPadding = () => {
+      if ('padding' in slice.primary && slice.primary.padding) {
+        return slice.primary.padding as "normal padding" | "smaller padding" | "no padding" | "no top padding" | "no bottom padding";
+      }
+      return "normal padding" as const;
+    };
 
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      padding="no top padding"
+      padding={getPadding()}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+      <div className="grid grid-cols-1 items-stretch gap-12 lg:grid-cols-2 lg:gap-16">
         {/* Left side - Heading and Text */}
-        <div className="space-y-6">
+        <div className="flex flex-col space-y-6 lg:justify-center">
           {slice.primary.heading && (
             <Heading as="h2" size="lg" className="text-black">
               {slice.primary.heading}
@@ -58,19 +66,37 @@ const Form: FC<FormProps> = ({ slice }) => {
           )}
           
           {slice.primary.body && (
-            <div className="prose prose-gray max-w-none">
+            <div className="max-w-none">
               <PrismicRichText 
                 field={slice.primary.body}
                 components={{
-                  paragraph: ({ children }) => (
-                    <p className="text-gray-600 text-lg leading-relaxed mb-4">
-                      {children}
-                    </p>
-                  ),
-                  heading3: ({ children }) => (
-                    <Heading as="h3" size="md" className="text-black mb-3 mt-8">
+                  heading2: ({ children }) => (
+                    <Heading as="h2" size="xl" className="mb-5 font-semibold lg:mb-10">
                       {children}
                     </Heading>
+                  ),
+                  heading3: ({ children }) => (
+                    <Heading as="h3" size="md" className="mb-3 mt-8 font-semibold">
+                      {children}
+                    </Heading>
+                  ),
+                  heading4: ({ children }) => (
+                    <Heading as="h4" size="sm" className="mb-3 mt-6 font-semibold">
+                      {children}
+                    </Heading>
+                  ),
+                  list: ({ children }) => (
+                    <ul className="mb-6 max-w-prose list-disc space-y-2 pl-14 text-brand-gray">
+                      {children}
+                    </ul>
+                  ),
+                  listItem: ({ children }) => (
+                    <li className="leading-relaxed">{children}</li>
+                  ),
+                  paragraph: ({ children }) => (
+                    <p className="mb-3 max-w-prose text-brand-gray leading-relaxed last:mb-0">
+                      {children}
+                    </p>
                   ),
                   strong: ({ children }) => (
                     <strong className="text-black font-semibold">
@@ -81,6 +107,14 @@ const Form: FC<FormProps> = ({ slice }) => {
                     <em className="text-gray-700">
                       {children}
                     </em>
+                  ),
+                  hyperlink: ({ node, children }) => (
+                    <PrismicNextLink
+                      field={node.data}
+                      className="font-semibold text-brand-green transition-colors hover:text-brand-blue"
+                    >
+                      {children}
+                    </PrismicNextLink>
                   ),
                 }}
               />

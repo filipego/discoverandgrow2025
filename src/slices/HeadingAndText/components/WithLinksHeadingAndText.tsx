@@ -31,6 +31,11 @@ export const WithLinksHeadingAndText: FC<WithLinksHeadingAndTextProps> = ({
                   {children}
                 </Heading>
               ),
+              paragraph: ({ children }) => (
+                <p className="mb-3 text-brand-gray leading-relaxed last:mb-0">
+                  {children}
+                </p>
+              ),
             }}
           />
         </div>

@@ -15,7 +15,7 @@ export type ImageProps = SliceComponentProps<Content.ImageSlice>;
  */
 const Image: FC<ImageProps> = ({ slice }) => {
   // Debug the value
-  console.log('Remove shadow value:', slice.primary.remove_shadow);
+  // console.log('Remove shadow value:', slice.primary.remove_shadow);
   
   const getPadding = () => {
     if (slice.variation === "default") {

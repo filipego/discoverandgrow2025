@@ -37,7 +37,7 @@ Living registry of reusable website UI. Read this before building a component an
 | --- | --- | --- |
 | `ContactForm` | `src/app/components/Forms/ContactForm.tsx` | Static contact form that posts to `/api/emails` |
 | `NewsletterForm` | `src/app/components/Forms/NewsletterForm.tsx` | Newsletter signup; currently inserts into Supabase then emails |
-| `DynamicForm` | `src/app/components/Forms/DynamicForm.tsx` | Prismic-configured dynamic form with optional Turnstile |
+| `DynamicForm` | `src/app/components/Forms/DynamicForm.tsx` | Prismic-configured dynamic form with optional Turnstile; in the Form slice, its complete adjacent left-content column is vertically centered on desktop |
 | `CustomInput` | `src/app/components/Forms/CustomInput.tsx` | Dynamic form text-like input |
 | `CustomTextarea` | `src/app/components/Forms/CustomTextarea.tsx` | Dynamic form textarea |
 | `CustomSelect` | `src/app/components/Forms/CustomSelect.tsx` | Dynamic form select |
@@ -97,6 +97,7 @@ Slice components should keep `data-slice-type` and `data-slice-variation` attrib
 | Metadata | Route-specific `generateMetadata` reads Prismic SEO fields |
 | Settings | `settings` singleton powers site metadata, navigation, header CTA, footer, and newsletter/donate content |
 | Dynamic forms | Form slice -> `DynamicForm` -> `/api/forms/submit` -> React Email templates via Resend |
+| Styled Prismic rich text | Slice-level `PrismicRichText` `components` map: `Heading` for headings, explicit paragraph/list spacing, and `PrismicNextLink` for brand-colored links without an underline by default |
 | Donations | DonationForm slice -> Stripe Elements -> Stripe API route |
 
 ---

@@ -12,6 +12,30 @@
       "description": "Heading and text on left, form on right",
       "imageUrl": "",
       "primary": {
+        "padding": {
+          "type": "Select",
+          "config": {
+            "label": "Padding",
+            "placeholder": "",
+            "options": [
+              "normal padding",
+              "smaller padding",
+              "no padding",
+              "no top padding",
+              "no bottom padding"
+            ],
+            "default_value": "normal padding"
+          }
+        },
+        "center_content": {
+          "type": "Boolean",
+          "config": {
+            "label": "Center content",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
+        },
         "heading": {
           "type": "Text",
           "config": {
@@ -95,7 +119,18 @@
                 "type": "Select",
                 "config": {
                   "label": "Field Type",
-                  "options": ["text", "email", "phone", "textarea", "select", "radio", "checkbox", "checkbox_group", "number", "url"]
+                  "options": [
+                    "text",
+                    "email",
+                    "phone",
+                    "textarea",
+                    "select",
+                    "radio",
+                    "checkbox",
+                    "checkbox_group",
+                    "number",
+                    "url"
+                  ]
                 }
               },
               "field_label": {
@@ -116,7 +151,10 @@
                 "type": "Select",
                 "config": {
                   "label": "Field Width",
-                  "options": ["full", "half"],
+                  "options": [
+                    "full",
+                    "half"
+                  ],
                   "default_value": "full"
                 }
               },

@@ -12,13 +12,13 @@ Tokens are declared in `@theme`, which exposes matching Tailwind utility names.
 
 | Token | Value | Utility |
 | --- | --- | --- |
-| `--font-primary` | `"Open Sans", serif` | `font-primary` |
-| `--font-secondary` | `"Raleway", serif` | `font-secondary` |
+| `--font-primary` | `"Open Sans", sans-serif` | `font-primary` |
+| `--font-secondary` | `"Raleway", sans-serif` | `font-secondary` |
 | `--font-logo` | `"More Sugar"` | `font-logo` |
 
 Global font loading:
 
-- Google Fonts import loads Open Sans and Raleway.
+- `next/font/google` self-hosts Open Sans and Raleway from the home layout.
 - `@font-face` loads More Sugar from `/fonts/MoreSugarRegular.woff2` and `/fonts/MoreSugarRegular.woff`.
 - `body` uses `var(--font-primary)`.
 - `h1` through `h6` use `var(--font-secondary)`.
@@ -102,6 +102,12 @@ The inner circular icon backgrounds are currently hardcoded `#54AC8B` and `#FF74
 ### Link Border Animation
 
 `.link-border-animation::before` uses `var(--color-brand-green)` and a scale transition for a top border hover effect.
+
+### Prismic Rich Text
+
+- Style rich text at the slice via `PrismicRichText`'s `components` map, not with a generic typography wrapper when element-level control is needed.
+- Render Prismic hyperlinks with `PrismicNextLink` and `text-brand-green`; do not add an underline unless it is explicitly part of the design.
+- Paragraph spacing is a slice-level rhythm decision. The Form slice uses `mb-3` to keep its contact-information paragraphs compact.
 
 ---
 
