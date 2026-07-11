@@ -25,7 +25,7 @@ export async function Footer({}: Props) {
     <div className="relative mt-30">
       <div
         className="w-full h-24 md:h-40 bg-no-repeat bg-cover bg-top"
-        style={{ backgroundImage: "url(/images/ellipse.png)" }}
+        style={{ backgroundImage: "url(/images/Ellipse.png)" }}
       />
 
       <Bounded className="!pt-0 pb-10 bg-[#29285D] text-white">
