@@ -1,0 +1,6 @@
+---
+description: Require discovery of the repository-root AGENTS.md
+alwaysApply: true
+---
+
+Before planning, answering questions about this project, or editing files, read the repository-root `AGENTS.md` at `../AGENTS.md` from the repository root. Treat it as the canonical project instruction source and follow it without duplicating its contents into Cursor rules.

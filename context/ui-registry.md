@@ -12,7 +12,7 @@ Living registry of reusable website UI. Read this before building a component an
 | `Heading` | `src/app/components/Heading.tsx` | Project heading abstraction and brand font/color/size mapping |
 | `ButtonLink` | `src/app/components/ButtonLink.tsx` | Prismic link CTA button with Primary, Secondary, and Link variants |
 | `ColorSection` | `src/app/components/ColorSection.tsx` | Colored inner section wrapper for selected slice backgrounds |
-| `Header` | `src/app/components/Header.tsx` | Fixed animated global header sourced from Prismic settings |
+| `Header` | `src/app/components/Header.tsx` | Fixed animated global header sourced from Prismic settings; desktop navigation at `lg`, right-side mobile/tablet navigation drawer below `lg` |
 | `Navigation` | `src/app/components/Navigation.tsx` | Header navigation list and hover indicator |
 | `Footer` | `src/app/components/Footer.tsx` | Global footer sourced from Prismic settings |
 | `LongLogo` | `src/app/components/LongLogo.tsx` | Brand logo rendering |

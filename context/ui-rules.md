@@ -38,6 +38,7 @@ route page
 - Use `Bounded` for constrained content sections unless a slice intentionally needs full-width styling.
 - Keep the global `Header` and `Footer` controlled by the Prismic `settings` singleton.
 - Preserve the fixed animated header behavior unless the task is specifically about navigation/header changes.
+- The Header uses its full logo/navigation/CTA layout at `lg` and above. Below `lg` (including tablet portrait and phones), show a larger logo and accessible menu toggle; it opens a right-side drawer containing the same Prismic navigation links plus Donate as the final, visually matching link.
 - Public paths should remain aligned with `src/prismicio.ts` route resolvers.
 - Route groups are organizational only; do not rely on them for public URL semantics.
 - Ensure long text, headings, buttons, and forms fit on mobile.

@@ -1,17 +1,27 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { LinkField } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 interface NavigationProps {
   navigation: any[];
-  navRef: React.RefObject<HTMLUListElement | null>;
-  onNavItemHover: (e: React.MouseEvent<HTMLLIElement>, isEnter: boolean) => void;
+  navRef?: React.RefObject<HTMLUListElement | null>;
+  onNavItemHover?: (e: React.MouseEvent<HTMLLIElement>, isEnter: boolean) => void;
+  mobile?: boolean;
+  onNavigate?: () => void;
+  secondaryLink?: LinkField;
 }
 
-export function Navigation({ navigation, navRef, onNavItemHover }: NavigationProps) {
+export function Navigation({
+  navigation,
+  navRef,
+  onNavItemHover,
+  mobile = false,
+  onNavigate,
+  secondaryLink,
+}: NavigationProps) {
   const lineRef = useRef<HTMLDivElement>(null);
   const [isLineVisible, setIsLineVisible] = useState(false);
 
@@ -21,7 +31,7 @@ export function Navigation({ navigation, navRef, onNavItemHover }: NavigationPro
     if (isEnter) {
       // Show and position the line
       const rect = target.getBoundingClientRect();
-      const navRect = navRef.current?.getBoundingClientRect();
+      const navRect = navRef?.current?.getBoundingClientRect();
       
       if (lineRef.current && navRect) {
         const leftOffset = rect.left - navRect.left;
@@ -37,7 +47,7 @@ export function Navigation({ navigation, navRef, onNavItemHover }: NavigationPro
     } else {
       // Check if we're not hovering over any nav item
       setTimeout(() => {
-        const isHoveringNav = navRef.current?.matches(':hover');
+        const isHoveringNav = navRef?.current?.matches(':hover');
         if (!isHoveringNav) {
           setIsLineVisible(false);
         }
@@ -45,12 +55,43 @@ export function Navigation({ navigation, navRef, onNavItemHover }: NavigationPro
     }
     
     // Call the original hover handler
-    onNavItemHover(e, isEnter);
+    onNavItemHover?.(e, isEnter);
   };
 
   const handleNavLeave = () => {
     setIsLineVisible(false);
   };
+
+  if (mobile) {
+    return (
+      <nav aria-label="Main" className="border-t border-brand-blue/15 pt-4">
+        <ul className="flex flex-col divide-y divide-brand-blue/15">
+          {navigation.map((item: any, index: number) => (
+            <li key={index} className="text-base font-medium text-brand-blue">
+              <PrismicNextLink
+                field={item.link}
+                className="block py-3"
+                onClick={onNavigate}
+              >
+                {item.link.text}
+              </PrismicNextLink>
+            </li>
+          ))}
+          {secondaryLink && (
+            <li className="text-base font-medium text-brand-blue">
+              <PrismicNextLink
+                field={secondaryLink}
+                className="block py-3"
+                onClick={onNavigate}
+              >
+                {secondaryLink.text}
+              </PrismicNextLink>
+            </li>
+          )}
+        </ul>
+      </nav>
+    );
+  }
 
   return (
     <nav aria-label="Main" className="grid place-items-center w-full">
@@ -83,4 +124,4 @@ export function Navigation({ navigation, navRef, onNavItemHover }: NavigationPro
       </div>
     </nav>
   );
-} 
+}

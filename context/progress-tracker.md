@@ -8,7 +8,7 @@ Update this file after every meaningful application implementation change. Docum
 
 **Phase:** Dependency compatibility and deployment readiness
 
-**Last completed:** The Form and HeadingAndText slices apply explicit Prismic rich-text paragraph/link styles; the Form left content is vertically centered, and Open Sans/Raleway load through Next.js rather than a runtime stylesheet import.
+**Last completed:** The Header is responsive at tablet portrait and phone widths with a right-side navigation drawer; the Form/HeadingAndText slices apply explicit Prismic rich-text paragraph/link styles; the Form left content is vertically centered, and Open Sans/Raleway load through Next.js rather than a runtime stylesheet import.
 
 **Next:** Address existing lint debt and remaining non-Next npm audit findings when deployment hardening continues.
 

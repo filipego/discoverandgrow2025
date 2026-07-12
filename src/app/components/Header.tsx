@@ -10,6 +10,7 @@ import { Navigation } from "./Navigation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import clsx from "clsx";
+import { Menu, X } from "lucide-react";
 
 // Removed headerStyles - now using Tailwind with clsx
 
@@ -28,6 +29,7 @@ function HeaderContent() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Fetch settings data
   useEffect(() => {
@@ -39,6 +41,17 @@ function HeaderContent() {
     
     fetchSettings();
   }, []);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isMobileMenuOpen]);
 
   // Setup GSAP animations
   useGSAP(() => {
@@ -126,27 +139,86 @@ function HeaderContent() {
     <div ref={headerRef} className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
       <Bounded as="header" padding="smaller padding">
         <div className={clsx(
-          "grid grid-cols-[230px_1fr_230px] w-full items-center transition-all duration-300",
+          "w-full transition-all duration-300",
           {
             // Glass effect and rounded corners when scrolled
             "backdrop-blur-md bg-white/70 rounded-[50px] mt-2.5 border border-white/90 shadow-[0_4px_15px_rgba(0,0,0,0.05)] max-w-6xl mx-auto py-4 px-6": isScrolled,
           }
         )}>
-          <div className="flex-shrink-0">
-            <Link href="/">
-              <LongLogo treeColor="#29285D" className="text-[#29285D] h-[55]" />
+          <div className="hidden w-full grid-cols-[230px_1fr_230px] items-center lg:grid">
+            <div className="flex-shrink-0">
+              <Link href="/">
+                <LongLogo treeColor="#29285D" className="h-[55px] text-[#29285D]" />
+              </Link>
+            </div>
+            <Navigation
+              navigation={settings.data.navigation}
+              navRef={navRef}
+              onNavItemHover={handleNavItemHover}
+            />
+            <div className="flex justify-end">
+              <ButtonLink field={settings.data.button} color="Secondary" size="md">
+                {settings.data.button.text}
+              </ButtonLink>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between gap-3 lg:hidden">
+            <Link href="/" aria-label="Discover and Grow home">
+              <LongLogo treeColor="#29285D" className="h-[46px] text-[#29285D]" />
             </Link>
+            <button
+              type="button"
+              className="flex h-11 w-11 items-center justify-center rounded-full text-brand-blue transition-colors hover:bg-brand-blue/10"
+              aria-label="Open navigation menu"
+              aria-controls="mobile-navigation"
+              aria-expanded={isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen(true)}
+            >
+              <Menu size={28} />
+            </button>
           </div>
-          <Navigation 
-            navigation={settings.data.navigation}
-            navRef={navRef}
-            onNavItemHover={handleNavItemHover}
+
+          <button
+            type="button"
+            aria-label="Close navigation menu"
+            aria-hidden={!isMobileMenuOpen}
+            tabIndex={isMobileMenuOpen ? 0 : -1}
+            onClick={() => setIsMobileMenuOpen(false)}
+            className={clsx(
+              "fixed inset-0 z-50 bg-brand-blue/30 transition-opacity duration-300 lg:hidden",
+              isMobileMenuOpen ? "opacity-100" : "pointer-events-none opacity-0"
+            )}
           />
-          <div className="flex justify-end">
-            <ButtonLink field={settings.data.button} color="Secondary" size="md">
-              {settings.data.button.text}
-            </ButtonLink>
-          </div>
+          <aside
+            id="mobile-navigation"
+            aria-hidden={!isMobileMenuOpen}
+            className={clsx(
+              "fixed inset-y-0 right-0 z-[60] flex w-[min(24rem,88vw)] flex-col bg-white p-6 shadow-2xl transition-transform duration-300 ease-out lg:hidden",
+              isMobileMenuOpen ? "translate-x-0" : "pointer-events-none translate-x-full"
+            )}
+          >
+            {isMobileMenuOpen && (
+              <>
+                <div className="flex justify-end">
+                  <button
+                    type="button"
+                    className="flex h-11 w-11 items-center justify-center rounded-full text-brand-blue transition-colors hover:bg-brand-blue/10"
+                    aria-label="Close navigation menu"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <X size={28} />
+                  </button>
+                </div>
+                <Navigation
+                  mobile
+                  navigation={settings.data.navigation}
+                  onNavigate={() => setIsMobileMenuOpen(false)}
+                  secondaryLink={settings.data.button}
+                />
+              </>
+            )}
+          </aside>
         </div>
       </Bounded>
     </div>
