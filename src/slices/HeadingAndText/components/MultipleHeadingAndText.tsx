@@ -33,6 +33,12 @@ export const MultipleHeadingAndText: FC<MultipleHeadingAndTextProps> = ({
                     {children}
                   </p>
                 ),
+                list: ({ children }) => (
+                  <ul className="ml-4 mb-6">{children}</ul>
+                ),
+                listItem: ({ children }) => (
+                  <li className="mb-4 list-disc ml-6">{children}</li>
+                ),
               }}
             />
           </div>

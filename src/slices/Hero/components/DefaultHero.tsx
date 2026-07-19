@@ -46,10 +46,10 @@ export function DefaultHero({
         )}
       </div>
       {isFilled.image(image) && (
-        <div className="col-span-5 mx-auto aspect-[3/4] w-full max-w-md overflow-hidden lg:col-span-2 lg:max-w-none">
+        <div className="col-span-5 mx-auto aspect-[3/4] w-full max-w-md overflow-hidden rounded-xl lg:col-span-2 lg:max-w-none">
           <PrismicNextImage
             field={image}
-            className="h-full w-full object-cover"
+            className="h-full w-full rounded-xl object-cover"
             sizes="(min-width: 1024px) 40vw, 100vw"
           />
         </div>
