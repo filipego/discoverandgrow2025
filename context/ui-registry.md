@@ -14,7 +14,8 @@ Living registry of reusable website UI. Read this before building a component an
 | `ColorSection` | `src/app/components/ColorSection.tsx` | Colored inner section wrapper for selected slice backgrounds |
 | `Header` | `src/app/components/Header.tsx` | Fixed animated global header sourced from Prismic settings; desktop navigation at `lg`, right-side mobile/tablet navigation drawer below `lg` |
 | `Navigation` | `src/app/components/Navigation.tsx` | Header navigation list and hover indicator |
-| `Footer` | `src/app/components/Footer.tsx` | Global footer sourced from Prismic settings |
+| `Footer` | `src/app/components/Footer.tsx` | Global footer sourced from Prismic settings; newsletter column uses `id="newsletter"` for in-page hash links |
+| `HashFocusHandler` | `src/app/components/HashFocusHandler.tsx` | Client helper that smooth-scrolls `#newsletter` to the footer and focuses `#newsletter-email` |
 | `LongLogo` | `src/app/components/LongLogo.tsx` | Brand logo rendering |
 | `HeaderAndText` | `src/app/components/HeaderAndText.tsx` | Reusable heading and rich-text composition |
 
@@ -24,7 +25,7 @@ Living registry of reusable website UI. Read this before building a component an
 
 | Component | Path | Purpose |
 | --- | --- | --- |
-| `BasicCard` | `src/app/components/Cards/BasicCard.tsx` | Standard Prismic image/text/link card |
+| `BasicCard` | `src/app/components/Cards/BasicCard.tsx` | Standard Prismic image/text/link card; optional `contentClassName` for text width; Learn more uses `ButtonLink` |
 | `SideimageCard` | `src/app/components/Cards/SideimageCard.tsx` | Side-image card variant |
 | `IconInsideCard` | `src/app/components/Cards/IconInsideCard.tsx` | Card with icon inside the surface |
 | `IconOutsideCard` | `src/app/components/Cards/IconOutsideCard.tsx` | Card with icon outside/offset from the surface |
@@ -36,7 +37,7 @@ Living registry of reusable website UI. Read this before building a component an
 | Component | Path | Purpose |
 | --- | --- | --- |
 | `ContactForm` | `src/app/components/Forms/ContactForm.tsx` | Static contact form that posts to `/api/emails` |
-| `NewsletterForm` | `src/app/components/Forms/NewsletterForm.tsx` | Newsletter signup; currently inserts into Supabase then emails |
+| `NewsletterForm` | `src/app/components/Forms/NewsletterForm.tsx` | Newsletter signup; currently inserts into Supabase then emails; footer passes `inputId="newsletter-email"` for hash-focus |
 | `DynamicForm` | `src/app/components/Forms/DynamicForm.tsx` | Prismic-configured dynamic form with optional Turnstile; in the Form slice, its complete adjacent left-content column is vertically centered on desktop |
 | `CustomInput` | `src/app/components/Forms/CustomInput.tsx` | Dynamic form text-like input |
 | `CustomTextarea` | `src/app/components/Forms/CustomTextarea.tsx` | Dynamic form textarea |
@@ -58,6 +59,7 @@ Living registry of reusable website UI. Read this before building a component an
 | `LazyTikTokPlayer` | `src/app/components/LazyTikTokPlayer.tsx` | Lazy TikTok embed |
 | `StoreSlider` | `src/app/components/Sliders/StoreSlider.tsx` | Store/product slider |
 | `PartnerSliderComponent` | `src/slices/Partners/PartnerSliderComponent.tsx` | Partner post carousel for the Partners slice |
+| `WhatWeDoCategorySlider` | `src/slices/WhatWeDoCategories/WhatWeDoCategorySlider.tsx` | Traditional Swiper carousel for one What We Do category; arrows over media when 2+ items |
 
 ---
 
@@ -81,6 +83,7 @@ The generated component map in `src/slices/index.ts` currently includes:
 - `text_and_image`
 - `text_block`
 - `video_block`
+- `what_we_do_categories`
 
 Slice components should keep `data-slice-type` and `data-slice-variation` attributes when using `Bounded`, because they help with debugging and Prismic/Slice Machine context.
 

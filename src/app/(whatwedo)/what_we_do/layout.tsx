@@ -3,6 +3,7 @@ import "../../globals.css";
 import { createClient } from "@/prismicio";
 import { Header } from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
+import { HashFocusHandler } from "@/app/components/HashFocusHandler";
 
 
 
@@ -29,6 +30,7 @@ export default function ProgramsLayout({
 
             >
                 <main>
+                    <HashFocusHandler />
                     <Header />
                     {children}
                     <Footer />

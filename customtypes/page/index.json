@@ -52,6 +52,9 @@
             },
             "text_and_image": {
               "type": "SharedSlice"
+            },
+            "what_we_do_categories": {
+              "type": "SharedSlice"
             }
           }
         }

@@ -8,9 +8,9 @@ Update this file after every meaningful application implementation change. Docum
 
 **Phase:** Dependency compatibility and deployment readiness
 
-**Last completed:** The Header is responsive at tablet portrait and phone widths with a right-side navigation drawer; the Form/HeadingAndText slices apply explicit Prismic rich-text paragraph/link styles; the Form left content is vertically centered, and Open Sans/Raleway load through Next.js rather than a runtime stylesheet import.
+**Last completed:** Added `WhatWeDoCategories` slice — queries `what_we_do` docs, groups by the three fixed categories, hides empty categories, and renders traditional Swiper carousels (available on the `page` type).
 
-**Next:** Address existing lint debt and remaining non-Next npm audit findings when deployment hardening continues.
+**Next:** Push/sync the new slice model to Prismic, add it to the What We Do page, publish; then address lint debt / remaining audit findings when deployment hardening continues.
 
 ---
 

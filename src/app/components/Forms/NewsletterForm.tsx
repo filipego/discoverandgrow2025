@@ -24,9 +24,13 @@ type FormData = z.infer<typeof formSchema>;
 
 type NewsletterFormProps = {
   hideLabel?: boolean;
+  inputId?: string;
 };
 
-export default function NewsletterForm({ hideLabel = false }: NewsletterFormProps) {
+export default function NewsletterForm({
+  hideLabel = false,
+  inputId,
+}: NewsletterFormProps) {
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   
@@ -96,11 +100,17 @@ export default function NewsletterForm({ hideLabel = false }: NewsletterFormProp
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full max-w-md mx-auto relative">
       <div>
-        {!hideLabel && <Label htmlFor="email">Email</Label>}
+        {!hideLabel && <Label htmlFor={inputId ?? "email"}>Email</Label>}
         <Input
           {...register("email")}
+          id={inputId ?? "email"}
           type="email"
           placeholder="your@email.com"
+          className={
+            inputId === "newsletter-email"
+              ? "focus:ring-brand-green focus:ring-offset-2 focus:ring-offset-[#29285D]"
+              : undefined
+          }
         />
         {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
       </div>

@@ -19,4 +19,5 @@ export const components = {
   text_and_image: dynamic(() => import("./TextAndImage")),
   text_block: dynamic(() => import("./TextBlock")),
   video_block: dynamic(() => import("./VideoBlock")),
+  what_we_do_categories: dynamic(() => import("./WhatWeDoCategories")),
 };

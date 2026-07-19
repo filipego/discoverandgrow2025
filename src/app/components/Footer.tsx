@@ -31,12 +31,15 @@ export async function Footer({}: Props) {
       <Bounded className="!pt-0 pb-10 bg-[#29285D] text-white">
         <div>
           <div className="flex flex-col md:flex-row gap-12 md:gap-8 mb-20 md:mb-40">
-            <div className="w-full md:w-2/6">
+            <div
+              id="newsletter"
+              className="w-full md:w-2/6 scroll-mt-24"
+            >
               <Heading size="sm" color="brand-off-white" className="mb-6 md:mb-11">
                 {settings.data.newsletter_title}
               </Heading>
               <div className="max-w-full md:max-w-[70%] [&_form]:mx-0 md:[&_form]:mx-auto">
-                <NewsletterForm hideLabel={true} />
+                <NewsletterForm hideLabel={true} inputId="newsletter-email" />
               </div>
             </div>
             <div className="w-full md:w-3/6">

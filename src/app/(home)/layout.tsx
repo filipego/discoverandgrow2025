@@ -6,6 +6,7 @@ import { createClient, repositoryName } from "@/prismicio";
 import { PrismicPreview } from "@prismicio/next";
 import { Header } from "../components/Header";
 import Footer from "../components/Footer";
+import { HashFocusHandler } from "../components/HashFocusHandler";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -44,6 +45,7 @@ export default function RootLayout({
         className={`${openSans.variable} ${raleway.variable}`}
       >
         <main>
+          <HashFocusHandler />
           <Header />
           <div className="pt-24">
             {children}

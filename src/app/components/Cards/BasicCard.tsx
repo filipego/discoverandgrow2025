@@ -15,15 +15,16 @@ export interface CardProps {
     bg_color: "Dark Blue" | "White";
     direction?: "left" | "right";
   };
+  contentClassName?: string;
 }
 
-export const BasicCard: FC<CardProps> = ({ item }) => {
+export const BasicCard: FC<CardProps> = ({ item, contentClassName }) => {
   const isDarkBlue = item.bg_color === "Dark Blue";
 
   return (
     <li
       className={clsx(
-        "shadow-xl rounded-xl w-full flex flex-col relative",
+        "shadow-xl rounded-xl w-full flex flex-col relative h-full",
         isDarkBlue && "bg-[#29285D] !text-white",
         item.bg_color === "White" && "bg-white"
       )}
@@ -36,7 +37,7 @@ export const BasicCard: FC<CardProps> = ({ item }) => {
         />
       </div>
       <div className="flex flex-col flex-1 p-6 md:p-10">
-        <div className="flex-1">
+        <div className={clsx("flex-1", contentClassName)}>
           <Heading
             as="h3"
             size="md"

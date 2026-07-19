@@ -29,7 +29,7 @@ This file documents the committed Prismic model state for the project. It is not
 | Type | Repeatable | Purpose |
 | --- | --- | --- |
 | `homepage` | No | Homepage slice zone and SEO metadata |
-| `page` | Yes | Generic pages by UID |
+| `page` | Yes | Generic pages by UID (includes `what_we_do_categories` slice for the What We Do landing page) |
 | `what_we_do` | Yes | Program/category detail content with category, featured flag, image, body, link, slices, and SEO |
 | `programs` | Yes | Program landing/detail pages by UID |
 | `partner_post` | Yes | Partner/testimonial entries consumed by the Partners slice |
@@ -57,6 +57,7 @@ Committed shared slice models currently include:
 - `TextAndImage`
 - `TextBlock`
 - `VideoBlock`
+- `WhatWeDoCategories`
 
 The generated `src/slices/index.ts` maps Prismic slice API IDs to these components.
 
