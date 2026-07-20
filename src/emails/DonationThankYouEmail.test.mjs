@@ -54,3 +54,8 @@ test("the donation email uses the real brand logo and approved links", () => {
 test("the donation email supports React Email export rendering", () => {
   assert.match(source, /import \* as React from "react"/);
 });
+
+test("the donation email preview uses the shared branded logo source", () => {
+  assert.match(source, /import \{ EMAIL_LOGO_URL \} from "@\/lib\/emailBranding"/);
+  assert.match(source, /logoUrl:\s*EMAIL_LOGO_URL/);
+});

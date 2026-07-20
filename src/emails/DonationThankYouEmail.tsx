@@ -16,6 +16,7 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 import type { DonationAcknowledgmentDetails } from "@/lib/donationAcknowledgment";
+import { EMAIL_LOGO_URL } from "@/lib/emailBranding";
 
 type DonationThankYouEmailProps = DonationAcknowledgmentDetails & {
   logoUrl: string;
@@ -197,8 +198,7 @@ DonationThankYouEmail.PreviewProps = {
   transactionId: "pi_example123456789",
   donationType: "one-time",
   receiptUrl: "https://pay.stripe.com/receipts/example",
-  logoUrl:
-    "https://www.discoverandgrow.org/images/discover-and-grow-logo-email.png",
+  logoUrl: EMAIL_LOGO_URL,
 } satisfies DonationThankYouEmailProps;
 
 const bodyStyle = {
