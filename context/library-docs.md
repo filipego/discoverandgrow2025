@@ -76,10 +76,13 @@ Current route resolvers:
 
 ## Resend and React Email
 
-- Installed versions: Resend `^4.1.2`, React Email `3.0.7`, `@react-email/components` `0.0.33`.
+- Installed versions: Resend `^6.17.2`, React Email `3.0.7`, `@react-email/components` `0.0.33`.
 - Email templates live in `src/emails`.
 - Local email preview runs with `npm run email`.
 - Server routes must use `RESEND_API_KEY`.
+- Donation acknowledgments are sent from the verified Stripe webhook with a stable Resend idempotency key. Send once for one-time gifts and once for only the initial successful monthly invoice.
+- Subscriber welcome and owner notification templates use the same email-safe Discover and Grow branding as donation acknowledgments. Testing continues to use `onboarding@resend.dev` and the account owner as recipient until the production domain is verified.
+- `DONATION_EMAIL_FROM` can override the donation sender; the configured domain/address must be verified in Resend.
 - Avoid documenting or logging actual API keys.
 
 ---
@@ -92,6 +95,8 @@ Current route resolvers:
 - Server routes live in `src/app/api`.
 - Use `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` on the client and `STRIPE_SECRET_KEY` on the server.
 - Webhooks must verify signatures with `STRIPE_WEBHOOK_SECRET`.
+- On the current Basil API, subscription creation must expand `latest_invoice.confirmation_secret` and return `confirmation_secret.client_secret`; `latest_invoice.payment_intent` is no longer the supported source for the first invoice client secret.
+- Allow Stripe to determine eligible payment methods instead of forcing `payment_method_types: ['card']` in PaymentIntent creation.
 
 ---
 

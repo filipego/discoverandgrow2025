@@ -1,23 +1,147 @@
-import { NextRequest, NextResponse } from 'next/server';
-import Stripe from 'stripe';
-import { headers } from 'next/headers';
+import { headers } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
+import Stripe from "stripe";
+import {
+  formatDonationAmount,
+  formatDonationDate,
+  isEligibleInitialMonthlyInvoice,
+  isEligibleOneTimeDonation,
+} from "@/lib/donationAcknowledgment";
+import { sendDonationThankYouEmail } from "@/lib/sendDonationThankYouEmail";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-12-18.acacia',
+  apiVersion: "2025-06-30.basil",
 });
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+
+function getResourceId(
+  resource: string | { id: string } | null | undefined,
+): string | null {
+  if (!resource) return null;
+  return typeof resource === "string" ? resource : resource.id;
+}
+
+async function getCustomer(
+  customerReference: string | Stripe.Customer | Stripe.DeletedCustomer | null,
+): Promise<Stripe.Customer | null> {
+  if (!customerReference) return null;
+
+  const customer =
+    typeof customerReference === "string"
+      ? await stripe.customers.retrieve(customerReference)
+      : customerReference;
+
+  return customer.deleted ? null : customer;
+}
+
+function getFirstName(metadata: Stripe.Metadata, customer: Stripe.Customer | null) {
+  return (
+    metadata.donor_first_name ||
+    customer?.name?.trim().split(/\s+/)[0] ||
+    "Friend"
+  );
+}
+
+async function acknowledgeOneTimeDonation(paymentIntentId: string) {
+  const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId, {
+    expand: ["latest_charge"],
+  });
+
+  if (!isEligibleOneTimeDonation(paymentIntent)) return;
+
+  const customer = await getCustomer(paymentIntent.customer);
+  const email = paymentIntent.metadata.donor_email || customer?.email;
+
+  if (!email) {
+    console.warn(
+      `Donation acknowledgment skipped for ${paymentIntent.id}: no donor email`,
+    );
+    return;
+  }
+
+  const latestCharge =
+    typeof paymentIntent.latest_charge === "string"
+      ? null
+      : paymentIntent.latest_charge;
+
+  await sendDonationThankYouEmail(
+    {
+      firstName: getFirstName(paymentIntent.metadata, customer),
+      email,
+      amount: formatDonationAmount(
+        paymentIntent.amount_received || paymentIntent.amount,
+        paymentIntent.currency,
+      ),
+      date: formatDonationDate(paymentIntent.created),
+      transactionId: paymentIntent.id,
+      donationType: "one-time",
+      receiptUrl: latestCharge?.receipt_url || undefined,
+    },
+    `donation-thank-you/payment-intent/${paymentIntent.id}`,
+  );
+
+  await stripe.paymentIntents.update(paymentIntent.id, {
+    metadata: { donation_thank_you_email_sent: "true" },
+  });
+}
+
+async function acknowledgeInitialMonthlyDonation(invoice: Stripe.Invoice) {
+  if (invoice.billing_reason !== "subscription_create") return;
+
+  const invoiceId = invoice.id;
+  const subscriptionReference =
+    invoice.parent?.subscription_details?.subscription;
+  const subscriptionId = getResourceId(subscriptionReference);
+
+  if (!invoiceId || !subscriptionId) return;
+
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+
+  if (!isEligibleInitialMonthlyInvoice(invoice, subscription)) return;
+
+  const customer = await getCustomer(invoice.customer);
+  const email =
+    subscription.metadata.donor_email || invoice.customer_email || customer?.email;
+
+  if (!email) {
+    console.warn(
+      `Donation acknowledgment skipped for ${invoiceId}: no donor email`,
+    );
+    return;
+  }
+
+  await sendDonationThankYouEmail(
+    {
+      firstName: getFirstName(subscription.metadata, customer),
+      email,
+      amount: formatDonationAmount(invoice.amount_paid, invoice.currency),
+      date: formatDonationDate(
+        invoice.status_transitions.paid_at || invoice.created,
+      ),
+      transactionId: invoiceId,
+      donationType: "monthly",
+      receiptUrl:
+        invoice.hosted_invoice_url || invoice.invoice_pdf || undefined,
+    },
+    `donation-thank-you/invoice/${invoiceId}`,
+  );
+
+  await stripe.subscriptions.update(subscription.id, {
+    metadata: { donation_thank_you_email_sent: "true" },
+  });
+}
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.text();
     const headersList = await headers();
-    const signature = headersList.get('stripe-signature');
+    const signature = headersList.get("stripe-signature");
 
     if (!signature) {
       return NextResponse.json(
-        { error: 'No signature found' },
-        { status: 400 }
+        { error: "No signature found" },
+        { status: 400 },
       );
     }
 
@@ -25,75 +149,35 @@ export async function POST(request: NextRequest) {
 
     try {
       event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
-    } catch (err) {
-      console.error('Webhook signature verification failed:', err);
+    } catch (error) {
+      console.error("Webhook signature verification failed:", error);
       return NextResponse.json(
-        { error: 'Webhook signature verification failed' },
-        { status: 400 }
+        { error: "Webhook signature verification failed" },
+        { status: 400 },
       );
     }
 
-    // Handle the event
     switch (event.type) {
-      case 'payment_intent.succeeded':
-        const paymentIntent = event.data.object as Stripe.PaymentIntent;
-        console.log('One-time donation succeeded:', paymentIntent.id);
-        // Here you can add logic to:
-        // - Send thank you email
-        // - Update database
-        // - Send to analytics
+      case "payment_intent.succeeded": {
+        await acknowledgeOneTimeDonation(event.data.object.id);
         break;
+      }
 
-      case 'payment_intent.payment_failed':
-        const failedPayment = event.data.object as Stripe.PaymentIntent;
-        console.log('Payment failed:', failedPayment.id);
-        // Handle failed payment
+      case "invoice.payment_succeeded": {
+        await acknowledgeInitialMonthlyDonation(event.data.object);
         break;
-
-      case 'invoice.payment_succeeded':
-        const invoice = event.data.object as Stripe.Invoice;
-        if (invoice.subscription) {
-          console.log('Subscription payment succeeded:', invoice.subscription);
-          // Handle successful subscription payment
-        }
-        break;
-
-      case 'invoice.payment_failed':
-        const failedInvoice = event.data.object as Stripe.Invoice;
-        if (failedInvoice.subscription) {
-          console.log('Subscription payment failed:', failedInvoice.subscription);
-          // Handle failed subscription payment
-        }
-        break;
-
-      case 'customer.subscription.created':
-        const newSubscription = event.data.object as Stripe.Subscription;
-        console.log('New subscription created:', newSubscription.id);
-        // Handle new subscription
-        break;
-
-      case 'customer.subscription.updated':
-        const updatedSubscription = event.data.object as Stripe.Subscription;
-        console.log('Subscription updated:', updatedSubscription.id);
-        // Handle subscription update
-        break;
-
-      case 'customer.subscription.deleted':
-        const deletedSubscription = event.data.object as Stripe.Subscription;
-        console.log('Subscription cancelled:', deletedSubscription.id);
-        // Handle subscription cancellation
-        break;
+      }
 
       default:
-        console.log(`Unhandled event type: ${event.type}`);
+        break;
     }
 
     return NextResponse.json({ received: true });
   } catch (error) {
-    console.error('Webhook error:', error);
+    console.error("Webhook error:", error);
     return NextResponse.json(
-      { error: 'Webhook handler failed' },
-      { status: 500 }
+      { error: "Webhook handler failed" },
+      { status: 500 },
     );
   }
 }

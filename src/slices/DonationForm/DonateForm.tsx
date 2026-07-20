@@ -202,6 +202,7 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
               donation_type: donationType,
               original_amount: customAmount ? parseFloat(customAmount) : selectedAmount,
               covers_fees: coverFees,
+              donor_first_name: donorInfo.firstName,
               donor_name: `${donorInfo.firstName} ${donorInfo.lastName}`,
               donor_email: donorInfo.email,
               donor_phone: donorInfo.phone,
@@ -232,13 +233,13 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
           body: JSON.stringify({
             amount: Math.round(finalAmount * 100), // Convert to cents
             currency: 'usd',
-            payment_method_types: ['card'],
             customer_email: donorInfo.email,
             customer_name: `${donorInfo.firstName} ${donorInfo.lastName}`,
             metadata: {
               donation_type: donationType,
               original_amount: customAmount ? parseFloat(customAmount) : selectedAmount,
               covers_fees: coverFees,
+              donor_first_name: donorInfo.firstName,
               donor_name: `${donorInfo.firstName} ${donorInfo.lastName}`,
               donor_email: donorInfo.email,
               donor_phone: donorInfo.phone,
@@ -281,6 +282,7 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
       <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank you!</h3>
       <p className="text-gray-600 mb-6">Your donation has been processed successfully.</p>
       <button
+        type="button"
         onClick={() => {
           setSuccess(false);
           setCurrentStep('amount');

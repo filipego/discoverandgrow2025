@@ -8,9 +8,9 @@ Update this file after every meaningful application implementation change. Docum
 
 **Phase:** Dependency compatibility and deployment readiness
 
-**Last completed:** Added `WhatWeDoCategories` slice — queries `what_we_do` docs, groups by the three fixed categories, hides empty categories, and renders traditional Swiper carousels (available on the `page` type).
+**Last completed:** Rebuilt both newsletter React Email templates with the Discover and Grow logo, brand palette, real website/social links, and the established branded email layout.
 
-**Next:** Push/sync the new slice model to Prismic, add it to the What We Do page, publish; then address lint debt / remaining audit findings when deployment hardening continues.
+**Next:** Push/sync the updated category models to Prismic, add a Text Block plus one slider slice per desired category, replace the existing `what_we_do` post content, publish/revalidate, then continue deployment hardening.
 
 ---
 
@@ -26,6 +26,8 @@ Update this file after every meaningful application implementation change. Docum
 - [x] Header and footer are sourced from Prismic `settings`.
 - [x] Stripe donation routes and donation slice exist.
 - [x] Resend email templates and email routes exist.
+- [x] Donation acknowledgments include the donor and gift summary, Stripe receipt/invoice link, nonprofit language, and duplicate-delivery protection.
+- [x] Newsletter welcome and owner-notification emails use the established Discover and Grow email branding.
 - [x] Dynamic forms support Turnstile and rate limiting.
 - [x] Legacy Supabase newsletter insert exists.
 - [x] Next.js is on `15.5.20` with matching `eslint-config-next`.
@@ -59,9 +61,9 @@ Update this file after every meaningful application implementation change. Docum
 - Fix existing lint errors so `npm run lint` can pass.
 - Decide whether `next.config.ts` should continue ignoring lint and TypeScript build errors.
 - Review remaining `npm audit --omit=dev` findings outside the Next version update.
-- Confirm production-safe Resend sender and recipient behavior.
-- Confirm newsletter persistence direction: keep Supabase, migrate, or remove storage.
-- Review Stripe webhook handling and API versions.
+- Verify `info@discoverandgrow.org` (or configure `DONATION_EMAIL_FROM`) in the production Resend account.
+- Replace the legacy Supabase newsletter insert with Resend Contacts, including normalized-email duplicate handling and a newsletter segment/topic.
+- After the new Vercel site has a public production URL, add a separate Stripe webhook at `<public-production-origin>/api/webhooks/stripe`, store its signing secret as Vercel's `STRIPE_WEBHOOK_SECRET`, deploy, and run one controlled live donation. Preserve the legacy `https://discoverandgrow.org?give-listener=stripe` endpoint while WordPress/Bluehost remains live.
 - Review mobile header/navigation behavior.
 - Publish the local Hero slice model update in Prismic and add the supplied home-hero image to the homepage's default Hero variation.
 
@@ -71,6 +73,7 @@ Update this file after every meaningful application implementation change. Docum
 
 - Prismic is the primary CMS and content source.
 - Supabase is not the application platform for this project; current Supabase code is legacy newsletter storage only.
+- Resend Contacts will replace Supabase as the newsletter subscriber store; Resend Broadcasts will handle future marketing sends and unsubscribe management.
 - Context files should be edited in place and kept accurate for the existing site.
 - `src/app/globals.css` is the source of truth for brand tokens.
 - Generated Prismic files should not be edited manually.
@@ -79,7 +82,6 @@ Update this file after every meaningful application implementation change. Docum
 
 ## Open Questions
 
-- Should newsletter signups continue storing in Supabase?
 - Should form and email routes send to real user-entered emails in production instead of the current testing recipient behavior?
 - Should the project add a separate `typecheck` script because builds currently ignore TypeScript errors?
 - Should hardcoded color variants in components be normalized into `globals.css` tokens?

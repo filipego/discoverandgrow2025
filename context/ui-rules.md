@@ -89,6 +89,7 @@ route page
 - Use plain `next/link` for fixed internal links.
 - Keep primary CTAs green and secondary CTAs orange unless a design task changes the system.
 - Icon buttons or icon-only links need accessible labels.
+- Desktop header navigation marks the current route with `aria-current="page"` and a persistent brand-blue underline; the moving underline remains the hover indicator.
 
 ---
 
