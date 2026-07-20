@@ -14,6 +14,7 @@ import {
 import * as React from "react";
 import { DEFAULT_DYNAMIC_THANK_YOU_CONTENT } from "@/lib/dynamicFormSubmission";
 import { EMAIL_LOGO_URL } from "@/lib/emailBranding";
+import { EmailMobileStyles } from "./EmailMobileStyles";
 
 interface ThankYouEmailProps {
   thankYouContent?: string;
@@ -36,22 +37,25 @@ export default function DynamicThankYouEmail({
 }: ThankYouEmailProps) {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+        <EmailMobileStyles />
+      </Head>
       <Preview>Thank you for contacting Discover and Grow</Preview>
-      <Body style={bodyStyle}>
-        <Container style={containerStyle}>
-          <Section style={headerStyle}>
+      <Body className="email-body" style={bodyStyle}>
+        <Container className="email-container" style={containerStyle}>
+          <Section className="email-header" style={headerStyle}>
             <Img
               src={logoUrl}
-              width="280"
-              height="74"
+              width="250"
+              height="66"
               alt="Discover and Grow"
+              className="email-logo"
               style={logoStyle}
             />
           </Section>
 
-          <Section style={contentStyle}>
-            <Heading as="h1" style={headingStyle}>
+          <Section className="email-content" style={contentStyle}>
+            <Heading as="h1" className="email-heading" style={headingStyle}>
               Thank You{recipientName ? `, ${recipientName}` : ""}!
             </Heading>
             <Text style={paragraphStyle}>
@@ -73,7 +77,7 @@ export default function DynamicThankYouEmail({
           </Section>
 
           <Hr style={dividerStyle} />
-          <Section style={footerStyle}>
+          <Section className="email-footer" style={footerStyle}>
             <Text style={footerTextStyle}>
               Discover and Grow, Inc. · New York City · EIN 87-1397816
             </Text>
@@ -122,7 +126,7 @@ const logoStyle = {
   display: "block",
   height: "auto",
   margin: "0 auto",
-  maxWidth: "280px",
+  maxWidth: "250px",
   width: "100%",
 };
 

@@ -14,6 +14,7 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 import { EMAIL_LOGO_URL } from "@/lib/emailBranding";
+import { EmailMobileStyles } from "./EmailMobileStyles";
 
 interface NewsletterFormNotificationEmailProps {
   email?: string;
@@ -33,22 +34,25 @@ export default function NewsletterFormNotificationEmail({
 }: NewsletterFormNotificationEmailProps) {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+        <EmailMobileStyles />
+      </Head>
       <Preview>New newsletter subscriber: {email || "new subscriber"}</Preview>
-      <Body style={bodyStyle}>
-        <Container style={containerStyle}>
-          <Section style={headerStyle}>
+      <Body className="email-body" style={bodyStyle}>
+        <Container className="email-container" style={containerStyle}>
+          <Section className="email-header" style={headerStyle}>
             <Img
               src={logoUrl}
-              width="280"
-              height="74"
+              width="250"
+              height="66"
               alt="Discover and Grow"
+              className="email-logo"
               style={logoStyle}
             />
           </Section>
 
-          <Section style={contentStyle}>
-            <Heading as="h1" style={headingStyle}>
+          <Section className="email-content" style={contentStyle}>
+            <Heading as="h1" className="email-heading" style={headingStyle}>
               New Newsletter Subscriber
             </Heading>
             <Text style={paragraphStyle}>
@@ -68,6 +72,7 @@ export default function NewsletterFormNotificationEmail({
             <Section style={buttonSectionStyle}>
               <Button
                 href="https://www.discoverandgrow.org"
+                className="email-button"
                 style={buttonStyle}
               >
                 Visit the Website
@@ -76,7 +81,7 @@ export default function NewsletterFormNotificationEmail({
           </Section>
 
           <Hr style={dividerStyle} />
-          <Section style={footerStyle}>
+          <Section className="email-footer" style={footerStyle}>
             <Text style={footerTextStyle}>
               Discover and Grow, Inc. · New York City · EIN 87-1397816
             </Text>
@@ -128,7 +133,7 @@ const logoStyle = {
   display: "block",
   height: "auto",
   margin: "0 auto",
-  maxWidth: "280px",
+  maxWidth: "250px",
   width: "100%",
 };
 

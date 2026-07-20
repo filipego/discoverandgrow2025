@@ -8,7 +8,7 @@ Update this file after every meaningful application implementation change. Docum
 
 **Phase:** Dependency compatibility and deployment readiness
 
-**Last completed:** Fixed the branded email logo source so local previews use a reachable fallback and sent newsletter, dynamic-form, and donation emails use the configured Vercel/site URL once `NEXT_PUBLIC_SITE_URL` is set.
+**Last completed:** Added a shared email-safe mobile breakpoint across the branded donation, newsletter, and dynamic-form templates, then removed the unused legacy static contact-form component, its two email templates, and its retired `TextAndForm` choice.
 
 **Next:** Push/sync the updated category models to Prismic, add a Text Block plus one slider slice per desired category, replace the existing `what_we_do` post content, publish/revalidate, then continue deployment hardening.
 

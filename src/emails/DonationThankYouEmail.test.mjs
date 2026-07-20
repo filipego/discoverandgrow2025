@@ -10,7 +10,8 @@ const normalizedSource = source.replace(/\s+/g, " ");
 
 test("the donation email contains the approved personalized acknowledgment", () => {
   const requiredContent = [
-    "Thank You for Supporting Discover and Grow",
+    "Thank You for Supporting",
+    "Discover and Grow",
     "firstName",
     "amount",
     "date",
@@ -58,4 +59,11 @@ test("the donation email supports React Email export rendering", () => {
 test("the donation email preview uses the shared branded logo source", () => {
   assert.match(source, /import \{ EMAIL_LOGO_URL \} from "@\/lib\/emailBranding"/);
   assert.match(source, /logoUrl:\s*EMAIL_LOGO_URL/);
+});
+
+test("the donation thank-you heading starts Discover and Grow on its second line", () => {
+  assert.match(
+    source,
+    /Thank You for Supporting\s*<br\s*\/>\s*Discover and Grow 💛/,
+  );
 });

@@ -6,7 +6,6 @@ import { Bounded } from "@/app/components/Bounded";
 import clsx from "clsx";
 import { isFilled } from "@prismicio/client";
 import { ColorSection } from "@/app/components/ColorSection";
-import ContactForm from "@/app/components/Forms/ContactForm";
 import NewsletterForm from "@/app/components/Forms/NewsletterForm";
 
 /**
@@ -15,10 +14,7 @@ import NewsletterForm from "@/app/components/Forms/NewsletterForm";
 export type TextAndFormProps = SliceComponentProps<Content.TextAndFormSlice>;
 
 const formComponents = {
-  "Contact Form": <ContactForm />,
   "Newsletter Form": <NewsletterForm />,
-  // Easy to add more forms:
-
 } as const;
 
 /**

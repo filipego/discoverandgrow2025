@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 import { Resend } from 'resend';
-import ContactFormEmail from '@/emails/ContactFormEmail';
-import ContactFormNotificationEmail from '@/emails/ContactFormNotificationEmail';
 import NewsletterFormEmail from '@/emails/NewsletterFormEmail';
 import NewsletterFormNotificationEmail from '@/emails/NewsletterFormNotificationEmail';
 import DynamicFormEmail from '@/emails/DynamicFormEmail';
@@ -15,35 +13,6 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { type, data } = body;
     const logoUrl = getEmailLogoUrl(process.env.NEXT_PUBLIC_SITE_URL);
-
-    if (type === 'contact') {
-      try {
-        // Send thank you email to the user
-        await resend.emails.send({
-          from: 'onboarding@resend.dev',
-          to: 'info@discoverandgrow.org', // Changed for testing
-          subject: 'Thank you for contacting us',
-          react: ContactFormEmail()
-        });
-
-        // Send notification email to admin
-        const adminEmail = await resend.emails.send({
-          from: 'onboarding@resend.dev',
-          to: 'info@discoverandgrow.org', // Changed for testing
-          subject: 'New Contact Form Submission',
-          react: ContactFormNotificationEmail({
-            name: data.name,
-            email: data.email,
-            phone: data.phone,
-            message: data.message
-          })
-        });
-        console.log('Admin email sent:', adminEmail);
-      } catch (emailError) {
-        console.error('Error sending contact emails:', emailError);
-        return NextResponse.json({ error: String(emailError) }, { status: 500 });
-      }
-    }
 
     if (type === 'newsletter') {
       // Send welcome email to subscriber

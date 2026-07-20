@@ -18,6 +18,7 @@ Living registry of reusable website UI. Read this before building a component an
 | `HashFocusHandler` | `src/app/components/HashFocusHandler.tsx` | Client helper that smooth-scrolls `#newsletter` to the footer and focuses `#newsletter-email` |
 | `LongLogo` | `src/app/components/LongLogo.tsx` | Brand logo rendering |
 | `HeaderAndText` | `src/app/components/HeaderAndText.tsx` | Reusable heading and rich-text composition |
+| `EmailMobileStyles` | `src/emails/EmailMobileStyles.tsx` | Shared, email-safe mobile breakpoint for branded React Email templates |
 
 ---
 
@@ -36,7 +37,6 @@ Living registry of reusable website UI. Read this before building a component an
 
 | Component | Path | Purpose |
 | --- | --- | --- |
-| `ContactForm` | `src/app/components/Forms/ContactForm.tsx` | Static contact form that posts to `/api/emails` |
 | `NewsletterForm` | `src/app/components/Forms/NewsletterForm.tsx` | Newsletter signup; currently inserts into Supabase then emails; footer passes `inputId="newsletter-email"` for hash-focus |
 | `DynamicForm` | `src/app/components/Forms/DynamicForm.tsx` | Prismic-configured dynamic form with optional Turnstile; preserves every configured field for email delivery, uses a standard thank-you fallback when Prismic copy is blank, and vertically centers its complete adjacent left-content column on desktop |
 | `CustomInput` | `src/app/components/Forms/CustomInput.tsx` | Dynamic form text-like input |
@@ -101,7 +101,7 @@ Slice components should keep `data-slice-type` and `data-slice-variation` attrib
 | Metadata | Route-specific `generateMetadata` reads Prismic SEO fields |
 | Settings | `settings` singleton powers site metadata, navigation, header CTA, footer, and newsletter/donate content |
 | Dynamic forms | Form slice -> `DynamicForm` -> `/api/forms/submit` -> branded owner notification and submitter thank-you templates via Resend |
-| Branded emails | React Email templates use the Discover and Grow logo, blue/green/orange palette, rounded white card, and dark-blue organization footer established by the donation and newsletter emails |
+| Branded emails | React Email templates use the Discover and Grow logo, blue/green/orange palette, rounded white card, dark-blue organization footer, and shared compact mobile breakpoint established by the donation and newsletter emails |
 | Styled Prismic rich text | Slice-level `PrismicRichText` `components` map: `Heading` for headings, explicit paragraph/list spacing, and `PrismicNextLink` for brand-colored links without an underline by default |
 | Donations | DonationForm slice -> Stripe Elements -> Stripe API route |
 
