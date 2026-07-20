@@ -50,3 +50,7 @@ test("the donation email uses the real brand logo and approved links", () => {
 
   assert.match(source, /alt="Discover and Grow"/);
 });
+
+test("the donation email supports React Email export rendering", () => {
+  assert.match(source, /import \* as React from "react"/);
+});

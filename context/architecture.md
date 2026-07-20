@@ -95,7 +95,9 @@ Root layout
 Prismic Form slice
   -> DynamicForm builds React Hook Form schema from Prismic field config
   -> /api/forms/submit validates rate limit, Turnstile token, timing, and payload
-  -> Resend sends notification and optional thank-you email
+  -> Resend sends a branded owner notification to the slice recipient (or the site default)
+  -> Resend sends a branded thank-you email to the submitted email address
+  -> blank thank-you copy uses the standard 2–3-business-day response message
 ```
 
 ### Donations
@@ -132,6 +134,8 @@ Do not commit real values.
 | `NEXT_PUBLIC_PRISMIC_ENVIRONMENT` | Optional | Overrides `slicemachine.config.json` repository name |
 | `RESEND_API_KEY` | Email routes and donation webhook | Server-side Resend API access |
 | `DONATION_EMAIL_FROM` | Optional donation email override | Verified Resend sender; defaults to `Discover and Grow <info@discoverandgrow.org>` |
+| `FORMS_EMAIL_FROM` | Optional dynamic-form email override | Verified Resend sender; defaults to the Resend onboarding sender during testing |
+| `FORM_TEST_RECIPIENT` | Optional dynamic-form test override | Routes both form emails to this address while testing a Resend onboarding sender or preview deployment |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Dynamic forms | Browser-safe Turnstile site key |
 | `TURNSTILE_SECRET_KEY` | Dynamic form API route | Server-side Turnstile verification |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Donation form | Browser-safe Stripe Elements key |

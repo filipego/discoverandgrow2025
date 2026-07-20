@@ -8,7 +8,7 @@ Update this file after every meaningful application implementation change. Docum
 
 **Phase:** Dependency compatibility and deployment readiness
 
-**Last completed:** Rebuilt both newsletter React Email templates with the Discover and Grow logo, brand palette, real website/social links, and the established branded email layout.
+**Last completed:** Hardened dynamic Prismic-form delivery: all configured fields are formatted for email, optional inputs validate correctly, branded owner and thank-you emails render, and blank thank-you content uses a standard 2–3-business-day response message.
 
 **Next:** Push/sync the updated category models to Prismic, add a Text Block plus one slider slice per desired category, replace the existing `what_we_do` post content, publish/revalidate, then continue deployment hardening.
 
@@ -29,6 +29,7 @@ Update this file after every meaningful application implementation change. Docum
 - [x] Donation acknowledgments include the donor and gift summary, Stripe receipt/invoice link, nonprofit language, and duplicate-delivery protection.
 - [x] Newsletter welcome and owner-notification emails use the established Discover and Grow email branding.
 - [x] Dynamic forms support Turnstile and rate limiting.
+- [x] Dynamic forms send branded owner notifications and submitter thank-you emails, with a default thank-you response when the slice copy is blank.
 - [x] Legacy Supabase newsletter insert exists.
 - [x] Next.js is on `15.5.20` with matching `eslint-config-next`.
 - [x] `/thank-you` is inside the `(home)` route group while preserving the public `/thank-you` URL.
@@ -62,6 +63,7 @@ Update this file after every meaningful application implementation change. Docum
 - Decide whether `next.config.ts` should continue ignoring lint and TypeScript build errors.
 - Review remaining `npm audit --omit=dev` findings outside the Next version update.
 - Verify `info@discoverandgrow.org` (or configure `DONATION_EMAIL_FROM`) in the production Resend account.
+- After the Resend domain is verified, configure `FORMS_EMAIL_FROM` with that sender and remove any `FORM_TEST_RECIPIENT` override so live form thank-you emails reach each submitter.
 - Replace the legacy Supabase newsletter insert with Resend Contacts, including normalized-email duplicate handling and a newsletter segment/topic.
 - After the new Vercel site has a public production URL, add a separate Stripe webhook at `<public-production-origin>/api/webhooks/stripe`, store its signing secret as Vercel's `STRIPE_WEBHOOK_SECRET`, deploy, and run one controlled live donation. Preserve the legacy `https://discoverandgrow.org?give-listener=stripe` endpoint while WordPress/Bluehost remains live.
 - Review mobile header/navigation behavior.
@@ -82,6 +84,5 @@ Update this file after every meaningful application implementation change. Docum
 
 ## Open Questions
 
-- Should form and email routes send to real user-entered emails in production instead of the current testing recipient behavior?
 - Should the project add a separate `typecheck` script because builds currently ignore TypeScript errors?
 - Should hardcoded color variants in components be normalized into `globals.css` tokens?

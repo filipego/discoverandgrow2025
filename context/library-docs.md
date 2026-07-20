@@ -83,6 +83,7 @@ Current route resolvers:
 - Donation acknowledgments are sent from the verified Stripe webhook with a stable Resend idempotency key. Send once for one-time gifts and once for only the initial successful monthly invoice.
 - Subscriber welcome and owner notification templates use the same email-safe Discover and Grow branding as donation acknowledgments. Testing continues to use `onboarding@resend.dev` and the account owner as recipient until the production domain is verified.
 - `DONATION_EMAIL_FROM` can override the donation sender; the configured domain/address must be verified in Resend.
+- Dynamic-form owner notifications and submitter thank-you emails use the same branded layout. Empty Prismic thank-you content falls back to the standard 2–3-business-day response message; `FORM_TEST_RECIPIENT` safely routes both emails to one testing inbox, and `FORMS_EMAIL_FROM` selects a verified sender once available.
 - Avoid documenting or logging actual API keys.
 
 ---

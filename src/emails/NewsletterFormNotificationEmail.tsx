@@ -34,7 +34,7 @@ export default function NewsletterFormNotificationEmail({
   return (
     <Html lang="en">
       <Head />
-      <Preview>New newsletter subscriber: {email}</Preview>
+      <Preview>New newsletter subscriber: {email || "new subscriber"}</Preview>
       <Body style={bodyStyle}>
         <Container style={containerStyle}>
           <Section style={headerStyle}>

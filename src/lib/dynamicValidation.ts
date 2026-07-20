@@ -55,7 +55,9 @@ export const createDynamicSchema = (formFields: FormField[]) => {
       
       case 'text':
       case 'textarea':
-        fieldSchema = z.string().min(1, `${field.field_label} is required`);
+        fieldSchema = field.is_required
+          ? z.string().min(1, `${field.field_label} is required`)
+          : z.string();
         break;
       
       case 'select':
@@ -68,9 +70,11 @@ export const createDynamicSchema = (formFields: FormField[]) => {
         break;
       
       case 'checkbox':
-        fieldSchema = z.boolean().refine(val => val === true, {
-          message: `You must agree to ${field.field_label}`
-        });
+        fieldSchema = field.is_required
+          ? z.boolean().refine(val => val === true, {
+              message: `You must agree to ${field.field_label}`
+            })
+          : z.boolean();
         break;
       
       case 'checkbox_group':
@@ -85,9 +89,9 @@ export const createDynamicSchema = (formFields: FormField[]) => {
         fieldSchema = z.string();
     }
 
-    // Make optional if not required
-    if (!field.is_required) {
-      fieldSchema = fieldSchema.optional();
+    // Optional browser fields submit empty strings, false, or empty arrays.
+    if (!field.is_required && field.field_type !== 'checkbox' && field.field_type !== 'checkbox_group') {
+      fieldSchema = allowEmptyValue(fieldSchema);
     }
 
     // Use field label as key (sanitized) - with proper null check
@@ -98,9 +102,12 @@ export const createDynamicSchema = (formFields: FormField[]) => {
   return z.object(schemaFields);
 };
 
+const allowEmptyValue = (schema: z.ZodTypeAny) =>
+  z.union([schema, z.literal("")]).optional();
+
 export const sanitizeFieldKey = (label: string): string => {
   if (!label || typeof label !== 'string') {
     return 'field';
   }
   return label.toLowerCase().replace(/[^a-z0-9]/g, '_');
-}; 
+};

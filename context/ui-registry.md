@@ -38,7 +38,7 @@ Living registry of reusable website UI. Read this before building a component an
 | --- | --- | --- |
 | `ContactForm` | `src/app/components/Forms/ContactForm.tsx` | Static contact form that posts to `/api/emails` |
 | `NewsletterForm` | `src/app/components/Forms/NewsletterForm.tsx` | Newsletter signup; currently inserts into Supabase then emails; footer passes `inputId="newsletter-email"` for hash-focus |
-| `DynamicForm` | `src/app/components/Forms/DynamicForm.tsx` | Prismic-configured dynamic form with optional Turnstile; in the Form slice, its complete adjacent left-content column is vertically centered on desktop |
+| `DynamicForm` | `src/app/components/Forms/DynamicForm.tsx` | Prismic-configured dynamic form with optional Turnstile; preserves every configured field for email delivery, uses a standard thank-you fallback when Prismic copy is blank, and vertically centers its complete adjacent left-content column on desktop |
 | `CustomInput` | `src/app/components/Forms/CustomInput.tsx` | Dynamic form text-like input |
 | `CustomTextarea` | `src/app/components/Forms/CustomTextarea.tsx` | Dynamic form textarea |
 | `CustomSelect` | `src/app/components/Forms/CustomSelect.tsx` | Dynamic form select |
@@ -100,7 +100,7 @@ Slice components should keep `data-slice-type` and `data-slice-variation` attrib
 | Page rendering | Route fetches document, then renders `SliceZone` with `components` |
 | Metadata | Route-specific `generateMetadata` reads Prismic SEO fields |
 | Settings | `settings` singleton powers site metadata, navigation, header CTA, footer, and newsletter/donate content |
-| Dynamic forms | Form slice -> `DynamicForm` -> `/api/forms/submit` -> React Email templates via Resend |
+| Dynamic forms | Form slice -> `DynamicForm` -> `/api/forms/submit` -> branded owner notification and submitter thank-you templates via Resend |
 | Branded emails | React Email templates use the Discover and Grow logo, blue/green/orange palette, rounded white card, and dark-blue organization footer established by the donation and newsletter emails |
 | Styled Prismic rich text | Slice-level `PrismicRichText` `components` map: `Heading` for headings, explicit paragraph/list spacing, and `PrismicNextLink` for brand-colored links without an underline by default |
 | Donations | DonationForm slice -> Stripe Elements -> Stripe API route |
