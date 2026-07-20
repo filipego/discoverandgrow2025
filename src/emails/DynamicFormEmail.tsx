@@ -13,6 +13,7 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 import type { SubmittedFormField } from "@/lib/dynamicFormSubmission";
+import { EMAIL_LOGO_URL } from "@/lib/emailBranding";
 
 interface FormSubmissionProps {
   formTitle: string;
@@ -22,8 +23,7 @@ interface FormSubmissionProps {
   logoUrl?: string;
 }
 
-const DEFAULT_LOGO_URL =
-  "https://www.discoverandgrow.org/images/discover-and-grow-logo-email.png";
+const DEFAULT_LOGO_URL = EMAIL_LOGO_URL;
 const BRAND_BLUE = "#29285D";
 const BRAND_GREEN = "#2CA382";
 const OFF_WHITE = "#FAF9F6";

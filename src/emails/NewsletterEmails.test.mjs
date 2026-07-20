@@ -10,6 +10,11 @@ const adminSource = readFileSync(
   "src/emails/NewsletterFormNotificationEmail.tsx",
   "utf8",
 );
+const emailRouteSource = readFileSync(
+  "src/app/(home)/api/emails/route.ts",
+  "utf8",
+);
+const emailBrandingSource = readFileSync("src/lib/emailBranding.ts", "utf8");
 
 test("both newsletter emails use Discover and Grow branding", () => {
   for (const source of [subscriberSource, adminSource]) {
@@ -41,4 +46,19 @@ test("the admin email clearly identifies the new subscriber", () => {
   assert.match(adminSource, /New Newsletter Subscriber/);
   assert.match(adminSource, /Email address/);
   assert.match(adminSource, /\{email\}/);
+});
+
+test("newsletter email previews and sends use a reachable logo source", () => {
+  assert.match(emailBrandingSource, /EMAIL_LOGO_FALLBACK_URL/);
+  assert.match(
+    emailBrandingSource,
+    /raw\.githubusercontent\.com\/filipego\/discoverandgrow2025/,
+  );
+  assert.match(emailRouteSource, /getEmailLogoUrl/);
+  assert.match(emailRouteSource, /logoUrl/);
+  for (const source of [subscriberSource, adminSource]) {
+    assert.match(source, /EMAIL_LOGO_URL/);
+  }
+  assert.match(emailBrandingSource, /EMAIL_LOGO_PREVIEW_URL/);
+  assert.match(emailBrandingSource, /\/static\/discover-and-grow-logo-email\.png/);
 });

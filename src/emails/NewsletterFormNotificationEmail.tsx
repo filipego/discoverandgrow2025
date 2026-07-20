@@ -13,14 +13,14 @@ import {
   Text,
 } from "@react-email/components";
 import * as React from "react";
+import { EMAIL_LOGO_URL } from "@/lib/emailBranding";
 
 interface NewsletterFormNotificationEmailProps {
   email?: string;
   logoUrl?: string;
 }
 
-const DEFAULT_LOGO_URL =
-  "https://www.discoverandgrow.org/images/discover-and-grow-logo-email.png";
+const DEFAULT_LOGO_URL = EMAIL_LOGO_URL;
 const BRAND_BLUE = "#29285D";
 const BRAND_GREEN = "#2CA382";
 const BRAND_ORANGE = "#F15B3B";

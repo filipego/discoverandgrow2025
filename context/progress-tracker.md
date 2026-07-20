@@ -8,7 +8,7 @@ Update this file after every meaningful application implementation change. Docum
 
 **Phase:** Dependency compatibility and deployment readiness
 
-**Last completed:** Hardened dynamic Prismic-form delivery: all configured fields are formatted for email, optional inputs validate correctly, branded owner and thank-you emails render, and blank thank-you content uses a standard 2–3-business-day response message.
+**Last completed:** Fixed the branded email logo source so local previews use a reachable fallback and sent newsletter, dynamic-form, and donation emails use the configured Vercel/site URL once `NEXT_PUBLIC_SITE_URL` is set.
 
 **Next:** Push/sync the updated category models to Prismic, add a Text Block plus one slider slice per desired category, replace the existing `what_we_do` post content, publish/revalidate, then continue deployment hardening.
 

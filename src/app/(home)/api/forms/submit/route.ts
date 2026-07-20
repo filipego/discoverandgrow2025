@@ -7,10 +7,10 @@ import {
 } from "@/lib/dynamicFormSubmission";
 import DynamicFormEmail from "@/emails/DynamicFormEmail";
 import DynamicThankYouEmail from "@/emails/DynamicThankYouEmail";
+import { getEmailLogoUrl } from "@/lib/emailBranding";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const DEFAULT_ADMIN_EMAIL = "info@discoverandgrow.org";
-const DEFAULT_SITE_URL = "https://www.discoverandgrow.org";
 const DEFAULT_FROM = "Discover and Grow <onboarding@resend.dev>";
 
 function getTestRecipient(): string | undefined {
@@ -18,13 +18,6 @@ function getTestRecipient(): string | undefined {
     process.env.FORM_TEST_RECIPIENT ||
     (process.env.NODE_ENV === "production" ? undefined : DEFAULT_ADMIN_EMAIL)
   );
-}
-
-function getLogoUrl(): string {
-  return new URL(
-    "/images/discover-and-grow-logo-email.png",
-    process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL,
-  ).toString();
 }
 
 async function sendEmail(
@@ -119,7 +112,7 @@ export async function POST(request: NextRequest) {
     const submittedAt = new Date().toLocaleString();
     const testRecipient = getTestRecipient();
     const adminRecipient = testRecipient || notificationEmail || DEFAULT_ADMIN_EMAIL;
-    const logoUrl = getLogoUrl();
+    const logoUrl = getEmailLogoUrl(process.env.NEXT_PUBLIC_SITE_URL);
 
     await sendEmail({
       from: process.env.FORMS_EMAIL_FROM || DEFAULT_FROM,

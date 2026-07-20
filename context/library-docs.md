@@ -84,6 +84,7 @@ Current route resolvers:
 - Subscriber welcome and owner notification templates use the same email-safe Discover and Grow branding as donation acknowledgments. Testing continues to use `onboarding@resend.dev` and the account owner as recipient until the production domain is verified.
 - `DONATION_EMAIL_FROM` can override the donation sender; the configured domain/address must be verified in Resend.
 - Dynamic-form owner notifications and submitter thank-you emails use the same branded layout. Empty Prismic thank-you content falls back to the standard 2–3-business-day response message; `FORM_TEST_RECIPIENT` safely routes both emails to one testing inbox, and `FORMS_EMAIL_FROM` selects a verified sender once available.
+- Branded email templates use a committed public PNG fallback for local previews and testing. At send time, routes use the `NEXT_PUBLIC_SITE_URL` logo when it is configured, so production delivery loads the logo from the Vercel-hosted site instead of the legacy Bluehost domain.
 - Avoid documenting or logging actual API keys.
 
 ---
