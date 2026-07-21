@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
 import { Resend } from 'resend';
-import ContactFormEmail from '@/emails/ContactFormEmail';
-import ContactFormNotificationEmail from '@/emails/ContactFormNotificationEmail';
 import NewsletterFormEmail from '@/emails/NewsletterFormEmail';
 import NewsletterFormNotificationEmail from '@/emails/NewsletterFormNotificationEmail';
 import DynamicFormEmail from '@/emails/DynamicFormEmail';
 import DynamicThankYouEmail from '@/emails/DynamicThankYouEmail';
+import { getEmailLogoUrl } from '@/lib/emailBranding';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -13,35 +12,7 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const { type, data } = body;
-
-    if (type === 'contact') {
-      try {
-        // Send thank you email to the user
-        const userEmail = await resend.emails.send({
-          from: 'onboarding@resend.dev',
-          to: 'info@discoverandgrow.org', // Changed for testing
-          subject: 'Thank you for contacting us',
-          react: ContactFormEmail()
-        });
-
-        // Send notification email to admin
-        const adminEmail = await resend.emails.send({
-          from: 'onboarding@resend.dev',
-          to: 'info@discoverandgrow.org', // Changed for testing
-          subject: 'New Contact Form Submission',
-          react: ContactFormNotificationEmail({
-            name: data.name,
-            email: data.email,
-            phone: data.phone,
-            message: data.message
-          })
-        });
-        console.log('Admin email sent:', adminEmail);
-      } catch (emailError) {
-        console.error('Error sending contact emails:', emailError);
-        return NextResponse.json({ error: String(emailError) }, { status: 500 });
-      }
-    }
+    const logoUrl = getEmailLogoUrl(process.env.NEXT_PUBLIC_SITE_URL);
 
     if (type === 'newsletter') {
       // Send welcome email to subscriber
@@ -49,7 +20,7 @@ export async function POST(request: Request) {
         from: 'onboarding@resend.dev',
         to: 'info@discoverandgrow.org', // Changed for testing
         subject: 'Welcome to our newsletter',
-        react: NewsletterFormEmail()
+        react: NewsletterFormEmail({ logoUrl })
       });
 
       // Send notification email to admin
@@ -58,7 +29,8 @@ export async function POST(request: Request) {
         to: 'info@discoverandgrow.org', // Changed for testing
         subject: 'New Newsletter Subscription',
         react: NewsletterFormNotificationEmail({
-          email: data.email
+          email: data.email,
+          logoUrl,
         })
       });
     }
@@ -79,16 +51,16 @@ export async function POST(request: Request) {
         });
 
         // Send thank you email to user (if email field exists)
-        const userEmailField = data.formData.find((field: any) => 
+        const userEmailField = data.formData.find((field: { type?: string; label?: string; value?: string }) =>
           field.type === 'email' || 
-          field.label.toLowerCase().includes('email')
+          field.label?.toLowerCase().includes('email')
         );
         
         if (userEmailField?.value && data.thankYouContent) {
           // Try to find name field for personalization
-          const nameField = data.formData.find((field: any) => 
-            field.label.toLowerCase().includes('name') ||
-            field.label.toLowerCase().includes('first')
+          const nameField = data.formData.find((field: { label?: string; value?: string }) =>
+            field.label?.toLowerCase().includes('name') ||
+            field.label?.toLowerCase().includes('first')
           );
 
           await resend.emails.send({

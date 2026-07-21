@@ -13,11 +13,12 @@ Living registry of reusable website UI. Read this before building a component an
 | `ButtonLink` | `src/app/components/ButtonLink.tsx` | Prismic link CTA button with Primary, Secondary, and Link variants |
 | `ColorSection` | `src/app/components/ColorSection.tsx` | Colored inner section wrapper for selected slice backgrounds |
 | `Header` | `src/app/components/Header.tsx` | Fixed animated global header sourced from Prismic settings; desktop navigation at `lg`, right-side mobile/tablet navigation drawer below `lg` |
-| `Navigation` | `src/app/components/Navigation.tsx` | Header navigation list and hover indicator |
+| `Navigation` | `src/app/components/Navigation.tsx` | Header navigation list with route-aware active underline and moving hover indicator |
 | `Footer` | `src/app/components/Footer.tsx` | Global footer sourced from Prismic settings; newsletter column uses `id="newsletter"` for in-page hash links |
 | `HashFocusHandler` | `src/app/components/HashFocusHandler.tsx` | Client helper that smooth-scrolls `#newsletter` to the footer and focuses `#newsletter-email` |
 | `LongLogo` | `src/app/components/LongLogo.tsx` | Brand logo rendering |
 | `HeaderAndText` | `src/app/components/HeaderAndText.tsx` | Reusable heading and rich-text composition |
+| `EmailMobileStyles` | `src/emails/EmailMobileStyles.tsx` | Shared, email-safe mobile breakpoint for branded React Email templates |
 
 ---
 
@@ -36,9 +37,8 @@ Living registry of reusable website UI. Read this before building a component an
 
 | Component | Path | Purpose |
 | --- | --- | --- |
-| `ContactForm` | `src/app/components/Forms/ContactForm.tsx` | Static contact form that posts to `/api/emails` |
 | `NewsletterForm` | `src/app/components/Forms/NewsletterForm.tsx` | Newsletter signup; currently inserts into Supabase then emails; footer passes `inputId="newsletter-email"` for hash-focus |
-| `DynamicForm` | `src/app/components/Forms/DynamicForm.tsx` | Prismic-configured dynamic form with optional Turnstile; in the Form slice, its complete adjacent left-content column is vertically centered on desktop |
+| `DynamicForm` | `src/app/components/Forms/DynamicForm.tsx` | Prismic-configured dynamic form with optional Turnstile; preserves every configured field for email delivery, uses a standard thank-you fallback when Prismic copy is blank, and vertically centers its complete adjacent left-content column on desktop |
 | `CustomInput` | `src/app/components/Forms/CustomInput.tsx` | Dynamic form text-like input |
 | `CustomTextarea` | `src/app/components/Forms/CustomTextarea.tsx` | Dynamic form textarea |
 | `CustomSelect` | `src/app/components/Forms/CustomSelect.tsx` | Dynamic form select |
@@ -59,6 +59,7 @@ Living registry of reusable website UI. Read this before building a component an
 | `LazyTikTokPlayer` | `src/app/components/LazyTikTokPlayer.tsx` | Lazy TikTok embed |
 | `StoreSlider` | `src/app/components/Sliders/StoreSlider.tsx` | Store/product slider |
 | `PartnerSliderComponent` | `src/slices/Partners/PartnerSliderComponent.tsx` | Partner post carousel for the Partners slice |
+| `WhatWeDoCategories` | `src/slices/WhatWeDoCategories/index.tsx` | Reusable carousel for one selected What We Do category; pair with a Text Block for introductory copy |
 | `WhatWeDoCategorySlider` | `src/slices/WhatWeDoCategories/WhatWeDoCategorySlider.tsx` | Traditional Swiper carousel for one What We Do category; arrows over media when 2+ items |
 
 ---
@@ -99,7 +100,8 @@ Slice components should keep `data-slice-type` and `data-slice-variation` attrib
 | Page rendering | Route fetches document, then renders `SliceZone` with `components` |
 | Metadata | Route-specific `generateMetadata` reads Prismic SEO fields |
 | Settings | `settings` singleton powers site metadata, navigation, header CTA, footer, and newsletter/donate content |
-| Dynamic forms | Form slice -> `DynamicForm` -> `/api/forms/submit` -> React Email templates via Resend |
+| Dynamic forms | Form slice -> `DynamicForm` -> `/api/forms/submit` -> branded owner notification and submitter thank-you templates via Resend |
+| Branded emails | React Email templates use the Discover and Grow logo, blue/green/orange palette, rounded white card, dark-blue organization footer, and shared compact mobile breakpoint established by the donation and newsletter emails |
 | Styled Prismic rich text | Slice-level `PrismicRichText` `components` map: `Heading` for headings, explicit paragraph/list spacing, and `PrismicNextLink` for brand-colored links without an underline by default |
 | Donations | DonationForm slice -> Stripe Elements -> Stripe API route |
 

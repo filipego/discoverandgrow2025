@@ -7,6 +7,7 @@ import { Bounded } from "@/app/components/Bounded";
 import { Heading } from "@/app/components/Heading";
 import DynamicForm from "@/app/components/Forms/DynamicForm";
 import { FormField } from "@/lib/dynamicValidation";
+import { getDynamicThankYouContent } from "@/lib/dynamicFormSubmission";
 
 /**
  * Props for `Form`.
@@ -17,31 +18,25 @@ export type FormProps = SliceComponentProps<Content.FormSlice>;
  * Component for "Form" Slices.
  */
 const Form: FC<FormProps> = ({ slice }) => {
-  // Transform slice primary form_fields to FormField format (reverting to working version)
-  // @ts-ignore - form_fields exists in actual Prismic data structure
-  const formFields: FormField[] = slice.primary.form_fields?.map((field: any) => {
-    // Add logging to debug the field structure
-    console.log('Processing form field:', field);
-    
+  const formFields: FormField[] = slice.primary.form_fields.map((field) => {
     return {
       field_type: field.field_type || 'text',
       field_label: field.field_label || 'Untitled Field',
       field_placeholder: field.field_placeholder || '',
       field_width: field.field_width || 'full',
       is_required: field.is_required || false,
-      options: field.options?.map((option: any) => ({
+      options: field.options.map((option) => ({
         option_label: option.option_label || ''
-      })) || []
+      }))
     };
-  }).filter((field: FormField) => field.field_label && field.field_type) || [];
-
-  // Log the final formFields array
-  console.log('Final formFields:', formFields);
+  }).filter((field) => field.field_label && field.field_type);
 
   // Convert RichTextField to HTML string for email
-  const thankYouContentHTML = slice.primary.thank_you_email_content 
-    ? asHTML(slice.primary.thank_you_email_content)
-    : 'Thank you for contacting us. We will get back to you soon.';
+  const thankYouContentHTML = getDynamicThankYouContent(
+    slice.primary.thank_you_email_content
+      ? asHTML(slice.primary.thank_you_email_content)
+      : undefined,
+  );
   
     const getPadding = () => {
       if ('padding' in slice.primary && slice.primary.padding) {
@@ -124,7 +119,6 @@ const Form: FC<FormProps> = ({ slice }) => {
 
         {/* Right side - Form */}
         <div className="bg-gray-50 p-8 rounded-2xl">
-          {/* @ts-ignore - hide_form_title field exists in Prismic but types not yet regenerated */}
           {slice.primary.form_title && !slice.primary.hide_form_title && (
             <Heading as="h3" size="md" className="text-black mb-6">
               {slice.primary.form_title}
@@ -137,9 +131,8 @@ const Form: FC<FormProps> = ({ slice }) => {
             submitButtonText={slice.primary.submit_button_text || 'Send Message'}
             successMessage={slice.primary.success_message || 'Thank you for your message!'}
             thankYouContent={thankYouContentHTML}
-            notificationEmail={slice.primary.notification_email || 'hello@discoverandgrow.ca'}
+            notificationEmail={slice.primary.notification_email || 'info@discoverandgrow.org'}
             enableCaptcha={slice.primary.enable_captcha ?? true}
-            // @ts-ignore - show_captcha field exists in Prismic but types not yet regenerated
             showCaptcha={slice.primary.show_captcha ?? true}
           />
         </div>

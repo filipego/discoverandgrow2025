@@ -33,10 +33,7 @@
           "config": {
             "label": "Form",
             "placeholder": "",
-            "options": [
-              "Contact Form",
-              "Newsletter Form"
-            ]
+            "options": ["Newsletter Form"]
           }
         },
         "bg_color": {

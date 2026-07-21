@@ -158,7 +158,8 @@ type PageDocumentDataSlicesSlice =
   | ImageSlice
   | HeroSlice
   | CardsandImagesSlice
-  | TextAndImageSlice;
+  | TextAndImageSlice
+  | WhatWeDoCategoriesSlice;
 
 /**
  * Content for Page documents
@@ -608,9 +609,9 @@ interface WhatWeDoDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
   category: prismic.SelectField<
-    | "Programs for Caregivers"
-    | "Programs for Children and Youth"
-    | "Programs for Schools"
+    | "Social and Emotional Learning for Schools"
+    | "Parenting Support & Education"
+    | "Community Campaigns & Awareness"
   >;
 
   /**
@@ -3085,6 +3086,74 @@ export type VideoBlockSlice = prismic.SharedSlice<
   VideoBlockSliceVariation
 >;
 
+/**
+ * Primary content in *WhatWeDoCategories → Default → Primary*
+ */
+export interface WhatWeDoCategoriesSliceDefaultPrimary {
+  /**
+   * Padding field in *WhatWeDoCategories → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: normal padding
+   * - **API ID Path**: what_we_do_categories.default.primary.padding
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  padding: prismic.SelectField<
+    | "normal padding"
+    | "smaller padding"
+    | "no padding"
+    | "no top padding"
+    | "no bottom padding"
+    | "bigger padding",
+    "filled"
+  >;
+
+  /**
+   * Category field in *WhatWeDoCategories → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: Select a category
+   * - **API ID Path**: what_we_do_categories.default.primary.category
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  category: prismic.SelectField<
+    | "Social and Emotional Learning for Schools"
+    | "Parenting Support & Education"
+    | "Community Campaigns & Awareness"
+  >;
+}
+
+/**
+ * Default variation for WhatWeDoCategories Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type WhatWeDoCategoriesSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<WhatWeDoCategoriesSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *WhatWeDoCategories*
+ */
+type WhatWeDoCategoriesSliceVariation = WhatWeDoCategoriesSliceDefault;
+
+/**
+ * WhatWeDoCategories Shared Slice
+ *
+ * - **API ID**: `what_we_do_categories`
+ * - **Description**: Three category sections with carousels of What we do documents
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type WhatWeDoCategoriesSlice = prismic.SharedSlice<
+  "what_we_do_categories",
+  WhatWeDoCategoriesSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -3223,6 +3292,10 @@ declare module "@prismicio/client" {
       VideoBlockSliceDefaultPrimary,
       VideoBlockSliceVariation,
       VideoBlockSliceDefault,
+      WhatWeDoCategoriesSlice,
+      WhatWeDoCategoriesSliceDefaultPrimary,
+      WhatWeDoCategoriesSliceVariation,
+      WhatWeDoCategoriesSliceDefault,
     };
   }
 }

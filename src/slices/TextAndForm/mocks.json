@@ -31,7 +31,7 @@
 			},
 			"form": {
 				"__TYPE__": "FieldContent",
-				"value": "Contact Form",
+				"value": "Newsletter Form",
 				"type": "Select"
 			}
 		},

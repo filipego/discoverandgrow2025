@@ -1,26 +1,32 @@
 # What We Do Categories Slice
 
 Date: 2026-07-18  
-Status: Approved — implementing
+Status: Implemented locally — awaiting Prismic sync
 
 ## Goal
 
-On the What We Do landing page (`page` type), show up to three category sections. Each section has CMS heading + paragraph and a traditional Swiper of `what_we_do` documents for that category. Empty categories are hidden.
+Provide one reusable category-slider section. Each slice instance has a selected category and renders a traditional Swiper of only the `what_we_do` documents assigned to that category. Use a Text Block slice immediately above it for introductory copy.
 
 ## Categories (fixed)
 
-1. Programs for Caregivers  
-2. Programs for Children and Youth  
-3. Programs for Schools  
+1. Social and Emotional Learning for Schools
+2. Parenting Support & Education
+3. Community Campaigns & Awareness
 
 ## Behavior
 
 - Query all `what_we_do` documents once per slice render.
-- Group by `category`.
-- Skip any category with zero documents.
+- Filter by the slice instance's selected `category` value.
+- Render nothing when no category is selected or when it has zero matching documents.
 - Cards use image, title, body, and link (fallback to document URL).
 - Swiper: traditional arrows over media, mobile-friendly; one item looks static.
 
+## Slice field API IDs
+
+- `category`
+
+The slice can be repeated on the What We Do page or on a different landing page. Every instance selects and displays one category only.
+
 ## Publishing
 
-Editor must push/sync the slice model to Prismic, add the slice to the What We Do page, fill intros, and publish.
+Editor must push/sync the slice model to Prismic, add a Text Block plus one slider slice per desired category, select the slider category, and publish.

@@ -27,12 +27,13 @@ export async function POST(request: NextRequest) {
 
       if (existingCustomers.data.length > 0) {
         customer = existingCustomers.data[0];
-        // Update customer name if provided and different
-        if (customer_name && customer.name !== customer_name) {
-          customer = await stripe.customers.update(customer.id, {
-            name: customer_name,
-          });
-        }
+        customer = await stripe.customers.update(customer.id, {
+          ...(customer_name ? { name: customer_name } : {}),
+          metadata: {
+            source: 'donation_form',
+            ...metadata,
+          },
+        });
       } else {
         customer = await stripe.customers.create({
           email: customer_email,
@@ -93,7 +94,7 @@ export async function POST(request: NextRequest) {
       payment_settings: {
         save_default_payment_method: 'on_subscription',
       },
-      expand: ['latest_invoice.payment_intent'],
+      expand: ['latest_invoice.confirmation_secret'],
       metadata: {
         ...metadata,
         source: 'donation_form',
@@ -101,14 +102,16 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    const invoice = subscription.latest_invoice as Stripe.Invoice & {
-      payment_intent: Stripe.PaymentIntent;
-    };
-    const paymentIntent = invoice.payment_intent;
+    const invoice = subscription.latest_invoice as Stripe.Invoice;
+    const clientSecret = invoice.confirmation_secret?.client_secret;
+
+    if (!clientSecret) {
+      throw new Error('Stripe did not return an invoice confirmation secret');
+    }
 
     return NextResponse.json({
       subscription_id: subscription.id,
-      client_secret: paymentIntent?.client_secret,
+      client_secret: clientSecret,
       customer_id: customer.id,
     });
   } catch (error) {

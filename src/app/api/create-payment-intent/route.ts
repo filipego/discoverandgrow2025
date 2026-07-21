@@ -7,7 +7,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST(request: NextRequest) {
   try {
-    const { amount, currency, payment_method_types, metadata, customer_email, customer_name } = await request.json();
+    const { amount, currency, metadata, customer_email, customer_name } = await request.json();
 
     // Validate amount
     if (!amount || amount < 50) { // Minimum $0.50
@@ -27,12 +27,13 @@ export async function POST(request: NextRequest) {
 
       if (existingCustomers.data.length > 0) {
         customer = existingCustomers.data[0];
-        // Update customer name if provided and different
-        if (customer_name && customer.name !== customer_name) {
-          customer = await stripe.customers.update(customer.id, {
-            name: customer_name,
-          });
-        }
+        customer = await stripe.customers.update(customer.id, {
+          ...(customer_name ? { name: customer_name } : {}),
+          metadata: {
+            source: 'donation_form',
+            ...metadata,
+          },
+        });
       } else {
         customer = await stripe.customers.create({
           email: customer_email,
@@ -49,8 +50,8 @@ export async function POST(request: NextRequest) {
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency: currency || 'usd',
-      payment_method_types: payment_method_types || ['card'],
       customer: customer?.id,
+      receipt_email: customer_email,
       metadata: {
         ...metadata,
         source: 'donation_form',

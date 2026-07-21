@@ -89,6 +89,7 @@ route page
 - Use plain `next/link` for fixed internal links.
 - Keep primary CTAs green and secondary CTAs orange unless a design task changes the system.
 - Icon buttons or icon-only links need accessible labels.
+- Desktop header navigation marks the current route with `aria-current="page"` and a persistent brand-blue underline; the moving underline remains the hover indicator.
 
 ---
 
@@ -105,6 +106,7 @@ route page
 
 - Static forms use React Hook Form, Zod, and the shared form UI controls.
 - Dynamic Prismic forms use `DynamicForm` plus `createDynamicSchema` from `src/lib/dynamicValidation.ts`.
+- Keep the on-page dynamic-form confirmation aligned with its email fallback: acknowledge receipt and promise a response within 2–3 business days unless the form's content explicitly requires different timing.
 - Server form handlers must validate input, rate limit where appropriate, avoid raw internal errors, and keep API keys server-side.
 - Cloudflare Turnstile verification belongs in the server route, not only in the client component.
 - The newsletter form currently writes to Supabase and then calls `/api/emails`; treat that as a legacy implementation detail.

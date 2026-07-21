@@ -28,52 +28,16 @@
             "default_value": "normal padding"
           }
         },
-        "caregivers_heading": {
-          "type": "Text",
+        "category": {
+          "type": "Select",
           "config": {
-            "label": "Caregivers Heading",
-            "placeholder": "Programs for Caregivers"
-          }
-        },
-        "caregivers_body": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Caregivers Body",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,strong,em,hyperlink"
-          }
-        },
-        "children_youth_heading": {
-          "type": "Text",
-          "config": {
-            "label": "Children and Youth Heading",
-            "placeholder": "Programs for Children and Youth"
-          }
-        },
-        "children_youth_body": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Children and Youth Body",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,strong,em,hyperlink"
-          }
-        },
-        "schools_heading": {
-          "type": "Text",
-          "config": {
-            "label": "Schools Heading",
-            "placeholder": "Programs for Schools"
-          }
-        },
-        "schools_body": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Schools Body",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,strong,em,hyperlink"
+            "label": "Category",
+            "placeholder": "Select a category",
+            "options": [
+              "Social and Emotional Learning for Schools",
+              "Parenting Support & Education",
+              "Community Campaigns & Awareness"
+            ]
           }
         }
       },

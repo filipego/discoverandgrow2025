@@ -95,7 +95,9 @@ Root layout
 Prismic Form slice
   -> DynamicForm builds React Hook Form schema from Prismic field config
   -> /api/forms/submit validates rate limit, Turnstile token, timing, and payload
-  -> Resend sends notification and optional thank-you email
+  -> Resend sends a branded owner notification to the slice recipient (or the site default)
+  -> Resend sends a branded thank-you email to the submitted email address
+  -> blank thank-you copy uses the standard 2–3-business-day response message
 ```
 
 ### Donations
@@ -105,7 +107,11 @@ DonationForm slice
   -> Stripe Elements collects card details
   -> /api/create-payment-intent or /api/create-subscription creates Stripe objects
   -> client confirms payment
-  -> /api/webhooks/stripe receives Stripe lifecycle events
+  -> /api/webhooks/stripe verifies Stripe lifecycle events
+  -> successful one-time gifts send one branded React Email through Resend
+  -> the first successful monthly invoice sends one branded React Email through Resend
+  -> Stripe metadata plus Resend idempotency keys prevent duplicate acknowledgments
+  -> later monthly invoices remain Stripe-only and do not trigger the custom email
 ```
 
 ### Cache and Preview
@@ -126,13 +132,16 @@ Do not commit real values.
 | Variable | Required For | Purpose |
 | --- | --- | --- |
 | `NEXT_PUBLIC_PRISMIC_ENVIRONMENT` | Optional | Overrides `slicemachine.config.json` repository name |
-| `RESEND_API_KEY` | Email routes | Server-side Resend API access |
+| `RESEND_API_KEY` | Email routes and donation webhook | Server-side Resend API access |
+| `DONATION_EMAIL_FROM` | Optional donation email override | Verified Resend sender; defaults to `Discover and Grow <info@discoverandgrow.org>` |
+| `FORMS_EMAIL_FROM` | Optional dynamic-form email override | Verified Resend sender; defaults to the Resend onboarding sender during testing |
+| `FORM_TEST_RECIPIENT` | Optional dynamic-form test override | Routes both form emails to this address while testing a Resend onboarding sender or preview deployment |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Dynamic forms | Browser-safe Turnstile site key |
 | `TURNSTILE_SECRET_KEY` | Dynamic form API route | Server-side Turnstile verification |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Donation form | Browser-safe Stripe Elements key |
 | `STRIPE_SECRET_KEY` | Stripe API routes | Server-side Stripe API access |
 | `STRIPE_WEBHOOK_SECRET` | Stripe webhook | Webhook signature verification |
-| `NEXT_PUBLIC_SITE_URL` | Customer portal fallback | Return URL for Stripe portal |
+| `NEXT_PUBLIC_SITE_URL` | Customer portal and donation email | Portal return URL and absolute hosted logo URL |
 | `ETSY_SHOP_ID` | Etsy API route | Etsy shop lookup |
 | `ETSY_API_KEY` | Etsy API route | Etsy API request key |
 | `NEXT_PUBLIC_SUPABASE_URL` | Legacy newsletter form | Supabase project URL for newsletter insert |

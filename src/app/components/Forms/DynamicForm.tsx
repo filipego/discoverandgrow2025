@@ -5,6 +5,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { createDynamicSchema, sanitizeFieldKey, FormField } from "@/lib/dynamicValidation";
+import { formatDynamicFormData } from "@/lib/dynamicFormSubmission";
 
 // Auto-generate clean values from labels
 const generateValue = (label: string): string => {
@@ -16,6 +17,7 @@ import { CustomRadio } from "./CustomRadio";
 import { CustomCheckbox } from "./CustomCheckbox";
 import { CustomCheckboxGroup } from "./CustomCheckboxGroup";
 import { CustomTextarea } from "./CustomTextarea";
+import { Button } from "./ui/Button";
 
 interface DynamicFormProps {
   formFields: FormField[];
@@ -28,6 +30,8 @@ interface DynamicFormProps {
   showCaptcha?: boolean;
   onSuccess?: () => void;
 }
+
+type DynamicFormValues = Record<string, string | boolean | string[]>;
 
 const DynamicForm: FC<DynamicFormProps> = ({
   formFields,
@@ -57,7 +61,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
     watch,
     control,
     trigger
-  } = useForm({
+  } = useForm<DynamicFormValues>({
     resolver: zodResolver(schema),
     mode: 'onSubmit' // Only validate when form is submitted
   });
@@ -82,9 +86,9 @@ const DynamicForm: FC<DynamicFormProps> = ({
         return value && value.toString().trim() !== '';
       }
     });
-  }, [watchedValues, formFields, errors]);
+  }, [watchedValues, formFields]);
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: DynamicFormValues) => {
     // Honeypot check
     if (honeypot) {
       console.log('Bot detected via honeypot');
@@ -102,14 +106,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
 
     try {
       // Transform data to match API format
-      const formData = formFields.map(field => {
-        const fieldKey = sanitizeFieldKey(field.field_label);
-        return {
-          label: field.field_label,
-          value: data[fieldKey] || '',
-          type: field.field_type
-        };
-      });
+      const formData = formatDynamicFormData(formFields, data);
 
       const response = await fetch('/api/forms/submit', {
         method: 'POST',
@@ -180,7 +177,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
                   required={field.is_required}
                   error={error}
                   options={selectOptions}
-                  value={controllerField.value}
+                  value={typeof controllerField.value === 'string' ? controllerField.value : ''}
                   onChange={controllerField.onChange}
                   name={controllerField.name}
                 />
@@ -206,7 +203,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
                   required={field.is_required}
                   error={error}
                   options={radioOptions}
-                  value={controllerField.value}
+                  value={typeof controllerField.value === 'string' ? controllerField.value : ''}
                   onChange={controllerField.onChange}
                   name={controllerField.name}
                 />
@@ -227,7 +224,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
                   label={field.field_label}
                   required={field.is_required}
                   error={error}
-                  checked={controllerField.value}
+                  checked={controllerField.value === true}
                   onChange={controllerField.onChange}
                   name={controllerField.name}
                 />
@@ -253,7 +250,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
                   options={checkboxOptions}
                   required={field.is_required}
                   error={error}
-                  value={controllerField.value || []}
+                  value={Array.isArray(controllerField.value) ? controllerField.value : []}
                   onChange={controllerField.onChange}
                 />
               )}
@@ -289,7 +286,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
           {successMessage}
         </div>
         <div className="text-green-600 text-sm">
-          We'll get back to you soon!
+          We&apos;ll get back to you within 2–3 business days.
         </div>
       </div>
     );
@@ -335,16 +332,21 @@ const DynamicForm: FC<DynamicFormProps> = ({
         </div>
       )}
 
-      {/* Submit button */}
-      <button
-        type="submit"
-        disabled={isSubmitting || (enableCaptcha && !turnstileToken) || !areRequiredFieldsValid}
-        className="w-full bg-brand-green text-white py-3 px-6 rounded-lg font-medium hover:bg-brand-green/80 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all duration-200 uppercase"
-      >
-        {isSubmitting ? 'Submitting...' : submitButtonText}
-      </button>
+      <div className="flex justify-start">
+        <Button
+          type="submit"
+          isValid={
+            !isSubmitting &&
+            areRequiredFieldsValid &&
+            (!enableCaptcha || Boolean(turnstileToken))
+          }
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Submitting...' : submitButtonText}
+        </Button>
+      </div>
     </form>
   );
 };
 
-export default DynamicForm; 
+export default DynamicForm;

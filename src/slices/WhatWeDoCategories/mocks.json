@@ -1,68 +1,19 @@
 [
-  {
-    "__TYPE__": "SharedSliceContent",
-    "variation": "default",
-    "primary": {
-      "padding": {
-        "__TYPE__": "FieldContent",
-        "value": "normal padding",
-        "type": "Select"
-      },
-      "caregivers_heading": {
-        "__TYPE__": "FieldContent",
-        "value": "Programs for Caregivers",
-        "type": "Text"
-      },
-      "caregivers_body": {
-        "__TYPE__": "StructuredTextContent",
-        "value": [
-          {
-            "type": "paragraph",
-            "content": {
-              "text": "Support and resources for caregivers.",
-              "spans": []
-            },
-            "direction": "ltr"
-          }
-        ]
-      },
-      "children_youth_heading": {
-        "__TYPE__": "FieldContent",
-        "value": "Programs for Children and Youth",
-        "type": "Text"
-      },
-      "children_youth_body": {
-        "__TYPE__": "StructuredTextContent",
-        "value": [
-          {
-            "type": "paragraph",
-            "content": {
-              "text": "Programs designed for children and youth.",
-              "spans": []
-            },
-            "direction": "ltr"
-          }
-        ]
-      },
-      "schools_heading": {
-        "__TYPE__": "FieldContent",
-        "value": "Programs for Schools",
-        "type": "Text"
-      },
-      "schools_body": {
-        "__TYPE__": "StructuredTextContent",
-        "value": [
-          {
-            "type": "paragraph",
-            "content": {
-              "text": "Partnerships and programs for schools.",
-              "spans": []
-            },
-            "direction": "ltr"
-          }
-        ]
-      }
-    },
-    "items": []
-  }
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"padding": {
+				"__TYPE__": "FieldContent",
+				"value": "normal padding",
+				"type": "Select"
+			},
+			"category": {
+				"__TYPE__": "FieldContent",
+				"value": "Community Campaigns & Awareness",
+				"type": "Select"
+			}
+		},
+		"items": []
+	}
 ]
