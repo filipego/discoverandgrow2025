@@ -13,8 +13,6 @@ export async function GET() {
       );
     }
 
-    console.log(`Attempting to fetch from Etsy for shop ID: ${shopId}`); // Add logging
-
     // Fetch shop listings using API key in header
     const response = await fetch(
       `https://openapi.etsy.com/v3/application/shops/${shopId}/listings/active`,
@@ -37,7 +35,6 @@ export async function GET() {
     }
 
     const data = await response.json();
-    console.log('Successfully fetched data from Etsy'); // Add success log
     return NextResponse.json(data);
   } catch (error) {
     console.error('Error in /api/etsy route:', error);

@@ -39,7 +39,6 @@ const StoreClientComponent: FC = () => { // Remove props from component definiti
         }
 
         const data = await response.json();
-        console.log("Etsy API response:", data);
         setProducts(data.results || []);
       } catch (err) {
         console.error("Error fetching from Etsy:", err);

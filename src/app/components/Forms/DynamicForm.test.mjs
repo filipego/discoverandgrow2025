@@ -14,6 +14,13 @@ test("hidden CAPTCHA uses Turnstile's invisible execute flow", () => {
   assert.match(source, /turnstileRef\.current\.execute\(\)/);
 });
 
+test("hidden CAPTCHA prevents duplicate executions and handles provider errors", () => {
+  assert.match(source, /const \[isCaptchaVerifying, setIsCaptchaVerifying\] = useState\(false\)/);
+  assert.match(source, /if \(isInvisibleCaptcha && turnstileRef\.current && !isCaptchaVerifying\)/);
+  assert.match(source, /const handleTurnstileError = \(errorCode: string\)/);
+  assert.match(source, /onError=\{handleTurnstileError\}/);
+});
+
 test("hidden CAPTCHA does not keep a valid form's submit button disabled", () => {
   assert.match(
     source,
@@ -36,4 +43,15 @@ test("browser autofill is synchronized before it can keep a valid form disabled"
 
 test("the honeypot opts out of browser profile autofill", () => {
   assert.match(source, /name="website"[\s\S]*autoComplete="new-password"/);
+});
+
+test("success feedback returns to the form after five seconds", () => {
+  assert.match(source, /window\.setTimeout\(\(\) => setSubmitStatus\('idle'\), 5000\)/);
+  assert.match(source, /return \(\) => window\.clearTimeout\(resetSuccessFeedback\)/);
+});
+
+test("success feedback is a compact branded confirmation card", () => {
+  assert.match(source, /CheckCircle2/);
+  assert.match(source, /Message sent/);
+  assert.match(source, /Your form is ready for another message\./);
 });
