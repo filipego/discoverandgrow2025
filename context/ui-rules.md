@@ -89,6 +89,7 @@ route page
 - Use plain `next/link` for fixed internal links.
 - Keep primary CTAs green and secondary CTAs orange unless a design task changes the system.
 - Icon buttons or icon-only links need accessible labels.
+- Use the accessible green text token for standard-size links on white or off-white surfaces. On dark surfaces, use a separately verified light color rather than the white-surface green token.
 - Desktop header navigation marks the current route with `aria-current="page"` and a persistent brand-blue underline; the moving underline remains the hover indicator.
 
 ---
