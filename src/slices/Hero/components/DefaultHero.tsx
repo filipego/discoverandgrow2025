@@ -51,6 +51,7 @@ export function DefaultHero({
             field={image}
             className="h-full w-full rounded-xl object-cover"
             priority
+            fetchPriority="high"
             sizes="(min-width: 1024px) 40vw, 100vw"
           />
         </div>

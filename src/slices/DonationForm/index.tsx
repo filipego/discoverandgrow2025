@@ -3,7 +3,7 @@ import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { Bounded } from "@/app/components/Bounded";
 import { Heading } from "@/app/components/Heading";
-import DonateForm from "./DonateForm";
+import { LazyDonateForm } from "./LazyDonateForm";
 
 /**
  * Props for `DonationForm`.
@@ -41,7 +41,7 @@ const DonationForm: FC<DonationFormProps> = ({ slice }) => {
           />
         </div>
         <div>
-          <DonateForm
+          <LazyDonateForm
             image={slice.primary.donate_form_image}
             heading={slice.primary.donate_form_heading}
           />

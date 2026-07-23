@@ -11,20 +11,6 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 // Initialize Stripe
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
-// Debug Stripe initialization
-if (typeof window !== 'undefined') {
-  console.log('Stripe publishable key:', process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
-  stripePromise.then((stripe) => {
-    if (stripe) {
-      console.log('Stripe loaded successfully');
-    } else {
-      console.error('Failed to load Stripe');
-    }
-  }).catch((error) => {
-    console.error('Error loading Stripe:', error);
-  });
-}
-
 type DonationType = 'one-time' | 'monthly';
 type FormStep = 'amount' | 'donor-info' | 'payment' | 'confirmation';
 
