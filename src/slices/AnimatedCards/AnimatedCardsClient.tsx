@@ -80,8 +80,14 @@ const AnimatedCardContent = ({
 
     {isFilled.link(card.link) && (
       <div className="pt-4">
-        <ButtonLink field={card.link} color="Link" size="sm" noPadding>
-          Learn more
+        <ButtonLink
+          field={card.link}
+          color="Link"
+          size="sm"
+          noPadding
+          className="!text-[#71d8b9]"
+        >
+          Learn more about {card.heading}
         </ButtonLink>
       </div>
     )}
