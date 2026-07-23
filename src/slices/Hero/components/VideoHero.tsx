@@ -24,21 +24,21 @@ export function VideoHero({
   kicker,
 }: VideoHeroProps) {
   return (
-    <div className="grid grid-cols-5 items-center gap-12 py-8 lg:gap-24 lg:py-20">
+    <div className="grid grid-cols-5 items-center gap-12 py-4 lg:gap-24 lg:py-20">
       <div className="col-span-5 lg:col-span-3">
         {isFilled.keyText(kicker) && (
-          <span className="mb-4 block text-xs uppercase tracking-widest">
+          <span className="mb-4 block text-[10px] uppercase tracking-widest lg:text-xs">
             {kicker}
           </span>
         )}
-        <Heading as="h1" size="xl" className="mb-10 max-w-[650]">
+        <Heading as="h1" size="xl" className="mb-5 max-w-[650] lg:mb-10">
           {heading}
         </Heading>
-        <div className="mb-5 max-w-[480]">
+        <div className="mb-3 max-w-[480] lg:mb-5">
           <PrismicRichText field={body} />
         </div>
         {isFilled.repeatable(link) && (
-          <ul className="mt-14 flex gap-2">
+          <ul className="mt-7 flex gap-2 lg:mt-14">
             {link.map((link) => (
               <li key={link.key}>
                 <ButtonLink field={link} color={link.variant}>

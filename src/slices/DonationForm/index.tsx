@@ -19,6 +19,7 @@ const DonationForm: FC<DonationFormProps> = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       padding="bigger padding"
+      className="max-lg:!pb-9"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div>

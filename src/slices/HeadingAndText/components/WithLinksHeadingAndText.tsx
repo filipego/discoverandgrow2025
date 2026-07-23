@@ -17,12 +17,12 @@ export const WithLinksHeadingAndText: FC<WithLinksHeadingAndTextProps> = ({
   link,
 }) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 border-t border-brand-light-gray pt-12">
+    <div className="grid grid-cols-1 gap-4 border-t border-brand-light-gray pt-6 lg:grid-cols-2 lg:gap-24 lg:pt-12">
       <div>
         <Heading as="h2" size="md" className="max-w-[600] mb-5">
           {heading}
         </Heading>
-        <div className="max-w-[480] mb-5">
+        <div className="mb-2 max-w-[480] lg:mb-5">
           <PrismicRichText
             field={body}
             components={{
@@ -37,10 +37,10 @@ export const WithLinksHeadingAndText: FC<WithLinksHeadingAndTextProps> = ({
                 </p>
               ),
               list: ({ children }) => (
-                <ul className="ml-4 mb-6">{children}</ul>
+                <ul className="mb-6 ml-2 lg:ml-4">{children}</ul>
               ),
               listItem: ({ children }) => (
-                <li className="mb-4 list-disc ml-6">{children}</li>
+                <li className="mb-4 ml-5 list-disc lg:ml-6">{children}</li>
               ),
             }}
           />
@@ -50,10 +50,10 @@ export const WithLinksHeadingAndText: FC<WithLinksHeadingAndTextProps> = ({
         {link && (
           <ul className="flex flex-col">
             {link.map((linkItem, index) => (
-              <li key={index} className="text-base relative group">
+              <li key={index} className="relative group text-[14px] lg:text-base">
                 <PrismicNextLink
                   field={linkItem}
-                  className="text-brand-green font-medium flex items-center justify-between w-full py-6 border-t border-brand-light-gray link-border-animation"
+                  className="flex w-full items-center justify-between border-t border-brand-light-gray py-6 font-medium text-brand-green link-border-animation"
                 >
                   <span>{linkItem.text}</span>
                   <HiArrowRight

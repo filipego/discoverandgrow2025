@@ -9,7 +9,7 @@ export const DefaultHeadingAndText: FC<HeadingAndTextComponentProps> = ({
   className,
 }) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 border-t border-brand-light-gray pt-8">
+    <div className="grid grid-cols-1 gap-4 border-t border-brand-light-gray pt-4 lg:grid-cols-2 lg:gap-24 lg:pt-8">
       <div>
         <Heading as="h2" size="md" className="max-w-[600]">
           {heading}
@@ -31,10 +31,10 @@ export const DefaultHeadingAndText: FC<HeadingAndTextComponentProps> = ({
                 </p>
               ),
               list: ({ children }) => (
-                <ul className="ml-4 mb-6">{children}</ul>
+                <ul className="mb-6 ml-2 lg:ml-4">{children}</ul>
               ),
               listItem: ({ children }) => (
-                <li className="mb-4 list-disc ml-6">{children}</li>
+                <li className="mb-4 ml-5 list-disc lg:ml-6">{children}</li>
               ),
             }}
           />

@@ -14,7 +14,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     const page = await client.getByUID("page", uid).catch(() => notFound());
 
     return (
-        <div className="pt-[100px]">
+        <div className="pt-4 lg:pt-[100px]">
             <SliceZone slices={page.data.slices} components={components} />
         </div>
     );

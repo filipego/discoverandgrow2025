@@ -12,7 +12,7 @@ const Input = React.forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProp
       return (
         <textarea
           className={cn(
-            "w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#F1E1A7] outline-none",
+            "w-full rounded-lg border px-4 py-2 text-[14px] outline-none placeholder:text-[14px] focus:ring-2 focus:ring-[#F1E1A7] lg:text-base lg:placeholder:text-base",
             className
           )}
           rows={rows}
@@ -26,7 +26,7 @@ const Input = React.forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProp
       <input
         type={type}
         className={cn(
-          "w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#F1E1A7] outline-none",
+          "w-full rounded-lg border px-4 py-2 text-[14px] outline-none placeholder:text-[14px] focus:ring-2 focus:ring-[#F1E1A7] lg:text-base lg:placeholder:text-base",
           className
         )}
         ref={ref as React.Ref<HTMLInputElement>}

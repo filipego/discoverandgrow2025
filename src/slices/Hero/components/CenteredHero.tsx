@@ -12,14 +12,14 @@ type CenteredHeroProps = {
 export function CenteredHero({ heading, body, link }: CenteredHeroProps) {
   return (
     <div className="flex flex-col items-center justify-center text-center h-[60dvh]">
-      <Heading as="h1" size="lg" className="mb-10 max-w-[800]">
+      <Heading as="h1" size="lg" className="mb-5 max-w-[800] lg:mb-10">
         {heading}
       </Heading>
-      <div className="max-w-[480] mb-5">
+      <div className="mb-3 max-w-[480] lg:mb-5">
         <PrismicRichText field={body} />
       </div>
       {isFilled.repeatable(link) && (
-        <ul className="flex gap-2 mt-8">
+        <ul className="mt-4 flex gap-2 lg:mt-8">
           {link.map((link) => (
             <li key={link.key}>
               <ButtonLink field={link} color={link.variant}>

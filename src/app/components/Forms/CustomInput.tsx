@@ -20,8 +20,8 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
           ref={ref}
           type={type}
           placeholder={placeholder}
-          className={`w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition-colors ${
-            error ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'
+          className={`w-full rounded-lg border px-3 py-2 text-[14px] shadow-sm transition-colors placeholder:text-[14px] focus:border-black focus:ring-2 focus:ring-black focus:outline-none lg:text-base lg:placeholder:text-base ${
+            error ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-gray-300'
           }`}
           {...props}
         />

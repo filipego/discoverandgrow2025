@@ -8,10 +8,14 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Heading } from "@/app/components/Heading";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 
 interface PartnerSliderComponentProps {
   partners: Content.PartnerPostDocument[];
 }
+
+const partnerNavButtonClassName =
+  "flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-brand-blue/15 bg-white text-brand-blue shadow-sm transition-colors duration-200 hover:border-brand-green hover:bg-brand-green hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green disabled:pointer-events-none disabled:opacity-40";
 
 const PartnerSliderComponent: FC<PartnerSliderComponentProps> = ({ partners }) => {
   const [currentSlide, setCurrentSlide] = useState(1);
@@ -19,51 +23,27 @@ const PartnerSliderComponent: FC<PartnerSliderComponentProps> = ({ partners }) =
   return (
     <div>
       {/* Navigation arrows and counter */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="mb-6 flex items-center justify-between">
         <div className="flex gap-2">
           <button
-            className="swiper-button-prev-custom w-8 h-8 bg-brand-green text-white flex items-center justify-center hover:bg-brand-yellow transition-colors duration-200 cursor-pointer group"
+            type="button"
+            className={`swiper-button-prev-custom ${partnerNavButtonClassName}`}
             aria-label="Previous slide"
           >
-            <span className="relative block w-4 h-4 overflow-hidden">
-              <svg
-                className="w-4 h-4 block transition-all duration-300 group-hover:-translate-y-full fill-white"
-                viewBox="0 0 24 24"
-              >
-                <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z" />
-              </svg>
-                              <svg
-                  className="w-4 h-4 absolute top-0 left-0 translate-y-full block transition-all duration-300 group-hover:translate-y-0 fill-white"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z" />
-                </svg>
-            </span>
+            <HiChevronLeft className="h-5 w-5" aria-hidden />
           </button>
 
           <button
-            className="swiper-button-next-custom w-8 h-8 bg-brand-green text-white flex items-center justify-center hover:bg-brand-yellow transition-colors duration-200 cursor-pointer group"
+            type="button"
+            className={`swiper-button-next-custom ${partnerNavButtonClassName}`}
             aria-label="Next slide"
           >
-            <span className="relative block w-4 h-4 overflow-hidden">
-              <svg
-                className="w-4 h-4 block transition-all duration-300 group-hover:-translate-y-full fill-white"
-                viewBox="0 0 24 24"
-              >
-                <path d="M8.59 16.09l4.58-4.59-4.58-4.59L10 5.5l6 6-6 6z" />
-              </svg>
-                              <svg
-                  className="w-4 h-4 absolute top-0 left-0 translate-y-full block transition-all duration-300 group-hover:translate-y-0 fill-white"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8.59 16.09l4.58-4.59-4.58-4.59L10 5.5l6 6-6 6z" />
-                </svg>
-            </span>
+            <HiChevronRight className="h-5 w-5" aria-hidden />
           </button>
         </div>
 
         {/* Slide counter */}
-        <div className="text-sm text-brand-gray font-medium">
+        <div className="text-sm font-medium text-brand-gray">
           {String(currentSlide).padStart(2, "0")}—{" "}
           {String(partners.length).padStart(2, "0")}
         </div>

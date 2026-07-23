@@ -19,7 +19,7 @@ const TextBlock: FC<TextBlockProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       padding="no padding"
     >
-      <div className="max-w-[970px] mb-5 lg:mb-10 px-[50px]">
+      <div className="mb-5 max-w-[970px] px-0 lg:mb-10 lg:px-[50px]">
         <PrismicRichText
           field={slice.primary.body}
           components={{
@@ -27,7 +27,7 @@ const TextBlock: FC<TextBlockProps> = ({ slice }) => {
               <Heading
                 as="h2"
                 size="xl"
-                className="font-semibold mb-5 lg:mb-10"
+                className="mb-5 font-semibold lg:mb-10"
               >
                 {children}
               </Heading>
@@ -36,7 +36,7 @@ const TextBlock: FC<TextBlockProps> = ({ slice }) => {
               <Heading
                 as="h3"
                 size="xl"
-                className="font-semibold mb-10 lg:mb-20"
+                className="mb-10 font-semibold lg:mb-20"
               >
                 {children}
               </Heading>
@@ -45,13 +45,13 @@ const TextBlock: FC<TextBlockProps> = ({ slice }) => {
               <Heading
                 as="h4"
                 size="xl"
-                className="font-semibold mb-10 lg:mb-20"
+                className="mb-10 font-semibold lg:mb-20"
               >
                 {children}
               </Heading>
             ),
             list: ({ children }) => (
-              <ul className="max-w-prose list-disc pl-14 mb-6 space-y-2 text-brand-gray">
+              <ul className="-mt-2 mb-6 ml-4 max-w-prose list-outside list-disc space-y-2 pl-5 text-brand-gray lg:mt-0 lg:ml-0 lg:pl-14">
                 {children}
               </ul>
             ),
@@ -59,7 +59,7 @@ const TextBlock: FC<TextBlockProps> = ({ slice }) => {
               <li className="leading-relaxed">{children}</li>
             ),
             paragraph: ({ children }) => (
-              <p className="max-w-prose mb-6 text-brand-gray leading-relaxed">
+              <p className="mb-4 max-w-prose leading-relaxed text-brand-gray lg:mb-6">
                 {children}
               </p>
             ),

@@ -10,7 +10,7 @@ Living registry of reusable website UI. Read this before building a component an
 | --- | --- | --- |
 | `Bounded` | `src/app/components/Bounded.tsx` | Constrained section wrapper with standard padding variants |
 | `Heading` | `src/app/components/Heading.tsx` | Project heading abstraction and brand font/color/size mapping |
-| `ButtonLink` | `src/app/components/ButtonLink.tsx` | Prismic link CTA button with Primary, Secondary, and Link variants |
+| `ButtonLink` | `src/app/components/ButtonLink.tsx` | Prismic link CTA button with Primary, Secondary, and Link variants; sizes step down one level below `lg` |
 | `ColorSection` | `src/app/components/ColorSection.tsx` | Colored inner section wrapper for selected slice backgrounds |
 | `Header` | `src/app/components/Header.tsx` | Fixed animated global header sourced from Prismic settings; desktop navigation at `lg`, right-side mobile/tablet navigation drawer below `lg` |
 | `Navigation` | `src/app/components/Navigation.tsx` | Header navigation list with route-aware active underline and moving hover indicator |
@@ -46,7 +46,7 @@ Living registry of reusable website UI. Read this before building a component an
 | `CustomCheckbox` | `src/app/components/Forms/CustomCheckbox.tsx` | Dynamic form checkbox |
 | `CustomCheckboxGroup` | `src/app/components/Forms/CustomCheckboxGroup.tsx` | Dynamic form checkbox group |
 | `Forms/ui/Input` | `src/app/components/Forms/ui/Input.tsx` | Low-level form input primitive |
-| `Forms/ui/Button` | `src/app/components/Forms/ui/Button.tsx` | Low-level form button primitive |
+| `Forms/ui/Button` | `src/app/components/Forms/ui/Button.tsx` | Form submit button matching `ButtonLink` Primary pill styles, without the arrow icon |
 | `Forms/ui/Label` | `src/app/components/Forms/ui/Label.tsx` | Low-level label primitive |
 
 ---

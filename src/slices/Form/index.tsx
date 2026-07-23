@@ -50,6 +50,7 @@ const Form: FC<FormProps> = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       padding={getPadding()}
+      className="max-lg:!pb-9"
     >
       <div className="grid grid-cols-1 items-stretch gap-12 lg:grid-cols-2 lg:gap-16">
         {/* Left side - Heading and Text */}
@@ -118,7 +119,8 @@ const Form: FC<FormProps> = ({ slice }) => {
         </div>
 
         {/* Right side - Form */}
-        <div className="bg-gray-50 p-8 rounded-2xl">
+        <div className="rounded-2xl bg-gray-50 p-4 lg:p-8">
+          {/* @ts-ignore - hide_form_title field exists in Prismic but types not yet regenerated */}
           {slice.primary.form_title && !slice.primary.hide_form_title && (
             <Heading as="h3" size="md" className="text-black mb-6">
               {slice.primary.form_title}

@@ -69,22 +69,48 @@ const DynamicForm: FC<DynamicFormProps> = ({
   // Watch all form values
   const watchedValues = watch();
 
-  // Check if required fields are valid
+  // Check if required fields are filled. Note: [].every() is true, so when
+  // nothing is marked required we still require fillable fields — otherwise
+  // Turnstile auto-success alone would enable the button (common locally).
   const areRequiredFieldsValid = useMemo(() => {
-    const requiredFields = formFields.filter(field => field.is_required);
-    
-    return requiredFields.every(field => {
+    const requiredFields = formFields.filter((field) => field.is_required);
+    const fieldsToCheck =
+      requiredFields.length > 0
+        ? requiredFields
+        : formFields.filter((field) =>
+            [
+              "text",
+              "email",
+              "phone",
+              "textarea",
+              "select",
+              "radio",
+              "number",
+              "url",
+              "checkbox",
+              "checkbox_group",
+            ].includes(field.field_type)
+          );
+
+    if (fieldsToCheck.length === 0) {
+      return false;
+    }
+
+    return fieldsToCheck.every((field) => {
       const fieldKey = sanitizeFieldKey(field.field_label);
       const value = watchedValues[fieldKey];
-      
-      // Check if field has a value and no errors
-      if (field.field_type === 'checkbox') {
+
+      if (field.field_type === "checkbox") {
         return value === true;
-      } else if (field.field_type === 'checkbox_group') {
-        return Array.isArray(value) && value.length > 0;
-      } else {
-        return value && value.toString().trim() !== '';
       }
+
+      if (field.field_type === "checkbox_group") {
+        return Array.isArray(value) && value.length > 0;
+      }
+
+      return typeof value === "string"
+        ? value.trim() !== ""
+        : Boolean(value);
     });
   }, [watchedValues, formFields]);
 
@@ -342,7 +368,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
           }
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Submitting...' : submitButtonText}
+          {isSubmitting ? "Submitting..." : submitButtonText}
         </Button>
       </div>
     </form>

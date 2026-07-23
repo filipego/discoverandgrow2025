@@ -102,28 +102,15 @@ export default function StoreSlider({ items }: StoreSliderProps) {
             ))}
           </Swiper>
 
-          <div className="text-center mt-10 min-h-[240px]">
-            <Heading as="h3" size="md" className="mb-6 max-w-[560px] mx-auto min-h-[72px]">
+          <div className="mt-6 min-h-0 text-center lg:mt-10 lg:min-h-[240px]">
+            <Heading
+              as="h3"
+              size="xs"
+              className="mx-auto mb-5 w-[90%] max-w-[560px] !text-base !leading-snug lg:mb-6 lg:min-h-[72px] lg:w-full lg:!text-2xl lg:!leading-[30px]"
+            >
               {items[activeIndex]?.heading}
             </Heading>
-            {/* <div className="max-w-md mx-auto mt-3 h-[120px] overflow-y-auto">
-              {items[activeIndex]?.body &&
-              Array.isArray(items[activeIndex]?.body) ? (
-                <PrismicRichText
-                  field={items[activeIndex].body}
-                  components={{
-                    paragraph: ({ children }) => <>{children}</>,
-                  }}
-                />
-              ) : (
-                <p className="max-w-[500px] mx-auto">
-                  {typeof items[activeIndex]?.body === "string"
-                    ? items[activeIndex].body
-                    : "No description available"}
-                </p>
-              )}
-            </div> */}
-            <div className="mt-0 flex justify-center min-h-[44px]">
+            <div className="mt-0 flex min-h-[44px] justify-center">
               {items[activeIndex]?.link && (
                 <ButtonLink
                   field={items[activeIndex].link}

@@ -5,7 +5,6 @@ import { Bounded } from "@/app/components/Bounded";
 import { DefaultHeadingAndText } from "./components/DefaultHeadingAndText";
 import { WithLinksHeadingAndText } from "./components/WithLinksHeadingAndText";
 import { MultipleHeadingAndText } from "./components/MultipleHeadingAndText";
-import clsx from "clsx";
 
 /**
  * Props for `HeadingAndText`.
@@ -56,9 +55,8 @@ const HeadingAndText: FC<HeadingAndTextProps> = ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={clsx(
-        "py-10 lg:pt-16 lg:pb-30",
-      )}
+      padding="no top padding"
+      className="lg:pt-16 lg:pb-30"
     >
       {renderContent()}
     </Bounded>

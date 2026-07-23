@@ -11,12 +11,9 @@ interface BoardLayoutProps {
 
 export const BoardLayout: FC<BoardLayoutProps> = ({ people }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+    <div className="grid grid-cols-1 gap-9 md:grid-cols-2 md:gap-8 lg:grid-cols-3 lg:gap-12">
       {people.map((person, index) => (
-        <div key={index} className={clsx(
-          "space-y-4",
-          index > 0 && "pt-8 md:pt-0"
-        )}>
+        <div key={index} className="space-y-4">
           {/* Image */}
           <div className={clsx(
             "w-full max-w-xs rounded-xl overflow-hidden",

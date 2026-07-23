@@ -47,7 +47,7 @@ export default function RootLayout({
         <main>
           <HashFocusHandler />
           <Header />
-          <div className="pt-24">
+          <div className="pt-20 lg:pt-24">
             {children}
           </div>
           <Footer />

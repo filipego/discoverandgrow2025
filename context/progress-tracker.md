@@ -8,7 +8,7 @@ Update this file after every meaningful application implementation change. Docum
 
 **Phase:** Dependency compatibility and deployment readiness
 
-**Last completed:** Added a shared email-safe mobile breakpoint across the branded donation, newsletter, and dynamic-form templates, then removed the unused legacy static contact-form component, its two email templates, and its retired `TextAndForm` choice.
+**Last completed:** Polished mobile layout across header, slices, forms, footer, and donation checkout; kept desktop behavior intact. Earlier: shared email-safe mobile breakpoint for branded templates and removed unused legacy contact-form assets.
 
 **Next:** Push/sync the updated category models to Prismic, add a Text Block plus one slider slice per desired category, replace the existing `what_we_do` post content, publish/revalidate, then continue deployment hardening.
 

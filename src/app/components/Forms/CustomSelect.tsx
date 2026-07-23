@@ -115,11 +115,11 @@ export const CustomSelect = forwardRef<HTMLInputElement, CustomSelectProps>(
             type="button"
             onClick={() => setIsOpen(!isOpen)}
             onKeyDown={handleKeyDown}
-            className={`relative w-full px-4 py-3 text-left border rounded-lg shadow-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition-all duration-200 ${
+            className={`relative w-full cursor-pointer rounded-lg border px-4 py-3 text-left text-[14px] shadow-sm transition-all duration-200 focus:border-black focus:ring-2 focus:ring-black focus:outline-none lg:text-base ${
               error 
-                ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
+                ? 'border-red-300 focus:border-red-500 focus:ring-red-500' 
                 : 'border-gray-300 hover:border-gray-400'
-            } ${isOpen ? 'ring-2 ring-black border-black' : ''}`}
+            } ${isOpen ? 'border-black ring-2 ring-black' : ''}`}
             aria-haspopup="listbox"
             aria-expanded={isOpen}
           >
@@ -151,7 +151,7 @@ export const CustomSelect = forwardRef<HTMLInputElement, CustomSelectProps>(
                   <li
                     key={option.value}
                     onClick={() => handleSelect(option)}
-                    className={`relative cursor-pointer select-none py-2 px-4 transition-colors duration-150 ${
+                    className={`relative cursor-pointer select-none px-4 py-2 text-[14px] transition-colors duration-150 lg:text-base ${
                       index === focusedIndex
                         ? 'bg-black text-white'
                         : selectedValue === option.value

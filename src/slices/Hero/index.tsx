@@ -10,7 +10,7 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 
 const Hero: FC<HeroProps> = ({ slice }) => {
   return (
-    <Bounded className="pt-4 lg:pt-6">
+    <Bounded padding="no padding" className="pt-2 pb-5 lg:pb-10 lg:pt-6">
       {slice.variation === "centeredHero" ? (
         <CenteredHero
           heading={slice.primary.heading}

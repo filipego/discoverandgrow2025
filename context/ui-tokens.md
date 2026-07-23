@@ -89,6 +89,8 @@ If `font-primary-light` or `font-primary-medium` are needed, add matching tokens
 - `Secondary`: `bg-brand-orange text-white rounded-full`
 - `Link`: transparent with `text-brand-green`
 
+Sizes step down one level below `lg` (`md` renders as `sm`, `lg` as `md`); desktop sizes are unchanged. Primary/Secondary label type is `12px` below `lg` and `text-sm` from `lg` up. Link variant type is `14px` below `lg` and `text-base` from `lg` up.
+
 The inner circular icon backgrounds are currently hardcoded `#54AC8B` and `#FF7456`; prefer tokenizing if those colors become reusable.
 
 ### Bounded Layout
@@ -98,6 +100,7 @@ The inner circular icon backgrounds are currently hardcoded `#54AC8B` and `#FF74
 - Outer `px-6`.
 - Inner `mx-auto w-full max-w-6xl`.
 - Padding variants: normal, smaller, none, no-top, no-bottom, and bigger.
+- Vertical padding is roughly half below `lg` (`py-5 lg:py-10` for normal); desktop values are unchanged.
 
 ### Link Border Animation
 

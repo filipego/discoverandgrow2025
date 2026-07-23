@@ -347,10 +347,10 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
           <button
             type="button"
             onClick={() => setDonationType('one-time')}
-            className={`py-2 px-6 rounded-l-lg border-2 transition-colors ${
+            className={`rounded-l-lg border-2 px-3 py-1.5 text-[13px] transition-colors lg:px-6 lg:py-2 lg:text-base ${
               donationType === 'one-time'
-                ? 'bg-black text-white border-black'
-                : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400'
+                ? 'border-black bg-black text-white'
+                : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400'
             }`}
           >
             One time
@@ -358,10 +358,10 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
           <button
             type="button"
             onClick={() => setDonationType('monthly')}
-            className={`py-2 px-6 rounded-r-lg border-2 transition-colors ${
+            className={`rounded-r-lg border-2 px-3 py-1.5 text-[13px] transition-colors lg:px-6 lg:py-2 lg:text-base ${
               donationType === 'monthly'
-                ? 'bg-black text-white border-black'
-                : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400'
+                ? 'border-black bg-black text-white'
+                : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400'
             }`}
           >
             Monthly
@@ -371,19 +371,19 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
 
       {/* Amounts Section */}
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Amounts</h3>
+        <h3 className="mb-3 text-base font-semibold text-gray-900 lg:mb-4 lg:text-lg">Amounts</h3>
         
         {/* Preset Amounts */}
-        <div className="grid grid-cols-5 gap-2 mb-4">
+        <div className="mb-4 grid grid-cols-5 gap-1.5 lg:gap-2">
           {PRESET_AMOUNTS.map((amount) => (
             <button
               key={amount}
               type="button"
               onClick={() => handleAmountSelect(amount)}
-              className={`py-2 px-2 rounded-lg border-2 transition-colors text-sm ${
+              className={`rounded-lg border-2 px-0.5 py-1.5 text-[11px] transition-colors lg:px-2 lg:py-2 lg:text-sm ${
                 selectedAmount === amount && !customAmount
-                  ? 'bg-black text-white border-black'
-                  : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400'
+                  ? 'border-black bg-black text-white'
+                  : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400'
               }`}
             >
               ${amount}
@@ -399,30 +399,30 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
           onChange={handleCustomAmountChange}
           min="1"
           step="0.01"
-          className="w-full py-3 px-4 border-2 border-gray-300 rounded-lg focus:border-black focus:outline-none transition-colors"
+          className="w-full rounded-lg border-2 border-gray-300 px-3 py-2 text-[14px] transition-colors placeholder:text-[14px] focus:border-black focus:outline-none lg:px-4 lg:py-3 lg:text-base lg:placeholder:text-base"
         />
       </div>
 
       {/* Cover Fees Checkbox */}
       <div>
-        <label className="flex items-center space-x-3 cursor-pointer">
+        <label className="flex cursor-pointer items-center space-x-3">
           <input
             type="checkbox"
             checked={coverFees}
             onChange={(e) => setCoverFees(e.target.checked)}
-            className="w-5 h-5 text-black border-2 border-gray-300 rounded focus:ring-black focus:ring-2"
+            className="h-5 w-5 rounded border-2 border-gray-300 text-black focus:ring-2 focus:ring-black"
           />
-          <span className="text-gray-700">
+          <span className="text-sm text-gray-700 lg:text-base">
             Add 5% to help cover fees and administration
           </span>
         </label>
       </div>
 
       {/* Total Amount Display */}
-      <div className="p-4 bg-gray-50 rounded-lg">
-        <div className="flex justify-between items-center">
-          <span className="text-gray-700">Total Amount:</span>
-          <span className="text-xl font-bold text-gray-900">
+      <div className="rounded-lg bg-gray-50 px-3 py-3.5 lg:p-4">
+        <div className="flex items-center justify-between gap-3">
+          <span className="text-sm text-gray-700 lg:text-base">Total Amount:</span>
+          <span className="text-lg font-bold text-gray-900 lg:text-xl">
             ${getFinalAmount().toFixed(2)}
           </span>
         </div>
@@ -618,7 +618,7 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
         </div>
       )}
 
-      <div className="p-8">
+      <div className="p-4 lg:p-8">
         {/* Title */}
         <Heading as='h3' size='sm' className="mb-6 text-center">
           {heading || 'Thank you for making a change'}
@@ -652,18 +652,18 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
 
           {/* Navigation Buttons */}
           {!success && (
-            <div className="flex justify-between space-x-4">
+            <div className="flex justify-between gap-3 space-x-0 lg:gap-4">
               <button
                 type="button"
                 onClick={handlePrevStep}
                 disabled={currentStep === 'amount'}
-                className={`flex items-center px-4 py-2 rounded-lg font-medium transition-colors cursor-pointer ${
+                className={`flex cursor-pointer items-center rounded-full px-4 py-1.5 text-[12px] font-semibold uppercase transition-colors lg:px-5 lg:py-2 lg:text-sm lg:normal-case lg:font-medium ${
                   currentStep === 'amount'
-                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300 hover:cursor-pointer'
+                    ? 'cursor-not-allowed bg-gray-100 text-gray-400'
+                    : 'bg-gray-200 text-gray-700 hover:cursor-pointer hover:bg-gray-300'
                 }`}
               >
-                <ChevronLeft className="w-4 h-4 mr-1" />
+                <ChevronLeft className="mr-1 h-3.5 w-3.5 lg:h-4 lg:w-4" />
                 Back
               </button>
               
@@ -671,7 +671,7 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
                 <button
                   type="submit"
                   disabled={isProcessing || !stripe || (!selectedAmount && !customAmount) || !showCardElement}
-                  className="flex-1 bg-black text-white py-4 rounded-lg font-semibold hover:bg-gray-800 hover:cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                  className="flex-1 rounded-full bg-black py-2.5 text-[12px] font-semibold text-white uppercase transition-colors hover:cursor-pointer hover:bg-gray-800 disabled:cursor-not-allowed disabled:bg-gray-400 lg:py-3 lg:text-base lg:normal-case"
                 >
                   {isProcessing ? 'Processing...' : !showCardElement ? 'Loading...' : `Donate $${getFinalAmount().toFixed(2)}`}
                 </button>
@@ -679,10 +679,10 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
                 <button
                   type="button"
                   onClick={handleNextStep}
-                  className="flex items-center px-6 py-2 bg-black text-white rounded-lg font-medium hover:bg-gray-800 hover:cursor-pointer transition-colors"
+                  className="flex items-center rounded-full bg-black px-5 py-1.5 text-[12px] font-semibold text-white uppercase transition-colors hover:cursor-pointer hover:bg-gray-800 lg:px-6 lg:py-2 lg:text-sm lg:normal-case lg:font-medium"
                 >
                   Continue
-                  <ChevronRight className="w-4 h-4 ml-1" />
+                  <ChevronRight className="ml-1 h-3.5 w-3.5 lg:h-4 lg:w-4" />
                 </button>
               )}
             </div>

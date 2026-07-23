@@ -5,6 +5,7 @@ import { asLink, LinkField } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
+import { ButtonLink } from "./ButtonLink";
 
 interface NavigationItem {
   link: LinkField;
@@ -95,16 +96,16 @@ export function Navigation({
 
   if (mobile) {
     return (
-      <nav aria-label="Main" className="border-t border-brand-blue/15 pt-4">
-        <ul className="flex flex-col divide-y divide-brand-blue/15">
+      <nav aria-label="Main">
+        <ul className="flex flex-col gap-1">
           {navigation.map((item, index) => {
             const isActive = isNavigationItemActive(pathname, item.link);
 
             return (
-              <li key={index} className="text-base font-medium text-brand-blue">
+              <li key={index}>
                 <PrismicNextLink
                   field={item.link}
-                  className="block py-3"
+                  className="block rounded-2xl px-3 py-3.5 font-secondary text-lg font-semibold text-brand-blue transition-colors hover:bg-brand-blue/5"
                   aria-current={isActive ? "page" : undefined}
                   onClick={onNavigate}
                 >
@@ -113,18 +114,18 @@ export function Navigation({
               </li>
             );
           })}
-          {secondaryLink && (
-            <li className="text-base font-medium text-brand-blue">
-              <PrismicNextLink
-                field={secondaryLink}
-                className="block py-3"
-                onClick={onNavigate}
-              >
-                {secondaryLink.text}
-              </PrismicNextLink>
-            </li>
-          )}
         </ul>
+        {secondaryLink && (
+          <div className="mt-3 border-t border-brand-blue/10 pt-4">
+            <ButtonLink
+              field={secondaryLink}
+              color="Secondary"
+              onClick={onNavigate}
+            >
+              {secondaryLink.text}
+            </ButtonLink>
+          </div>
+        )}
       </nav>
     );
   }

@@ -24,11 +24,29 @@ const Image: FC<ImageProps> = ({ slice }) => {
     return "normal padding";
   };
 
+  const padding = getPadding();
+
+  // Match hero → bordered-section gap on mobile (~36px). Bounded `py-5` alone
+  // only gives 20px under images; desktop keeps the normal/bigger values.
+  const mobilePaddingClass =
+    padding === "normal padding"
+      ? "pt-5 pb-9 lg:py-10"
+      : padding === "bigger padding"
+        ? "pt-5 pb-9 lg:py-20"
+        : padding === "smaller padding"
+          ? "pt-3 pb-5 lg:py-5"
+          : padding === "no top padding"
+            ? "pt-0 pb-9 lg:pb-10"
+            : padding === "no bottom padding"
+              ? "pt-5 pb-0 lg:pt-10"
+              : undefined;
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      padding={getPadding()}
+      padding={mobilePaddingClass ? "no padding" : padding}
+      className={mobilePaddingClass}
     >
       {slice.variation === "multipleImages" ? (
         <ul

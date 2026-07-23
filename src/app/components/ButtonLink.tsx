@@ -27,17 +27,23 @@ export function ButtonLink({
       <span
         className={clsx(
           "group inline-flex items-center transition duration-300 uppercase font-semibold",
-          color === "Link" && "bg-transparent text-brand-green text-base",
+          color === "Link" &&
+            "bg-transparent text-brand-green text-[14px] lg:text-base",
           color === "Primary" &&
-            "bg-brand-green text-white rounded-full text-sm",
+            "bg-brand-green text-white rounded-full text-[12px] lg:text-sm",
           color === "Secondary" &&
-            "bg-brand-orange text-white rounded-full text-sm",
-          noPadding && size === "sm" && "gap-2.5 text-sm",
-          noPadding && size === "md" && "gap-3 text-base", 
-          noPadding && size === "lg" && "gap-3 text-lg",
-          !noPadding && size === "sm" && "gap-2.5 py-1.5 text-sm px-2",
-          !noPadding && size === "md" && "gap-3 py-[9px] px-5",
-          !noPadding && size === "lg" && "gap-3 py-3 px-5",
+            "bg-brand-orange text-white rounded-full text-[12px] lg:text-sm",
+          // One size down below lg: sm stays sm, md→sm, lg→md
+          noPadding && size === "sm" && "gap-2.5",
+          noPadding && size === "md" && "gap-2.5 lg:gap-3 lg:text-base",
+          noPadding && size === "lg" && "gap-3 lg:text-lg",
+          !noPadding && size === "sm" && "gap-2 py-1.5 pl-3 pr-1",
+          !noPadding &&
+            size === "md" &&
+            "gap-2.5 py-1.5 pl-4 pr-1.5 lg:gap-3 lg:px-5 lg:py-[9px]",
+          !noPadding &&
+            size === "lg" &&
+            "gap-3 py-[9px] pl-5 pr-1.5 lg:px-5 lg:py-3",
           className
         )}
       >
@@ -47,28 +53,24 @@ export function ButtonLink({
             {isPrimaryOrSecondary ? (
               <span
                 className={clsx(
-                  "flex items-center justify-center rounded-full w-7 h-7",
+                  "flex h-6 w-6 items-center justify-center rounded-full lg:h-7 lg:w-7",
                   color === "Primary" && "bg-[#54AC8B]",
                   color === "Secondary" && "bg-[#FF7456]"
                 )}
               >
                 <HiArrowRight
                   className={clsx(
-                    "transition-all duration-300 transform",
-                    "-rotate-45 group-hover:rotate-0",
-                    "relative left-[0.5px] group-hover:left-[1px]" // Adjust position before and after hover
+                    "relative left-[0.5px] h-3.5 w-3.5 -rotate-45 transform transition-all duration-300 group-hover:left-[1px] group-hover:rotate-0 lg:h-4 lg:w-4"
                   )}
-                  size={16}
+                  aria-hidden
                 />
               </span>
             ) : (
               <HiArrowRight
                 className={clsx(
-                  "transition-all duration-300 transform",
-                  "-rotate-45 group-hover:rotate-0",
-                  "relative left-[0.5px] group-hover:left-[1px]"
+                  "relative left-[0.5px] h-3.5 w-3.5 -rotate-45 transform transition-all duration-300 group-hover:left-[1px] group-hover:rotate-0 lg:h-4 lg:w-4"
                 )}
-                size={16}
+                aria-hidden
               />
             )}
           </>

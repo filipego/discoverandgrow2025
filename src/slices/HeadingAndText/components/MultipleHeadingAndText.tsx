@@ -13,9 +13,9 @@ export const MultipleHeadingAndText: FC<MultipleHeadingAndTextProps> = ({
   className,
 }) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 border-t border-brand-light-gray pt-8">
+    <div className="grid grid-cols-1 gap-8 border-t border-brand-light-gray pt-4 lg:grid-cols-2 lg:gap-16 lg:pt-8">
       {items.map((item, index) => (
-        <div key={index} className="space-y-4">
+        <div key={index} className="space-y-5 lg:space-y-4">
           <Heading as="h2" size="md" className="max-w-[600px]">
             {item.heading}
           </Heading>
@@ -34,10 +34,10 @@ export const MultipleHeadingAndText: FC<MultipleHeadingAndTextProps> = ({
                   </p>
                 ),
                 list: ({ children }) => (
-                  <ul className="ml-4 mb-6">{children}</ul>
+                  <ul className="mb-6 ml-2 lg:ml-4">{children}</ul>
                 ),
                 listItem: ({ children }) => (
-                  <li className="mb-4 list-disc ml-6">{children}</li>
+                  <li className="mb-4 ml-5 list-disc lg:ml-6">{children}</li>
                 ),
               }}
             />

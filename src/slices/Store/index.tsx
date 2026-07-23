@@ -17,6 +17,8 @@ const Store: FC<StoreProps> = ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      padding="no padding"
+      className="pt-2 pb-5 lg:py-10"
     >
       <StoreSlider items={slice.primary.items} />
     </Bounded>
