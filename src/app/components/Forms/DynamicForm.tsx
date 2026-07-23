@@ -324,6 +324,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
       <input
         type="text"
         name="website"
+        aria-hidden="true"
         value={honeypot}
         onChange={(e) => setHoneypot(e.target.value)}
         style={{ 

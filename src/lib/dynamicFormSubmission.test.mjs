@@ -66,3 +66,7 @@ test("dynamic forms use the shared compact button instead of a full-width submit
   assert.match(dynamicForm, /<Button[\s\S]*?type="submit"/);
   assert.doesNotMatch(dynamicForm, /className="w-full bg-brand-green/);
 });
+
+test("the hidden honeypot is excluded from assistive technology", () => {
+  assert.match(dynamicForm, /name="website"[\s\S]*?aria-hidden="true"/);
+});
