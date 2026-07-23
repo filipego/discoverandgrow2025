@@ -110,7 +110,7 @@ route page
 - Keep the on-page dynamic-form confirmation aligned with its email fallback: acknowledge receipt and promise a response within 2–3 business days unless the form's content explicitly requires different timing.
 - Server form handlers must validate input, rate limit where appropriate, avoid raw internal errors, and keep API keys server-side.
 - Cloudflare Turnstile verification belongs in the server route, not only in the client component.
-- The newsletter form currently writes to Supabase and then calls `/api/emails`; treat that as a legacy implementation detail.
+- The newsletter form posts to `/api/emails`; the server creates the Resend contact and sends the email notifications.
 
 ---
 
@@ -133,9 +133,8 @@ route page
 
 ## Do Nots
 
-- Do not introduce Supabase auth/admin/dashboard patterns.
+- Do not introduce admin/dashboard or client-side marketing-provider credential patterns.
 - Do not hand-edit generated Prismic files.
-- Do not expand legacy Supabase usage without an explicit task.
 - Do not duplicate route resolvers outside `src/prismicio.ts`.
 - Do not hardcode secrets, Prismic repository credentials, Stripe keys, Resend keys, Etsy keys, or Turnstile secrets.
 - Do not rewrite user-visible copy unless requested.

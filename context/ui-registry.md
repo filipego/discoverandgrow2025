@@ -37,7 +37,7 @@ Living registry of reusable website UI. Read this before building a component an
 
 | Component | Path | Purpose |
 | --- | --- | --- |
-| `NewsletterForm` | `src/app/components/Forms/NewsletterForm.tsx` | Newsletter signup; currently inserts into Supabase then emails; footer passes `inputId="newsletter-email"` for hash-focus |
+| `NewsletterForm` | `src/app/components/Forms/NewsletterForm.tsx` | Newsletter signup; posts to the server-side Resend contact/email flow; footer passes `inputId="newsletter-email"` for hash-focus |
 | `DynamicForm` | `src/app/components/Forms/DynamicForm.tsx` | Prismic-configured dynamic form with optional Turnstile; preserves every configured field for email delivery, uses a standard thank-you fallback when Prismic copy is blank, and vertically centers its complete adjacent left-content column on desktop |
 | `CustomInput` | `src/app/components/Forms/CustomInput.tsx` | Dynamic form text-like input |
 | `CustomTextarea` | `src/app/components/Forms/CustomTextarea.tsx` | Dynamic form textarea |

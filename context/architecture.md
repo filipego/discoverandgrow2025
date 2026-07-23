@@ -16,7 +16,7 @@
 | Payments | Stripe server SDK + Stripe React/JS | One-time donations, subscriptions, customer portal, and webhooks |
 | Bot protection | Cloudflare Turnstile | Dynamic form verification |
 | Sliders | Swiper | Partner/store carousel experiences |
-| Legacy storage | Supabase JS | Newsletter insert only; not the primary backend |
+| Newsletter audience | Resend Contacts + Segments | Stores website signups in the `Newsletter subscribers` segment for future campaigns |
 
 ---
 
@@ -40,7 +40,7 @@
 │   │   ├── globals.css              # Brand tokens and global styles
 │   │   └── thank-you/               # Static thank-you page
 │   ├── emails/                      # React Email templates
-│   ├── lib/                         # Utilities, rate limiting, dynamic validation, legacy Supabase client
+│   ├── lib/                         # Utilities, rate limiting, dynamic validation, email helpers
 │   ├── prismicio.ts                 # Prismic client, repository name, route resolvers
 │   └── slices/                      # Shared Slice Machine slice components and models
 └── package.json
@@ -133,6 +133,7 @@ Do not commit real values.
 | --- | --- | --- |
 | `NEXT_PUBLIC_PRISMIC_ENVIRONMENT` | Optional | Overrides `slicemachine.config.json` repository name |
 | `RESEND_API_KEY` | Email routes and donation webhook | Server-side Resend API access |
+| `RESEND_NEWSLETTER_SEGMENT_ID` | Newsletter API route | Resend segment receiving website newsletter contacts |
 | `DONATION_EMAIL_FROM` | Optional donation email override | Verified Resend sender; defaults to `Discover and Grow <info@discoverandgrow.org>` |
 | `FORMS_EMAIL_FROM` | Optional dynamic-form email override | Verified Resend sender; defaults to the Resend onboarding sender during testing |
 | `FORM_TEST_RECIPIENT` | Optional dynamic-form test override | Routes both form emails to this address while testing a Resend onboarding sender or preview deployment |
@@ -144,8 +145,6 @@ Do not commit real values.
 | `NEXT_PUBLIC_SITE_URL` | Customer portal and donation email | Portal return URL and absolute hosted logo URL |
 | `ETSY_SHOP_ID` | Etsy API route | Etsy shop lookup |
 | `ETSY_API_KEY` | Etsy API route | Etsy API request key |
-| `NEXT_PUBLIC_SUPABASE_URL` | Legacy newsletter form | Supabase project URL for newsletter insert |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Legacy newsletter form | Supabase anon key for newsletter insert |
 
 ---
 
@@ -159,5 +158,5 @@ Do not commit real values.
 6. Shared UI belongs in `src/app/components`; slice-specific UI can live near its slice.
 7. Brand styling comes from `src/app/globals.css` tokens and existing component patterns.
 8. Server-only API keys stay in route handlers or server code.
-9. Legacy Supabase usage should not be expanded without an explicit product decision.
+9. Newsletter contacts are created server-side in Resend before newsletter emails are sent; never expose the Resend API key in the browser.
 10. Current `next.config.ts` ignores lint and TypeScript errors during build; do not treat a successful build as proof of type/lint correctness.

@@ -6,7 +6,6 @@ import * as z from "zod";
 import { Input } from "@/app/components/Forms/ui/Input";
 import { Label } from "@/app/components/Forms/ui/Label";
 import { Button } from "@/app/components/Forms/ui/Button";
-import { supabase } from "@/lib/supabase";
 import { useState } from 'react';
 
 const formSchema = z.object({
@@ -16,7 +15,7 @@ const formSchema = z.object({
 const FORM_MESSAGES = {
   SUCCESS: 'Thank you for subscribing to our newsletter!',
   DUPLICATE: 'This email is already subscribed to our newsletter.',
-  DATABASE_ERROR: 'Unable to add your email to our newsletter. Please try again later.',
+  SUBSCRIPTION_ERROR: 'Unable to add your email to our newsletter. Please try again later.',
   EMAIL_ERROR: 'Unable to send confirmation email. Please try again later.'
 } as const;
 
@@ -44,31 +43,6 @@ export default function NewsletterForm({
       setIsLoading(true);
       setMessage(null);
 
-      // First try to insert into Newsletter table
-      const { error: insertError } = await supabase
-        .from('Newsletter')
-        .insert([{ email: data.email }]);
-
-      // If we get a unique constraint error, it means email already exists
-      if (insertError?.code === '23505') {
-        setMessage({ type: 'error', text: FORM_MESSAGES.DUPLICATE });
-        setTimeout(() => {
-          setMessage(null);
-        }, 5000);
-        setIsLoading(false);
-        return;
-      }
-
-      if (insertError) {
-        setMessage({ type: 'error', text: FORM_MESSAGES.DATABASE_ERROR });
-        setTimeout(() => {
-          setMessage(null);
-        }, 5000);
-        setIsLoading(false);
-        return;
-      }
-
-      // If insert successful, send welcome email
       const response = await fetch('/api/emails', {
         method: 'POST',
         headers: {
@@ -79,19 +53,21 @@ export default function NewsletterForm({
           data
         }),
       });
-      
-      if (response.ok) {
-        setMessage({ type: 'success', text: FORM_MESSAGES.SUCCESS });
-        reset();
-        setTimeout(() => {
-          setMessage(null);
-        }, 5000);
+
+      if (!response.ok) {
+        const result = await response.json().catch(() => null);
+        const text = response.status === 409
+          ? FORM_MESSAGES.DUPLICATE
+          : result?.error ?? FORM_MESSAGES.EMAIL_ERROR;
+
+        setMessage({ type: 'error', text });
+        return;
       }
+
+      setMessage({ type: 'success', text: FORM_MESSAGES.SUCCESS });
+      reset();
     } catch (error) {
-      setMessage({ type: 'error', text: FORM_MESSAGES.DATABASE_ERROR });
-      setTimeout(() => {
-        setMessage(null);
-      }, 5000);
+      setMessage({ type: 'error', text: FORM_MESSAGES.SUBSCRIPTION_ERROR });
     } finally {
       setIsLoading(false);
     }
