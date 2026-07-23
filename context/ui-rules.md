@@ -110,9 +110,10 @@ route page
 - Required indicators must use the same effective-required rule as dynamic-form submission validation, so every field users must complete has an asterisk beside its label.
 - Dynamic forms must synchronize browser-autofilled field values into React Hook Form before using them to determine whether the submit button is enabled; the off-screen honeypot must opt out of profile autofill.
 - Keep the on-page dynamic-form confirmation aligned with its email fallback: acknowledge receipt and promise a response within 2–3 business days unless the form's content explicitly requires different timing.
+- After a dynamic-form submission succeeds, show the compact confirmation briefly, then return to a reset form after five seconds so a visitor can send another message without a manual refresh.
 - Server form handlers must validate input, rate limit where appropriate, avoid raw internal errors, and keep API keys server-side.
 - Cloudflare Turnstile verification belongs in the server route, not only in the client component.
-- When a Prismic form hides CAPTCHA, use Turnstile's invisible execute mode; preserve verification and do not use CSS hiding as a substitute for issuing a token.
+- When a Prismic form hides CAPTCHA, use Turnstile's invisible execute mode; preserve verification and do not use CSS hiding as a substitute for issuing a token. While a token is being requested, prevent duplicate executions and surface provider errors through the existing form feedback state.
 - The newsletter form posts to `/api/emails`; the server creates the Resend contact and sends the email notifications.
 
 ---

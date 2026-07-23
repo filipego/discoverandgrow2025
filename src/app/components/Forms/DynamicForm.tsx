@@ -4,6 +4,7 @@ import { FC, useCallback, useEffect, useRef, useState, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
+import { CheckCircle2 } from "lucide-react";
 import { createDynamicSchema, sanitizeFieldKey, FormField } from "@/lib/dynamicValidation";
 import { formatDynamicFormData } from "@/lib/dynamicFormSubmission";
 
@@ -60,6 +61,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [turnstileToken, setTurnstileToken] = useState('');
+  const [isCaptchaVerifying, setIsCaptchaVerifying] = useState(false);
   const [honeypot, setHoneypot] = useState('');
   const [formStartTime] = useState(Date.now());
   const formRef = useRef<HTMLFormElement>(null);
@@ -125,6 +127,14 @@ const DynamicForm: FC<DynamicFormProps> = ({
     };
   }, [syncAutofilledValues]);
 
+  useEffect(() => {
+    if (submitStatus !== 'success') return;
+
+    const resetSuccessFeedback = window.setTimeout(() => setSubmitStatus('idle'), 5000);
+
+    return () => window.clearTimeout(resetSuccessFeedback);
+  }, [submitStatus]);
+
   // If a slice does not mark any field required, preserve the existing form
   // behavior: all fillable fields are required and labels show that clearly.
   const areRequiredFieldsValid = useMemo(() => {
@@ -186,8 +196,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
         const error = await response.json();
         throw new Error(error.error || 'Submission failed');
       }
-    } catch (error) {
-      console.error('Form submission error:', error);
+    } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -196,6 +205,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
 
   const handleTurnstileSuccess = (token: string) => {
     setTurnstileToken(token);
+    setIsCaptchaVerifying(false);
 
     const pendingData = pendingSubmission.current;
     if (pendingData) {
@@ -204,19 +214,30 @@ const DynamicForm: FC<DynamicFormProps> = ({
     }
   };
 
+  const handleTurnstileError = (errorCode: string) => {
+    pendingSubmission.current = null;
+    setIsCaptchaVerifying(false);
+    setTurnstileToken('');
+    setSubmitStatus('error');
+
+    return Boolean(errorCode);
+  };
+
   const onSubmit = async (data: DynamicFormValues) => {
     // Honeypot check
     if (honeypot) {
-      console.log('Bot detected via honeypot');
       return;
     }
 
     if (enableCaptcha && !turnstileToken) {
-      if (isInvisibleCaptcha && turnstileRef.current) {
+      if (isInvisibleCaptcha && turnstileRef.current && !isCaptchaVerifying) {
         pendingSubmission.current = data;
+        setIsCaptchaVerifying(true);
         turnstileRef.current.execute();
         return;
       }
+
+      if (isInvisibleCaptcha) return;
 
       alert('Please complete the security verification');
       return;
@@ -368,13 +389,20 @@ const DynamicForm: FC<DynamicFormProps> = ({
 
   if (submitStatus === 'success') {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
-        <div className="text-green-600 text-lg font-medium mb-2">
+      <div
+        role="status"
+        className="rounded-2xl border border-emerald-100 bg-white px-6 py-7 text-center shadow-sm"
+      >
+        <div className="mx-auto mb-4 flex size-11 items-center justify-center rounded-full bg-emerald-50 text-brand-green">
+          <CheckCircle2 aria-hidden="true" className="size-6" strokeWidth={2.25} />
+        </div>
+        <p className="text-lg font-semibold text-black">Message sent</p>
+        <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-brand-gray">
           {successMessage}
-        </div>
-        <div className="text-green-600 text-sm">
-          We&apos;ll get back to you within 2–3 business days.
-        </div>
+        </p>
+        <p className="mt-4 text-xs font-medium text-brand-green">
+          Your form is ready for another message.
+        </p>
       </div>
     );
   }
@@ -415,6 +443,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
             ref={turnstileRef}
             siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
             onSuccess={handleTurnstileSuccess}
+            onError={handleTurnstileError}
             options={{
               size: showCaptcha ? "normal" : "invisible",
               execution: showCaptcha ? "render" : "execute",
@@ -427,7 +456,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
       {/* Error message */}
       {submitStatus === 'error' && (
         <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-600 text-sm">
-          Something went wrong. Please try again.
+          We couldn&apos;t complete the security check. Please refresh the page and try again.
         </div>
       )}
 
@@ -436,12 +465,17 @@ const DynamicForm: FC<DynamicFormProps> = ({
           type="submit"
           isValid={
             !isSubmitting &&
+            !isCaptchaVerifying &&
             areRequiredFieldsValid &&
             (!enableCaptcha || !showCaptcha || Boolean(turnstileToken))
           }
-          disabled={isSubmitting}
+          disabled={isSubmitting || isCaptchaVerifying}
         >
-          {isSubmitting ? "Submitting..." : submitButtonText}
+          {isSubmitting
+            ? "Submitting..."
+            : isCaptchaVerifying
+              ? "Verifying..."
+              : submitButtonText}
         </Button>
       </div>
     </form>

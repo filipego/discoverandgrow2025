@@ -507,11 +507,6 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
   );
 
   const renderPaymentStep = () => {
-    // Debug Stripe and Elements availability
-    console.log('Rendering payment step');
-    console.log('Stripe available:', !!stripe);
-    console.log('Elements available:', !!elements);
-    
     if (!stripe || !elements) {
       return (
         <div className="space-y-6">
@@ -562,11 +557,7 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
                 hidePostalCode: false,
                 disableLink: true,
               }}
-              onReady={() => {
-                console.log('CardElement ready');
-              }}
               onChange={(event) => {
-                console.log('CardElement change:', event);
                 // Only clear errors if the card becomes complete
                 if (event.complete) {
                   setError(null);
