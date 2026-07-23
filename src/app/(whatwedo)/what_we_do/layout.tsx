@@ -14,6 +14,9 @@ export async function generateMetadata(): Promise<Metadata> {
     return {
         title: settings.data.title,
         description: settings.data.meta_description,
+        icons: {
+            icon: "/favicon.ico",
+        },
         openGraph: {
             images: settings.data.fallback_og_image.url ?? undefined,
         },
