@@ -11,7 +11,7 @@ import { getEmailLogoUrl } from "@/lib/emailBranding";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const DEFAULT_ADMIN_EMAIL = "info@discoverandgrow.org";
-const DEFAULT_FROM = "Discover and Grow <onboarding@resend.dev>";
+const DEFAULT_FROM = "Discover and Grow <info@discoverandgrow.org>";
 
 function getTestRecipient(): string | undefined {
   return (
