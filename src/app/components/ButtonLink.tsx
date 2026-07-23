@@ -28,7 +28,7 @@ export function ButtonLink({
         className={clsx(
           "group inline-flex items-center transition duration-300 uppercase font-semibold",
           color === "Link" &&
-            "bg-transparent text-brand-green text-[14px] lg:text-base",
+            "bg-transparent text-brand-green-accessible text-[14px] lg:text-base",
           color === "Primary" &&
             "bg-brand-green text-white rounded-full text-[12px] lg:text-sm",
           color === "Secondary" &&
