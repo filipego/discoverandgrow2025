@@ -50,7 +50,11 @@ export const FoundersLayout: FC<FoundersLayoutProps> = ({ people }) => {
                 </p>
               </div>
               {person.linkedin && (
-                <PrismicNextLink field={person.linkedin} className="text-brand-green hover:text-brand-green/80 transition-colors ml-2 self-start">
+                <PrismicNextLink
+                  field={person.linkedin}
+                  aria-label={`View ${person.name ?? "team member"} on LinkedIn`}
+                  className="text-brand-green hover:text-brand-green/80 transition-colors ml-2 self-start"
+                >
                   <FaLinkedinIn className="w-5 h-5" />
                 </PrismicNextLink>
               )}
@@ -74,4 +78,4 @@ export const FoundersLayout: FC<FoundersLayoutProps> = ({ people }) => {
       ))}
     </div>
   );
-}; 
+};

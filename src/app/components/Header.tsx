@@ -141,7 +141,7 @@ function HeaderContent() {
           >
             <div className="hidden w-full grid-cols-[230px_1fr_230px] items-center lg:grid">
               <div className="flex-shrink-0">
-                <Link href="/">
+                <Link href="/" aria-label="Discover and Grow home">
                   <LongLogo treeColor="#29285D" className="h-[55px] text-[#29285D]" />
                 </Link>
               </div>

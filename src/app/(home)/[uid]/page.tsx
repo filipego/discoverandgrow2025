@@ -8,6 +8,9 @@ import { components } from "@/slices";
 
 type Params = { uid: string };
 
+const fallbackDescription =
+    "Discover and Grow empowers children, families, and communities through educational programs and support.";
+
 export default async function Page({ params }: { params: Promise<Params> }) {
     const { uid } = await params;
     const client = createClient();
@@ -31,11 +34,13 @@ export async function generateMetadata({
 
     return {
         title: page.data.meta_title,
-        description: page.data.meta_description,
+        description: isFilled.keyText(page.data.meta_description)
+            ? page.data.meta_description
+            : fallbackDescription,
         openGraph: {
             title: isFilled.keyText(page.data.meta_title)
                 ? page.data.meta_title
-                : undefined,
+                : fallbackDescription,
             description: isFilled.keyText(page.data.meta_description)
                 ? page.data.meta_description
                 : undefined,
