@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useRef, useState, useMemo } from "react";
+import { FC, useCallback, useEffect, useRef, useState, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
@@ -62,6 +62,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
   const [turnstileToken, setTurnstileToken] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const [formStartTime] = useState(Date.now());
+  const formRef = useRef<HTMLFormElement>(null);
   const turnstileRef = useRef<TurnstileInstance | undefined>(undefined);
   const pendingSubmission = useRef<DynamicFormValues | null>(null);
   const isInvisibleCaptcha = enableCaptcha && !showCaptcha;
@@ -76,6 +77,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
     reset,
     watch,
     control,
+    setValue,
     trigger
   } = useForm<DynamicFormValues>({
     resolver: zodResolver(schema),
@@ -88,6 +90,40 @@ const DynamicForm: FC<DynamicFormProps> = ({
   const isFieldRequired = (field: FormField) =>
     field.is_required ||
     (!hasExplicitRequiredFields && fillableFieldTypes.includes(field.field_type));
+
+  const syncAutofilledValues = useCallback(() => {
+    const form = formRef.current;
+    if (!form) return;
+
+    formFields.forEach((field) => {
+      const fieldKey = sanitizeFieldKey(field.field_label);
+      const element = form.elements.namedItem(fieldKey);
+
+      if (
+        !(element instanceof HTMLInputElement) &&
+        !(element instanceof HTMLTextAreaElement)
+      ) {
+        return;
+      }
+
+      if (element.value) {
+        setValue(fieldKey, element.value, {
+          shouldDirty: true,
+          shouldValidate: true,
+        });
+      }
+    });
+  }, [formFields, setValue]);
+
+  useEffect(() => {
+    const initialSync = window.setTimeout(syncAutofilledValues, 0);
+    const autofillSync = window.setTimeout(syncAutofilledValues, 250);
+
+    return () => {
+      window.clearTimeout(initialSync);
+      window.clearTimeout(autofillSync);
+    };
+  }, [syncAutofilledValues]);
 
   // If a slice does not mark any field required, preserve the existing form
   // behavior: all fillable fields are required and labels show that clearly.
@@ -344,7 +380,12 @@ const DynamicForm: FC<DynamicFormProps> = ({
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit(onSubmit)}
+      onFocusCapture={syncAutofilledValues}
+      className="space-y-6"
+    >
       {/* Honeypot */}
       <input
         type="text"
@@ -359,7 +400,7 @@ const DynamicForm: FC<DynamicFormProps> = ({
           pointerEvents: 'none'
         }}
         tabIndex={-1}
-        autoComplete="off"
+        autoComplete="new-password"
       />
 
       {/* Dynamic form fields */}

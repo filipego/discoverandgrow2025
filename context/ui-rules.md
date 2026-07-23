@@ -108,6 +108,7 @@ route page
 - Static forms use React Hook Form, Zod, and the shared form UI controls.
 - Dynamic Prismic forms use `DynamicForm` plus `createDynamicSchema` from `src/lib/dynamicValidation.ts`.
 - Required indicators must use the same effective-required rule as dynamic-form submission validation, so every field users must complete has an asterisk beside its label.
+- Dynamic forms must synchronize browser-autofilled field values into React Hook Form before using them to determine whether the submit button is enabled; the off-screen honeypot must opt out of profile autofill.
 - Keep the on-page dynamic-form confirmation aligned with its email fallback: acknowledge receipt and promise a response within 2–3 business days unless the form's content explicitly requires different timing.
 - Server form handlers must validate input, rate limit where appropriate, avoid raw internal errors, and keep API keys server-side.
 - Cloudflare Turnstile verification belongs in the server route, not only in the client component.
