@@ -106,7 +106,12 @@ const AnimatedCardImage = ({ card, className }: AnimatedCardImageProps) => {
 
   return (
     <div className={className}>
-      <PrismicNextImage field={card.image} className="h-full w-full object-cover" />
+      <PrismicNextImage
+        field={card.image}
+        className="h-full w-full object-cover"
+        loading="lazy"
+        sizes="(min-width: 1024px) 50vw, 100vw"
+      />
     </div>
   );
 };
