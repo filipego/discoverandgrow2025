@@ -25,7 +25,7 @@ Add the existing production values in Vercel for the appropriate Production, Pre
 - [ ] `NEXT_PUBLIC_SITE_URL`
 - [ ] `ETSY_SHOP_ID` and `ETSY_API_KEY`, if the Etsy section remains enabled
 - [ ] `NEXT_PUBLIC_PRISMIC_ENVIRONMENT`, only if the default repository is not correct
-- [ ] `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` only until the newsletter storage migration is complete
+- [ ] `RESEND_NEWSLETTER_SEGMENT_ID`
 
 ## 3. Move email from testing to production
 
@@ -57,9 +57,8 @@ Add the existing production values in Vercel for the appropriate Production, Pre
 
 ## 6. Newsletter follow-up
 
-- [ ] Decide when to replace the legacy Supabase newsletter insert with Resend Contacts.
-- [ ] Before removing Supabase, implement normalized-email duplicate handling and a Resend contact segment/topic.
-- [ ] Confirm future newsletter campaigns use the chosen Resend Broadcasts workflow and include unsubscribe handling.
+- [x] Store website newsletter signups as Resend Contacts in the dedicated newsletter segment.
+- [ ] Confirm future newsletter campaigns use the Resend Broadcasts workflow and include unsubscribe handling.
 
 ## 7. Final production smoke test
 

@@ -8,7 +8,7 @@ Update this file after every meaningful application implementation change. Docum
 
 **Phase:** Dependency compatibility and deployment readiness
 
-**Last completed:** Audited the live homepage with a fresh isolated Lighthouse run (mobile: 64/96/79/100 before third-party deferral; then 75/96/100/100 after deployment). Its only accessibility failure is the existing CTA contrast; preserve the established colors unless a visual change is explicitly approved. The homepage now gates Prismic Preview to Next draft mode, defers Stripe checkout until a rendered donation form nears the viewport, explicitly prioritizes the existing LCP hero image, and lazy-loads/sizes below-the-fold Animated Cards media so it does not compete with the hero request. The generic Prismic page route now supplies fallback title/description metadata when editorial metadata is empty (including Donate), and the Who We Are page now has nonvisual accessible names for logo/LinkedIn links plus correct partner-card heading semantics. The dynamic contact form’s hidden honeypot is now excluded from assistive technology; live Turnstile error 110200 remains an external Cloudflare Hostname Management configuration issue for the configured site key. All Resend production flows now send from `Discover and Grow <info@discoverandgrow.org>`; owner notifications go to `info@discoverandgrow.org`, while newsletter/contact/donation acknowledgments go to the submitted email. The supplied favicon is registered in every route-group root layout but remains uncommitted locally pending user verification. Earlier: responsive Prismic image sizing for cards/store content, accessible footer social-link names, guarded header GSAP initialization, removed store-slider debug logging, and removed the desktop navigation stagger that could leave every navigation item stuck at `translateY(-20px)` while its container remained centered.
+**Last completed:** The newsletter no longer depends on Supabase. It now creates a normalized Resend Contact in the dedicated `Newsletter subscribers` segment before sending the existing welcome email to the subscriber and the owner notification to `info@discoverandgrow.org`; duplicate subscriptions and Resend delivery errors are returned to the form instead of being shown as success. The Vercel project now has `RESEND_NEWSLETTER_SEGMENT_ID` configured for production, preview, and development. The Supabase client module and package have been removed. The supplied favicon is registered in every route-group root layout but remains uncommitted locally pending user verification. Earlier: audited the live homepage with a fresh isolated Lighthouse run, gated Prismic Preview to Next draft mode, deferred Stripe checkout, and added nonvisual SEO/accessibility fixes without changing the locked visual design.
 **Next:** Push/sync the updated category models to Prismic, add a Text Block plus one slider slice per desired category, replace the existing `what_we_do` post content, publish/revalidate, then continue deployment hardening.
 
 ---
@@ -29,7 +29,7 @@ Update this file after every meaningful application implementation change. Docum
 - [x] Newsletter welcome and owner-notification emails use the established Discover and Grow email branding.
 - [x] Dynamic forms support Turnstile and rate limiting.
 - [x] Dynamic forms send branded owner notifications and submitter thank-you emails, with a default thank-you response when the slice copy is blank.
-- [x] Legacy Supabase newsletter insert exists.
+- [x] Newsletter signups are stored as Resend Contacts in a dedicated campaign segment.
 - [x] Next.js is on `15.5.20` with matching `eslint-config-next`.
 - [x] `/thank-you` is inside the `(home)` route group while preserving the public `/thank-you` URL.
 
@@ -63,7 +63,6 @@ Update this file after every meaningful application implementation change. Docum
 - Review remaining `npm audit --omit=dev` findings outside the Next version update.
 - Verify `info@discoverandgrow.org` (or configure `DONATION_EMAIL_FROM`) in the production Resend account.
 - After the Resend domain is verified, configure `FORMS_EMAIL_FROM` with that sender and remove any `FORM_TEST_RECIPIENT` override so live form thank-you emails reach each submitter.
-- Replace the legacy Supabase newsletter insert with Resend Contacts, including normalized-email duplicate handling and a newsletter segment/topic.
 - After the new Vercel site has a public production URL, add a separate Stripe webhook at `<public-production-origin>/api/webhooks/stripe`, store its signing secret as Vercel's `STRIPE_WEBHOOK_SECRET`, deploy, and run one controlled live donation. Preserve the legacy `https://discoverandgrow.org?give-listener=stripe` endpoint while WordPress/Bluehost remains live.
 - Review mobile header/navigation behavior.
 - Publish the local Hero slice model update in Prismic and add the supplied home-hero image to the homepage's default Hero variation.
@@ -73,8 +72,8 @@ Update this file after every meaningful application implementation change. Docum
 ## Decisions Made
 
 - Prismic is the primary CMS and content source.
-- Supabase is not the application platform for this project; current Supabase code is legacy newsletter storage only.
-- Resend Contacts will replace Supabase as the newsletter subscriber store; Resend Broadcasts will handle future marketing sends and unsubscribe management.
+- Supabase is not used by this project.
+- Resend Contacts stores newsletter subscribers; Resend Broadcasts will handle future marketing sends and unsubscribe management.
 - Context files should be edited in place and kept accurate for the existing site.
 - `src/app/globals.css` is the source of truth for brand tokens.
 - Generated Prismic files should not be edited manually.

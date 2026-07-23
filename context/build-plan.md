@@ -25,7 +25,7 @@ Maintain the Discover and Grow public website incrementally. Keep Prismic as the
 - Replace copied Supabase admin boilerplate documentation.
 - Document the actual Prismic/Slice Machine architecture.
 - Document current brand tokens and shared UI components.
-- Document active integrations: Stripe, Resend, Turnstile, Etsy, and legacy Supabase newsletter storage.
+- Document active integrations: Stripe, Resend Contacts/Segments, Turnstile, and Etsy.
 
 ---
 
@@ -37,7 +37,7 @@ Maintain the Discover and Grow public website incrementally. Keep Prismic as the
 - Run `npm run build` and note current behavior.
 - Decide whether to keep `ignoreDuringBuilds` and `ignoreBuildErrors` in `next.config.ts`.
 - Review existing `any`, `@ts-ignore`, and console logging in slices/forms/API routes.
-- Confirm whether the newsletter should continue storing data in Supabase or move to another system.
+- Verify the newsletter Resend segment and end-to-end signup delivery.
 
 ---
 

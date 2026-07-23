@@ -79,7 +79,7 @@ Shared slices live in `src/slices`. The generated component map in `src/slices/i
 - Stripe powers one-time and monthly donation flows.
 - Resend sends contact, newsletter, and dynamic-form emails.
 - Cloudflare Turnstile is supported by dynamic forms.
-- Supabase currently appears only as a legacy newsletter storage dependency.
+- Resend Contacts stores newsletter subscribers in a dedicated segment for future campaigns.
 - Etsy listing fetch is exposed through `/api/etsy`.
 
 ---

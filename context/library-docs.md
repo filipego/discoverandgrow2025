@@ -110,12 +110,11 @@ Current route resolvers:
 
 ---
 
-## Supabase JS
+## Resend Contacts and Segments
 
-- Installed version: `@supabase/supabase-js` `^2.48.1`.
-- Current active usage is limited to `NewsletterForm`, which imports `src/lib/supabase.ts` and inserts into a `Newsletter` table.
-- This project does not use Supabase auth, RLS migrations, roles, permissions, or an admin shell.
-- Do not expand Supabase usage without a focused task and context update.
+- Newsletter subscriptions are created server-side with `resend.contacts.create`.
+- `RESEND_NEWSLETTER_SEGMENT_ID` selects the dedicated Resend segment that future newsletter broadcasts target.
+- The client form never receives a Resend API key or creates contacts directly.
 
 ---
 
