@@ -26,3 +26,14 @@ test("labels use the same effective-required rule as the submit button", () => {
   assert.match(source, /const isFieldRequired = \(field: FormField\) =>/);
   assert.match(source, /required:\s*isFieldRequired\(field\)/);
 });
+
+test("browser autofill is synchronized before it can keep a valid form disabled", () => {
+  assert.match(source, /const syncAutofilledValues = useCallback\(/);
+  assert.match(source, /setValue\(fieldKey, element\.value/);
+  assert.match(source, /window\.setTimeout\(syncAutofilledValues, 250\)/);
+  assert.match(source, /onFocusCapture=\{syncAutofilledValues\}/);
+});
+
+test("the honeypot opts out of browser profile autofill", () => {
+  assert.match(source, /name="website"[\s\S]*autoComplete="new-password"/);
+});
