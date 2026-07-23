@@ -17,6 +17,14 @@ import { ButtonLink } from "./ButtonLink";
 
 type Props = {};
 
+const socialLinkLabels = [
+  "Email Discover and Grow",
+  "Discover and Grow on Instagram",
+  "Discover and Grow on Facebook",
+  "Discover and Grow on X",
+  "Discover and Grow on LinkedIn",
+];
+
 export async function Footer({}: Props) {
   const client = createClient();
   const settings = await client.getSingle("settings");
@@ -79,6 +87,7 @@ export async function Footer({}: Props) {
                   <PrismicNextLink
                     key={link.key}
                     field={link}
+                    aria-label={socialLinkLabels[index] ?? "Discover and Grow social link"}
                     className={`text-white ${hoverColors[index] || "hover:text-[#D93CA6]"} transition-colors`}
                   >
                     {index === 0 && <HiOutlineEnvelope className={iconClassName} />}

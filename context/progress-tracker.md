@@ -8,7 +8,7 @@ Update this file after every meaningful application implementation change. Docum
 
 **Phase:** Dependency compatibility and deployment readiness
 
-**Last completed:** Polished mobile layout across header, slices, forms, footer, and donation checkout; kept desktop behavior intact. Earlier: shared email-safe mobile breakpoint for branded templates and removed unused legacy contact-form assets.
+**Last completed:** Audited the live homepage with PageSpeed Insights (mobile: 71/92/73/91; desktop: 85/92/77/91 for Performance/Accessibility/Best Practices/SEO) and applied code-owned first-pass fixes: prioritized the LCP hero image, responsive Prismic image sizing for cards/store content, accessible footer social-link names, guarded header GSAP initialization, removed store-slider debug logging, and moved the header's Prismic settings query from the browser to the server layout. Earlier: polished mobile layout across header, slices, forms, footer, and donation checkout; kept desktop behavior intact.
 
 **Next:** Push/sync the updated category models to Prismic, add a Text Block plus one slider slice per desired category, replace the existing `what_we_do` post content, publish/revalidate, then continue deployment hardening.
 

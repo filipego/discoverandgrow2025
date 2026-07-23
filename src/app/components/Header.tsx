@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import { Content } from "@prismicio/client";
 import { ButtonLink } from "./ButtonLink";
 import { Bounded } from "./Bounded";
-import { createClient } from "@/prismicio";
 import { LongLogo } from "./LongLogo";
 import { Navigation } from "./Navigation";
 import { useGSAP } from "@gsap/react";
@@ -14,33 +14,24 @@ import { Menu, X } from "lucide-react";
 
 // Removed headerStyles - now using Tailwind with clsx
 
-// Create a client component wrapper to handle animations
-export function HeaderWrapper() {
+type HeaderProps = {
+  settings: Content.SettingsDocument;
+};
+
+// Client wrapper for interactions and animations; settings are fetched on the server.
+export function HeaderWrapper({ settings }: HeaderProps) {
   return (
-    <HeaderContent />
+    <HeaderContent settings={settings} />
   );
 }
 
-// Original Header component renamed to HeaderContent
-function HeaderContent() {
+function HeaderContent({ settings }: HeaderProps) {
   const headerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLUListElement>(null);
-  const [settings, setSettings] = useState<any>(null);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  // Fetch settings data
-  useEffect(() => {
-    const fetchSettings = async () => {
-      const client = createClient();
-      const settingsData = await client.getSingle("settings");
-      setSettings(settingsData);
-    };
-    
-    fetchSettings();
-  }, []);
 
   useEffect(() => {
     if (!isMobileMenuOpen) return;
@@ -55,6 +46,8 @@ function HeaderContent() {
 
   // Setup GSAP animations
   useGSAP(() => {
+    if (!settings || !headerRef.current) return;
+
     // Initial state - slightly translated up and invisible
     gsap.set(headerRef.current, { 
       yPercent: -100,
@@ -82,7 +75,7 @@ function HeaderContent() {
         ease: "power2.out"
       });
     }
-  }, []);
+  }, { dependencies: [settings] });
 
   // Handle scroll events
   useEffect(() => {
@@ -132,8 +125,6 @@ function HeaderContent() {
   const handleNavItemHover = (e: React.MouseEvent<HTMLLIElement>, isEnter: boolean) => {
     // No animations - just using the moving line effect now
   };
-
-  if (!settings) return null;
 
   return (
     <>
@@ -240,8 +231,8 @@ function HeaderContent() {
 }
 
 // Export the original component as default for backward compatibility
-export function Header() {
-  return <HeaderWrapper />;
+export function Header({ settings }: HeaderProps) {
+  return <HeaderWrapper settings={settings} />;
 }
 
 export default Header;
