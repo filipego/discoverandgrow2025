@@ -37,7 +37,6 @@ Global font loading:
 | `--color-brand-gray-light` | `#4e4e4e` | `bg-brand-gray-light`, `text-brand-gray-light` |
 | `--color-brand-gray-lighter` | `#949494` | `bg-brand-gray-lighter`, `text-brand-gray-lighter` |
 | `--color-brand-green` | `#2ca382` | `bg-brand-green`, `text-brand-green`, `border-brand-green` |
-| `--color-brand-green-accessible` | `#167458` | `text-brand-green-accessible`; use for green text on white surfaces where normal-size text requires WCAG AA contrast |
 | `--color-brand-orange` | `#f15b3b` | `bg-brand-orange`, `text-brand-orange`, `border-brand-orange` |
 
 ---
@@ -88,7 +87,7 @@ If `font-primary-light` or `font-primary-medium` are needed, add matching tokens
 
 - `Primary`: `bg-brand-green text-white rounded-full`
 - `Secondary`: `bg-brand-orange text-white rounded-full`
-- `Link`: transparent with `text-brand-green-accessible`; use an explicit light override only on a dark surface
+- `Link`: transparent with `text-brand-green`
 
 Sizes step down one level below `lg` (`md` renders as `sm`, `lg` as `md`); desktop sizes are unchanged. Primary/Secondary label type is `12px` below `lg` and `text-sm` from `lg` up. Link variant type is `14px` below `lg` and `text-base` from `lg` up.
 

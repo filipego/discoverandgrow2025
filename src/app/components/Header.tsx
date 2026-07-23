@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import { Content } from "@prismicio/client";
 import { ButtonLink } from "./ButtonLink";
 import { Bounded } from "./Bounded";
+import { createClient } from "@/prismicio";
 import { LongLogo } from "./LongLogo";
 import { Navigation } from "./Navigation";
 import { useGSAP } from "@gsap/react";
@@ -14,24 +14,28 @@ import { Menu, X } from "lucide-react";
 
 // Removed headerStyles - now using Tailwind with clsx
 
-type HeaderProps = {
-  settings: Content.SettingsDocument;
-};
-
-// Client wrapper for interactions and animations; settings are fetched on the server.
-export function HeaderWrapper({ settings }: HeaderProps) {
+// Keep the original client-side header data flow. Rendering this component only
+// after the settings document is available preserves the established header timing.
+export function HeaderWrapper() {
   return (
-    <HeaderContent settings={settings} />
+    <HeaderContent />
   );
 }
 
-function HeaderContent({ settings }: HeaderProps) {
+function HeaderContent() {
   const headerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLUListElement>(null);
+  const [settings, setSettings] = useState<any>(null);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const client = createClient();
+
+    void client.getSingle("settings").then(setSettings);
+  }, []);
 
   useEffect(() => {
     if (!isMobileMenuOpen) return;
@@ -125,6 +129,8 @@ function HeaderContent({ settings }: HeaderProps) {
   const handleNavItemHover = (e: React.MouseEvent<HTMLLIElement>, isEnter: boolean) => {
     // No animations - just using the moving line effect now
   };
+
+  if (!settings) return null;
 
   return (
     <>
@@ -231,8 +237,8 @@ function HeaderContent({ settings }: HeaderProps) {
 }
 
 // Export the original component as default for backward compatibility
-export function Header({ settings }: HeaderProps) {
-  return <HeaderWrapper settings={settings} />;
+export function Header() {
+  return <HeaderWrapper />;
 }
 
 export default Header;
