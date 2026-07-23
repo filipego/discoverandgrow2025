@@ -31,16 +31,20 @@ export async function generateMetadata({
     const { uid } = await params;
     const client = createClient();
     const page = await client.getByUID("page", uid).catch(() => notFound());
+    const fallbackTitle =
+        uid === "donate" ? "Donate | Discover and Grow" : "Discover and Grow";
 
     return {
-        title: page.data.meta_title,
+        title: isFilled.keyText(page.data.meta_title)
+            ? page.data.meta_title
+            : fallbackTitle,
         description: isFilled.keyText(page.data.meta_description)
             ? page.data.meta_description
             : fallbackDescription,
         openGraph: {
             title: isFilled.keyText(page.data.meta_title)
                 ? page.data.meta_title
-                : fallbackDescription,
+                : fallbackTitle,
             description: isFilled.keyText(page.data.meta_description)
                 ? page.data.meta_description
                 : undefined,

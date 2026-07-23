@@ -22,9 +22,11 @@ test("Who We Are semantic fixes preserve accessible names and heading order", as
   assert.match(partners, /<Heading\s+as="h3"/);
 });
 
-test("generic Prismic pages provide a fallback meta description", async () => {
+test("generic Prismic pages provide fallback metadata", async () => {
   const page = await source("src/app/(home)/[uid]/page.tsx");
 
+  assert.match(page, /const fallbackTitle =/);
   assert.match(page, /const fallbackDescription =/);
+  assert.match(page, /title: isFilled\.keyText\(page\.data\.meta_title\)/);
   assert.match(page, /: fallbackDescription/);
 });
