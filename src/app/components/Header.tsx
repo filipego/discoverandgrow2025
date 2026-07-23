@@ -67,18 +67,6 @@ function HeaderContent() {
       delay: 0.2
     });
 
-    // Animate nav items with stagger
-    if (navRef.current) {
-      const navItems = navRef.current.querySelectorAll('li');
-      gsap.from(navItems, {
-        y: -20,
-        opacity: 0,
-        duration: 0.4,
-        stagger: 0.1,
-        delay: 0.5,
-        ease: "power2.out"
-      });
-    }
   }, { dependencies: [settings] });
 
   // Handle scroll events
