@@ -34,6 +34,7 @@ export const BasicCard: FC<CardProps> = ({ item, contentClassName }) => {
           field={item.image}
           className="w-full h-full object-cover"
           alt=""
+          sizes="(min-width: 1024px) 40vw, (min-width: 768px) 45vw, 100vw"
         />
       </div>
       <div className="flex flex-col flex-1 p-6 md:p-10">

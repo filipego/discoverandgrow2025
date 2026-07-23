@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { PrismicRichText } from "@prismicio/react";
 import { PrismicNextImage } from "@prismicio/next";
 import { ImageField, RichTextField, LinkField } from "@prismicio/client";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -31,12 +30,6 @@ export default function StoreSlider({ items }: StoreSliderProps) {
 
   useEffect(() => {
     setMounted(true);
-    // Add debugging to see what's in the items array
-    console.log("StoreSlider items:", items);
-    console.log("Items length:", items?.length);
-    if (items && items.length > 0) {
-      console.log("First item structure:", items[0]);
-    }
   }, [items]);
 
   if (!items || items.length === 0) {
@@ -94,6 +87,7 @@ export default function StoreSlider({ items }: StoreSliderProps) {
                         fill
                         className="object-cover rounded-2xl"
                         alt=""
+                        sizes="(min-width: 1024px) 340px, (min-width: 640px) 33vw, 100vw"
                       />
                     </div>
                   )}

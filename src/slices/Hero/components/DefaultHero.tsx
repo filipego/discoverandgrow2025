@@ -50,6 +50,7 @@ export function DefaultHero({
           <PrismicNextImage
             field={image}
             className="h-full w-full rounded-xl object-cover"
+            priority
             sizes="(min-width: 1024px) 40vw, 100vw"
           />
         </div>
