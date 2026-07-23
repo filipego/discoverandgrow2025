@@ -33,14 +33,11 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   };
 }
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const client = createClient();
-  const settings = await client.getSingle("settings");
-
   return (
     <html lang="en">
       <body
@@ -49,7 +46,7 @@ export default async function RootLayout({
       >
         <main>
           <HashFocusHandler />
-          <Header settings={settings} />
+          <Header />
           <div className="pt-20 lg:pt-24">
             {children}
           </div>
