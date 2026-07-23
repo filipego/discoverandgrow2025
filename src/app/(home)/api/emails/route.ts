@@ -7,6 +7,8 @@ import DynamicThankYouEmail from '@/emails/DynamicThankYouEmail';
 import { getEmailLogoUrl } from '@/lib/emailBranding';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const DEFAULT_ADMIN_EMAIL = "info@discoverandgrow.org";
+const DEFAULT_FROM = "Discover and Grow <info@discoverandgrow.org>";
 
 export async function POST(request: Request) {
   try {
@@ -17,16 +19,18 @@ export async function POST(request: Request) {
     if (type === 'newsletter') {
       // Send welcome email to subscriber
       await resend.emails.send({
-        from: 'onboarding@resend.dev',
-        to: 'info@discoverandgrow.org', // Changed for testing
+        from: DEFAULT_FROM,
+        to: data.email,
+        replyTo: DEFAULT_ADMIN_EMAIL,
         subject: 'Welcome to our newsletter',
         react: NewsletterFormEmail({ logoUrl })
       });
 
       // Send notification email to admin
       await resend.emails.send({
-        from: 'onboarding@resend.dev',
-        to: 'info@discoverandgrow.org', // Changed for testing
+        from: DEFAULT_FROM,
+        to: DEFAULT_ADMIN_EMAIL,
+        replyTo: DEFAULT_ADMIN_EMAIL,
         subject: 'New Newsletter Subscription',
         react: NewsletterFormNotificationEmail({
           email: data.email,
@@ -39,8 +43,9 @@ export async function POST(request: Request) {
       try {
         // Send notification email to admin
         await resend.emails.send({
-          from: 'onboarding@resend.dev',
-          to: 'info@discoverandgrow.org', // Changed for testing
+          from: DEFAULT_FROM,
+          to: DEFAULT_ADMIN_EMAIL,
+          replyTo: DEFAULT_ADMIN_EMAIL,
           subject: `New ${data.formTitle} Submission`,
           react: DynamicFormEmail({ 
             formTitle: data.formTitle,
@@ -64,8 +69,9 @@ export async function POST(request: Request) {
           );
 
           await resend.emails.send({
-            from: 'onboarding@resend.dev',
-            to: 'info@discoverandgrow.org', // Changed for testing - in production would be userEmailField.value
+            from: DEFAULT_FROM,
+            to: userEmailField.value,
+            replyTo: DEFAULT_ADMIN_EMAIL,
             subject: `Thank you for your ${data.formTitle.toLowerCase()} submission`,
             react: DynamicThankYouEmail({ 
               thankYouContent: data.thankYouContent,
