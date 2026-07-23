@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
 import { Open_Sans, Raleway } from "next/font/google";
 import "../globals.css";
 
@@ -33,11 +34,13 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   };
 }
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { isEnabled: isPreview } = await draftMode();
+
   return (
     <html lang="en">
       <body
@@ -52,7 +55,7 @@ export default function RootLayout({
           </div>
           <Footer />
         </main>
-        <PrismicPreview repositoryName={repositoryName} />
+        {isPreview ? <PrismicPreview repositoryName={repositoryName} /> : null}
       </body>
     </html>
   );

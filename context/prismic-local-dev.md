@@ -44,7 +44,7 @@ The installed `prismic-cli` is `4.2.3`. Its help output currently lists `help`, 
 
 - Preview entry route: `/api/preview`.
 - Preview exit route: `/api/exit-preview`.
-- `PrismicPreview` is rendered in `src/app/(home)/layout.tsx`.
+- `PrismicPreview` is rendered in `src/app/(home)/layout.tsx` only when Next draft mode is enabled, so editor previews continue to work without loading the preview runtime for ordinary public visitors.
 - Production Prismic fetches use the `prismic` cache tag.
 - `/api/revalidate` calls `revalidateTag("prismic")`.
 
