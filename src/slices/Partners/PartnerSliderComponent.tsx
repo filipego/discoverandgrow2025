@@ -98,7 +98,7 @@ const PartnerSliderComponent: FC<PartnerSliderComponentProps> = ({ partners }) =
                   <div className="flex-1">
                     {isFilled.keyText(partnerData.name) && (
                       <Heading
-                        as="h4"
+                        as="h3"
                         size="sm"
                         className="font-semibold text-black mb-1"
                       >
