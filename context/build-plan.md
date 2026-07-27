@@ -48,7 +48,7 @@ Maintain the Discover and Grow public website incrementally. Keep Prismic as the
 - Confirm all Prismic custom types are current in Slice Machine.
 - Regenerate Prismic types after any model changes.
 - Confirm route resolvers match the intended public URLs.
-- Confirm `/api/revalidate` is connected to the correct Prismic webhook behavior before deployment.
+- Verify a Prismic publish appears on production without a redeploy or manual cache clear.
 - Review Slice Simulator behavior at `/slice-simulator`.
 
 ---

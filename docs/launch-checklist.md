@@ -50,10 +50,10 @@ Add the existing production values in Vercel for the appropriate Production, Pre
 - [ ] Publish the current `settings` document.
 - [ ] Publish the homepage, contact, donate, get involved, and all required generic pages.
 - [ ] Publish the three What We Do categories and their posts after replacing the placeholder content.
-- [ ] Add a Text Block plus one category-filtered program slider for each What We Do category, then publish/revalidate.
+- [ ] Add a Text Block plus one category-filtered program slider for each What We Do category, then publish.
 - [ ] Publish the local slice-model changes through Slice Machine if any model changes remain unpublished.
-- [ ] Configure Prismic's publish webhook to call the production revalidation endpoint if cached content needs immediate updates.
-- [ ] Test Prismic preview and publishing/revalidation on the production URL.
+- [x] Production Prismic reads bypass the deployment cache; publishing does not need a webhook, redeploy, or manual cache clear.
+- [ ] Test Prismic preview and immediate publishing on the production URL.
 
 ## 6. Newsletter follow-up
 

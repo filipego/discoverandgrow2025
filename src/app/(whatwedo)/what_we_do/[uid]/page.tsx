@@ -8,6 +8,8 @@ import { components } from "@/slices";
 
 type Params = { uid: string };
 
+export const dynamic = "force-dynamic";
+
 export default async function Page({ params }: { params: Promise<Params> }) {
     const { uid } = await params;
     const client = createClient();
@@ -40,13 +42,4 @@ export async function generateMetadata({
                 : undefined,
         },
     };
-}
-
-export async function generateStaticParams() {
-    const client = createClient();
-    const pages = await client.getAllByType("what_we_do");
-
-    return pages.map((page) => {
-        return { uid: page.uid };
-    });
 }

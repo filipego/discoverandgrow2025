@@ -118,8 +118,9 @@ DonationForm slice
 
 ```text
 Prismic client in production
-  -> fetches with next tag "prismic" and force-cache
-  -> /api/revalidate calls revalidateTag("prismic")
+  -> fetches fresh content with cache: "no-store"
+  -> published content does not require a redeploy or cache revalidation
+  -> /api/revalidate remains available for legacy/manual cache invalidation
   -> /api/preview and /api/exit-preview handle Prismic preview sessions
   -> Prismic Page Builder embeds https://discoverandgrow.org/slice-simulator
   -> /slice-simulator permits framing only from https://discoverandgrow2025.prismic.io
