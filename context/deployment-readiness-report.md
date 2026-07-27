@@ -44,7 +44,7 @@ Set these in the deployment provider. Do not commit real values.
 - [ ] Confirm homepage is published.
 - [ ] Confirm required page/program/what-we-do documents are published.
 - [ ] Confirm Prismic preview routes work.
-- [ ] Configure publish webhook to hit `/api/revalidate` if production cache revalidation is required.
+- [x] Production Prismic reads bypass the deployment cache; publishing does not require a webhook, redeploy, or manual cache clear.
 
 ---
 

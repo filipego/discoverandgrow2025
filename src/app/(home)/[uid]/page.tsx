@@ -8,6 +8,8 @@ import { components } from "@/slices";
 
 type Params = { uid: string };
 
+export const dynamic = "force-dynamic";
+
 const fallbackDescription =
     "Discover and Grow empowers children, families, and communities through educational programs and support.";
 
@@ -53,13 +55,4 @@ export async function generateMetadata({
                 : undefined,
         },
     };
-}
-
-export async function generateStaticParams() {
-    const client = createClient();
-    const pages = await client.getAllByType("page");
-
-    return pages.map((page) => {
-        return { uid: page.uid };
-    });
 }
