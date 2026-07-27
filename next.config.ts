@@ -4,7 +4,33 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/(.*)",
+        source: "/slice-simulator",
+        headers: [
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Content-Security-Policy",
+            value:
+              "frame-ancestors https://discoverandgrow2025.prismic.io",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), geolocation=(), microphone=()",
+          },
+        ],
+      },
+      {
+        source: "/((?!slice-simulator).*)",
         headers: [
           {
             key: "Strict-Transport-Security",
