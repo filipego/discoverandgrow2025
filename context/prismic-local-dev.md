@@ -45,6 +45,9 @@ The installed `prismic-cli` is `4.2.3`. Its help output currently lists `help`, 
 - Preview entry route: `/api/preview`.
 - Preview exit route: `/api/exit-preview`.
 - `PrismicPreview` is always rendered in `src/app/(home)/layout.tsx`; it activates Next draft mode when an editor starts a Prismic preview.
+- The production Prismic Page Builder Live Preview URL is `https://discoverandgrow.org/slice-simulator`.
+- Local Slice Machine independently uses `http://localhost:3000/slice-simulator` from `slicemachine.config.json`; the production Page Builder URL does not replace or disable local slice previews.
+- `/slice-simulator` omits the site-wide `X-Frame-Options: SAMEORIGIN` header and instead allows framing only from `https://discoverandgrow2025.prismic.io` through CSP `frame-ancestors`. Keep the stricter header on every other route.
 - Production Prismic fetches use the `prismic` cache tag.
 - `/api/revalidate` calls `revalidateTag("prismic")`.
 

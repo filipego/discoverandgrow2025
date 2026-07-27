@@ -121,6 +121,8 @@ Prismic client in production
   -> fetches with next tag "prismic" and force-cache
   -> /api/revalidate calls revalidateTag("prismic")
   -> /api/preview and /api/exit-preview handle Prismic preview sessions
+  -> Prismic Page Builder embeds https://discoverandgrow.org/slice-simulator
+  -> /slice-simulator permits framing only from https://discoverandgrow2025.prismic.io
 ```
 
 ---
