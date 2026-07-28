@@ -97,9 +97,10 @@ const WhatWeDoCategorySlider: FC<WhatWeDoCategorySliderProps> = ({ items }) => {
                       link: getCardLink(item),
                       bg_color: "White",
                     }}
-                    contentClassName="max-w-2xl"
+                    contentClassName="max-w-[40rem]"
                     imageContainerClassName="aspect-video"
                     imageClassName="object-bottom"
+                    listClassName="mb-6"
                   />
                 </ul>
               </SwiperSlide>
