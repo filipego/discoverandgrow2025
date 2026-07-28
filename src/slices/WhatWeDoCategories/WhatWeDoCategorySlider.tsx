@@ -97,7 +97,7 @@ const WhatWeDoCategorySlider: FC<WhatWeDoCategorySliderProps> = ({ items }) => {
                       link: getCardLink(item),
                       bg_color: "White",
                     }}
-                    contentClassName="max-w-xl"
+                    contentClassName="max-w-2xl"
                     imageContainerClassName="aspect-video"
                     imageClassName="object-bottom"
                   />
