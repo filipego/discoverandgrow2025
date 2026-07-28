@@ -49,7 +49,7 @@ const TextBlock: FC<TextBlockProps> = ({ slice }) => {
               <Heading
                 as="h3"
                 size="md"
-                className="mb-3 max-w-xl font-semibold lg:mb-4"
+                className="mb-[17px] max-w-xl font-semibold lg:mb-[21px]"
               >
                 {children}
               </Heading>
