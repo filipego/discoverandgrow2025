@@ -12,6 +12,7 @@ type TextBlockPrimary = Content.TextBlockSliceDefaultPrimary & {
     | "no top padding"
     | "no bottom padding"
     | null;
+  anchor_id?: string | null;
 };
 
 /**
@@ -25,18 +26,20 @@ export type TextBlockProps = SliceComponentProps<Content.TextBlockSlice>;
 const TextBlock: FC<TextBlockProps> = ({ slice }) => {
   const primary = slice.primary as TextBlockPrimary;
   const padding = primary.padding ?? "normal padding";
+  const anchorId = primary.anchor_id?.trim() || undefined;
 
   return (
-    <Bounded
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-      padding={padding}
-    >
-      <div className="mb-5 max-w-[970px] px-0 lg:mb-10 lg:px-[50px]">
-        <PrismicRichText
-          field={primary.body}
-          components={{
-            heading2: ({ children }) => (
+    <div id={anchorId} className="scroll-mt-24 lg:scroll-mt-32">
+      <Bounded
+        data-slice-type={slice.slice_type}
+        data-slice-variation={slice.variation}
+        padding={padding}
+      >
+        <div className="mb-5 max-w-[970px] px-0 lg:mb-10 lg:px-[50px]">
+          <PrismicRichText
+            field={primary.body}
+            components={{
+              heading2: ({ children }) => (
               <Heading
                 as="h2"
                 size="xl"
@@ -45,7 +48,7 @@ const TextBlock: FC<TextBlockProps> = ({ slice }) => {
                 {children}
               </Heading>
             ),
-            heading3: ({ children }) => (
+              heading3: ({ children }) => (
               <Heading
                 as="h3"
                 size="md"
@@ -54,7 +57,7 @@ const TextBlock: FC<TextBlockProps> = ({ slice }) => {
                 {children}
               </Heading>
             ),
-            heading4: ({ children }) => (
+              heading4: ({ children }) => (
               <Heading
                 as="h4"
                 size="sm"
@@ -63,7 +66,7 @@ const TextBlock: FC<TextBlockProps> = ({ slice }) => {
                 {children}
               </Heading>
             ),
-            heading5: ({ children }) => (
+              heading5: ({ children }) => (
               <Heading
                 as="h5"
                 size="xs"
@@ -72,7 +75,7 @@ const TextBlock: FC<TextBlockProps> = ({ slice }) => {
                 {children}
               </Heading>
             ),
-            heading6: ({ children }) => (
+              heading6: ({ children }) => (
               <Heading
                 as="h6"
                 size="xs"
@@ -81,23 +84,24 @@ const TextBlock: FC<TextBlockProps> = ({ slice }) => {
                 {children}
               </Heading>
             ),
-            list: ({ children }) => (
+              list: ({ children }) => (
               <ul className="-mt-2 mb-6 ml-4 max-w-prose list-outside list-disc space-y-2 pl-5 text-brand-gray lg:mt-0 lg:ml-0 lg:pl-14">
                 {children}
               </ul>
             ),
-            listItem: ({ children }) => (
+              listItem: ({ children }) => (
               <li className="leading-relaxed">{children}</li>
             ),
-            paragraph: ({ children }) => (
+              paragraph: ({ children }) => (
               <p className="mb-4 max-w-prose leading-relaxed text-brand-gray lg:mb-6">
                 {children}
               </p>
             ),
-          }}
-        />
-      </div>
-    </Bounded>
+            }}
+          />
+        </div>
+      </Bounded>
+    </div>
   );
 };
 

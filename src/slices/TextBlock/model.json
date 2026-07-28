@@ -35,6 +35,14 @@
             ],
             "default_value": "normal padding"
           }
+        },
+        "anchor_id": {
+          "type": "Text",
+          "config": {
+            "label": "Anchor ID (optional)",
+            "placeholder": "example: sel",
+            "help": "Use lowercase letters, numbers, and hyphens only. Do not include #."
+          }
         }
       },
       "items": {}

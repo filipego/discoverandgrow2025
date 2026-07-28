@@ -41,6 +41,7 @@ route page
 - The Header uses its full logo/navigation/CTA layout at `lg` and above. Below `lg` (including tablet portrait and phones), show a larger logo and accessible menu toggle; it opens an inset, rounded glass drawer (matching the scrolled header language) with navigation links and Donate as a Secondary CTA directly under the last link. The drawer must render outside the header’s transform/`backdrop-blur` wrappers so `fixed` positioning uses the viewport.
 - Public paths should remain aligned with `src/prismicio.ts` route resolvers.
 - Route groups are organizational only; do not rely on them for public URL semantics.
+- Use named section IDs for content deep links; apply a scroll margin when a fixed header would otherwise cover the target.
 - Ensure long text, headings, buttons, and forms fit on mobile.
 - For a desktop two-column Form slice, use `items-stretch` on the grid and `flex flex-col lg:justify-center` on the complete left column. This centers the entire heading-and-rich-text group against the adjacent form; never center only one child.
 

@@ -12,3 +12,15 @@ test("Text Block gives H3 and H4 a smaller shared heading hierarchy with compact
   assert.match(source, /heading6:[\s\S]*as="h6"[\s\S]*size="xs"[\s\S]*className="mb-3 max-w-lg font-semibold lg:mb-4"/);
   assert.doesNotMatch(source, /heading[34]:[\s\S]*mb-10 font-semibold lg:mb-20/);
 });
+
+test("Text Block provides an optional reusable anchor ID", async () => {
+  const [source, model] = await Promise.all([
+    readFile(new URL("./index.tsx", import.meta.url), "utf8"),
+    readFile(new URL("./model.json", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(model, /"anchor_id"[\s\S]*"type": "Text"/);
+  assert.match(source, /anchor_id\?: string \| null;/);
+  assert.match(source, /id=\{anchorId\}/);
+  assert.match(source, /scroll-mt-24 lg:scroll-mt-32/);
+});

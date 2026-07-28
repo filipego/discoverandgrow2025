@@ -10,6 +10,13 @@
 - Do not create `codex/*` branches unless the user explicitly requests one.
 - When the user asks to make a change available online, complete the normal Git delivery in this checkout: commit the intended work, push it, merge it into `main`, and confirm the production deployment. Do not leave completed work isolated or merely local.
 
+## Prismic / Slice Machine Development Policy — Persistent User Preference
+
+- Make every Prismic slice, custom type, and slice-component change locally in this repository's `dev` branch first.
+- Never use a browser, CLI, API, or any other tool to create or edit Prismic production content or production models while implementing a change.
+- For local Slice Machine model updates, leave the model unpushed and tell the user when it is ready for them to press **Push** from their dev Slice Machine workflow.
+- Only publish, push, merge, or deploy after the user explicitly asks to do so.
+
 ## Project Context
 
 This is the Discover and Grow 2025 public website. It is a Next.js App Router site powered primarily by Prismic and Slice Machine, with Stripe donation flows, Resend email notifications, Cloudflare Turnstile on dynamic forms, and a small Etsy products API route.

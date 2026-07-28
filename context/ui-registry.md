@@ -64,6 +64,8 @@ Living registry of reusable website UI. Read this before building a component an
 | `WhatWeDoCategories` | `src/slices/WhatWeDoCategories/index.tsx` | Reusable carousel for one selected What We Do category; pair with a Text Block for introductory copy |
 | `WhatWeDoCategorySlider` | `src/slices/WhatWeDoCategories/WhatWeDoCategorySlider.tsx` | Traditional Swiper carousel for one What We Do category; on tablet/desktop it shows one complete card plus a clipped partial next card, 640px-capped copy, responsive 16:9 bottom-aligned image areas, list-to-paragraph spacing, and protected space for card shadows; navigation appears when 2+ items |
 
+`TextBlock` supports an optional `Anchor ID` field. When set, it becomes the section ID and reserves scroll room for the fixed header; leave it blank for normal blocks.
+
 ---
 
 ## Shared Slices
