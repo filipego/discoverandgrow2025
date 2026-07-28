@@ -100,8 +100,9 @@ The inner circular icon backgrounds are currently hardcoded `#54AC8B` and `#FF74
 
 - Outer `px-6`.
 - Inner `mx-auto w-full max-w-6xl`.
-- Padding variants: normal, smaller, none, no-top, no-bottom, and bigger.
+- Padding variants: normal, smaller, none, no-top, no-bottom, bigger, and double-bottom.
 - Vertical padding is roughly half below `lg` (`py-5 lg:py-10` for normal); desktop values are unchanged.
+- `double bottom padding` preserves normal top padding and uses double normal bottom padding (`pb-10 lg:pb-20`). It is currently exposed only by What We Do Categories.
 
 ### Link Border Animation
 

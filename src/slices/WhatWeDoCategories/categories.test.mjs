@@ -40,6 +40,13 @@ test("the What We Do model and category sections use the approved categories", (
     sliceModel.variations[0].primary.category.config.options,
     expectedCategories,
   );
+
+  assert.ok(
+    sliceModel.variations[0].primary.padding.config.options.includes(
+      "double bottom padding",
+    ),
+  );
+  assert.match(component, /\| "double bottom padding"/);
 });
 
 test("the slice renders only posts matching its selected category", () => {
