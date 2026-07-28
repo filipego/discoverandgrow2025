@@ -9,6 +9,13 @@ import clsx from "clsx";
 
 type VideoBlockPrimary = Content.VideoBlockSliceDefaultPrimary & {
   video_platform?: "YouTube" | "Canva" | null;
+  padding?:
+    | "normal padding"
+    | "smaller padding"
+    | "no padding"
+    | "no top padding"
+    | "no bottom padding"
+    | null;
 };
 
 /**
@@ -23,14 +30,13 @@ const VideoBlock: FC<VideoBlockProps> = ({ slice }) => {
   const primary = slice.primary as VideoBlockPrimary;
   const videoPlatform = primary.video_platform ?? "YouTube";
   const canvaEmbedUrl = getCanvaEmbedUrl(primary.youtube_video_id);
+  const padding = primary.padding ?? "normal padding";
 
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={clsx(
-        primary.no_padding && "!py-0"
-      )}
+      padding={padding}
     >
       <div className="flex justify-center">
         <div className={clsx(

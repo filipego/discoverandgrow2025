@@ -55,8 +55,8 @@ Committed shared slice models currently include:
 - `TabPanel`
 - `TextAndForm`
 - `TextAndImage`
-- `TextBlock`
-- `VideoBlock` (YouTube or Canva, selected through its `Video platform` field)
+- `TextBlock` (standard per-slice padding selector)
+- `VideoBlock` (YouTube or Canva, selected through its `Video platform` field; standard per-slice padding selector)
 - `WhatWeDoCategories`
 
 The generated `src/slices/index.ts` maps Prismic slice API IDs to these components.
