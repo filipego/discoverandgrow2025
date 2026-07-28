@@ -46,7 +46,7 @@ Committed shared slice models currently include:
 - `DonationForm`
 - `Form`
 - `HeadingAndText`
-- `Hero`
+- `Hero` (default, centered, video, and text-block hero variations)
 - `ImageBlock`
 - `OurTeam`
 - `Partners`

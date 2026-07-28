@@ -4,11 +4,23 @@ import { SliceComponentProps } from "@prismicio/react";
 import { Bounded } from "@/app/components/Bounded";
 import { CenteredHero } from "./components/CenteredHero";
 import { DefaultHero } from "./components/DefaultHero";
+import { TextBlockHero } from "./components/TextBlockHero";
 import { VideoHero } from "./components/VideoHero";
 
 export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 
 const Hero: FC<HeroProps> = ({ slice }) => {
+  // Local variation typing until Slice Machine regenerates prismicio-types.d.ts.
+  const variation = slice.variation as string;
+
+  if (variation === "textBlock") {
+    return (
+      <Bounded padding="no padding" className="pt-2 pb-5 lg:pb-10 lg:pt-6">
+        <TextBlockHero body={slice.primary.body} />
+      </Bounded>
+    );
+  }
+
   return (
     <Bounded padding="no padding" className="pt-2 pb-5 lg:pb-10 lg:pt-6">
       {slice.variation === "centeredHero" ? (
