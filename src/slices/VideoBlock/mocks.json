@@ -12,9 +12,15 @@
 				"__TYPE__": "BooleanContent",
 				"value": false
 			},
-			"no_padding": {
-				"__TYPE__": "BooleanContent",
-				"value": false
+			"padding": {
+				"__TYPE__": "FieldContent",
+				"value": "normal padding",
+				"type": "Select"
+			},
+			"video_platform": {
+				"__TYPE__": "FieldContent",
+				"value": "YouTube",
+				"type": "Select"
 			}
 		},
 		"items": []

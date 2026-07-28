@@ -2719,7 +2719,7 @@ export interface TextAndFormSliceDefaultPrimary {
    * - **API ID Path**: text_and_form.default.primary.form
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  form: prismic.SelectField<"Contact Form" | "Newsletter Form">;
+  form: prismic.SelectField<"Newsletter Form">;
 
   /**
    * Bg Color field in *TextAndForm → Default → Primary*

@@ -56,7 +56,7 @@ Committed shared slice models currently include:
 - `TextAndForm`
 - `TextAndImage`
 - `TextBlock`
-- `VideoBlock`
+- `VideoBlock` (YouTube or Canva, selected through its `Video platform` field)
 - `WhatWeDoCategories`
 
 The generated `src/slices/index.ts` maps Prismic slice API IDs to these components.

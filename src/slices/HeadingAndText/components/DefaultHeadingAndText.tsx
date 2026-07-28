@@ -8,6 +8,8 @@ export const DefaultHeadingAndText: FC<HeadingAndTextComponentProps> = ({
   body,
   className,
 }) => {
+  const bodyStartsWithH3 = body?.[0]?.type === "heading3";
+
   return (
     <div className="grid grid-cols-1 gap-4 border-t border-brand-light-gray pt-4 lg:grid-cols-2 lg:gap-24 lg:pt-8">
       <div>
@@ -21,7 +23,11 @@ export const DefaultHeadingAndText: FC<HeadingAndTextComponentProps> = ({
             field={body}
             components={{
               heading3: ({ children }) => (
-                <Heading as="h3" size="sm" className="font-semibold mb-3 mt-10">
+                <Heading
+                  as="h3"
+                  size="sm"
+                  className={`font-semibold mb-3 ${bodyStartsWithH3 ? "mt-0" : "mt-10"}`}
+                >
                   {children}
                 </Heading>
               ),

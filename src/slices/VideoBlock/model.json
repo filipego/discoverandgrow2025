@@ -15,8 +15,8 @@
         "youtube_video_id": {
           "type": "Text",
           "config": {
-            "label": "Youtube Video ID",
-            "placeholder": ""
+            "label": "YouTube video ID or Canva video URL",
+            "placeholder": "Paste a YouTube video ID or public Canva video share link"
           }
         },
         "smaller": {
@@ -28,13 +28,31 @@
             "default_value": false
           }
         },
-        "no_padding": {
-          "type": "Boolean",
+        "padding": {
+          "type": "Select",
           "config": {
-            "label": "No padding",
-            "placeholder_false": "false",
-            "placeholder_true": "true",
-            "default_value": false
+            "label": "Padding",
+            "placeholder": "",
+            "options": [
+              "normal padding",
+              "smaller padding",
+              "no padding",
+              "no top padding",
+              "no bottom padding"
+            ],
+            "default_value": "normal padding"
+          }
+        },
+        "video_platform": {
+          "type": "Select",
+          "config": {
+            "label": "Video platform",
+            "placeholder": "",
+            "options": [
+              "YouTube",
+              "Canva"
+            ],
+            "default_value": "YouTube"
           }
         }
       },

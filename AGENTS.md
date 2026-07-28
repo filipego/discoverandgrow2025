@@ -3,6 +3,13 @@
 - Prefer the Codex desktop in-app Browser for visual/browser verification, browser comments, and user-visible UI checks.
 - Use Chrome DevTools only when lower-level Chrome inspection is specifically needed, such as detailed console, network, storage, performance, or Chrome-only session state debugging.
 
+## Git Workspace Policy — Persistent User Preference
+
+- Never create, enter, or use a Codex worktree, `git worktree`, `/private/tmp` release folder, or other isolated checkout for this project.
+- Work directly in the repository's active `dev` branch by default. If a separate branch is necessary, use a normal Git branch in this same checkout only after the user explicitly asks for that branch.
+- Do not create `codex/*` branches unless the user explicitly requests one.
+- When the user asks to make a change available online, complete the normal Git delivery in this checkout: commit the intended work, push it, merge it into `main`, and confirm the production deployment. Do not leave completed work isolated or merely local.
+
 ## Project Context
 
 This is the Discover and Grow 2025 public website. It is a Next.js App Router site powered primarily by Prismic and Slice Machine, with Stripe donation flows, Resend email notifications, Cloudflare Turnstile on dynamic forms, and a small Etsy products API route.
