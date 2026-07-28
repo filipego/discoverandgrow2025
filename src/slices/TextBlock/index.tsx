@@ -4,6 +4,16 @@ import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { Bounded } from "@/app/components/Bounded";
 import { Heading } from "@/app/components/Heading";
 
+type TextBlockPrimary = Content.TextBlockSliceDefaultPrimary & {
+  padding?:
+    | "normal padding"
+    | "smaller padding"
+    | "no padding"
+    | "no top padding"
+    | "no bottom padding"
+    | null;
+};
+
 /**
  * Props for `TextBlock`.
  */
@@ -13,15 +23,18 @@ export type TextBlockProps = SliceComponentProps<Content.TextBlockSlice>;
  * Component for "TextBlock" Slices.
  */
 const TextBlock: FC<TextBlockProps> = ({ slice }) => {
+  const primary = slice.primary as TextBlockPrimary;
+  const padding = primary.padding ?? "normal padding";
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      padding="no padding"
+      padding={padding}
     >
       <div className="mb-5 max-w-[970px] px-0 lg:mb-10 lg:px-[50px]">
         <PrismicRichText
-          field={slice.primary.body}
+          field={primary.body}
           components={{
             heading2: ({ children }) => (
               <Heading
