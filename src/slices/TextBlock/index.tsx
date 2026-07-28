@@ -48,8 +48,8 @@ const TextBlock: FC<TextBlockProps> = ({ slice }) => {
             heading3: ({ children }) => (
               <Heading
                 as="h3"
-                size="xl"
-                className="mb-10 font-semibold lg:mb-20"
+                size="lg"
+                className="mb-3 font-semibold lg:mb-4"
               >
                 {children}
               </Heading>
@@ -57,8 +57,8 @@ const TextBlock: FC<TextBlockProps> = ({ slice }) => {
             heading4: ({ children }) => (
               <Heading
                 as="h4"
-                size="xl"
-                className="mb-10 font-semibold lg:mb-20"
+                size="md"
+                className="mb-3 font-semibold lg:mb-4"
               >
                 {children}
               </Heading>
