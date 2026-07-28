@@ -106,6 +106,26 @@
       "items": {}
     },
     {
+      "id": "textBlock",
+      "name": "Text Block",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Text-only hero with the existing Text Block presentation.",
+      "imageUrl": "",
+      "primary": {
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl,heading2,heading3"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
       "id": "heroWithVideo",
       "name": "Hero with Video",
       "docURL": "...",

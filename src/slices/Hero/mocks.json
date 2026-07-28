@@ -111,6 +111,30 @@
 	},
 	{
 		"__TYPE__": "SharedSliceContent",
+		"variation": "textBlock",
+		"primary": {
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Text block hero"
+						}
+					},
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "This preserves the existing Text Block presentation for page introductions."
+						}
+					}
+				]
+			}
+		},
+		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
 		"variation": "heroWithVideo",
 		"primary": {
 			"kicker": {

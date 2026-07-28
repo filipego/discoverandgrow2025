@@ -8,7 +8,7 @@ Update this file after every meaningful application implementation change. Docum
 
 **Phase:** Dependency compatibility and deployment readiness
 
-**Last completed:** Text Block and Video Block use the standard per-slice `Padding` control, offering normal, smaller, none, no-top, and no-bottom spacing. Video Block supports YouTube and Canva through one source field; Canva uses its native lazy-loaded `watch` player. The default Heading and Text variation aligns an initial H3 with its paired heading. Production Prismic reads use `cache: "no-store"`; and the Page Builder slice simulator permits framing only from `https://discoverandgrow2025.prismic.io` while all other routes keep frame protection.
+**Last completed:** Hero now includes a `Text Block` variation that preserves the existing Text Block rich-text presentation for page introductions, allowing Text Block itself to later use a normal content hierarchy. Text Block and Video Block use the standard per-slice `Padding` control, offering normal, smaller, none, no-top, and no-bottom spacing. Video Block supports YouTube and Canva through one source field; Canva uses its native lazy-loaded `watch` player. The default Heading and Text variation aligns an initial H3 with its paired heading. Production Prismic reads use `cache: "no-store"`; and the Page Builder slice simulator permits framing only from `https://discoverandgrow2025.prismic.io` while all other routes keep frame protection.
 **Next:** Push/sync the updated category models to Prismic, add a Text Block plus one slider slice per desired category, replace the existing `what_we_do` post content, publish/revalidate, then continue deployment hardening.
 
 ---
