@@ -8,7 +8,7 @@ Update this file after every meaningful application implementation change. Docum
 
 **Phase:** Dependency compatibility and deployment readiness
 
-**Last completed:** Restored Prismic Page Builder slice previews end-to-end. The production repository now targets `https://discoverandgrow.org/slice-simulator`; local Slice Machine continues to use `http://localhost:3000/slice-simulator`; and the simulator route replaces the Lighthouse-era site-wide `X-Frame-Options: SAMEORIGIN` header with a narrowly scoped CSP `frame-ancestors` rule for `https://discoverandgrow2025.prismic.io`, while all other routes keep the original frame protection. Earlier: the newsletter no longer depends on Supabase; dynamic forms synchronize browser autofill and use the invisible Turnstile flow; the compact contact confirmation resets after five seconds; and the supplied favicon is registered in every route-group root layout but remains uncommitted locally pending user verification.
+**Last completed:** Text Block and Video Block use the standard per-slice `Padding` control, offering normal, smaller, none, no-top, and no-bottom spacing. Video Block supports YouTube and Canva through one source field; Canva uses its native lazy-loaded `watch` player. The default Heading and Text variation aligns an initial H3 with its paired heading. Production Prismic reads use `cache: "no-store"`; and the Page Builder slice simulator permits framing only from `https://discoverandgrow2025.prismic.io` while all other routes keep frame protection.
 **Next:** Push/sync the updated category models to Prismic, add a Text Block plus one slider slice per desired category, replace the existing `what_we_do` post content, publish/revalidate, then continue deployment hardening.
 
 ---

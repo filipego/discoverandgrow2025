@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useEffect, useRef, useState } from "react";
-import { Content, isFilled, type LinkField } from "@prismicio/client";
+import { Content, type LinkField } from "@prismicio/client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, A11y } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
@@ -16,20 +16,7 @@ type WhatWeDoCategorySliderProps = {
 const navButtonClassName =
   "flex h-11 w-11 items-center justify-center rounded-full border border-brand-blue/15 bg-white text-brand-blue shadow-sm transition-colors hover:border-brand-green hover:bg-brand-green hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green disabled:pointer-events-none disabled:opacity-40";
 
-const getCardLink = (item: Content.WhatWeDoDocument): LinkField => {
-  if (isFilled.link(item.data.link)) {
-    return item.data.link;
-  }
-
-  if (item.url) {
-    return {
-      link_type: "Web",
-      url: item.url,
-    };
-  }
-
-  return item.data.link;
-};
+const getCardLink = (item: Content.WhatWeDoDocument): LinkField => item.data.link;
 
 const WhatWeDoCategorySlider: FC<WhatWeDoCategorySliderProps> = ({ items }) => {
   const prevRef = useRef<HTMLButtonElement>(null);

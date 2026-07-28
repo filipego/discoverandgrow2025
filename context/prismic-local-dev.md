@@ -48,10 +48,8 @@ The installed `prismic-cli` is `4.2.3`. Its help output currently lists `help`, 
 - The production Prismic Page Builder Live Preview URL is `https://discoverandgrow.org/slice-simulator`.
 - Local Slice Machine independently uses `http://localhost:3000/slice-simulator` from `slicemachine.config.json`; the production Page Builder URL does not replace or disable local slice previews.
 - `/slice-simulator` omits the site-wide `X-Frame-Options: SAMEORIGIN` header and instead allows framing only from `https://discoverandgrow2025.prismic.io` through CSP `frame-ancestors`. Keep the stricter header on every other route.
-- Production Prismic fetches use the `prismic` cache tag.
-- `/api/revalidate` calls `revalidateTag("prismic")`.
-
-Confirm webhook configuration before assuming Prismic publishes will revalidate production content.
+- Production Prismic fetches use `cache: "no-store"`, so published content appears without a redeploy, webhook, or manual cache clear.
+- `/api/revalidate` remains available for legacy/manual cache invalidation, but publishing does not depend on it.
 
 ---
 
