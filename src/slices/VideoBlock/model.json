@@ -15,8 +15,8 @@
         "youtube_video_id": {
           "type": "Text",
           "config": {
-            "label": "Youtube Video ID",
-            "placeholder": ""
+            "label": "YouTube video ID or Canva video URL",
+            "placeholder": "Paste a YouTube video ID or public Canva video share link"
           }
         },
         "smaller": {
@@ -35,6 +35,18 @@
             "placeholder_false": "false",
             "placeholder_true": "true",
             "default_value": false
+          }
+        },
+        "video_platform": {
+          "type": "Select",
+          "config": {
+            "label": "Video platform",
+            "placeholder": "",
+            "options": [
+              "YouTube",
+              "Canva"
+            ],
+            "default_value": "YouTube"
           }
         }
       },

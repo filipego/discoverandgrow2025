@@ -57,6 +57,7 @@ Living registry of reusable website UI. Read this before building a component an
 | --- | --- | --- |
 | `LazyYouTubePlayer` | `src/app/components/LazyYouTubePlayer.tsx` | Lazy YouTube embed |
 | `LazyTikTokPlayer` | `src/app/components/LazyTikTokPlayer.tsx` | Lazy TikTok embed |
+| `LazyCanvaPlayer` | `src/app/components/LazyCanvaPlayer.tsx` | Lazy Canva design/video embed; accepts public Canva design share links |
 | `StoreSlider` | `src/app/components/Sliders/StoreSlider.tsx` | Store/product slider with responsive image sizing |
 | `LazyDonateForm` | `src/slices/DonationForm/LazyDonateForm.tsx` | Client boundary that loads the Stripe donation checkout only when its form nears the viewport |
 | `PartnerSliderComponent` | `src/slices/Partners/PartnerSliderComponent.tsx` | Partner post carousel for the Partners slice |

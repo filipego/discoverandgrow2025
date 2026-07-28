@@ -8,7 +8,7 @@ Update this file after every meaningful application implementation change. Docum
 
 **Phase:** Dependency compatibility and deployment readiness
 
-**Last completed:** What We Do carousel cards now use only the `Link` selected in each Prismic What We Do document; an empty link leaves the card without a CTA instead of silently sending visitors to that document's detail URL. Earlier: production Prismic reads use `cache: "no-store"`, so a published page or shared settings content appears without a Vercel redeploy, publish webhook, or manual cache clear; and the Prismic Page Builder slice simulator permits framing only from `https://discoverandgrow2025.prismic.io` while all other routes keep frame protection.
+**Last completed:** Video Block supports YouTube and Canva through one source field: the selected platform interprets it as either a YouTube ID or a Canva URL, and Canva URLs are also detected automatically when the platform value is unavailable. Both embeds lazy-load near the viewport. Earlier: What We Do carousel cards use only their authored Prismic link; production Prismic reads use `cache: "no-store"`; and the Prismic Page Builder slice simulator permits framing only from `https://discoverandgrow2025.prismic.io` while all other routes keep frame protection.
 **Next:** Push/sync the updated category models to Prismic, add a Text Block plus one slider slice per desired category, replace the existing `what_we_do` post content, publish/revalidate, then continue deployment hardening.
 
 ---
