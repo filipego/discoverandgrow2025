@@ -48,8 +48,10 @@
     "postcss": "^8",
     "prettier": "^3.5.3",
     "react-email": "3.0.7",
+    "resend-mcp": "2.11.0",
     "slice-machine-ui": "^2.21.4",
     "tailwindcss": "^4.0.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vercel-mcp-pro": "1.0.0"
   }
 }

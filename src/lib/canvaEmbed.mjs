@@ -12,7 +12,7 @@ export function getCanvaEmbedUrl(canvaUrl) {
     if (!isCanvaHost || !match) return null;
 
     const [, designId, versionId] = match;
-    return `https://www.canva.com/design/${designId}/${versionId}/view?embed`;
+    return `https://www.canva.com/design/${designId}/${versionId}/watch?embed`;
   } catch {
     return null;
   }

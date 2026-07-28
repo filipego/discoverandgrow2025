@@ -29,7 +29,7 @@ export function LazyCanvaPlayer({ canvaUrl }: LazyCanvaPlayerProps) {
   }, [embedUrl]);
 
   return (
-    <div className="relative h-full w-full" ref={containerRef}>
+    <div className="relative h-full w-full overflow-hidden rounded-xl" ref={containerRef}>
       {isInView && embedUrl && (
         <iframe
           src={embedUrl}

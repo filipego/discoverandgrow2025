@@ -11,16 +11,15 @@ const paddingOptions = [
 ];
 
 for (const sliceName of ["TextBlock", "VideoBlock"]) {
-  test(`${sliceName} exposes the standard per-slice padding controls`, async () => {
+  test(`${sliceName} sends its selected padding to Bounded`, async () => {
     const [modelSource, componentSource] = await Promise.all([
       readFile(new URL(`./${sliceName}/model.json`, import.meta.url), "utf8"),
       readFile(new URL(`./${sliceName}/index.tsx`, import.meta.url), "utf8"),
     ]);
     const model = JSON.parse(modelSource);
-    const padding = model.variations[0].primary.padding;
 
-    assert.deepEqual(padding.config.options, paddingOptions);
-    assert.equal(padding.config.default_value, "normal padding");
+    assert.deepEqual(model.variations[0].primary.padding.config.options, paddingOptions);
+    assert.match(componentSource, /const padding = primary\.padding \?\? "normal padding"/);
     assert.match(componentSource, /padding=\{padding\}/);
   });
 }

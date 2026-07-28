@@ -63,7 +63,7 @@
           "label": "Link",
           "placeholder": "",
           "select": null,
-          "allowTargetBlank": false,
+          "allowTargetBlank": true,
           "allowText": false,
           "repeat": false
         }
