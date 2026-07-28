@@ -16,7 +16,8 @@ type WhatWeDoCategoriesSlicePrimary = {
     | "no padding"
     | "no top padding"
     | "no bottom padding"
-    | "bigger padding";
+    | "bigger padding"
+    | "double bottom padding";
   category: WhatWeDoCategoryValue | null;
 };
 

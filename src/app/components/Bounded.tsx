@@ -9,7 +9,8 @@ type BoundedProps = {
     | "no padding"
     | "no top padding"
     | "no bottom padding"
-    | "bigger padding";
+    | "bigger padding"
+    | "double bottom padding";
   className?: string;
   style?: CSSProperties;
   children: ReactNode;
@@ -32,6 +33,7 @@ export function Bounded({
         padding === "no top padding" && "pt-0 pb-5 lg:pb-10",
         padding === "no bottom padding" && "pt-5 pb-0 lg:pt-10",
         padding === "bigger padding" && "py-5 lg:py-20",
+        padding === "double bottom padding" && "pt-5 pb-10 lg:pt-10 lg:pb-20",
         className
       )}
       {...restProps}
