@@ -18,6 +18,7 @@ export interface CardProps {
   contentClassName?: string;
   imageContainerClassName?: string;
   imageClassName?: string;
+  listClassName?: string;
 }
 
 export const BasicCard: FC<CardProps> = ({
@@ -25,6 +26,7 @@ export const BasicCard: FC<CardProps> = ({
   contentClassName,
   imageContainerClassName,
   imageClassName,
+  listClassName,
 }) => {
   const isDarkBlue = item.bg_color === "Dark Blue";
 
@@ -85,7 +87,9 @@ export const BasicCard: FC<CardProps> = ({
                 </p>
               ),
               list: ({ children }) => (
-                <ul className="list-disc pl-10 space-y-2">{children}</ul>
+                <ul className={clsx("list-disc pl-10 space-y-2", listClassName)}>
+                  {children}
+                </ul>
               ),
               listItem: ({ children }) => (
                 <li className={clsx("text-sm", isDarkBlue && "text-gray-200")}>

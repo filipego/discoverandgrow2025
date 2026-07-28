@@ -35,3 +35,21 @@ test("What We Do cards use a responsive bottom-aligned media crop", async () => 
   assert.match(source, /imageContainerClassName="aspect-video"/);
   assert.match(source, /imageClassName="object-bottom"/);
 });
+
+test("What We Do card copy uses a slightly reduced capped measure", async () => {
+  const source = await readFile(
+    new URL("./WhatWeDoCategorySlider.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(source, /contentClassName="max-w-\[40rem\]"/);
+});
+
+test("What We Do card lists leave room before the following paragraph", async () => {
+  const source = await readFile(
+    new URL("./WhatWeDoCategorySlider.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(source, /listClassName="mb-6"/);
+});
