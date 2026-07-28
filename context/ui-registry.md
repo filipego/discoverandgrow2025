@@ -62,7 +62,7 @@ Living registry of reusable website UI. Read this before building a component an
 | `LazyDonateForm` | `src/slices/DonationForm/LazyDonateForm.tsx` | Client boundary that loads the Stripe donation checkout only when its form nears the viewport |
 | `PartnerSliderComponent` | `src/slices/Partners/PartnerSliderComponent.tsx` | Partner post carousel for the Partners slice |
 | `WhatWeDoCategories` | `src/slices/WhatWeDoCategories/index.tsx` | Reusable carousel for one selected What We Do category; pair with a Text Block for introductory copy |
-| `WhatWeDoCategorySlider` | `src/slices/WhatWeDoCategories/WhatWeDoCategorySlider.tsx` | Traditional Swiper carousel for one What We Do category; arrows over media when 2+ items |
+| `WhatWeDoCategorySlider` | `src/slices/WhatWeDoCategories/WhatWeDoCategorySlider.tsx` | Traditional Swiper carousel for one What We Do category; on tablet/desktop it shows one complete card plus a clipped partial next card, responsive 16:9 bottom-aligned image areas, and protected space for card shadows; navigation appears when 2+ items |
 
 ---
 

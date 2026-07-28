@@ -58,7 +58,7 @@ const WhatWeDoCategorySlider: FC<WhatWeDoCategorySliderProps> = ({ items }) => {
           </div>
         )}
 
-        <div className="min-w-0 flex-1 overflow-visible">
+        <div className="min-w-0 flex-1 overflow-hidden">
           <Swiper
             modules={[Navigation, A11y]}
             spaceBetween={24}
@@ -76,18 +76,18 @@ const WhatWeDoCategorySlider: FC<WhatWeDoCategorySliderProps> = ({ items }) => {
             }
             breakpoints={{
               768: {
-                slidesPerView: Math.min(items.length, 2),
+                slidesPerView: Math.min(items.length, 1.3),
                 spaceBetween: 28,
               },
               1024: {
-                slidesPerView: Math.min(items.length, 2),
+                slidesPerView: Math.min(items.length, 1.3),
                 spaceBetween: 32,
               },
             }}
-            className="what-we-do-category-slider !overflow-visible px-1 pb-6 pt-2 [&_.swiper-button-prev]:hidden [&_.swiper-button-next]:hidden [&_.swiper-wrapper]:!overflow-visible"
+            className="what-we-do-category-slider !overflow-hidden px-1 pb-10 pt-2 [&_.swiper-button-prev]:hidden [&_.swiper-button-next]:hidden"
           >
             {items.map((item) => (
-              <SwiperSlide key={item.id} className="!h-auto !overflow-visible">
+              <SwiperSlide key={item.id} className="!h-auto pb-8">
                 <ul className="flex h-full list-none p-0">
                   <BasicCard
                     item={{
@@ -98,6 +98,8 @@ const WhatWeDoCategorySlider: FC<WhatWeDoCategorySliderProps> = ({ items }) => {
                       bg_color: "White",
                     }}
                     contentClassName="max-w-xl"
+                    imageContainerClassName="aspect-video"
+                    imageClassName="object-bottom"
                   />
                 </ul>
               </SwiperSlide>

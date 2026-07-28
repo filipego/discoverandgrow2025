@@ -16,9 +16,16 @@ export interface CardProps {
     direction?: "left" | "right";
   };
   contentClassName?: string;
+  imageContainerClassName?: string;
+  imageClassName?: string;
 }
 
-export const BasicCard: FC<CardProps> = ({ item, contentClassName }) => {
+export const BasicCard: FC<CardProps> = ({
+  item,
+  contentClassName,
+  imageContainerClassName,
+  imageClassName,
+}) => {
   const isDarkBlue = item.bg_color === "Dark Blue";
 
   return (
@@ -29,10 +36,10 @@ export const BasicCard: FC<CardProps> = ({ item, contentClassName }) => {
         item.bg_color === "White" && "bg-white"
       )}
     >
-      <div className="w-full overflow-hidden rounded-t-xl">
+      <div className={clsx("w-full overflow-hidden rounded-t-xl", imageContainerClassName)}>
         <PrismicNextImage
           field={item.image}
-          className="w-full h-full object-cover"
+          className={clsx("w-full h-full object-cover", imageClassName)}
           alt=""
           sizes="(min-width: 1024px) 40vw, (min-width: 768px) 45vw, 100vw"
         />
