@@ -55,7 +55,7 @@ Committed shared slice models currently include:
 - `TabPanel`
 - `TextAndForm`
 - `TextAndImage`
-- `TextBlock` (standard per-slice padding selector)
+- `TextBlock` (standard per-slice padding selector and optional reusable Anchor ID)
 - `VideoBlock` (YouTube or Canva, selected through its `Video platform` field; standard per-slice padding selector)
 - `WhatWeDoCategories` (includes the `double bottom padding` option)
 

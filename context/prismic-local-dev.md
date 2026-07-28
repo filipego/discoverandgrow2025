@@ -34,6 +34,7 @@ The installed `prismic-cli` is `4.2.3`. Its help output currently lists `help`, 
 ## Model Change Rules
 
 - Prefer Slice Machine or `npx prismic` workflows for custom type and slice model changes.
+- Make slice-model and component changes locally on `dev`; do not edit Prismic production. Leave local models ready for the editor to Push from the dev Slice Machine workflow unless the user explicitly asks to publish.
 - Do not manually edit generated `src/slices/index.ts`.
 - Do not manually edit `prismicio-types.d.ts`; regenerate types through the Prismic/Slice Machine workflow.
 - If the CLI or Slice Machine cannot support the required operation, state the limitation and use an approved manual fallback only for the model JSON files that need it.
