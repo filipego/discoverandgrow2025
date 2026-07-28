@@ -15,6 +15,11 @@
 			"no_padding": {
 				"__TYPE__": "BooleanContent",
 				"value": false
+			},
+			"video_platform": {
+				"__TYPE__": "FieldContent",
+				"value": "YouTube",
+				"type": "Select"
 			}
 		},
 		"items": []
