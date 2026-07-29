@@ -105,8 +105,8 @@ Current route resolvers:
 ## Cloudflare Turnstile
 
 - Installed version: `@marsidev/react-turnstile` `^1.1.0`.
-- Dynamic forms use `NEXT_PUBLIC_TURNSTILE_SITE_KEY` in the client.
-- `/api/forms/submit` verifies tokens with `TURNSTILE_SECRET_KEY`.
+- Dynamic forms and newsletter signup use `NEXT_PUBLIC_TURNSTILE_SITE_KEY` in the client.
+- `/api/forms/submit` and `/api/emails` verify tokens with `TURNSTILE_SECRET_KEY`; newsletter verification is invisible until a visitor submits its visible footer form.
 
 ---
 

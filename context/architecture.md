@@ -140,8 +140,8 @@ Do not commit real values.
 | `DONATION_EMAIL_FROM` | Optional donation email override | Verified Resend sender; defaults to `Discover and Grow <info@discoverandgrow.org>` |
 | `FORMS_EMAIL_FROM` | Optional dynamic-form email override | Verified Resend sender; defaults to the Resend onboarding sender during testing |
 | `FORM_TEST_RECIPIENT` | Optional dynamic-form test override | Routes both form emails to this address while testing a Resend onboarding sender or preview deployment |
-| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Dynamic forms | Browser-safe Turnstile site key |
-| `TURNSTILE_SECRET_KEY` | Dynamic form API route | Server-side Turnstile verification |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Dynamic forms and newsletter signup | Browser-safe Turnstile site key |
+| `TURNSTILE_SECRET_KEY` | Dynamic form and newsletter API routes | Server-side Turnstile verification |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Donation form | Browser-safe Stripe Elements key |
 | `STRIPE_SECRET_KEY` | Stripe API routes | Server-side Stripe API access |
 | `STRIPE_WEBHOOK_SECRET` | Stripe webhook | Webhook signature verification |

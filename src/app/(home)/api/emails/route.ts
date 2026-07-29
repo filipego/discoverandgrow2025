@@ -20,15 +20,47 @@ const isDuplicateContactError = (error: { message?: string; statusCode?: number 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { type, data } = body;
+    const { type, data, turnstileToken } = body;
     const logoUrl = getEmailLogoUrl(process.env.NEXT_PUBLIC_SITE_URL);
 
     if (type === 'newsletter') {
       const email = typeof data?.email === 'string' ? data.email.trim().toLowerCase() : '';
       const newsletterSegmentId = process.env.RESEND_NEWSLETTER_SEGMENT_ID;
+      const ip =
+        request.headers.get('x-forwarded-for') ||
+        request.headers.get('x-real-ip') ||
+        undefined;
 
       if (!EMAIL_PATTERN.test(email)) {
         return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 });
+      }
+
+      if (typeof turnstileToken !== 'string' || !turnstileToken) {
+        return NextResponse.json(
+          { error: 'Security verification failed. Please try again.' },
+          { status: 400 },
+        );
+      }
+
+      const turnstileResponse = await fetch(
+        'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            secret: process.env.TURNSTILE_SECRET_KEY,
+            response: turnstileToken,
+            remoteip: ip,
+          }),
+        },
+      );
+      const turnstileResult = await turnstileResponse.json();
+
+      if (!turnstileResult.success) {
+        return NextResponse.json(
+          { error: 'Security verification failed. Please try again.' },
+          { status: 400 },
+        );
       }
 
       if (!newsletterSegmentId) {
