@@ -115,7 +115,7 @@ route page
 - Server form handlers must validate input, rate limit where appropriate, avoid raw internal errors, and keep API keys server-side.
 - Cloudflare Turnstile verification belongs in the server route, not only in the client component.
 - When a Prismic form hides CAPTCHA, use Turnstile's invisible execute mode; preserve verification and do not use CSS hiding as a substitute for issuing a token. While a token is being requested, prevent duplicate executions and surface provider errors through the existing form feedback state.
-- The newsletter form posts to `/api/emails`; the server creates the Resend contact and sends the email notifications.
+- The visible newsletter form posts to `/api/emails` only after invisible Turnstile verification; the server validates its token before it creates the Resend contact or sends email notifications.
 
 ---
 

@@ -47,3 +47,19 @@ test("newsletter errors are returned to the form instead of being reported as su
   assert.match(newsletterForm, /FORM_MESSAGES\.EMAIL_ERROR/);
   assert.match(emailRoute, /status: 502/);
 });
+
+test("newsletter requests pass Turnstile before Resend work begins", () => {
+  assert.match(emailRoute, /const \{ type, data, turnstileToken \} = body/);
+  assert.match(
+    emailRoute,
+    /challenges\.cloudflare\.com\/turnstile\/v0\/siteverify/,
+  );
+  assert.match(
+    emailRoute,
+    /if \(!turnstileResult\.success\)[\s\S]*?status: 400/,
+  );
+  assert.match(
+    emailRoute,
+    /if \(typeof turnstileToken !== 'string' \|\| !turnstileToken\)[\s\S]*?status: 400/,
+  );
+});
