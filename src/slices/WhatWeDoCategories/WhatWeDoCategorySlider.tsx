@@ -46,7 +46,7 @@ const WhatWeDoCategorySlider: FC<WhatWeDoCategorySliderProps> = ({ items }) => {
     <div className="w-full">
       <div className="flex items-stretch gap-2 sm:gap-3 md:gap-4">
         {showNavigation && (
-          <div className="flex shrink-0 items-center self-center md:-ml-2 lg:-ml-6">
+          <div className="hidden shrink-0 items-center self-center md:flex md:-ml-2 lg:-ml-6">
             <button
               ref={prevRef}
               type="button"
@@ -61,8 +61,8 @@ const WhatWeDoCategorySlider: FC<WhatWeDoCategorySliderProps> = ({ items }) => {
         <div className="min-w-0 flex-1 overflow-hidden">
           <Swiper
             modules={[Navigation, A11y]}
-            spaceBetween={24}
-            slidesPerView={1}
+            spaceBetween={16}
+            slidesPerView={Math.min(items.length, 1.12)}
             grabCursor={showNavigation}
             allowTouchMove={showNavigation}
             onSwiper={setSwiperInstance}
@@ -84,11 +84,11 @@ const WhatWeDoCategorySlider: FC<WhatWeDoCategorySliderProps> = ({ items }) => {
                 spaceBetween: 32,
               },
             }}
-            className="what-we-do-category-slider !overflow-hidden px-1 pb-10 pt-2 [&_.swiper-button-prev]:hidden [&_.swiper-button-next]:hidden"
+            className="what-we-do-category-slider !overflow-hidden px-0 md:px-1 pb-10 pt-2 [&_.swiper-button-prev]:hidden [&_.swiper-button-next]:hidden"
           >
             {items.map((item) => (
               <SwiperSlide key={item.id} className="!h-auto pb-8">
-                <ul className="flex h-full list-none p-0">
+                <ul className="flex list-none p-0 [&>li]:!h-auto md:h-full md:[&>li]:!h-full">
                   <BasicCard
                     item={{
                       heading: item.data.title || "",
@@ -109,7 +109,7 @@ const WhatWeDoCategorySlider: FC<WhatWeDoCategorySliderProps> = ({ items }) => {
         </div>
 
         {showNavigation && (
-          <div className="flex shrink-0 items-center self-center md:-mr-2 lg:-mr-6">
+          <div className="hidden shrink-0 items-center self-center md:flex md:-mr-2 lg:-mr-6">
             <button
               ref={nextRef}
               type="button"

@@ -18,12 +18,25 @@ test("What We Do slider keeps one full card and a partial next card inside the c
     "utf8",
   );
 
+  assert.match(source, /slidesPerView=\{Math\.min\(items\.length, 1\.12\)\}/);
+  assert.match(source, /spaceBetween=\{16\}/);
   assert.match(source, /slidesPerView: Math\.min\(items\.length, 1\.3\)/);
   assert.match(source, /!overflow-hidden/);
-  assert.match(source, /px-1 pb-10 pt-2/);
+  assert.match(source, /px-0 md:px-1 pb-10 pt-2/);
   assert.match(source, /className="!h-auto pb-8"/);
   assert.doesNotMatch(source, /!overflow-visible/);
   assert.doesNotMatch(source, /flex-1 overflow-visible/);
+});
+
+test("What We Do hides navigation and lets mobile cards fit their own content", async () => {
+  const source = await readFile(
+    new URL("./WhatWeDoCategorySlider.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(source, /hidden shrink-0 items-center self-center md:flex md:-ml-2/);
+  assert.match(source, /hidden shrink-0 items-center self-center md:flex md:-mr-2/);
+  assert.match(source, /\[&>li\]:!h-auto md:h-full md:\[&>li\]:!h-full/);
 });
 
 test("What We Do cards use a responsive bottom-aligned media crop", async () => {
