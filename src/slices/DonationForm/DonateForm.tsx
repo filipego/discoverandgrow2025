@@ -6,7 +6,7 @@ import { Elements, CardElement, useStripe, useElements } from '@stripe/react-str
 import { ImageField, KeyTextField } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import { Heading } from '@/app/components/Heading';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Initialize Stripe
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
@@ -259,14 +259,14 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
   };
 
   const renderSuccessStep = () => (
-    <div className="text-center">
-      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-        <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-        </svg>
+    <div className="rounded-2xl border border-emerald-100 bg-white px-6 py-7 text-center shadow-sm">
+      <div className="mx-auto mb-4 flex size-11 items-center justify-center rounded-full bg-emerald-50 text-brand-green">
+        <CheckCircle2 aria-hidden="true" className="size-6" strokeWidth={2.25} />
       </div>
-      <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank you!</h3>
-      <p className="text-gray-600 mb-6">Your donation has been processed successfully.</p>
+      <h3 className="text-lg font-semibold text-black">Thank you!</h3>
+      <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-brand-gray">
+        Your donation has been processed successfully.
+      </p>
       <button
         type="button"
         onClick={() => {
@@ -284,7 +284,7 @@ const CheckoutForm: React.FC<DonateFormProps> = ({ image, heading }) => {
             isAnonymous: false
           });
         }}
-        className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors"
+        className="mt-4 bg-black px-6 py-3 text-white rounded-lg transition-colors hover:bg-gray-800"
       >
         Make Another Donation
       </button>
