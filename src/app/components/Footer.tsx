@@ -122,7 +122,7 @@ export async function Footer({}: Props) {
         </div>
         
         <div className="relative mt-12 mb-0 md:mt-30">
-          <div className="relative flex flex-col items-start justify-between gap-4 rounded-full px-2 py-4 md:flex-row md:items-center md:gap-0 md:border md:border-[#979797] md:px-6 md:py-3">
+          <div className="relative flex flex-col items-start justify-between gap-4 rounded-full px-0 py-4 md:flex-row md:items-center md:gap-0 md:border md:border-[#979797] md:px-6 md:py-3">
             <div className="flex w-full flex-col gap-0.5 text-[10px] text-white md:w-auto">
               <p className="hidden text-[11px] md:block">© 2025 DISCOVER AND GROW, INC - We are a 501(c)(3) nonprofit based in New York City EIN# 87-1397816</p>
               <div className="flex flex-col gap-0.5 md:hidden">
