@@ -13,6 +13,8 @@ Update this file after every meaningful application implementation change. Docum
 
 **Recent UI fix:** The mobile footer legal/copyright row now removes redundant inner horizontal padding so its text and document links align with the footer bio; desktop padding remains unchanged.
 
+**Recent UI fix:** The mobile What We Do category carousel now uses the full content width, hides the side arrows, shows a clipped partial next card as the swipe affordance, and lets each card fit its own content; tablet/desktop slider behavior remains unchanged.
+
 ---
 
 ## Project Foundation
